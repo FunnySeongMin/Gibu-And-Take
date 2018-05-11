@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- IOC -->
+	<context:component-scan base-package="org.kosta" />
+	<!-- dataSource -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@127.0.0.1:1521:xe</value>
+		</property>
+		<property name="username">
+			<value>scott</value>
+		</property>
+		<property name="password">
+			<value>tiger</value>
+		</property>
+		<property name="maxActive">
+			<value>30</value>
+		</property>
+	</bean>
+	<!-- MyBatis 설정 SqlSessionConfig.xml 을 사용하지 않고 mapperLocations : *.xml 으로 
+		편리하게 mapper 을 load 하고 typeAliasesPackage와 mapUnderscoreToCamelCase 을 설정 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- SqlSessionConfig.xml 를 사용하지 않으므로 해당 디렉토리에서 지운다 -->
+		<!-- <property name="configLocation" value="classpath:/mybatis/config/SqlSessionConfig.xml"/> -->
+		<property name="mapperLocations"
+			value="classpath:/mybatis/config/*.xml" />
+		<property name="typeAliasesPackage"
+			value="org.kosta.gat.model" />
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="mapUnderscoreToCamelCase" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	<!-- Annotation AOP 설정 -->
+	<!-- <aop:aspectj-autoproxy/> -->
+	<!-- 트팬잭션 설정 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 어노테이션 기반 선언적 트랜잭션 설정 -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+</beans>
