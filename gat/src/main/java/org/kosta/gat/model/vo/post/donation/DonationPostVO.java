@@ -7,6 +7,7 @@ public class DonationPostVO {
 	private String dpTitle;
 	private String dpContents;
 	private String dpRegdate;
+	private String place;
 	private int dpCount;
 	private int goalMileage;
 	private int donationMileage;
@@ -16,13 +17,14 @@ public class DonationPostVO {
 	public DonationPostVO() {
 		super();
 	}
-	public DonationPostVO(String dpNo, String dpTitle, String dpContents, String dpRegdate, int dpCount,
+	public DonationPostVO(String dpNo, String dpTitle, String dpContents, String dpRegdate, String place, int dpCount,
 			int goalMileage, int donationMileage, int totalEntry, ApplicationPostVO appPostVO) {
 		super();
 		this.dpNo = dpNo;
 		this.dpTitle = dpTitle;
 		this.dpContents = dpContents;
 		this.dpRegdate = dpRegdate;
+		this.place = place;
 		this.dpCount = dpCount;
 		this.goalMileage = goalMileage;
 		this.donationMileage = donationMileage;
@@ -52,6 +54,12 @@ public class DonationPostVO {
 	}
 	public void setDpRegdate(String dpRegdate) {
 		this.dpRegdate = dpRegdate;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
 	}
 	public int getDpCount() {
 		return dpCount;
@@ -86,7 +94,8 @@ public class DonationPostVO {
 	@Override
 	public String toString() {
 		return "DonationPostVO [dpNo=" + dpNo + ", dpTitle=" + dpTitle + ", dpContents=" + dpContents + ", dpRegdate="
-				+ dpRegdate + ", dpCount=" + dpCount + ", goalMileage=" + goalMileage + ", donationMileage="
-				+ donationMileage + ", totalEntry=" + totalEntry + ", appPostVO=" + appPostVO + "]";
+				+ dpRegdate + ", place=" + place + ", dpCount=" + dpCount + ", goalMileage=" + goalMileage
+				+ ", donationMileage=" + donationMileage + ", totalEntry=" + totalEntry + ", appPostVO=" + appPostVO
+				+ "]";
 	}
 }

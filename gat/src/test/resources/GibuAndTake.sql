@@ -103,7 +103,7 @@ create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
 	app_contents clob not null,
-	place varchar2(100) not null,
+	app_place varchar2(100) not null,
 	goal_mileage number not null,
 	app_status varchar2(100) not null,
 	start_date date not null,
@@ -120,7 +120,7 @@ drop sequence application_seq;
 create sequence application_seq;
 
 --신청서 등록
-insert into application(app_no,app_title,app_contents,place,goal_mileage,app_status,start_date,end_date,id,ag_no)
+insert into application(app_no,app_title,app_contents,app_place,goal_mileage,app_status,start_date,end_date,id,ag_no)
 values(application_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
 '판교',200000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'hwang','1');
 
@@ -171,6 +171,7 @@ create table donation_post(
 	dp_title varchar2(100) not null,
 	dp_contents clob not null,
 	dp_regdate date default sysdate,
+	dp_place varchar2(100) not null,
 	dp_count number default 0,
 	goal_mileage number not null,
 	donation_mileage number default 0,
@@ -183,8 +184,8 @@ create table donation_post(
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
 
-insert into donation_post(dp_no,dp_title,dp_contents,goal_mileage,app_no)
-values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
+insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
+values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
 200000,'1');
 
 select * from donation_post;

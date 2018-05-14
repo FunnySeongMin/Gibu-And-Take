@@ -1,23 +1,23 @@
 package org.kosta.gat.model.vo.post.application;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ApplicationPostListVO {
-	private ArrayList<ApplicationPostVO>appPostVO;
+	private List<ApplicationPostVO>appPostVO;
 	private ApplicationPostPagingBean appPb;
 	
 	public ApplicationPostListVO() {
 		super();
 	}
-	public ApplicationPostListVO(ArrayList<ApplicationPostVO> appPostVO, ApplicationPostPagingBean appPb) {
+	public ApplicationPostListVO(List<ApplicationPostVO> appPostVO, ApplicationPostPagingBean appPb) {
 		super();
 		this.appPostVO = appPostVO;
 		this.appPb = appPb;
 	}
-	public ArrayList<ApplicationPostVO> getAppPostVO() {
+	public List<ApplicationPostVO> getAppPostVO() {
 		return appPostVO;
 	}
-	public void setAppPostVO(ArrayList<ApplicationPostVO> appPostVO) {
+	public void setAppPostVO(List<ApplicationPostVO> appPostVO) {
 		this.appPostVO = appPostVO;
 	}
 	public ApplicationPostPagingBean getAppPb() {

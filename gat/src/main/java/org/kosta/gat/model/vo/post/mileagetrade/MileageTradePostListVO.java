@@ -1,23 +1,23 @@
 package org.kosta.gat.model.vo.post.mileagetrade;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MileageTradePostListVO {
-	private ArrayList<MileageTradeVO> mtVO;
+	private List<MileageTradeVO> mtVO;
 	private MileageTradePostPagingBean mtPb;
 	
 	public MileageTradePostListVO() {
 		super();
 	}
-	public MileageTradePostListVO(ArrayList<MileageTradeVO> mtVO, MileageTradePostPagingBean mtPb) {
+	public MileageTradePostListVO(List<MileageTradeVO> mtVO, MileageTradePostPagingBean mtPb) {
 		super();
 		this.mtVO = mtVO;
 		this.mtPb = mtPb;
 	}
-	public ArrayList<MileageTradeVO> getMtVO() {
+	public List<MileageTradeVO> getMtVO() {
 		return mtVO;
 	}
-	public void setMtVO(ArrayList<MileageTradeVO> mtVO) {
+	public void setMtVO(List<MileageTradeVO> mtVO) {
 		this.mtVO = mtVO;
 	}
 	public MileageTradePostPagingBean getMtPb() {

@@ -1,23 +1,23 @@
 package org.kosta.gat.model.vo.post.review;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewPostListVO {
-	private ArrayList<ReviewPostVO> list;
+	private List<ReviewPostVO> list;
 	private ReviewPostPagingBean rpPb;
 	
 	public ReviewPostListVO() {
 		super();
 	}
-	public ReviewPostListVO(ArrayList<ReviewPostVO> list, ReviewPostPagingBean rpPb) {
+	public ReviewPostListVO(List<ReviewPostVO> list, ReviewPostPagingBean rpPb) {
 		super();
 		this.list = list;
 		this.rpPb = rpPb;
 	}
-	public ArrayList<ReviewPostVO> getList() {
+	public List<ReviewPostVO> getList() {
 		return list;
 	}
-	public void setList(ArrayList<ReviewPostVO> list) {
+	public void setList(List<ReviewPostVO> list) {
 		this.list = list;
 	}
 	public ReviewPostPagingBean getRpPb() {

@@ -1,23 +1,23 @@
 package org.kosta.gat.model.vo.post.webquestion;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class WebQuestionPostListVO {
-	private ArrayList<WebQuestionPostVO> wqPostVO;
+	private List<WebQuestionPostVO> wqPostVO;
 	private WebQuestionPostPagingBean wqPb;
 	
 	public WebQuestionPostListVO() {
 		super();
 	}
-	public WebQuestionPostListVO(ArrayList<WebQuestionPostVO> wqPostVO, WebQuestionPostPagingBean wqPb) {
+	public WebQuestionPostListVO(List<WebQuestionPostVO> wqPostVO, WebQuestionPostPagingBean wqPb) {
 		super();
 		this.wqPostVO = wqPostVO;
 		this.wqPb = wqPb;
 	}
-	public ArrayList<WebQuestionPostVO> getWqPostVO() {
+	public List<WebQuestionPostVO> getWqPostVO() {
 		return wqPostVO;
 	}
-	public void setWqPostVO(ArrayList<WebQuestionPostVO> wqPostVO) {
+	public void setWqPostVO(List<WebQuestionPostVO> wqPostVO) {
 		this.wqPostVO = wqPostVO;
 	}
 	public WebQuestionPostPagingBean getWqPb() {

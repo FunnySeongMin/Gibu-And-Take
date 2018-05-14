@@ -3,6 +3,7 @@ package org.kosta.gat.model.vo.member;
 public class MemberVO {
 	private String id;
 	private String name;
+	private String password;
 	private String address;
 	private String birthday;
 	private int mileage;
@@ -13,11 +14,12 @@ public class MemberVO {
 	public MemberVO() {
 		super();
 	}
-	public MemberVO(String id, String name, String address, String birthday, int mileage, int totalUseMileage,
-			MemberGroupVO memberGroupVO, MemberGradeVO memberGradeVO) {
+	public MemberVO(String id, String name, String password, String address, String birthday, int mileage,
+			int totalUseMileage, MemberGroupVO memberGroupVO, MemberGradeVO memberGradeVO) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.password = password;
 		this.address = address;
 		this.birthday = birthday;
 		this.mileage = mileage;
@@ -36,6 +38,12 @@ public class MemberVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getAddress() {
 		return address;
@@ -75,8 +83,8 @@ public class MemberVO {
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [id=" + id + ", name=" + name + ", address=" + address + ", birthday=" + birthday
-				+ ", mileage=" + mileage + ", totalUseMileage=" + totalUseMileage + ", memberGroupVO=" + memberGroupVO
-				+ ", memberGradeVO=" + memberGradeVO + "]";
+		return "MemberVO [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address
+				+ ", birthday=" + birthday + ", mileage=" + mileage + ", totalUseMileage=" + totalUseMileage
+				+ ", memberGroupVO=" + memberGroupVO + ", memberGradeVO=" + memberGradeVO + "]";
 	}
 }

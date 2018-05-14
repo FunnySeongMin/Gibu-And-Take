@@ -1,23 +1,23 @@
 package org.kosta.gat.model.vo.post.takedonation;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TakeDonationPostListVO {
-	private ArrayList<TakeDonationPostVO> tdpVO;
+	private List<TakeDonationPostVO> tdpVO;
 	private TakeDonationPostPagingBean tdpPb;
 	
 	public TakeDonationPostListVO() {
 		super();
 	}
-	public TakeDonationPostListVO(ArrayList<TakeDonationPostVO> tdpVO, TakeDonationPostPagingBean tdpPb) {
+	public TakeDonationPostListVO(List<TakeDonationPostVO> tdpVO, TakeDonationPostPagingBean tdpPb) {
 		super();
 		this.tdpVO = tdpVO;
 		this.tdpPb = tdpPb;
 	}
-	public ArrayList<TakeDonationPostVO> getTdpVO() {
+	public List<TakeDonationPostVO> getTdpVO() {
 		return tdpVO;
 	}
-	public void setTdpVO(ArrayList<TakeDonationPostVO> tdpVO) {
+	public void setTdpVO(List<TakeDonationPostVO> tdpVO) {
 		this.tdpVO = tdpVO;
 	}
 	public TakeDonationPostPagingBean getTdpPb() {
