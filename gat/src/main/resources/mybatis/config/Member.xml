@@ -4,6 +4,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+ 	<insert id="registerMember" parameterType="memberVO">
+ 		insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+		values(#{id}, #{password}, #{name}, #{address}, #{email}, #{birthday}, 1, 1)
+ 	</insert>
+ 	<select id ="checkId" parameterType="string" resultType="memberVO">
+ 		select id, password, name, address, birthday from gt_member where id= #{value}  
+ 	</select>
  	<update id="updateMember" parameterType="memberVO">
  		update GT_MEMBER set password=#{password}, address=#{address}, email=#{email}
 		where id=#{id}

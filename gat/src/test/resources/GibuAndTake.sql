@@ -42,23 +42,23 @@ create table gt_member(
 )
 
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('javaking','seo','서정우','판교','naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
+values('javaking','seo','서정우','판교','seo@naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('hwang','ma','황명아','한국','naver.com',to_date('1820.07.21','yyyy.mm.dd'),1,6);
+values('hwang','ma','황명아','한국','hwang@naver.com',to_date('1820.07.21','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('banjang','lee','이윤희','판교','naver.com',to_date('1988.08.24','yyyy.mm.dd'),1,6);
+values('banjang','lee','이윤희','판교','banjang@naver.com',to_date('1988.08.24','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('baek','12345','백설희','용인','naver.com',to_date('1994.06.16','yyyy.mm.dd'),1,1);
+values('baek','12345','백설희','용인','baek@naver.com',to_date('1994.06.16','yyyy.mm.dd'),1,1);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('cho','abcd','조민경','서울','naver.com',to_date('1992.06.09','yyyy.mm.dd'),1,2);
+values('cho','abcd','조민경','서울','cho@naver.com',to_date('1992.06.09','yyyy.mm.dd'),1,2);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('yong','diyong','용다은','수원','naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
+values('yong','diyong','용다은','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('jin','jung','정진표','하남','naver.com',to_date('1987.06.15','yyyy.mm.dd'),3,4);
+values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),3,4);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('keroro','pororo','은성민','서울','naver.com',to_date('1990.08.14','yyyy.mm.dd'),4,5);
+values('keroro','pororo','은성민','서울','keroro@naver.com',to_date('1990.08.14','yyyy.mm.dd'),4,5);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('D_ruking','1234','앞잡이','교도소','naver.com',to_date('1988.02.24','yyyy.mm.dd'),4,6);
+values('D_ruking','1234','앞잡이','교도소','D_ruking@naver.com',to_date('1988.02.24','yyyy.mm.dd'),4,6);
 
 --마일리지 거래 분류 테이블
 drop table mileage_use_group;
@@ -107,6 +107,7 @@ create table application(
 	app_title varchar2(100) not null,
 	app_contents clob not null,
 	app_place varchar2(100) not null,
+	app_regdate date default sysdate,
 	goal_mileage number not null,
 	app_status varchar2(100) not null,
 	start_date date not null,

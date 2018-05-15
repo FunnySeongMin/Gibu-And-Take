@@ -1,0 +1,214 @@
+/*!
+ * Start Bootstrap - Modern Business (https://startbootstrap.com/template-overviews/modern-business)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+
+/* body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+} */
+
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.header-top{
+	background-color:#f35b56;
+	font-size:13px;
+	width:100%;
+	color:#f8f9fa;
+}
+.header-top a{
+	color:#f8f9fa;
+}
+
+/* font awesome with text align*/
+i{
+	vertical-align:middle;
+	margin:0 5px;
+}
+
+
+
+.divider{
+	text-align:center;
+	border-top:1px solid #ccc;	
+}
+.divider>span{
+	position:relative;
+	top:-13px;
+	background-color:#fff;
+	font-size:10px;
+	padding:0 0.8rem;
+}
+
+
+.small-txt{
+	font-size:10px;
+}
+
+.desc-color{
+	color:#757575;
+}
+
+.white-txt, .white-txt a{
+	color:#fff;
+}
+
+nav.navbar>.container>.navbar-brand>img{
+	height:70px;
+}
+
+
+/* gibu n take text color */
+.point-txt-gnt{
+	color:#f35b56;
+}
+.sub-1-txt-gnt{
+	color:#1e878d;
+}
+.sub-2-txt-gnt{
+	color:#34bdb6;
+}
+.sub-3-txt-gnt{
+	color:#edbf71;
+}
+.sub-4-txt-gnt{
+	color:#cee7e4;
+}
+
+/* gibu n take <a> text hover color */
+a.point-txt-gnt:hover{
+	color:#c24945;
+}
+a.sub-1-txt-gnt:hover{
+	color:#165e62;
+}
+a.sub-2-txt-gnt:hover{
+	color:#247f7a;
+}
+a.sub-3-txt-gnt:hover{
+	color:#ba975a;
+}
+a.sub-4-txt-gnt:hover{
+	color:#aabebc;
+}
+
+
+/* gibu n take background color */
+.bg-point-gnt{
+	background-color:#f35b56;
+}
+
+.bg-sub-1-gnt{
+	background-color:#1e878d;
+}
+
+.bg-sub-2-gnt{
+	background-color:#34bdb6;
+}
+
+.bg-sub-3-gnt{
+	background-color:#edbf71;
+}
+
+.bg-sub-4-gnt{
+	background-color:#cee7e4;
+}
+
+.bg-black-gnt{
+	background-color:#000;
+}
+
+
+/* gibu n take button color */
+
+.btn-point-gnt{
+	background-color:#f35b56;
+	color:#fff;
+}
+.btn-point-gnt:hover{
+	background-color:#c24945;
+}
+
+.btn-sub-1-gnt{
+	background-color:#1e878d;
+}
+.btn-sub-1-gnt:hover{
+	background-color:#165e62;
+}
+
+.btn-sub-2-gnt{
+	background-color:#34bdb6;
+}
+.btn-sub-2-gnt:hover{
+	background-color:#247f7a;
+}
+
+.btn-sub-3-gnt{
+	background-color:#edbf71;
+}
+.btn-sub-3-gnt:hover{
+	background-color:#ba975a;
+}
+
+.btn-sub-4-gnt{
+	background-color:#cee7e4;
+}
+.btn-sub-4-gnt:hover{
+	background-color:#aabebc;
+}
+
+button[class^="btn"], a[class^="btn"]{
+	color:#fff;
+}
+
+
+
+
+/* scoll-spy active color*/
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+	background-color:transparent;
+	border-radius:0;
+	color:#f35b56;
+	border-bottom:3px solid #f35b56;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+   background-color: #f35b56;
+}
+
+
+/* page heading*/
+.page-heading{
+	background : url("../img/bg_page_heading.jpg") repeat-x; 
+	border-top:1px solid #eee;
+}
+
+
+
+
+
+
+
+
