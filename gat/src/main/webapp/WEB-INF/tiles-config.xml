@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+ 
+ <tiles-definitions>
+	 <!-- 
+	 	Controller에서 반환하는 viewName이 home.tiles이면 
+	 	tiles view(6페이지가 조합된 페이지)가 응답된다 
+	 -->
+ 	<definition name="home.tiles" template="/WEB-INF/views/templates/layout.jsp">
+ 		<put-attribute name="title" value="gat"/>
+ 		<put-attribute name="header" value="/WEB-INF/views/templates/header.jsp"/>
+ 		<put-attribute name="main" value="/WEB-INF/views/home.jsp"/>
+ 		<put-attribute name="footer" value="/WEB-INF/views/templates/footer.jsp"/> 		
+ 	</definition>
+	
+	<!-- 
+ 			*  {1} : 디렉토리명 
+ 			*  {2} : jsp 파일명 
+ 			ex)  member/findbyid_form.tiles 
+ 	 -->
+ 	<definition name="*/*.tiles" extends="home.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
+ 	</definition>
+ </tiles-definitions>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
