@@ -9,11 +9,11 @@ public class ApplicationPostVO {
 	private String appTitle;
 	private String appContents;
 	private String place;
-	private String imgDirectory;
-	private int goalMileage;
-	private String appStatus;
+	private String appRegdate;
 	private String startDate;
 	private String endDate;
+	private int goalMileage;
+	private String appStatus;
 	private String appParentNo;
 	private AppGroupVO appGroupVO;
 	private ArrayList<AttachmentVO> attList;
@@ -23,8 +23,8 @@ public class ApplicationPostVO {
 	public ApplicationPostVO() {
 		super();
 	}
-	public ApplicationPostVO(String appNo, String appTitle, String appContents, String place, String imgDirectory,
-			int goalMileage, String appStatus, String startDate, String endDate, String appParentNo,
+	public ApplicationPostVO(String appNo, String appTitle, String appContents, String place, String appRegdate,
+			String startDate, String endDate, int goalMileage, String appStatus, String appParentNo,
 			AppGroupVO appGroupVO, ArrayList<AttachmentVO> attList, ArrayList<PresentVO> presentList,
 			MemberVO memberVO) {
 		super();
@@ -32,11 +32,11 @@ public class ApplicationPostVO {
 		this.appTitle = appTitle;
 		this.appContents = appContents;
 		this.place = place;
-		this.imgDirectory = imgDirectory;
-		this.goalMileage = goalMileage;
-		this.appStatus = appStatus;
+		this.appRegdate = appRegdate;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.goalMileage = goalMileage;
+		this.appStatus = appStatus;
 		this.appParentNo = appParentNo;
 		this.appGroupVO = appGroupVO;
 		this.attList = attList;
@@ -67,23 +67,11 @@ public class ApplicationPostVO {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	public String getImgDirectory() {
-		return imgDirectory;
+	public String getAppRegdate() {
+		return appRegdate;
 	}
-	public void setImgDirectory(String imgDirectory) {
-		this.imgDirectory = imgDirectory;
-	}
-	public int getGoalMileage() {
-		return goalMileage;
-	}
-	public void setGoalMileage(int goalMileage) {
-		this.goalMileage = goalMileage;
-	}
-	public String getAppStatus() {
-		return appStatus;
-	}
-	public void setAppStatus(String appStatus) {
-		this.appStatus = appStatus;
+	public void setAppRegdate(String appRegdate) {
+		this.appRegdate = appRegdate;
 	}
 	public String getStartDate() {
 		return startDate;
@@ -96,6 +84,18 @@ public class ApplicationPostVO {
 	}
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+	public int getGoalMileage() {
+		return goalMileage;
+	}
+	public void setGoalMileage(int goalMileage) {
+		this.goalMileage = goalMileage;
+	}
+	public String getAppStatus() {
+		return appStatus;
+	}
+	public void setAppStatus(String appStatus) {
+		this.appStatus = appStatus;
 	}
 	public String getAppParentNo() {
 		return appParentNo;
@@ -130,9 +130,9 @@ public class ApplicationPostVO {
 	@Override
 	public String toString() {
 		return "ApplicationPostVO [appNo=" + appNo + ", appTitle=" + appTitle + ", appContents=" + appContents
-				+ ", place=" + place + ", imgDirectory=" + imgDirectory + ", goalMileage=" + goalMileage
-				+ ", appStatus=" + appStatus + ", startDate=" + startDate + ", endDate=" + endDate + ", appParentNo="
-				+ appParentNo + ", appGroupVO=" + appGroupVO + ", attList=" + attList + ", presentList=" + presentList
-				+ ", memberVO=" + memberVO + "]";
+				+ ", place=" + place + ", appRegdate=" + appRegdate + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", goalMileage=" + goalMileage + ", appStatus=" + appStatus + ", appParentNo=" + appParentNo
+				+ ", appGroupVO=" + appGroupVO + ", attList=" + attList + ", presentList=" + presentList + ", memberVO="
+				+ memberVO + "]";
 	}
 }

@@ -8,23 +8,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		count(*) from application where app_status='처리중'
 	</select>
-
+	
 	<resultMap type="applicationPostVO" id="appPostVO">
-		<result property="attachmentVO.achNo" column="ach_no" />
-		<result property="attachmentVO.achDirectory" column="ach_directory" />
-		<result property="attachmentVO.achGrade" column="ach_grade" />
-		<result property="presentVO.presentNo" column="present_no" />
-		<result property="presentVO.donationMileage" column="donation_mileage" />
-		<result property="presentVO.presentContents" column="present_contents" />
-		<result property="memberVO.id" column="id" />
-		<result property="memberVO.name" column="name" />
+		<result column="app_no" property="appNo"/>
+		<result column="app_title" property="appTitle"/>
+		<result column="app_contents" property="appContents"/>
+		<result column="app_place" property="place"/>
+		<result column="app_regdate" property="appRegdate"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="goal_mileage" property="goalMileage"/>
+		<result column="app_status" property="appStatus"/>
+		<collection property="attList" ofType="attachmentVO" 
+		javaType="java.util.List" column="app_no" select="selectAttachment"></collection>
+		<collection property="presentList" ofType="presentVO" 
+		javaType="java.util.List" column="app_no" select="selectPresent"></collection>
+		<collection property="memberVO" javaType="memberVO" column="app_no"
+		select="selectMember"></collection>
 	</resultMap>
-
+	
+	<select id="selectAttachment" resultType="attachmentVO" parameterType="string">
+		select att.ach_no,att.ach_directory,att.ach_grade
+		from attachment att, application app
+		where att.app_no=app.app_no and att.app_no=#{value}
+	</select>
+	
+	<select id="selectPresent" resultType="presentVO" parameterType="string">
+		select pre.present_no,pre.donation_mileage,pre.present_contents
+		from present pre, application app
+		where pre.app_no=app.app_no and pre.app_no=#{value}
+	</select>
+	
+	<select id="selectMember" resultType="memberVO" parameterType="string">
+		select m.id,m.password,m.name,m.address,m.birthday,m.mileage,m.total_use_mileage
+		from gt_member m, application app
+		where m.id=app.id and app.app_no=#{value}
+	</select>
+	
 	<select id="readUnReceivedApplicationList"
 		resultMap="appPostVO" parameterType="applicationPostPagingBean">
 		<![CDATA[
  			select rnum,app.app_no,app.app_title,app.app_place,app.app_regdate,
- 			app.start_date,app.end_date,app.goal_mileage,app.app_status,m.id,m.name
+ 			app.start_date,app.end_date,app.goal_mileage,app.app_status
 			from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
 			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(start_date,'yyyy.mm.dd') start_date,
@@ -37,7 +62,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
 		<![CDATA[
-			
+			select app.app_no,app.app_title,app.app_contents,app.app_place,
+			to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
+			to_char(app.start_date,'yyyy.mm.dd') start_date,
+			to_char(app.end_date,'yyyy.mm.dd') end_date,
+			app.goal_mileage,app.app_status
+			from application app, gt_member m
+			where m.id=app.id and app.app_no=#{value}
 		]]>
 	</select>
+	
+	<update id="rejectionApplication">
+		update application set app_status='거절' where app_no=#{value}
+	</update>
+	
+	<update id="approvalApplication">
+		update application set app_status='승인' where app_no=#{value}
+	</update>
 </mapper>
