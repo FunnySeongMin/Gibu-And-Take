@@ -12,6 +12,7 @@ import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -59,12 +60,12 @@ public class MemberController {
 	/**
 	* 작성이유 : 회원수정 메서드
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
 	@RequestMapping("updateMember.do")
-	public String updateMember(MemberVO vo) {
+	public String updateMember(MemberVO vo,ModelAndView modelAndView) {
 		memberService.updateMember(vo);
-		return null;
+		return "updateMember";
 	}
 	/**
 	* 작성이유 : 회원탈퇴 메서드
