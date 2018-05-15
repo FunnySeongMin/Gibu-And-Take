@@ -5,7 +5,7 @@
 		<div class="container">
 			<ul class="nav justify-content-end">
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/login.do">Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/register.do">Register</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/registerMemberForm.do">Register</a></li>
 			</ul>
 		</div>
 	</div>
