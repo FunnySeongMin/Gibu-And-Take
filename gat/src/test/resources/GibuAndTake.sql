@@ -106,6 +106,7 @@ create table application(
 	app_title varchar2(100) not null,
 	app_contents clob not null,
 	app_place varchar2(100) not null,
+	app_regdate date default sysdate,
 	goal_mileage number not null,
 	app_status varchar2(100) not null,
 	start_date date not null,
