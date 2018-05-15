@@ -8,6 +8,7 @@
 <title>홈 화면입니다~~</title>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/registerMemberForm.do">가입하기</a>
 홈이에요~~~
 </body>
 </html>
