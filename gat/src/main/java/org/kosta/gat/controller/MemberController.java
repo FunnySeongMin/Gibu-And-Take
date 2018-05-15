@@ -11,6 +11,7 @@ import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -35,6 +36,7 @@ public class MemberController {
 	* 
 	* @author 은성민
 	*/
+	@RequestMapping("")
 	public String login(String id,String password,HttpServletRequest request) {
 		MemberVO mvo=memberService.checkId(id);
 		if(mvo==null) {
@@ -135,5 +137,15 @@ public class MemberController {
 	public String readMyActivityList(String id,int nowPage,Model model) {
 		TakeDonationPostListVO tdListVO=memberService.readMyActivityList(id,nowPage);
 		return null;
+	}
+	/**
+	 * 
+	 * 작성이유 : tiles가 적용된 view
+	 * @author 조민경
+	 * 
+	 */
+	@RequestMapping("{dirName}/{viewName}.do")
+	public String showTiles(@PathVariable String dirName, @PathVariable String viewName) {
+		return dirName+"/"+viewName+".tiles";
 	}
 }
