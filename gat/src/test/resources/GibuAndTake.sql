@@ -45,6 +45,8 @@ values('javaking','seo','서정우','판교',to_date('1997.07.21','yyyy.mm.dd'),
 insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
 values('hwang','ma','황명아','한국',to_date('1820.07.21','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
+values('banjang','lee','이윤희','판교',to_date('1988.08.24','yyyy.mm.dd'),1,6);
+insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
 values('baek','12345','백설희','용인',to_date('1994.06.16','yyyy.mm.dd'),1,1);
 insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
 values('cho','abcd','조민경','서울',to_date('1992.06.09','yyyy.mm.dd'),1,2);
@@ -123,6 +125,10 @@ create sequence application_seq;
 insert into application(app_no,app_title,app_contents,app_place,goal_mileage,app_status,start_date,end_date,id,ag_no)
 values(application_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
 '판교',200000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'hwang','1');
+
+insert into application(app_no,app_title,app_contents,app_place,goal_mileage,app_status,start_date,end_date,id,ag_no)
+values(application_seq.nextval,'이윤희의 유니짜장','유니짜장은 재료만 잘게 다지면 됩니다!',
+'판교',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang','1');
 
 select *from application;
 
