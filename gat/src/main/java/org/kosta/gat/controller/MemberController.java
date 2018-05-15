@@ -13,20 +13,52 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
 	@Resource
 	private MemberService memberService;
 	/**
-	* 작성이유 : 회원가입 메서드
+	* 회원가입 메서드
 	* 
-	* @author 은성민
+	* 작성이유: MemberVO를 받아와서 db에 저장시킨다.
+	* 
+	* @author 용다은
 	*/
 	@RequestMapping("registerMember.do")
 	public String registerMember(MemberVO vo) {
 		memberService.registerMember(vo);
 		return null;
+	}
+	/**
+	* 회원가입 폼 메서드
+	* 
+	* 작성이유: 회원가입 폼 페이지를 불러온다.
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("registerMemberForm.do")
+	public String registerMemberForm() {
+		return "registerMember";
+	}
+	/**
+	* 아이디를 중복체크 하는 메서드
+	* 
+	* 작성이유: 아이디를 받아와서 db에 같은 아이디가 있는지 확인하고
+	* 				  결과에 따라 ajax로 사용 가능 여부를 나타냄
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("checkId.do")
+	@ResponseBody
+	public String checkId(String id) {
+		MemberVO mvo = memberService.checkId(id);
+		System.out.println(mvo);
+		if(mvo != null) {// 아이디가 이미 존재한다면
+			return "fail";
+		} else // 아이디가 아직 존재하지 않는다면
+			return "ok";
 	}
 	/**
 	* 작성이유 : 로그인 메서드

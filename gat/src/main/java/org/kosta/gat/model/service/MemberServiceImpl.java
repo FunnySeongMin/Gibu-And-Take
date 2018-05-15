@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public MemberVO checkId(String id) {
 		return memberDAO.checkId(id);
 	}

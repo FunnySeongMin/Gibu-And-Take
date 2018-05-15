@@ -31,6 +31,7 @@ create table gt_member(
 	password varchar2(100) not null,
 	name varchar2(100) not null,
 	address varchar2(100) not null,
+	email varchar2(100) not null,
 	birthday date not null,
 	mileage number default 0,
 	total_use_mileage number default 0,
@@ -40,24 +41,41 @@ create table gt_member(
 	CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
 )
 
-insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('javaking','seo','서정우','판교',to_date('1997.07.21','yyyy.mm.dd'),1,6);
-insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('hwang','ma','황명아','한국',to_date('1820.07.21','yyyy.mm.dd'),1,6);
-insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('banjang','lee','이윤희','판교',to_date('1988.08.24','yyyy.mm.dd'),1,6);
-insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('baek','12345','백설희','용인',to_date('1994.06.16','yyyy.mm.dd'),1,1);
-insert into gt_member(id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('cho','abcd','조민경','서울',to_date('1992.06.09','yyyy.mm.dd'),1,2);
-insert into gt_member (id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('yong','diyong','용다은','수원',to_date('1994.06.01','yyyy.mm.dd'),2,3);
-insert into gt_member (id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('jin','jung','정진표','하남',to_date('1987.06.15','yyyy.mm.dd'),3,4);
-insert into gt_member (id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('keroro','pororo','은성민','서울',to_date('1990.08.14','yyyy.mm.dd'),4,5);
-insert into gt_member (id,password,name,address,birthday,mgroup_no,mgrade_no)
-values('D_ruking','1234','앞잡이','교도소',to_date('1988.02.24','yyyy.mm.dd'),4,6);
+create table gt_member(
+   id varchar2(100) primary key,
+   password varchar2(100) not null,
+   name varchar2(100) not null,
+   address varchar2(100) not null,
+   email varchar2(100) not null,
+   birthday date not null,
+   mileage number default 0,
+   total_use_mileage number default 0,
+   mgroup_no varchar2(100) not null,
+   mgrade_no varchar2(100) not null,
+   CONSTRAINT fk_gt_member_mgroup FOREIGN KEY(mgroup_no) REFERENCES member_group(mgroup_no) ON DELETE CASCADE,
+   CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
+)
+
+select * from gt_member;
+
+insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('javaking','seo','서정우','판교','seo@naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
+insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('hwang','ma','황명아','한국','hwang@naver.com',to_date('1820.07.21','yyyy.mm.dd'),1,6);
+insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('banjang','lee','이윤희','판교','banjang@naver.com',to_date('1988.08.24','yyyy.mm.dd'),1,6);
+insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('baek','12345','백설희','용인','baek@naver.com',to_date('1994.06.16','yyyy.mm.dd'),1,1);
+insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('cho','abcd','조민경','서울','cho@naver.com',to_date('1992.06.09','yyyy.mm.dd'),1,2);
+insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('yong','diyong','용다은','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
+insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),3,4);
+insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('keroro','pororo','은성민','서울','keroro@naver.com',to_date('1990.08.14','yyyy.mm.dd'),4,5);
+insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
+values('D_ruking','1234','앞잡이','교도소','D_ruking@naver.com',to_date('1988.02.24','yyyy.mm.dd'),4,6);
 
 --마일리지 거래 분류 테이블
 drop table mileage_use_group;
@@ -106,6 +124,7 @@ create table application(
 	app_title varchar2(100) not null,
 	app_contents clob not null,
 	app_place varchar2(100) not null,
+	app_regdate date default sysdate,
 	goal_mileage number not null,
 	app_status varchar2(100) not null,
 	start_date date not null,
