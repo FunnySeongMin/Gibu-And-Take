@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
-	<h4 class="py-5 text-center">±Û ÀÛ¼º</h4>
+	<h4 class="py-5 text-center">æ¹²ï¿½ ï¿½ï¿½ï¿½ï¿½</h4>
 </div>
 <!-- /.Page Heading -->
 
@@ -15,24 +16,37 @@
 			<form action="addApplication.do" method="post" name="sentMessage" id="contactForm" novalidate>
 				<div class="control-group form-group">
 					<div class="controls">
-						<label>ÀÛ¼ºÀÚ</label> <input type="tel" class="form-control"
+<<<<<<< HEAD
+						<label>ì‘ì„±ì</label> <input type="tel" class="form-control"
 							id="name" required
 							data-validation-required-message="Please enter your phone number.">
+=======
+						<label>ï¿½ï¿½ï¿½ê¹†ï¿½ï¿½</label>
+						<input type="tel" class="form-control" id="name" required data-validation-required-message="Please enter your phone number.">
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 					</div>
 				</div>
 
 				<div class="control-group form-group">
-					<!-- ½º¸¶Æ® ¿¡µğÅÍ-->
+					<!-- ï¿½ã…»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
 					<div class="controls">
+<<<<<<< HEAD
 						<textarea name="editor" id="editor" rows="10" cols="100"
 							style="width:636px; height:412px;"></textarea>
-						<!-- <textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="¹®ÀÇ³»¿ë"></textarea> -->
+						<!-- <textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="ë¬¸ì˜ë‚´ìš©"></textarea> -->
+=======
+						<textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="è‡¾ëª„ï¿½ï¿½ï¿½ëŒï¿½ï¿½"></textarea>
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 					</div>
 				</div>
 				<div id="success"></div>
 				<!-- For success/fail messages -->
+<<<<<<< HEAD
 				<button type="button" id="savebutton"
-					class="btn btn-sub-2-gnt btn-block" id="#">±Û¾²±â</button>
+					class="btn btn-sub-2-gnt btn-block" id="#">ê¸€ì“°ê¸°</button>
+=======
+				<button type="submit" class="btn btn-sub-2-gnt btn-block" id="#">æ¹²ï¿½ï¿½ê³Œë¦°</button>
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 			</form>
 		</div>
 

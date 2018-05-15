@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!--  script  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -8,7 +8,7 @@ $(document).ready(function(){
 	$("#id").keyup(function(){
 		var id=$(this).val().trim();
 		if(id.length<3 || id.length>10){
-			$("#checkIdView").html("¾ÆÀÌµğ´Â 3ÀÚÀÌ»ó 10ÀÚ ÀÌÇÏ¿©¾ß ÇÕ´Ï´Ù.").css("color","#edbf71");
+			$("#checkIdView").html("ì•„ì´ë””ëŠ” 3ìì´ìƒ 10ì ì´í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤.").css("color","#edbf71");
 			checkResultId="";
 			return;
 		}
@@ -20,10 +20,10 @@ $(document).ready(function(){
 			data:"id="+id,	
 			success:function(data){	
 				if(data=="fail"){
-					$("#checkIdView").html(id+"Àº ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.").css("color","#f35b56");
+					$("#checkIdView").html(id+"ì€ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.").css("color","#f35b56");
 					checkResultId="";
 				}else{					
-					$("#checkIdView").html(id+"´Â »ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.").css("color","#1e878d");		
+					$("#checkIdView").html(id+"ëŠ” ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.").css("color","#1e878d");		
 					checkResultId=id;
 				}					
 			}//success		
@@ -33,38 +33,38 @@ $(document).ready(function(){
 		var passwordCon = $("#passwordCon").val();
 		var password = $("#password").val();
 		var checkResultPassword="";
-		if(passwordCon!="" && password != passwordCon) {//ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
-			$("#checkPasswordView").html("ÆĞ½º¿öµå¿Í ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù").css("color","#f35b56");
+		if(passwordCon!="" && password != passwordCon) {//ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” ê²½ìš°
+			$("#checkPasswordView").html("íŒ¨ìŠ¤ì›Œë“œì™€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤").css("color","#f35b56");
 			checkResultPassword="";
 		}else if (passwordCon=="") {
 			$("#checkPasswordView").html("");
 			checkResultPassword="";
-		}else {//ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏ¿© ÁøÇà °¡´ÉÇÑ °æ¿ì
-			$("#checkPasswordView").html("ÆĞ½º¿öµå¿Í ÀÏÄ¡ÇÕ´Ï´Ù").css("color","#1e878d");
+		}else {//ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì—¬ ì§„í–‰ ê°€ëŠ¥í•œ ê²½ìš°
+			$("#checkPasswordView").html("íŒ¨ìŠ¤ì›Œë“œì™€ ì¼ì¹˜í•©ë‹ˆë‹¤").css("color","#1e878d");
 			checkResultPassword=password;
 		}
 	});//keyup
 	$("#passwordCon").keyup(function(){
 		var passwordCon = $("#passwordCon").val();
 		var password = $("#password").val();
-		if(passwordCon!="" && password != passwordCon) {//ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
-			$("#checkPasswordView").html("ÆĞ½º¿öµå¿Í ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù").css("color","#f35b56");
+		if(passwordCon!="" && password != passwordCon) {//ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” ê²½ìš°
+			$("#checkPasswordView").html("íŒ¨ìŠ¤ì›Œë“œì™€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤").css("color","#f35b56");
 			checkResultPassword="";
 		}else if (passwordCon=="") {
 			$("#checkPasswordView").html("");
 			checkResultPassword="";
-		}else {//ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏ¿© ÁøÇà °¡´ÉÇÑ °æ¿ì
-			$("#checkPasswordView").html("ÆĞ½º¿öµå¿Í ÀÏÄ¡ÇÕ´Ï´Ù").css("color","#1e878d");
+		}else {//ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì—¬ ì§„í–‰ ê°€ëŠ¥í•œ ê²½ìš°
+			$("#checkPasswordView").html("íŒ¨ìŠ¤ì›Œë“œì™€ ì¼ì¹˜í•©ë‹ˆë‹¤").css("color","#1e878d");
 			checkResultPassword=password;
 		}
 	});//keyup
 	$("#registerForm").submit(function(){
 		if(checkResultId==""){
-			alert("¾ÆÀÌµğ Áßº¹ È®ÀÎÇÏ¼¼¿ä!");
+			alert("ì•„ì´ë”” ì¤‘ë³µ í™•ì¸í•˜ì„¸ìš”!");
 			return false;
 		}
 		else if (checkResultPassword=="") {
-			alert("ºñ¹Ğ¹øÈ£ È®ÀÎÇÏ¼¼¿ä!");
+			alert("ë¹„ë°€ë²ˆí˜¸ í™•ì¸í•˜ì„¸ìš”!");
 			return false;
 		}
 	});//submit
@@ -76,45 +76,45 @@ $(document).ready(function(){
 		<div class="col-md-4 offset-md-4">				
 			<div class="card login-form pt-5 pb-5">
 				<div class="card-body">
-					<!--NAVER ·Î±×ÀÎ -->
-					<button type="submit" class="btn btn-success btn-block">³×ÀÌ¹ö ¾ÆÀÌµğ·Î °¡ÀÔÇÏ±â</button>
+					<!--NAVER ë¡œê·¸ì¸ -->
+					<button type="submit" class="btn btn-success btn-block">ë„¤ì´ë²„ ì•„ì´ë””ë¡œ ê°€ì…í•˜ê¸°</button>
 					<div class="divider mt-4">						
-						<span>¶Ç´Â<span>
+						<span>ë˜ëŠ”<span>
 					</div>
-<!-- È¸¿ø°¡ÀÔ Æû -->
+<!-- íšŒì›ê°€ì… í¼ -->
  <form action="registerMember.do" method="post" name="registerForm">
                      <div class="form-group">
-                        <input type="text" class="form-control" name="id" id="id" placeholder="¾ÆÀÌµğ" required="required">
+                        <input type="text" class="form-control" name="id" id="id" placeholder="ì•„ì´ë””" required="required">
                          <span id="checkIdView"></span>
                      </div>
                      <div class="form-group">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="ºñ¹Ğ¹øÈ£" required="required">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="ë¹„ë°€ë²ˆí˜¸" required="required">
                      </div>
                      <div class="form-group">
-                        <input type="password" class="form-control" name="passwordCon" id="passwordCon" placeholder="ºñ¹Ğ¹øÈ£ ÀçÈ®ÀÎ" required="required">
+                        <input type="password" class="form-control" name="passwordCon" id="passwordCon" placeholder="ë¹„ë°€ë²ˆí˜¸ ì¬í™•ì¸" required="required">
                     	<span id="checkPasswordView"></span>
                      </div>
                      <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="ÀÌ¸§" required="required">
+                        <input type="text" class="form-control" name="name" placeholder="ì´ë¦„" required="required">
                      </div>
                      <div class="form-group">
-                        <label>»ı³â¿ùÀÏ</label>
+                        <label>ìƒë…„ì›”ì¼</label>
                         <input type="date" class="form-control" name="birthday" required="required">
                      </div>
                      <div class="form-group">
-                        <label>ÁÖ¼Ò</label>
-                        <button type="" class="btn btn-sm">°Ë»ö</button>
+                        <label>ì£¼ì†Œ</label>
+                        <button type="" class="btn btn-sm">ê²€ìƒ‰</button>
                         <input type="text" class="form-control" name="address" required="required">
                      </div>
                      <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="ÀÌ¸ŞÀÏ" required="required">
+                        <input type="email" class="form-control" name="email" placeholder="ì´ë©”ì¼" required="required">
                      </div>
-                     <button type="submit" class="btn btn-point-gnt btn-block">È¸¿ø°¡ÀÔ</button>
+                     <button type="submit" class="btn btn-point-gnt btn-block">íšŒì›ê°€ì…</button>
                   </form>
 				</div>
 				<div class="card-body text-center">
 					<div class="divider"></div>
-					<span class="small-txt desc-color mr-1">ÀÌ¹Ì ±âºÎ¾ØÅ×ÀÌÅ© °èÁ¤ÀÌ ÀÖÀ¸½Å°¡¿ä?</span><a class="small-txt point-txt-gnt" href="${pageContext.request.contextPath }/member/login.do">·Î±×ÀÎ</a>
+					<span class="small-txt desc-color mr-1">ì´ë¯¸ ê¸°ë¶€ì•¤í…Œì´í¬ ê³„ì •ì´ ìˆìœ¼ì‹ ê°€ìš”?</span><a class="small-txt point-txt-gnt" href="${pageContext.request.contextPath }/member/login.do">ë¡œê·¸ì¸</a>
 				</div>
 			</div>
 		</div>

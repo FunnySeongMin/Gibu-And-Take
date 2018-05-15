@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 	<div class="page-heading bg-sub-3-gnt">
-		<h4 class="py-5 text-center">юГ╢и╠Б╨н ╫ец╩го╠Б</h4>
+		<h4 class="py-5 text-center">Л·╛К┼╔Й╦╟К╤─ Л▀═Л╡╜М∙≤Й╦╟</h4>
 	</div>
 	
 	<!-- /.Page Heading -->
@@ -11,11 +11,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-10 offset-lg-1 my-4">
-				<h3 class="mt-4 mb-3">юГ╢и╠Б╨нюз ╠Б╨╩ а╓╨╦
+				<h3 class="mt-4 mb-3">Л·╛К┼╔Й╦╟К╤─Л·░ Й╦╟КЁ╦ Л═∙КЁ╢
 						<small>info</small>
 					</h3>
 				<div class="jumbotron">
-					юГ╢и╠Б╨нюз ╠Б╨╩ а╓╨╦
+					Л·╛К┼╔Й╦╟К╤─Л·░ Й╦╟КЁ╦ Л═∙КЁ╢
 				</div>
 			</div>
 		</div>
@@ -28,38 +28,38 @@
 				<form action="#" method="#">
 					<div class="control-group form-group">
 						<div class="controls">
-							<label>юГ╢и╠Б╨н га╥на╖ф╝╦М</label>
-							<input type="text" class="form-control" id="name" required data-validation-required-message="юГ╢и╠Б╨н га╥на╖ф╝╦Мю╩ ют╥бго╪╪©Д">
+							<label>Л·╛К┼╔Й╦╟К╤─ М■└К║°Л═²М┼╦К╙┘</label>
+							<input type="text" class="form-control" id="name" required data-validation-required-message="Л·╛К┼╔Й╦╟К╤─ М■└К║°Л═²М┼╦К╙┘Л²└ Л·┘К═╔М∙≤Л└╦Л ■">
 						</div>
 					</div>
 					<div class="control-group form-group">
 						<div class="controls">
-							<label>юГ╢и╠Б╨н ╠Б╟ё</label>
+							<label>Л·╛К┼╔Й╦╟К╤─ Й╦╟Й╟└</label>
 							<input type="date" id="start_date"> - <input type="date" id="end_date">
 						</div>
 					</div>
 					<div class="control-group form-group">
 						<div class="controls">
-							<label>аж╪р</label>
-							<button type="" class="btn btn-sm">╟к╩Ж</button>
+							<label>Лё╪Л├▄</label>
+							<button type="" class="btn btn-sm">Й╡─Л┐┴</button>
 							<input type="text" class="form-control" name="address">
 						</div>
 						<div class="view-map"></div>
 					</div>
 					<div class="control-group form-group">
-						<label>юл╧лаЖ</label>
-						<button type="" class="btn btn-sm">╟к╩Ж</button>
+						<label>Л²╢К╞╦Л╖─</label>
+						<button type="" class="btn btn-sm">Й╡─Л┐┴</button>
 						<input type="upload" class="form-control" name="address">
 					</div>
 					<div class="control-group form-group">
 						<div class="controls">
-							<label>юГ╢и╠Б╨н га╥на╖ф╝ ╪р╟Ё</label>
-							<textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="╧╝югЁ╩©К"></textarea>
+							<label>Л·╛К┼╔Й╦╟К╤─ М■└К║°Л═²М┼╦ Л├▄Й╟°</label>
+							<textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="К╛╦Л²≤К┌╢Л ╘"></textarea>
 						</div>
 					</div>
 					<div id="success"></div>
 					<!-- For success/fail messages -->
-					<button type="submit" class="btn btn-sub-2-gnt btn-block" id="apply_gibu">юГ╢и╠Б╨н ╫ец╩го╠Б</button>
+					<button type="submit" class="btn btn-sub-2-gnt btn-block" id="apply_gibu">Л·╛К┼╔Й╦╟К╤─ Л▀═Л╡╜М∙≤Й╦╟</button>
 				</form>
 			</div>
 		</div>
