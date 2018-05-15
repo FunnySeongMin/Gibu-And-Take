@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
-	<h4 class="py-5 text-center">±Û ÀÛ¼º</h4>
+	<h4 class="py-5 text-center">ê¸€ ìž‘ì„±</h4>
 </div>
 <!-- /.Page Heading -->
 
@@ -15,20 +15,20 @@
 			<form name="sentMessage" id="contactForm" novalidate>
 				<div class="control-group form-group">
 					<div class="controls">
-						<label>ÀÛ¼ºÀÚ</label>
+						<label>ìž‘ì„±ìž</label>
 						<input type="tel" class="form-control" id="name" required data-validation-required-message="Please enter your phone number.">
 					</div>
 				</div>
 			
 				<div class="control-group form-group">
-					<!-- ½º¸¶Æ® ¿¡µðÅÍ-->
+					<!-- ìŠ¤ë§ˆíŠ¸ ì—ë””í„°-->
 					<div class="controls">
-						<textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="¹®ÀÇ³»¿ë"></textarea>
+						<textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="ë¬¸ì˜ë‚´ìš©"></textarea>
 					</div>
 				</div>
 				<div id="success"></div>
 				<!-- For success/fail messages -->
-				<button type="submit" class="btn btn-sub-2-gnt btn-block" id="#">±Û¾²±â</button>
+				<button type="submit" class="btn btn-sub-2-gnt btn-block" id="#">ê¸€ì“°ê¸°</button>
 			</form>
 		</div>
 
