@@ -8,6 +8,7 @@ import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,8 +22,9 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("readUnReceivedApplicationList.do")
-	public String readUnReceivedApplicationList(int nowPage) {
+	public String readUnReceivedApplicationList(int nowPage,Model model) {
 		ApplicationPostListVO apListVO=adminService.readUnReceivedApplicationList(nowPage);
+		model.addAttribute("apListVO", apListVO);
 		return null;
 	}
 	/**
@@ -31,8 +33,9 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("readUnReceivedApplicationDetail.do")
-	public String readUnReceivedApplicationDetail(String apno) {
+	public String readUnReceivedApplicationDetail(String apno,Model model) {
 		ApplicationPostVO apVO=adminService.readUnReceivedApplicationDetail(apno);
+		model.addAttribute("apVO", apVO);
 		return null;
 	}
 	/**

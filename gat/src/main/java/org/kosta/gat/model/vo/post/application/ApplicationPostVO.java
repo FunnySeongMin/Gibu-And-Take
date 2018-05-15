@@ -6,6 +6,7 @@ import org.kosta.gat.model.vo.member.MemberVO;
 
 public class ApplicationPostVO {
 	private String appNo;
+	private String appTitle;
 	private String appContents;
 	private String place;
 	private String imgDirectory;
@@ -22,11 +23,13 @@ public class ApplicationPostVO {
 	public ApplicationPostVO() {
 		super();
 	}
-	public ApplicationPostVO(String appNo, String appContents, String place, String imgDirectory, int goalMileage,
-			String appStatus, String startDate, String endDate, String appParentNo, AppGroupVO appGroupVO,
-			ArrayList<AttachmentVO> attList, ArrayList<PresentVO> presentList, MemberVO memberVO) {
+	public ApplicationPostVO(String appNo, String appTitle, String appContents, String place, String imgDirectory,
+			int goalMileage, String appStatus, String startDate, String endDate, String appParentNo,
+			AppGroupVO appGroupVO, ArrayList<AttachmentVO> attList, ArrayList<PresentVO> presentList,
+			MemberVO memberVO) {
 		super();
 		this.appNo = appNo;
+		this.appTitle = appTitle;
 		this.appContents = appContents;
 		this.place = place;
 		this.imgDirectory = imgDirectory;
@@ -45,6 +48,12 @@ public class ApplicationPostVO {
 	}
 	public void setAppNo(String appNo) {
 		this.appNo = appNo;
+	}
+	public String getAppTitle() {
+		return appTitle;
+	}
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
 	}
 	public String getAppContents() {
 		return appContents;
@@ -120,9 +129,10 @@ public class ApplicationPostVO {
 	}
 	@Override
 	public String toString() {
-		return "ApplicationPostVO [appNo=" + appNo + ", appContents=" + appContents + ", place=" + place
-				+ ", imgDirectory=" + imgDirectory + ", goalMileage=" + goalMileage + ", appStatus=" + appStatus
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", appParentNo=" + appParentNo + ", appGroupVO="
-				+ appGroupVO + ", attList=" + attList + ", presentList=" + presentList + ", memberVO=" + memberVO + "]";
+		return "ApplicationPostVO [appNo=" + appNo + ", appTitle=" + appTitle + ", appContents=" + appContents
+				+ ", place=" + place + ", imgDirectory=" + imgDirectory + ", goalMileage=" + goalMileage
+				+ ", appStatus=" + appStatus + ", startDate=" + startDate + ", endDate=" + endDate + ", appParentNo="
+				+ appParentNo + ", appGroupVO=" + appGroupVO + ", attList=" + attList + ", presentList=" + presentList
+				+ ", memberVO=" + memberVO + "]";
 	}
 }

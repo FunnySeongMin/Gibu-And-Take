@@ -5,16 +5,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 	<select id="totalUnReceivedApplicationCount" resultType="int">
-		select count(*) from application where app_status='처리중'
+		select
+		count(*) from application where app_status='처리중'
+	</select>
+
+	<resultMap type="applicationPostVO" id="appPostVO">
+		<result property="attachmentVO.achNo" column="ach_no" />
+		<result property="attachmentVO.achDirectory" column="ach_directory" />
+		<result property="attachmentVO.achGrade" column="ach_grade" />
+		<result property="presentVO.presentNo" column="present_no" />
+		<result property="presentVO.donationMileage" column="donation_mileage" />
+		<result property="presentVO.presentContents" column="present_contents" />
+		<result property="memberVO.id" column="id" />
+		<result property="memberVO.name" column="name" />
+	</resultMap>
+
+	<select id="readUnReceivedApplicationList"
+		resultMap="appPostVO" parameterType="applicationPostPagingBean">
+		<![CDATA[
+ 			select rnum,app.app_no,app.app_title,app.app_place,app.app_regdate,
+ 			app.start_date,app.end_date,app.goal_mileage,app.app_status,m.id,m.name
+			from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
+			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
+			to_char(start_date,'yyyy.mm.dd') start_date,
+			to_char(end_date,'yyyy.mm.dd') end_date,goal_mileage,app_status,id
+			from application) app, gt_member m
+			where app.id=m.id and app.app_status='처리중' and rnum between #{startRowNumber} 
+			and #{endRowNumber} order by app.app_no desc
+ 		]]>
 	</select>
 	
-	<resultMap type="applicationPostVO" id="appPostVO">
-		
-	</resultMap>
-	
-	<select id="readUnReceivedApplicationList"
-		resultType="applicationPostVO"
-		parameterType="applicationPostPagingBean">
-		
+	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
+		<![CDATA[
+			
+		]]>
 	</select>
 </mapper>
