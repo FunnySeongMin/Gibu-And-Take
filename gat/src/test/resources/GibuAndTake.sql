@@ -41,21 +41,6 @@ create table gt_member(
 	CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
 )
 
-create table gt_member(
-   id varchar2(100) primary key,
-   password varchar2(100) not null,
-   name varchar2(100) not null,
-   address varchar2(100) not null,
-   email varchar2(100) not null,
-   birthday date not null,
-   mileage number default 0,
-   total_use_mileage number default 0,
-   mgroup_no varchar2(100) not null,
-   mgrade_no varchar2(100) not null,
-   CONSTRAINT fk_gt_member_mgroup FOREIGN KEY(mgroup_no) REFERENCES member_group(mgroup_no) ON DELETE CASCADE,
-   CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
-)
-
 select * from gt_member;
 
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
