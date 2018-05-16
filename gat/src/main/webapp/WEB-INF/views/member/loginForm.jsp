@@ -23,7 +23,7 @@
 					</form>
 				</div>
 				<div class="card-body text-center">
-					<span class="small-txt desc-color mr-1">아직 계정이 없으신가요?</span><a class="small-txt point-txt-gnt" href="${pageContext.request.contextPath }/member/register.do">가입하기</a>
+					<span class="small-txt desc-color mr-1">아직 계정이 없으신가요?</span><a class="small-txt point-txt-gnt" href="${pageContext.request.contextPath }/member/registerMemberForm.do">가입하기</a>
 					<!-- <div class="divider mt-2 mb-2"></div>
 					<span class="small-txt desc-color mr-1">비밀번호를 잊으셨나요?</span><a class="small-txt point-txt-gnt" href="find_password.html">비밀번호 찾기</a> -->
 				</div>

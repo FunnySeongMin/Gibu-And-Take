@@ -36,21 +36,21 @@
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : obj,
-			elPlaceHolder : "editor",
+			elPlaceHolder : "appContents",
 			sSkinURI : "/gat/resources/editor/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseToolbar : true,
 				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-				bUseVerticalResizer : true,
+				bUseVerticalResizer : false,
 				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-				bUseModeChanger : true,
+				bUseModeChanger : false,
 			}
 		});
 		//전송버튼
 		$("#savebutton").click(function() {
 			//id가 smarteditor인 textarea에 에디터에서 대입
-			obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+			obj.getById["appContents"].exec("UPDATE_CONTENTS_FIELD", []);
 			//폼 submit
 			$("#contactForm").submit();
 		})

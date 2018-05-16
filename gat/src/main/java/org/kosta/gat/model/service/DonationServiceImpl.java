@@ -1,8 +1,11 @@
 package org.kosta.gat.model.service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.gat.model.dao.DonationDAO;
+import org.kosta.gat.model.dao.PhotoVo;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
@@ -46,5 +49,17 @@ public class DonationServiceImpl implements DonationService {
 	@Transactional
 	public void updateApplication(ApplicationPostVO apVO) {
 		donationDAO.updateApplication(apVO);
+	}
+
+	@Override
+	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
+		donationDAO.multiplePhotoUpload(request, response);
+		
+	}
+
+	@Override
+	public void photoUpload(HttpServletRequest request, PhotoVo vo) {
+		donationDAO.photoUpload(request, vo);
+		
 	}
 }

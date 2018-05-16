@@ -42,6 +42,9 @@ create table gt_member(
 	CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
 )
 
+select * from gt_member;
+
+
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('javaking','seo','서정우','판교','seo@naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -101,6 +104,7 @@ create table app_group(
 
 insert into app_group values('1','재능기부');
 insert into app_group values('2','기부단체');
+insert into app_group values('3','신청서 답변');
 
 --신청서 테이블
 drop table application;
@@ -108,12 +112,12 @@ create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
 	app_contents clob not null,
-	app_place varchar2(100) not null,
+	app_place varchar2(100),
 	app_regdate date default sysdate,
-	goal_mileage number not null,
+	goal_mileage number,
 	app_status varchar2(100) not null,
-	start_date date not null,
-	end_date date not null,
+	start_date date,
+	end_date date,
 	app_parent_no number,
 	id varchar2(100) not null,
 	ag_no varchar2(100) not null,
@@ -252,7 +256,22 @@ insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
 values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전부를 모두 다 배운거 같아 뿌듯합니다. 가위바위보를 확실히 질 수 있을것 같아요!!',
 8,'keroro',1,1);
 
+--사이트 문의 테이블
+drop table web_question;
+create table web_question(
+	wq_no number primary key,
+	wq_title varchar2(100),
+	wq_contents clob,
+	wq_regdate date default sysdate,
+	wq_parent_no number,
+	wq_status varchar2(100) default '처리중',
+	id varchar2(100) not null,
+	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
+)
 
+--사이트 문의 시퀀스
+drop sequence web_question_seq;
+create sequence web_question_seq;
 
 
 

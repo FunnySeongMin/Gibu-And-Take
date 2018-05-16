@@ -1,4 +1,4 @@
-package org.kosta.gat.model.service;
+	package org.kosta.gat.model.service;
 
 import javax.annotation.Resource;
 

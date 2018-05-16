@@ -24,7 +24,6 @@ public class HomeController {
 	 */
 	@RequestMapping("{dirName}/{viewName}.do")
 	public String showTiles(@PathVariable String dirName, @PathVariable String viewName) {
-		System.out.println(dirName+"/"+viewName);
 		return dirName+"/"+viewName+".tiles";
 	}
 }

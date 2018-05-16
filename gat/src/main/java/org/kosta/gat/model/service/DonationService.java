@@ -1,5 +1,9 @@
 package org.kosta.gat.model.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.kosta.gat.model.dao.PhotoVo;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
@@ -19,5 +23,13 @@ public interface DonationService {
 	public void addApplication(ApplicationPostVO apVO);
 
 	public void updateApplication(ApplicationPostVO apVO);
+
+	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response);
+	
+	public void photoUpload(HttpServletRequest request, PhotoVo vo);
+	
+	
+	
+	
 
 }

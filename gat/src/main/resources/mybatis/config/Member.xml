@@ -4,12 +4,31 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+	<resultMap type="memberVO" id="memberRM">
+		<result property="memberGroupVO.mgroupNo" column="mgroup_no" />
+		<result property="memberGroupVO.mgroupName" column="mgroup_name" />
+		<result property="memberGradeVO.mgradeNo" column="mgrade_no"/>
+		<result property="memberGradeVO.mgradeName" column="mgrade_name"/>
+	</resultMap>
  	<insert id="registerMember" parameterType="memberVO">
  		insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 		values(#{id}, #{password}, #{name}, #{address}, #{email}, #{birthday}, 1, 1)
  	</insert>
- 	<select id ="checkId" parameterType="string" resultType="memberVO">
- 		select id, password, name, address, birthday from gt_member where id= #{value}  
+ 	<select id ="checkId" parameterType="string" resultMap="memberRM">
+	<!-- 	기존 방식 쿼리 
+	select m.id, m.password, m.name, m.address, m.email, m.birthday, m.mileage, m.total_use_mileage as totalUseMileage,
+	gro.mgroup_no, gro.mgroup_name, gra.mgrade_no, gra.mgrade_name
+	from gt_member m, MEMBER_GROUP gro, MEMBER_GRADE gra
+	where m.mgroup_no=gro.mgroup_no
+	and m.mgrade_no=gra.mgrade_no
+	and m.id= #{value}  -->
+	<!--  inner join 쿼리  -->
+	select m.id, m.password, m.name, m.address, m.email, m.birthday, m.mileage, m.total_use_mileage as totalUseMileage,
+	gro.mgroup_no, gro.mgroup_name, gra.mgrade_no, gra.mgrade_name
+	from gt_member m
+	inner join member_group gro on m.mgroup_no=gro.mgroup_no
+	inner join member_grade gra on m.mgrade_no=gra.mgrade_no
+	and m.id=#{value}
  	</select>
  	<update id="updateMember" parameterType="memberVO">
  		update GT_MEMBER set address=#{address}, email=#{email}

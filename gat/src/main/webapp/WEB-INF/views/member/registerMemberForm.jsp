@@ -60,11 +60,11 @@ $(document).ready(function(){
 	});//keyup
 	$("#registerForm").submit(function(){
 		if(checkResultId==""){
-			alert("아이디 중복 확인하세요!");
+			alert("아이디를 확인하세요!");
 			return false;
 		}
 		else if (checkResultPassword=="") {
-			alert("비밀번호 확인하세요!");
+			alert("비밀번호를 확인하세요!");
 			return false;
 		}
 	});//submit
@@ -82,7 +82,7 @@ $(document).ready(function(){
 						<span>또는<span>
 					</div>
 <!-- 회원가입 폼 -->
- <form action="registerMember.do" method="post" name="registerForm">
+ <form action="registerMember.do" method="post" id="registerForm">
                      <div class="form-group">
                         <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required="required">
                          <span id="checkIdView"></span>

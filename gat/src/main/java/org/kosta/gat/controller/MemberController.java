@@ -30,7 +30,7 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
 	public String registerMember(MemberVO vo) {
 		memberService.registerMember(vo);
-		return "home.tiles";
+		return "redirect:home.do";
 	}
 	/**
 	* 아이디를 중복체크 하는 메서드
@@ -61,9 +61,9 @@ public class MemberController {
 	public String login(MemberVO vo, HttpServletRequest request) {
 		MemberVO mvo=memberService.checkId(vo.getId());
 		if(mvo==null) { //아이디가 존재하지 않는 경우
-			return "member/login_fail";
+			return "member/login_fail.tiles";
 		}else if(!vo.getPassword().equals(mvo.getPassword())) { //비밀번호가 일치하지 않는 경우
-			return "member/login_fail";
+			return "member/login_fail.tiles";
 		}else { //정상적으로 로그인 하는 경우
 			request.getSession().setAttribute("mvo", mvo);
 			return "home.tiles";
