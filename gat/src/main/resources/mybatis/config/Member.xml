@@ -15,4 +15,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update GT_MEMBER set password=#{password}, address=#{address}, email=#{email}
 		where id=#{id}
  	</update>
+ 	<update id="deleteMember" parameterType="string">
+ 		update GT_MEMBER set mgroup_no = '5'
+		where id =#{value}
+ 	</update>
 </mapper>

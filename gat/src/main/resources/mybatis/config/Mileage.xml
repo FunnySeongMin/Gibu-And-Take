@@ -4,5 +4,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mileage">
- 	
+ 	<select id="" parameterType="string" resultType="mileageUseGroupVO">
+ 		select mt_volume, mt_regdate from mileage_trade
+		where id='D_ruking'
+		order by mt_regdate desc
+ 	</select>
 </mapper>

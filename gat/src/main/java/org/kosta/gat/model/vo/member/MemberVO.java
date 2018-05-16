@@ -30,7 +30,18 @@ public class MemberVO {
 		this.memberGroupVO = memberGroupVO;
 		this.memberGradeVO = memberGradeVO;
 	}
+	public MemberVO(String id, String password, String address,  String email) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.address = address;
+		this.email = email;
 
+	}
+	public MemberVO(String id) {
+		super();
+		this.id = id;
+	}
 	public String getId() {
 		return id;
 	}

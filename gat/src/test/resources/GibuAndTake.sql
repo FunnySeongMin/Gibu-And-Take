@@ -9,6 +9,7 @@ insert into member_group values('1','일반회원');
 insert into member_group values('2','재능기부자');
 insert into member_group values('3','기부단체');
 insert into member_group values('4','관리자');
+insert into member_group values('5','탈퇴회원');
 
 --회원 등급 테이블
 drop table member_grade;
@@ -89,7 +90,8 @@ create sequence mileage_trade_seq;
 
 insert into mileage_trade(mt_no,mt_volume,mug_no,id)
 values(mileage_trade_seq.nextval,1000,'1','D_ruking');
-
+insert into mileage_trade(mt_no,mt_volume,mug_no,id)
+values(mileage_trade_seq.nextval,800,'1','D_ruking');
 --신청서 분류 테이블
 drop table app_group;
 create table app_group(
