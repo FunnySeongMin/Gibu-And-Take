@@ -30,7 +30,7 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					
-					<form method="" action="">
+					<form method="post" action="">
 						<div class="modal-body bg-light">
 							<div class="">
 								신청한 재능기부 내용
