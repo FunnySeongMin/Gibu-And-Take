@@ -2,6 +2,7 @@ package org.kosta.gat.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
@@ -11,8 +12,8 @@ import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -26,7 +27,7 @@ public class MemberController {
 	* 
 	* @author 용다은
 	*/
-	@RequestMapping("member/registerMember.do")
+	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
 	public String registerMember(MemberVO vo) {
 		memberService.registerMember(vo);
 		return "home.tiles";
@@ -49,34 +50,36 @@ public class MemberController {
 			return "ok";
 	}
 	/**
-	* 작성이유 : 로그인 메서드
+	* 로그인 메서드
 	* 
-	* 아이디를 기준으로 MemberVO를 뽑아오며 아이디 존재 여부를 확인하고
+	* 작성이유 : 아이디를 기준으로 MemberVO를 뽑아오며 아이디 존재 여부를 확인하고
 	* 비밀번호와 비교하여 일치여부를 파악한다.
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("")
-	public String login(String id,String password,HttpServletRequest request) {
-		MemberVO mvo=memberService.checkId(id);
-		if(mvo==null) {
-			//아이디가 존재하지 않습니다.
-			return null;
-		}else if(mvo.getPassword()!=password) {
-			//비밀번호가 일치하지 않습니다.
-			return null;
+	@RequestMapping(method=RequestMethod.POST, value="member/login.do")
+	public String login(MemberVO vo, HttpServletRequest request) {
+		MemberVO mvo=memberService.checkId(vo.getId());
+		if(mvo==null) { //아이디가 존재하지 않는 경우
+			return "member/login_fail";
+		}else if(!vo.getPassword().equals(mvo.getPassword())) { //비밀번호가 일치하지 않는 경우
+			return "member/login_fail";
+		}else { //정상적으로 로그인 하는 경우
+			request.getSession().setAttribute("mvo", mvo);
+			return "home.tiles";
 		}
-		request.getSession().setAttribute("mvo", mvo);
-		return null;
 	}
 	/**
-	* 작성이유 : 로그아웃 메서드
+	* 로그아웃 메서드
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("logout.do")
+	@RequestMapping("member/logout.do")
 	public String logout(HttpServletRequest request) {
-		return null;
+		HttpSession session = request.getSession(false);
+		if (session != null)
+			session.invalidate();
+		return "home.tiles";
 	}
 	/**
 	* 작성이유 : 회원수정 메서드
