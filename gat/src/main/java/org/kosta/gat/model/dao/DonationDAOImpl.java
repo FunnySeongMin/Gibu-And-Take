@@ -2,6 +2,7 @@ package org.kosta.gat.model.dao;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -22,6 +23,8 @@ import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class DonationDAOImpl implements DonationDAO {
@@ -174,6 +177,48 @@ public class DonationDAOImpl implements DonationDAO {
 	        e.printStackTrace();
 	    }
 	    return "redirect:" + callback + "?callback_func="+callback_func+file_result;
+		
+	}
+
+	@Override
+	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
+		System.out.println("파일있음");
+        OutputStream out = null;
+        PrintWriter printWriter = null;
+        try {
+            // 파일명 얻기
+            String fileName = uploadfile.getOriginalFilename();
+            
+            
+            // 파일의 바이트 정보 얻기
+            byte[] bytes = uploadfile.getBytes();
+            // 파일의 저장 경로 얻기
+            String uploadPath = "/업로드폴더/" + fileName;
+            // 파일 객체 생성
+            File file = new File(uploadPath);
+            // 상위 폴더 존재 여부 확인
+            if (!file.getParentFile().exists()) {
+                // 상위 폴더가 존재 하지 않는 경우 상위 폴더 생성
+                file.getParentFile().mkdirs();
+            }           
+            // 파일 아웃풋 스트림 생성
+            out = new FileOutputStream(file);
+            // 파일 아웃풋 스트림에 파일의 바이트 쓰기
+            out.write(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (printWriter != null) {
+                    printWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 		
 	}
 }
