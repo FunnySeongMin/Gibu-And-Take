@@ -8,7 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<selectKey keyProperty="tdNo" resultType="int" order="BEFORE">
  			select take_donation_seq.nextval from dual
  		</selectKey>
- 		insert into take_donation(td_no, td_regdate, td_mileage, cheerup_message, id, dp_no)
- 		values(#{tdNo}, sysdate, #{tdMileage}, #{cheerUpMessage}, #{memberVO.id}, #{donationPostVO.dpNo})
+ 		insert into take_donation(td_no, td_regdate, td_mileage <if test="cheerUpMessage!=null">,cheerup_message</if>, id, dp_no)
+ 		values(#{tdNo}, sysdate, #{tdMileage} <if test="cheerUpMessage!=null">,#{cheerUpMessage}</if>, #{memberVO.id}, #{donationPostVO.dpNo})
  	</insert>
+ 	
+ 	<select id="findCheerupMessageByDpno" parameterType="int" resultType="takeDonationPostVO">
+ 		select td_no, td_regdate, td_mileage, cheerup_message, id, dp_no
+		from take_donation
+		where dp_no=#{value}
+ 	</select>
 </mapper>

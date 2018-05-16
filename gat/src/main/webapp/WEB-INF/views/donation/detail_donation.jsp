@@ -150,8 +150,57 @@
 							</div>
 						</div>
 					</div>
+					<div class="border-bottom">
+						<div class="media mt-4">
+							<div class="media-body mb-3 ml-3">
+							  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.<span class="small-txt border-left ml-2 pl-2">조민경</span>
+							</div>
+						</div>
+					</div>
+					<div class="border-bottom">
+						<div class="media mt-4">
+							<div class="media-body mb-3 ml-3">
+							  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.<span class="small-txt border-left ml-2 pl-2">조민경</span>
+							</div>
+						</div>
+					</div>
+					<div class="border-bottom">
+						<div class="media mt-4">
+							<div class="media-body mb-3 ml-3">
+							  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.<span class="small-txt border-left ml-2 pl-2">조민경</span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="tab-pane fade mx-3 my-3" id="entry-review" role="tabpanel" aria-labelledby="review-tab">참여후기</div>
+				<div class="tab-pane fade mx-3 my-3" id="entry-review" role="tabpanel" aria-labelledby="review-tab">
+					<h4 class="mt-5 pb-3 mb-3 border-bottom">참여 후기</h4>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<td>#</td>
+								<td>글제목</td>
+								<td>작성자</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>3</td>
+								<td><a href="#">참여후기</a></td>
+								<td>서정우</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td><a href="#">참여후기</a></td>
+								<td>서정우</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td><a href="#">참여후기</a></td>
+								<td>서정우</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
