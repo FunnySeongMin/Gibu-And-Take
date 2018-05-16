@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<!-- header-top -->
 	<div class="header-top">
 		<div class="container">
 			<ul class="nav justify-content-end">
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/login.do">Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/registerMemberForm.do">Register</a></li>
+			<c:choose>
+				<c:when test="${sessionScope.mvo!=null}">
+					<li class="nav-item">${sessionScope.mvo.name} 님</li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/logout.do">Logout</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/loginForm.do">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/registerMemberForm.do">Register</a></li>
+				</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
