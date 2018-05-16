@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 <div class="page-heading">
-	<h4 class="py-5 text-center sub2-txt">Ŀ�´�Ƽ</h4>
+	<h4 class="py-5 text-center sub2-txt">커뮤니티</h4>
 </div>
 
 <!-- /.Page Heading -->
@@ -11,7 +11,7 @@
 <div class="container">
 	<div class="col-10 offset-lg-1">
 		<div class="d-flex align-items-end">
-			<a href="${pageContext.request.contextPath }/board/write_board.do" class="btn btn-sm btn-point-gnt ml-auto mt-4">�۾���</a>
+			<a href="${pageContext.request.contextPath }/board/write_board.do" class="btn btn-sm btn-point-gnt ml-auto mt-4">글쓰기</a>
 		</div>		
 	</div>
 	<div class="row">
@@ -19,18 +19,18 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<td>��ȣ</td>
-						<td>����</td>
-						<td>�ۼ���</td>
-						<td>�ۼ�����</td>
+						<td>번호</td>
+						<td>제목</td>
+						<td>작성자</td>
+						<td>작성일자</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td><a href="${pageContext.request.contextPath }/board/detail_board.do">�������Դϴ�</a></td>
-						<td>�ۼ����Դϴ�</td>
-						<td>�ۼ������Դϴ�</td>
+						<td><a href="${pageContext.request.contextPath }/board/detail_board.do">글제목입니다</a></td>
+						<td>작성자입니다</td>
+						<td>작성일자입니다</td>
 					</tr>
 				</tbody>
 			</table>
