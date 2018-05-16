@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">
-		insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
-		values(donation_post_seq.nextval,#{appTitle},#{appContents},#{place},#{goalMileage},#{appNo})
+		insert into donation_post(dp_no,dp_title,dp_contents,dp_place,dp_imgdirectory,goal_mileage,app_no)
+		values(donation_post_seq.nextval,#{appTitle},#{appContents},#{place},#{imgDirectory},#{goalMileage},#{appNo})
 	</insert>
 </mapper>
