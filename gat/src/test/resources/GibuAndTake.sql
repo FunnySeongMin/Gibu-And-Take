@@ -110,6 +110,7 @@ create table application(
 	app_title varchar2(100) not null,
 	app_contents clob not null,
 	app_place varchar2(100),
+	app_imgdirectory varchar2(100),
 	app_regdate date default sysdate,
 	goal_mileage number,
 	app_status varchar2(100) not null,
@@ -117,9 +118,7 @@ create table application(
 	end_date date,
 	app_parent_no number,
 	id varchar2(100) not null,
-	ag_no varchar2(100) not null,
-	CONSTRAINT fk_gt_appliction_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE,
-	CONSTRAINT fk_gt_applictrion_ag_no FOREIGN KEY(ag_no) REFERENCES app_group(ag_no) ON DELETE CASCADE
+	CONSTRAINT fk_gt_appliction_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
 )
 
 --신청서 테이블 시퀀스
@@ -127,13 +126,13 @@ drop sequence application_seq;
 create sequence application_seq;
 
 --신청서 등록
-insert into application(app_no,app_title,app_contents,app_place,goal_mileage,app_status,start_date,end_date,id,ag_no)
+insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
 values(application_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
-'판교',200000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'hwang','1');
+'판교','이미지가 여기에 있어요',200000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'hwang');
 
-insert into application(app_no,app_title,app_contents,app_place,goal_mileage,app_status,start_date,end_date,id,ag_no)
+insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
 values(application_seq.nextval,'이윤희의 유니짜장','유니짜장은 재료만 잘게 다지면 됩니다!',
-'판교',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang','1');
+'판교','이미지가 여기에 있어요',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang');
 
 select *from application;
 
@@ -156,33 +155,15 @@ insert into present values(present_seq.nextval,1000,'한 달 수강','1');
 insert into present values(present_seq.nextval,2800,'세 달 수강','1');
 insert into present values(present_seq.nextval,3500,'네 달 수강','1');
 
---첨부파일 테이블
-drop table attachment;
-create table attachment(
-	ach_no number primary key,
-	ach_directory varchar2(100) not null,
-	ach_grade varchar2(100) not null,
-	app_no number not null,
-	CONSTRAINT fk_gt_attachment_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
-)
-
---첨부파일 시퀀스
-drop sequence attachment_seq;
-create sequence attachment_seq;
-
-insert into attachment values(attachment_seq.nextval,'디렉토리1','메인',1);
-insert into attachment values(attachment_seq.nextval,'디렉토리2','내용 이미지1',1);
-insert into attachment values(attachment_seq.nextval,'디렉토리3','내용 이미지2',1);
-insert into attachment values(attachment_seq.nextval,'디렉토리4','내용 이미지3',1);
-
 --기부 게시글 테이블
 drop table donation_post;
 create table donation_post(
 	dp_no number primary key,
 	dp_title varchar2(100) not null,
 	dp_contents clob not null,
-	dp_regdate date default sysdate,
 	dp_place varchar2(100) not null,
+	dp_imgdirectory varchar2(100),
+	dp_regdate date default sysdate,
 	dp_count number default 0,
 	goal_mileage number not null,
 	donation_mileage number default 0,
@@ -264,7 +245,7 @@ create table web_question(
 	wq_status varchar2(100) default '처리중',
 	id varchar2(100) not null,
 	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
-)
+) --힘내세요 1조!
 
 --사이트 문의 시퀀스
 drop sequence web_question_seq;
