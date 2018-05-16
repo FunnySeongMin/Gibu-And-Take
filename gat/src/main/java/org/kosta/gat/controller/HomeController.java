@@ -1,6 +1,7 @@
 package org.kosta.gat.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -15,5 +16,15 @@ public class HomeController {
 		//<definition name="home.tiles" template="/WEB-INF/views/templates/layout.jsp">
 		return "home.tiles";
 	}
-	
+	/**
+	 * 
+	 * 작성이유 : tiles가 적용된 view
+	 * @author 조민경
+	 * 
+	 */
+	@RequestMapping("{dirName}/{viewName}.do")
+	public String showTiles(@PathVariable String dirName, @PathVariable String viewName) {
+		System.out.println(dirName+"/"+viewName);
+		return dirName+"/"+viewName+".tiles";
+	}
 }

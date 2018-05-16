@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
-	<h4 class="py-5 text-center">湲� ����</h4>
+	<h4 class="py-5 text-center">글작성</h4>
 </div>
 <!-- /.Page Heading -->
 
