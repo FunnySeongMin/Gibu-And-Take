@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <div class="jumbotron">
 		<div class="container">
 			<div class="row">
@@ -44,8 +44,8 @@
 	
     <!-- Page Content -->
     <div class="container mt-5 mb-5">   
-		<!-- Àç´É±âºÎ ½ÅÃ»ÇÏ±â -->
-		<a href="${pageContext.request.contextPath }/donation/apply_donation.do" class="btn btn-point-gnt my-5">Àç´É±âºÎ ½ÅÃ»ÇÏ±â</a>
+		<!-- ìž¬ëŠ¥ê¸°ë¶€ ì‹ ì²­í•˜ê¸° -->
+		<a href="${pageContext.request.contextPath }/donation/apply_donation.do" class="btn btn-point-gnt my-5">ìž¬ëŠ¥ê¸°ë¶€ ì‹ ì²­í•˜ê¸°</a>
 
       <!-- Project One -->
       <div class="row">

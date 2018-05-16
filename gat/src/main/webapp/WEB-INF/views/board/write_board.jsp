@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
-	<h4 class="py-5 text-center">±Û ÀÛ¼º</h4>
+	<h4 class="py-5 text-center">ê¸€ìž‘ì„±</h4>
 </div>
 <!-- /.Page Heading -->
 
@@ -11,24 +11,29 @@
 	<!-- Contact Form -->
 	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 	<div class="row">
-		<div class="col-lg-6 offset-lg-3 my-4">
-			<form name="sentMessage" id="contactForm" novalidate>
+		<div class="col-lg-12 my-4">
+			<form action="addApplication.do" method="post" name="sentMessage" id="contactForm" novalidate>
 				<div class="control-group form-group">
 					<div class="controls">
-						<label>ÀÛ¼ºÀÚ</label>
-						<input type="tel" class="form-control" id="name" required data-validation-required-message="Please enter your phone number.">
+						<label>ìž‘ì„±ìž</label> <input type="tel" class="form-control"
+							id="name" required
+							data-validation-required-message="Please enter your phone number.">
+
 					</div>
 				</div>
-			
+
 				<div class="control-group form-group">
-					<!-- ½º¸¶Æ® ¿¡µðÅÍ-->
+					<!-- ìŠ¤ë§ˆíŠ¸ ì—ë””í„° -->
 					<div class="controls">
-						<textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="¹®ÀÇ³»¿ë"></textarea>
+						<textarea name="editor" id="editor" rows="10" cols="100"
+							style="width:636px; height:412px;"></textarea>
+						<!-- <textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="ë¬¸ì˜ë‚´ìš©"></textarea> -->
 					</div>
 				</div>
 				<div id="success"></div>
 				<!-- For success/fail messages -->
-				<button type="submit" class="btn btn-sub-2-gnt btn-block" id="#">±Û¾²±â</button>
+				<button type="button" id="savebutton"
+					class="btn btn-sub-2-gnt btn-block" id="#">ê¸€ì“°ê¸°</button>
 			</form>
 		</div>
 
@@ -37,3 +42,5 @@
 
 </div>
 <!-- /.container -->
+
+

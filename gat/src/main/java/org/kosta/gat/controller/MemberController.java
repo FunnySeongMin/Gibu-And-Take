@@ -26,21 +26,10 @@ public class MemberController {
 	* 
 	* @author 용다은
 	*/
-	@RequestMapping("registerMember.do")
+	@RequestMapping("member/registerMember.do")
 	public String registerMember(MemberVO vo) {
 		memberService.registerMember(vo);
-		return null;
-	}
-	/**
-	* 회원가입 폼 메서드
-	* 
-	* 작성이유: 회원가입 폼 페이지를 불러온다.
-	* 
-	* @author 용다은
-	*/
-	@RequestMapping("registerMemberForm.do")
-	public String registerMemberForm() {
-		return "registerMember";
+		return "home.tiles";
 	}
 	/**
 	* 아이디를 중복체크 하는 메서드
@@ -50,11 +39,10 @@ public class MemberController {
 	* 
 	* @author 용다은
 	*/
-	@RequestMapping("checkId.do")
+	@RequestMapping("member/checkId.do")
 	@ResponseBody
 	public String checkId(String id) {
 		MemberVO mvo = memberService.checkId(id);
-		System.out.println(mvo);
 		if(mvo != null) {// 아이디가 이미 존재한다면
 			return "fail";
 		} else // 아이디가 아직 존재하지 않는다면
@@ -169,15 +157,5 @@ public class MemberController {
 	public String readMyActivityList(String id,int nowPage,Model model) {
 		TakeDonationPostListVO tdListVO=memberService.readMyActivityList(id,nowPage);
 		return null;
-	}
-	/**
-	 * 
-	 * 작성이유 : tiles가 적용된 view
-	 * @author 조민경
-	 * 
-	 */
-	@RequestMapping("{dirName}/{viewName}.do")
-	public String showTiles(@PathVariable String dirName, @PathVariable String viewName) {
-		return dirName+"/"+viewName+".tiles";
 	}
 }
