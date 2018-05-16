@@ -39,7 +39,7 @@
 
 	</div>
 	<!-- /.row -->
-
+<img src="" style="width:100%;height:auto">
 </div>
 <!-- /.container -->
 
