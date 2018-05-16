@@ -1,8 +1,10 @@
 package org.kosta.gat.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.gat.model.service.AdminService;
+import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -54,7 +56,9 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("addApplicationAnswer.do")
-	public String addApplicationAnswer(ApplicationPostVO apVO) {
+	public String addApplicationAnswer(ApplicationPostVO apVO,HttpServletRequest request) {
+		MemberVO vo=(MemberVO) request.getSession().getAttribute("mvo");
+		apVO.setMemberVO(vo);
 		adminService.addApplicationAnswer(apVO);
 		return null;
 	}
