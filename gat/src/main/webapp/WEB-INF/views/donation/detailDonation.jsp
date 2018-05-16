@@ -1,15 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- Page Content -->
 <div class="container my-3">
-
 	<!-- Portfolio Item Row -->
-	<div class="row">
-	
+	<div class="row">	
 		<div class="col-md-6">
 		  <img class="img-fluid mt-3" src="http://placehold.it/750x500" alt="">
-		</div>
-	
+		</div>	
 		<div class="col-md-6">
 			<h4 class="my-3">재능기부 제목</h3>
 			<h3 class="mt-3 sub-1-txt-gnt">63%</h3>
@@ -18,8 +15,7 @@
 			</div>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
 			<button class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entry_form">참가하기</button>			
-		</div>
-		
+		</div>		
 		<!-- 참여 신청 Modal -->
 		<div class="modal fade" id="entry_form" role="dialog">
 			<div class="modal-dialog modal-dialog-centered">
@@ -28,8 +24,7 @@
 					<div class="modal-header">
 						<h4 class="modal-title text-center">재능기부 참여 신청</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					
+					</div>					
 					<form method="post" action="">
 						<div class="modal-body bg-light">
 							<div class="">
@@ -45,8 +40,7 @@
 							</div>
 							<div class="form-control form-check small-txt">
 								<input type="checkbox" class="form-check-input" id="entry_agree">
-								<label class="form-check-label" for="entry_agree">상기 내용에 동의합니다
-								
+								<label class="form-check-label" for="entry_agree">상기 내용에 동의합니다</label>								
 							</div>							
 						</div>
 						<div class="modal-footer">
@@ -60,33 +54,32 @@
 		</div>
 	</div>
 	<!-- /.row -->
-	</div>
-	<!-- /.container -->
+</div>
+<!-- /.container -->
 		
-	<nav id="navbar-dp-info" class="mt-5 border-top border-bottom">
-		<div class="container border-left">
-			<ul class="nav nav-pills">	
-				<li class="nav-item">
-					<a class="nav-link" href="#dp_summary">재능기부 요약정보</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#dp_info">재능기부 소개</a>
-				</li>	
-				<li class="nav-item">
-					<a class="nav-link" href="#dp_member">재능기부자 소개</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#dp_community">커뮤니티</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+<nav id="navbar-dp-info" class="mt-5 border-top border-bottom">
+	<div class="container border-left">
+		<ul class="nav nav-pills">	
+			<li class="nav-item">
+				<a class="nav-link" href="#dp_summary">재능기부 요약정보</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#dp_info">재능기부 소개</a>
+			</li>	
+			<li class="nav-item">
+				<a class="nav-link" href="#dp_member">재능기부자 소개</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#dp_community">커뮤니티</a>
+			</li>
+		</ul>
+	</div>
+</nav>
 	
-	<div class="container border border-top-0 pb-5 mb-5">	  
-		<div class="row pt-3">
-			<div class ="col-sm-12 px-4" data-spy="scroll" data-target="#navbar-dp-info" data-offset="50">
-			
-				<!-- 재능기부 요약정보 -->
+<div class="container border border-top-0 pb-5 mb-5">	  
+	<div class="row pt-3">
+		<div class ="col-sm-12 px-4" data-spy="scroll" data-target="#navbar-dp-info" data-offset="50">			
+			<!-- 재능기부 요약정보 -->
 			<div id="dp_summary">
 				<h3 class="mt-4 mb-3">재능기부 요약정보
 					<small>summary</small>
