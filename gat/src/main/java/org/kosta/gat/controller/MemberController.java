@@ -3,7 +3,6 @@ package org.kosta.gat.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
@@ -30,7 +29,7 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
 	public String registerMember(MemberVO vo) {
 		memberService.registerMember(vo);
-		return "redirect:home.do";
+		return "redirect:/home.do";
 	}
 	/**
 	* 아이디를 중복체크 하는 메서드
@@ -84,12 +83,15 @@ public class MemberController {
 	/**
 	* 작성이유 : 회원수정 메서드
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
-	@RequestMapping("updateMember.do")
-	public String updateMember(MemberVO vo) {
+	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
+	public String updateMember(HttpServletRequest request,MemberVO vo) {
+		HttpSession session=request.getSession(false);
 		memberService.updateMember(vo);
-		return null;
+		//회원정보 조회
+		session.setAttribute("mvo", memberService.checkId(vo.getId()));
+		return "home.tiles";
 	}
 	/**
 	* 작성이유 : 회원탈퇴 메서드

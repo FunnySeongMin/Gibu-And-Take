@@ -25,7 +25,7 @@
 				<div class="control-group form-group">
 					<!-- 스마트 에디터 -->
 					<div class="controls">
-						<textarea name="editor" id="editor" rows="10" cols="100"
+						<textarea name="appContents" id="appContents" rows="10" cols="100"
 							style="width:636px; height:412px;"></textarea>
 						<!-- <textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="문의내용"></textarea> -->
 					</div>

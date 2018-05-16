@@ -206,9 +206,40 @@ button[class^="btn"], a[class^="btn"]{
 }
 
 
+/*updateForm*/
+#updateForm{
+	/* width: 184px; */
+	margin: 50px auto;
+	border: 3px double #edbf71;
+	width: 50%;
+	border-radius: 20px;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+#updateForm .control-group:nth-child(4),.control-group:nth-child(5){
+	margin-bottom: 10px;
+}
+#updateForm .controls .btn{
+	width: 49%;
+	height: 50px;
+	margin-top : 20px;
+	margin-bottom: 26px;
+}
+#updateForm .controls .input-xlarge{
+	width: 100%;
+}
 
-
-
-
-
+#updateForm .control-label{
+	margin-bottom: 15px;
+}
+#updateForm .contact-us legend{
+	
+	border-bottom: 1px dotted #ccc;
+    text-align: center;
+    padding: 15px;
+}
+#updateForm .controls .btn-primary{
+	background-color: #34bdb6;
+	border-color: #34bdb6;
+}
 

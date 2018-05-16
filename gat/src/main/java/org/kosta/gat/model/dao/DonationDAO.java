@@ -1,10 +1,15 @@
 package org.kosta.gat.model.dao;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface DonationDAO {
 
@@ -19,5 +24,11 @@ public interface DonationDAO {
 	public void addApplication(ApplicationPostVO apVO);
 
 	public void updateApplication(ApplicationPostVO apVO);
+	
+	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response);
+
+	public String photoUpload(HttpServletRequest request, PhotoVo vo);
+
+	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap);
 
 }

@@ -7,7 +7,7 @@
 			<ul class="nav justify-content-end">
 			<c:choose>
 				<c:when test="${sessionScope.mvo!=null}">
-					<li class="nav-item">${sessionScope.mvo.name} 님</li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/myPage.do">${sessionScope.mvo.name} 님</a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/logout.do">Logout</a></li>
 				</c:when>
 				<c:otherwise>
