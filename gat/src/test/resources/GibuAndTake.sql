@@ -9,7 +9,6 @@ insert into member_group values('1','일반회원');
 insert into member_group values('2','재능기부자');
 insert into member_group values('3','기부단체');
 insert into member_group values('4','관리자');
-insert into member_group values('5','탈퇴회원');
 
 --회원 등급 테이블
 drop table member_grade;
@@ -43,7 +42,6 @@ create table gt_member(
 )
 
 select * from gt_member;
-
 
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('javaking','seo','서정우','판교','seo@naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
@@ -93,8 +91,7 @@ create sequence mileage_trade_seq;
 
 insert into mileage_trade(mt_no,mt_volume,mug_no,id)
 values(mileage_trade_seq.nextval,1000,'1','D_ruking');
-insert into mileage_trade(mt_no,mt_volume,mug_no,id)
-values(mileage_trade_seq.nextval,800,'1','D_ruking');
+
 --신청서 분류 테이블
 drop table app_group;
 create table app_group(
@@ -267,11 +264,12 @@ create table web_question(
 	wq_status varchar2(100) default '처리중',
 	id varchar2(100) not null,
 	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
-)
+) --힘내세요 1조!
 
 --사이트 문의 시퀀스
 drop sequence web_question_seq;
 create sequence web_question_seq;
+
 
 
 
