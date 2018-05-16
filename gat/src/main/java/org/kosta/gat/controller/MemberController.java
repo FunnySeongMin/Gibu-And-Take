@@ -30,7 +30,7 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
 	public String registerMember(MemberVO vo) {
 		memberService.registerMember(vo);
-		return "redirect:/home.do";
+		return "redirect:home.do";
 	}
 	/**
 	* 아이디를 중복체크 하는 메서드

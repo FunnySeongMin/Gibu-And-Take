@@ -15,11 +15,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{id}, #{password}, #{name}, #{address}, #{email}, #{birthday}, 1, 1)
  	</insert>
  	<select id ="checkId" parameterType="string" resultMap="memberRM">
+	<!-- 	기존 방식 쿼리 
 	select m.id, m.password, m.name, m.address, m.email, m.birthday, m.mileage, m.total_use_mileage as totalUseMileage,
 	gro.mgroup_no, gro.mgroup_name, gra.mgrade_no, gra.mgrade_name
 	from gt_member m, MEMBER_GROUP gro, MEMBER_GRADE gra
 	where m.mgroup_no=gro.mgroup_no
 	and m.mgrade_no=gra.mgrade_no
-	and m.id= #{value} 
+	and m.id= #{value}  -->
+	<!--  inner join 쿼리  -->
+	select m.id, m.password, m.name, m.address, m.email, m.birthday, m.mileage, m.total_use_mileage as totalUseMileage,
+	gro.mgroup_no, gro.mgroup_name, gra.mgrade_no, gra.mgrade_name
+	from gt_member m
+	inner join member_group gro on m.mgroup_no=gro.mgroup_no
+	inner join member_grade gra on m.mgrade_no=gra.mgrade_no
+	and m.id=#{value}
  	</select>
 </mapper>
