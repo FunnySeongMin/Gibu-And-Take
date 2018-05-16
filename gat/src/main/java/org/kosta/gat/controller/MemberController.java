@@ -84,12 +84,15 @@ public class MemberController {
 	/**
 	* 작성이유 : 회원수정 메서드
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
-	@RequestMapping("updateMember.do")
-	public String updateMember(MemberVO vo) {
+	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
+	public String updateMember(HttpServletRequest request,MemberVO vo) {
+		HttpSession session=request.getSession(false);
 		memberService.updateMember(vo);
-		return null;
+		//회원정보 조회
+		session.setAttribute("mvo", memberService.checkId(vo.getId()));
+		return "home.tiles";
 	}
 	/**
 	* 작성이유 : 회원탈퇴 메서드

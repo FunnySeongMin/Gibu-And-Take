@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select id, password, name, address, birthday from gt_member where id= #{value}  
  	</select>
  	<update id="updateMember" parameterType="memberVO">
- 		update GT_MEMBER set password=#{password}, address=#{address}, email=#{email}
+ 		update GT_MEMBER set address=#{address}, email=#{email}
 		where id=#{id}
  	</update>
  	<update id="deleteMember" parameterType="string">

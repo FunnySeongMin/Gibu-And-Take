@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public void updateMember(MemberVO vo) {
+		System.out.println("멤버서비스 까지 들어옴");
 		memberDAO.updateMember(vo);
 	}
 	
