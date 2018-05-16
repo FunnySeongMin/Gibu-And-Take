@@ -4,5 +4,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="entry" >
- 	
+ 	<insert id="addTakeDonation" parameterType="takeDonationPostVO">
+ 		<selectKey keyProperty="tdNo" resultType="int" order="BEFORE">
+ 			select take_donation_seq.nextval from dual
+ 		</selectKey>
+ 		insert into take_donation(td_no, td_regdate, td_mileage, cheerup_message, id, dp_no)
+ 		values(#{tdNo}, sysdate, #{tdMileage}, #{cheerUpMessage}, #{memberVO.id}, #{donationPostVO.dpNo})
+ 	</insert>
 </mapper>

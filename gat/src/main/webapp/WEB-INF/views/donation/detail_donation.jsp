@@ -130,18 +130,28 @@
 	</div>
 	
 	<div class="row my-3">
-		<div class="col-sm-12" data-spy="scroll" data-target="#navbar-dp-info" data-offset="50">
+		<div class="col-sm-12" id="dp_community" data-spy="scroll" data-target="#navbar-dp-info" data-offset="50">
 			<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#entry-review" role="tab" aria-controls="home" aria-selected="true">참여 후기</a>
+					<a class="nav-link active" id="cheerup-tab" data-toggle="tab" href="#cheerup-message" role="tab" aria-controls="profile" aria-selected="true">응원 메시지</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#cheerup-message" role="tab" aria-controls="profile" aria-selected="false">응원 메시지</a>
+					<a class="nav-link" id="review-tab" data-toggle="tab" href="#entry-review" role="tab" aria-controls="home" aria-selected="false">참여 후기</a>
 				</li>
+				
 			</ul>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show mx-3 my-3 active" id="entry-review" role="tabpanel" aria-labelledby="home-tab">참여후기</div>
-				<div class="tab-pane mx-3 my-3 fade" id="cheerup-message" role="tabpanel" aria-labelledby="profile-tab">응원 메시지</div>
+				<div class="tab-pane fade show active mx-3 my-3" id="cheerup-message" role="tabpanel" aria-labelledby="cheerup-tab">
+					<h4 class="mt-5 pb-3 mb-3 border-bottom">응원 메시지</h4>
+					<div class="border-bottom">
+						<div class="media mt-4">
+							<div class="media-body mb-3 ml-3">
+							  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.<span class="small-txt border-left ml-2 pl-2">조민경</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade mx-3 my-3" id="entry-review" role="tabpanel" aria-labelledby="review-tab">참여후기</div>
 			</div>
 		</div>
 	</div>

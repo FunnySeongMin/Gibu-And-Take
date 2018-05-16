@@ -4,5 +4,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="donation">
- 	
+ 	<select id="readDonationDetail" resultType="DonationPostVO">
+ 		select dp_no, dp_title, dp_contents, dp_regdate, dp_place, dp_count, goal_mileage, donation_mileage, total_entry 
+		from donation_post where dp_no=#{value}
+ 	</select>
 </mapper>

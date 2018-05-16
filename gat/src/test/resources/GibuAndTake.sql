@@ -41,21 +41,6 @@ create table gt_member(
 	CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
 )
 
-create table gt_member(
-   id varchar2(100) primary key,
-   password varchar2(100) not null,
-   name varchar2(100) not null,
-   address varchar2(100) not null,
-   email varchar2(100) not null,
-   birthday date not null,
-   mileage number default 0,
-   total_use_mileage number default 0,
-   mgroup_no varchar2(100) not null,
-   mgrade_no varchar2(100) not null,
-   CONSTRAINT fk_gt_member_mgroup FOREIGN KEY(mgroup_no) REFERENCES member_group(mgroup_no) ON DELETE CASCADE,
-   CONSTRAINT fk_gt_member_mgrade FOREIGN KEY(mgrade_no) REFERENCES member_grade(mgrade_no) ON DELETE CASCADE
-)
-
 select * from gt_member;
 
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -205,6 +190,8 @@ create table donation_post(
 	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
 )
 
+select dp_no, dp_title, dp_contents, dp_regdate, dp_place, dp_count, goal_mileage,donation_mileage, total_entry 
+from donation_post where dp_no=1;
 --기부 게시글 시퀀스
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
@@ -236,12 +223,10 @@ create sequence take_donation_seq;
 
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
+insert into take_donation(td_no,td_mileage,id,dp_no)
+values(take_donation_seq.nextval,3000,'keroro',1);
 
 select *from take_donation;
-
-select 
-
-select * from gt_member where id='keroro';
 
 --후기 게시판 테이블
 drop table review_post;
@@ -266,6 +251,10 @@ create sequence review_post_seq;
 insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
 values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전부를 모두 다 배운거 같아 뿌듯합니다. 가위바위보를 확실히 질 수 있을것 같아요!!',
 8,'keroro',1,1);
+
+select * from TAKE_DONATION;
+
+select * from review_post;
 
 
 
