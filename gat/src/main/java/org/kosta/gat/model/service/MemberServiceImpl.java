@@ -78,7 +78,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	@Transactional
 	public void addMemberMileage(MileageTradeVO mileageTradeVO) {
 		memberDAO.addMemberMileage(mileageTradeVO);
+	}
+
+	@Override
+	@Transactional
+	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO) {
+		memberDAO.exchangeMileage(mileageTradeVO);
 	}
 }

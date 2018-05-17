@@ -11,7 +11,7 @@ insert into member_group values('1','일반회원');
 insert into member_group values('2','재능기부자');
 insert into member_group values('3','기부단체');
 insert into member_group values('4','관리자');
-insert into MEMBER_GRADE values('5', '탈퇴회원');
+insert into member_group values('5', '탈퇴회원');
 --회원 등급 테이블
 drop table member_grade;
 create table member_grade(

@@ -50,4 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from review_post
 		where id=#{value}
  	</select>
+ 	 <update id="exchangeMemberMileage" parameterType="mileageTradeVO">
+ 		update GT_MEMBER set mileage=mileage - #{mtVolume} where id =#{memberVO.id}
+ 	</update>
 </mapper>

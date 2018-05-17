@@ -26,8 +26,8 @@ public class MileageServiceImpl implements MileageService {
 	}
 
 	@Override
-	public void exchangeMileage(int mileage) {
-		mileageDAO.exchangeMileage(mileage);
+	public void exchangeMileage(MileageTradeVO mileageTradeVO) {
+		mileageDAO.exchangeMileage(mileageTradeVO);
 	}
 
 	@Override
