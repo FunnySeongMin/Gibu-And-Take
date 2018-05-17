@@ -87,31 +87,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from web_question
 	</select>
 	
-	<resultMap type="webQuestionPostVO" id="wqListVO">
+	<resultMap type="webQuestionPostVO" id="wqPostVO">
+		<result column="wq_no" property="wqNo"/>
+		<result column="wq_title" property="wqTitle"/>
+		<result column="wq_contents" property="wqContents"/>
+		<result column="wq_regdate" property="wqRegdate"/>
+		<result column="wq_parent_no" property="wqParentNo"/>
+		<result column="wq_status" property="wqStatus"/>
 		<collection property="memberVO" javaType="memberVO" column="wq_no"
-		select="selectMemberByList"></collection>
+		select="selectMemberByDetail" ></collection>
 	</resultMap>
 	
-	<select id="selectMemberByList" resultType="memberVO">
-		select m.id,m.name from gt_member m, web_question wq where m.id=wq.id
+	<select id="selectMemberByDetail" resultType="memberVO">
+		select m.id,m.password,m.name,m.address,to_char(m.birthday,'yyyy.mm.dd') birthday,
+		m.mileage,m.total_use_mileage
+		from gt_member m, web_question wq
+		where m.id=wq.id and wq.wq_no=#{value}
 	</select>
 	
-	<select id="readWebQuestionList" resultMap="wqListVO">
+	<select id="readWebQuestionList" resultMap="wqPostVO">
 		select wq.wq_no,wq.wq_title,to_char(wq.wq_regdate,'yyyy.mm.dd') wq_regdate,
 		wq.wq_parent_no,wq.wq_status
 		from web_question wq, gt_member m
 		where wq.id=m.id
-	</select>
-	
-	<resultMap type="webQuestionPostVO" id="wqPostVO">
-		<collection property="memberVO" javaType="memberVO" column="wq_no"
-		select="selectMember2"></collection>
-	</resultMap>
-	
-	<select id="selectMember2" resultType="memberVO">
-		select m.id,m.password,m.name,m.address,m.birthday,m.mileage,m.total_use_mileage
-		from gt_member m, web_question wq
-		where m.id=wq.id and wq.wq_no=#{value}
 	</select>
 	
 	<select id="readWebQuestionDetail" resultMap="wqPostVO">
@@ -128,4 +126,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(web_question_seq.nextval,#{wqTitle},#{wqContents},#{wqNo},'답변',#{memberVO.id})
 	</insert>
 	
+	<update id="updateWebQuestionAnswer" parameterType="webQuestionPostVO">
+		update web_question set wq_title=#{wqTitle} , wq_contents=#{wqContents} 
+		where wq_no=#{wqNo}	
+	</update>
 </mapper>

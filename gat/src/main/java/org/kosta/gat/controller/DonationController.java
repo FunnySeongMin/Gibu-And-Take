@@ -1,21 +1,17 @@
 package org.kosta.gat.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.UUID;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.gat.model.dao.PhotoVo;
 import org.kosta.gat.model.service.DonationService;
+import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
@@ -24,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,16 +74,30 @@ public class DonationController {
 	* @author 정진표
 	*/
 	@RequestMapping("/board/addApplication.do")
-	public String addApplication(@RequestParam("uploadfile") MultipartFile uploadfile, ModelMap modelMap, ApplicationPostVO apVO, HttpServletRequest request, Model model) {
-		//donationService.addApplication(apVO);
+	public String addApplication(@RequestParam("main_image") MultipartFile uploadfile, ModelMap modelMap, ApplicationPostVO apVO, HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession(false);
+		if(session!=null){
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			if(mvo!=null){
+				apVO.setMemberVO(mvo);
+			}
+		}		
 		if(!uploadfile.getOriginalFilename().equals("")) {
     		System.out.println("대표 이미지 파일 업로드");
+    		apVO.setImgDirectory(uploadfile.getOriginalFilename());
+    		
+    		System.out.println("대표이미지 이름 : "+apVO.getImgDirectory());
     		donationService.file_upload_save(uploadfile, modelMap);
     	}
+		String appNO = donationService.addApplication(apVO);
 		
-		
+		ArrayList<PresentVO> list = new ArrayList<>();
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")), request.getParameter("presentContents1"),appNO));
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")), request.getParameter("presentContents2"),appNO));
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage3")), request.getParameter("presentContents3"),appNO));
 		System.out.println("apVO : "+apVO);
-		System.out.println("글쓰기:"+request.getParameter("appContents"));
+		//System.out.println("리스크 : "+list);
+		donationService.addPresent(list);
 		//model.addAttribute("test",request.getParameter("editor") );
 		return "home.tiles";
 	}

@@ -1,5 +1,7 @@
 package org.kosta.gat.model.service;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.kosta.gat.model.dao.DonationDAO;
 import org.kosta.gat.model.dao.PhotoVo;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
@@ -43,8 +46,8 @@ public class DonationServiceImpl implements DonationService {
 
 	@Override
 	@Transactional
-	public void addApplication(ApplicationPostVO apVO) {
-		donationDAO.addApplication(apVO);
+	public String  addApplication(ApplicationPostVO apVO) {
+		return donationDAO.addApplication(apVO);
 	}
 
 	@Override
@@ -68,6 +71,12 @@ public class DonationServiceImpl implements DonationService {
 	@Override
 	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
 		donationDAO.file_upload_save(uploadfile, modelMap);
+		
+	}
+
+	@Override
+	public void addPresent(ArrayList<PresentVO> list) {
+		donationDAO.addPresent(list);
 		
 	}
 }

@@ -5,11 +5,13 @@ create table member_group(
 	mgroup_name varchar2(100) not null
 )
 
+select * from MEMBER_GROUP
+
 insert into member_group values('1','일반회원');
 insert into member_group values('2','재능기부자');
 insert into member_group values('3','기부단체');
 insert into member_group values('4','관리자');
-
+insert into MEMBER_GRADE values('5', '탈퇴회원');
 --회원 등급 테이블
 drop table member_grade;
 create table member_grade(
@@ -121,6 +123,9 @@ create table application(
 	CONSTRAINT fk_gt_appliction_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
 )
 
+select app_no, app_title, app_contents, app_place, app_imgdirectory, app_regdate, goal_mileage, 
+app_status, start_date, end_date, id from application
+
 --신청서 테이블 시퀀스
 drop sequence application_seq;
 create sequence application_seq;
@@ -134,7 +139,9 @@ insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory
 values(application_seq.nextval,'이윤희의 유니짜장','유니짜장은 재료만 잘게 다지면 됩니다!',
 '판교','이미지가 여기에 있어요',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang');
 
-select *from application;
+SELECT application_seq.NEXTVAL FROM dual ; 
+SELECT application_seq.CURRVAL FROM dual ;
+
 
 --선물 테이블
 drop table present;
@@ -154,6 +161,7 @@ create sequence present_seq;
 insert into present values(present_seq.nextval,1000,'한 달 수강','1');
 insert into present values(present_seq.nextval,2800,'세 달 수강','1');
 insert into present values(present_seq.nextval,3500,'네 달 수강','1');
+
 
 --기부 게시글 테이블
 drop table donation_post;
