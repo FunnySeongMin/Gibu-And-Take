@@ -5,8 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 	<select id="totalUnReceivedApplicationCount" resultType="int">
-		select
-		count(*) from application where app_status='처리중'
+		select count(*) from application where app_status='처리중'
 	</select>
 	
 	<resultMap type="applicationPostVO" id="appPostVO">
@@ -71,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="approvalApplication">
 		update application set app_status='승인' where app_no=#{value}
 	</update>
-	
+		
 	<insert id="addApplicationAnswer" parameterType="applicationPostVO">
 		insert into application(app_no,app_title,app_contents,
 		app_status,app_parent_no,id,ag_no)
@@ -83,4 +82,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into donation_post(dp_no,dp_title,dp_contents,dp_place,dp_imgdirectory,goal_mileage,app_no)
 		values(donation_post_seq.nextval,#{appTitle},#{appContents},#{place},#{imgDirectory},#{goalMileage},#{appNo})
 	</insert>
+	
+	<select id="totalWebQuestionCount" resultType="int">
+		select count(*) from web_question
+	</select>
+	
+	<resultMap type="webQuestionPostVO" id="wqListVO">
+		<collection property="memberVO" javaType="memberVO" column="wq_no"
+		select="selectMemberByList"></collection>
+	</resultMap>
+	
+	<select id="selectMemberByList" resultType="memberVO">
+		select m.id,m.name from gt_member m, web_question wq where m.id=wq.id
+	</select>
+	
+	<select id="readWebQuestionList" resultMap="wqListVO">
+		select wq.wq_no,wq.wq_title,to_char(wq.wq_regdate,'yyyy.mm.dd') wq_regdate,
+		wq.wq_parent_no,wq.wq_status
+		from web_question wq, gt_member m
+		where wq.id=m.id
+	</select>
+	
+	<resultMap type="webQuestionPostVO" id="wqPostVO">
+		<collection property="memberVO" javaType="memberVO" column="wq_no"
+		select="selectMember2"></collection>
+	</resultMap>
+	
+	<select id="selectMember2" resultType="memberVO">
+		select m.id,m.password,m.name,m.address,m.birthday,m.mileage,m.total_use_mileage
+		from gt_member m, web_question wq
+		where m.id=wq.id and wq.wq_no=#{value}
+	</select>
+	
+	<select id="readWebQuestionDetail" resultMap="wqPostVO">
+		select wq_no,wq_title,wq_contents,to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_parent_no,wq_status
+		from web_question where wq_no=#{value}
+	</select>
+	
+	<update id="updateWebQuestionStatus" parameterType="webQuestionPostVO">
+		update web_question set wq_status='답변완료' where wq_no=#{wqNo}
+	</update>
+	
+	<insert id="addWebQuestionAnswer" parameterType="webQuestionPostVO">
+		insert into web_question(wq_no,wq_title,wq_contents,wq_parent_no,wq_status,id)
+		values(web_question_seq.nextval,#{wqTitle},#{wqContents},#{wqNo},'답변',#{memberVO.id})
+	</insert>
+	
 </mapper>
