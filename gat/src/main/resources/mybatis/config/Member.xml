@@ -45,4 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <update id="addMemberMileage" parameterType="mileageTradeVO">
  		update GT_MEMBER set mileage=mileage + #{mtVolume} where id =#{memberVO.id}
  	</update>
+ 	<select id="readMyReviewPostList">
+ 		select rp_no,rp_title,rp_contents,rp_regdate 
+		from review_post
+		where id=#{value}
+ 	</select>
 </mapper>

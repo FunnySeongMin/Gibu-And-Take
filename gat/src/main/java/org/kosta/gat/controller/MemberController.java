@@ -170,7 +170,7 @@ public class MemberController {
 	/**
 	* 작성이유 : 나의 후기목록 보기
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
 	@RequestMapping("readMyReviewPostList.do")
 	public String readMyReviewPostList(String id,int nowPage,Model model) {
@@ -180,7 +180,7 @@ public class MemberController {
 	/**
 	* 작성이유 : 나의 활동목록 보기
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
 	@RequestMapping("readMyActivityList.do")
 	public String readMyActivityList(String id,int nowPage,Model model) {
