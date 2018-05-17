@@ -9,6 +9,7 @@ public class ApplicationPostVO {
 	private String appTitle;
 	private String appContents;
 	private String place;
+	private String imgDirectory;
 	private String appRegdate;
 	private String startDate;
 	private String endDate;
@@ -16,22 +17,21 @@ public class ApplicationPostVO {
 	private String appStatus;
 	private String appParentNo;
 	private AppGroupVO appGroupVO;
-	private ArrayList<AttachmentVO> attList;
 	private ArrayList<PresentVO> presentList;
 	private MemberVO memberVO;
 	
 	public ApplicationPostVO() {
 		super();
 	}
-	public ApplicationPostVO(String appNo, String appTitle, String appContents, String place, String appRegdate,
-			String startDate, String endDate, int goalMileage, String appStatus, String appParentNo,
-			AppGroupVO appGroupVO, ArrayList<AttachmentVO> attList, ArrayList<PresentVO> presentList,
-			MemberVO memberVO) {
+	public ApplicationPostVO(String appNo, String appTitle, String appContents, String place, String imgDirectory,
+			String appRegdate, String startDate, String endDate, int goalMileage, String appStatus, String appParentNo,
+			AppGroupVO appGroupVO, ArrayList<PresentVO> presentList, MemberVO memberVO) {
 		super();
 		this.appNo = appNo;
 		this.appTitle = appTitle;
 		this.appContents = appContents;
 		this.place = place;
+		this.imgDirectory = imgDirectory;
 		this.appRegdate = appRegdate;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -39,7 +39,6 @@ public class ApplicationPostVO {
 		this.appStatus = appStatus;
 		this.appParentNo = appParentNo;
 		this.appGroupVO = appGroupVO;
-		this.attList = attList;
 		this.presentList = presentList;
 		this.memberVO = memberVO;
 	}
@@ -66,6 +65,12 @@ public class ApplicationPostVO {
 	}
 	public void setPlace(String place) {
 		this.place = place;
+	}
+	public String getImgDirectory() {
+		return imgDirectory;
+	}
+	public void setImgDirectory(String imgDirectory) {
+		this.imgDirectory = imgDirectory;
 	}
 	public String getAppRegdate() {
 		return appRegdate;
@@ -109,12 +114,6 @@ public class ApplicationPostVO {
 	public void setAppGroupVO(AppGroupVO appGroupVO) {
 		this.appGroupVO = appGroupVO;
 	}
-	public ArrayList<AttachmentVO> getAttList() {
-		return attList;
-	}
-	public void setAttList(ArrayList<AttachmentVO> attList) {
-		this.attList = attList;
-	}
 	public ArrayList<PresentVO> getPresentList() {
 		return presentList;
 	}
@@ -130,9 +129,9 @@ public class ApplicationPostVO {
 	@Override
 	public String toString() {
 		return "ApplicationPostVO [appNo=" + appNo + ", appTitle=" + appTitle + ", appContents=" + appContents
-				+ ", place=" + place + ", appRegdate=" + appRegdate + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", goalMileage=" + goalMileage + ", appStatus=" + appStatus + ", appParentNo=" + appParentNo
-				+ ", appGroupVO=" + appGroupVO + ", attList=" + attList + ", presentList=" + presentList + ", memberVO="
-				+ memberVO + "]";
+				+ ", place=" + place + ", imgDirectory=" + imgDirectory + ", appRegdate=" + appRegdate + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", goalMileage=" + goalMileage + ", appStatus=" + appStatus
+				+ ", appParentNo=" + appParentNo + ", appGroupVO=" + appGroupVO + ", presentList=" + presentList
+				+ ", memberVO=" + memberVO + "]";
 	}
 }

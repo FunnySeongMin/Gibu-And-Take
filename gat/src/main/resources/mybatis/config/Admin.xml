@@ -19,19 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="end_date" property="endDate"/>
 		<result column="goal_mileage" property="goalMileage"/>
 		<result column="app_status" property="appStatus"/>
-		<collection property="attList" ofType="attachmentVO" 
-		javaType="java.util.List" column="app_no" select="selectAttachment"></collection>
 		<collection property="presentList" ofType="presentVO" 
 		javaType="java.util.List" column="app_no" select="selectPresent"></collection>
 		<collection property="memberVO" javaType="memberVO" column="app_no"
 		select="selectMember"></collection>
 	</resultMap>
-	
-	<select id="selectAttachment" resultType="attachmentVO" parameterType="string">
-		select att.ach_no,att.ach_directory,att.ach_grade
-		from attachment att, application app
-		where att.app_no=app.app_no and att.app_no=#{value}
-	</select>
 	
 	<select id="selectPresent" resultType="presentVO" parameterType="string">
 		select pre.present_no,pre.donation_mileage,pre.present_contents

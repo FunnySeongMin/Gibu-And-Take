@@ -241,6 +241,5 @@ button[class^="btn"], a[class^="btn"]{
 #updateForm .controls .btn-primary{
 	background-color: #34bdb6;
 	border-color: #34bdb6;
-	margin-right: 9px;
 }
 
