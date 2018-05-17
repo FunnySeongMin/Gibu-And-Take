@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
@@ -71,10 +73,14 @@ public class DonationDAOImpl implements DonationDAO {
 	public ReviewPostVO readReviewDetail(String rpno) {
 		return template.selectOne("donation.readReviewDetail", rpno);
 	}
-
+	
+	//신청서 작성
 	@Override
-	public void addApplication(ApplicationPostVO apVO) {
+	public String addApplication(ApplicationPostVO apVO) {
+		System.out.println("DAO :"+apVO);
 		template.insert("donation.addApplication", apVO);
+		System.out.println("시퀀스 넘버:"+apVO.getAppNo());
+		return apVO.getAppNo();
 	}
 
 	@Override
@@ -219,6 +225,17 @@ public class DonationDAOImpl implements DonationDAO {
                 e.printStackTrace();
             }
         }
+		
+	}
+
+	@Override
+	public void addPresent(ArrayList<PresentVO> list) {
+		
+		for(int i=0; i<list.size(); i++) {
+			//System.out.println(list.get(i));
+			template.insert("donation.addPresent", list.get(i));
+		}
+		
 		
 	}
 }

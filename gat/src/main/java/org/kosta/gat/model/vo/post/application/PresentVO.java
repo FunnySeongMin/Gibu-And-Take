@@ -4,15 +4,25 @@ public class PresentVO {
 	private String presentNo;
 	private int donationMileage;
 	private String presentContents;
+	private String appNo;
 	
+	public String getAppNo() {
+		return appNo;
+	}
+	public void setAppNo(String appNo) {
+		this.appNo = appNo;
+	}
 	public PresentVO() {
 		super();
 	}
-	public PresentVO(String presentNo, int donationMileage, String presentContents) {
+	
+	
+	public PresentVO(String presentNo, int donationMileage, String presentContents, String appNo) {
 		super();
 		this.presentNo = presentNo;
 		this.donationMileage = donationMileage;
 		this.presentContents = presentContents;
+		this.appNo = appNo;
 	}
 	public String getPresentNo() {
 		return presentNo;
@@ -35,6 +45,8 @@ public class PresentVO {
 	@Override
 	public String toString() {
 		return "PresentVO [presentNo=" + presentNo + ", donationMileage=" + donationMileage + ", presentContents="
-				+ presentContents + "]";
+				+ presentContents + ", appNo=" + appNo + "]";
 	}
+	
+	
 }
