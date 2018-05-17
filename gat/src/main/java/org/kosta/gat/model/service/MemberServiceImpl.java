@@ -73,6 +73,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void updatePassword(MemberVO vo) {
+		memberDAO.updatePassword(vo);
+	}
+	
+	@Override
 	public void addMemberMileage(MileageTradeVO mileageTradeVO) {
 		memberDAO.addMemberMileage(mileageTradeVO);
 	}

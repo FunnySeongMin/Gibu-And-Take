@@ -9,6 +9,9 @@
 			<c:when test="${sessionScope.mvo!=null}">
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/myPage.do">${sessionScope.mvo.name} 님</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/logout.do">Logout</a></li>
+				<c:if test="${sessionScope.mvo.memberGroupVO.mgroupNo=='4' }">
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/admin/adminPage.do">관리자 페이지</a></li>
+				</c:if>
 			</c:when>
 			<c:otherwise>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/loginForm.do">Login</a></li>

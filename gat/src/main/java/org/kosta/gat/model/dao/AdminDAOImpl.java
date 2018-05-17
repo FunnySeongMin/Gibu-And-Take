@@ -80,6 +80,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public void addWebQuestionAnswer(WebQuestionPostVO wqVO) {
+		template.update("admin.updateWebQuestionStatus",wqVO);
 		template.insert("admin.addWebQuestionAnswer", wqVO);
 	}
 
