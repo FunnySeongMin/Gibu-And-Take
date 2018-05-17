@@ -70,4 +70,9 @@ public class MemberServiceImpl implements MemberService {
 	public TakeDonationPostListVO readMyActivityList(String id, int nowPage) {
 		return memberDAO.readMyActivityList(id,nowPage);
 	}
+
+	@Override
+	public void updatePassword(MemberVO vo) {
+		memberDAO.updatePassword(vo);
+	}
 }

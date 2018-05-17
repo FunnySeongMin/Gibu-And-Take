@@ -14,6 +14,8 @@ public interface MemberService {
 
 	public void updateMember(MemberVO vo);
 	
+	public void updatePassword(MemberVO vo);
+	
 	public void deleteMember(String id);
 	
 	public void addWebQuestion(WebQuestionPostVO webVO);
@@ -27,4 +29,5 @@ public interface MemberService {
 	public ReviewPostListVO readMyReviewPostList(String id, int nowPage);
 
 	public TakeDonationPostListVO readMyActivityList(String id, int nowPage);
+
 }

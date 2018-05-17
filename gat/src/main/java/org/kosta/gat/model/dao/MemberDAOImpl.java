@@ -33,8 +33,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public void updateMember(MemberVO vo) {
-		System.out.println("멤버DAO까지 들어옴");
 		template.update("member.updateMember", vo);
+	}
+	@Override
+	public void updatePassword(MemberVO vo) {
+		template.update("member.updatePassword", vo);
 	}
 	
 	@Override

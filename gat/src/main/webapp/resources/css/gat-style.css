@@ -232,8 +232,8 @@ button[class^="btn"], a[class^="btn"]{
 #updateForm .control-label{
 	margin-bottom: 15px;
 }
-#updateForm .contact-us legend{
-	
+#updateForm>.contact-us h3{
+	color : #444;
 	border-bottom: 1px dotted #ccc;
     text-align: center;
     padding: 15px;
@@ -243,3 +243,10 @@ button[class^="btn"], a[class^="btn"]{
 	border-color: #34bdb6;
 }
 
+/*myPage*/
+#memberDelet{
+	border-top: 1px solid rgba(0, 0, 0, 0.07);	
+}
+
+
+    
