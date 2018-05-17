@@ -38,4 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update GT_MEMBER set mgroup_no = '5'
 		where id =#{value}
  	</update>
+ 	 <update id="addMemberMileage" parameterType="mileageTradeVO">
+ 		update GT_MEMBER set mileage=mileage + #{mtVolume} where id =#{memberVO.id}
+ 	</update>
 </mapper>

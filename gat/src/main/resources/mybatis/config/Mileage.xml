@@ -19,5 +19,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into mileage_trade(mt_no, mt_volume, mug_no, id)
  		values(mileage_trade_seq.nextval, #{mtVolume}, #{mugVO.mugNo}, #{memberVO.id})
  	</insert>
- 	
 </mapper>

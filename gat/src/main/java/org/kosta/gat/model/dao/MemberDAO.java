@@ -1,6 +1,7 @@
 package org.kosta.gat.model.dao;
 
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -27,5 +28,7 @@ public interface MemberDAO {
 	public ReviewPostListVO readMyReviewPostList(String id, int nowPage);
 
 	public TakeDonationPostListVO readMyActivityList(String id, int nowPage);
+
+	public void addMemberMileage(MileageTradeVO mileageTradeVO);
 
 }

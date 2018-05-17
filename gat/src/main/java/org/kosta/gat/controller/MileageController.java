@@ -43,8 +43,10 @@ public class MileageController {
 		//mileageTradeVO에 정보를 저장시켜 addMileage시킴
 		mileageService.addMileage(mileageTradeVO);
 		//addMileage된 내용을 MemberVO의 mileage에 업데이트 시킴
-		/*memberService.addMemberMileage(mileageTradeVO.getMtVolume());*/
-		return "member/mileagePage";
+		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
+		memberService.addMemberMileage(mileageTradeVO);
+		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
+		return "redirect:/member/mileagePage.do";
 	}
 	/**
 	* 작성이유 : 마일리지 거래
