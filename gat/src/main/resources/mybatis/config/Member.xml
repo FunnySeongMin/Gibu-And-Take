@@ -45,4 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <update id="addMemberMileage" parameterType="mileageTradeVO">
  		update GT_MEMBER set mileage=mileage + #{mtVolume} where id =#{memberVO.id}
  	</update>
+ 	 <update id="exchangeMemberMileage" parameterType="mileageTradeVO">
+ 		update GT_MEMBER set mileage=mileage - #{mtVolume} where id =#{memberVO.id}
+ 	</update>
 </mapper>

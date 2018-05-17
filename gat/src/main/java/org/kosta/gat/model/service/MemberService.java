@@ -32,4 +32,6 @@ public interface MemberService {
 	public TakeDonationPostListVO readMyActivityList(String id, int nowPage);
 
 	public void addMemberMileage(MileageTradeVO mileageTradeVO);
+
+	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO);
 }
