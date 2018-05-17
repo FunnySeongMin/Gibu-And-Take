@@ -59,9 +59,12 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/login.do")
 	public String login(MemberVO vo, HttpServletRequest request) {
 		MemberVO mvo=memberService.checkId(vo.getId());
+		String gnum=mvo.getMemberGroupVO().getMgroupNo();
 		if(mvo==null) { //아이디가 존재하지 않는 경우
 			return "member/loginFail.tiles";
 		}else if(!vo.getPassword().equals(mvo.getPassword())) { //비밀번호가 일치하지 않는 경우
+			return "member/loginFail.tiles";
+		}else if(gnum.equals("5")) {//탈퇴회원이 로그인하는 경우
 			return "member/loginFail.tiles";
 		}else { //정상적으로 로그인 하는 경우
 			request.getSession().setAttribute("mvo", mvo);
@@ -114,10 +117,12 @@ public class MemberController {
 	* 
 	* @author 백설희
 	*/
-	@RequestMapping("deleteMember.do")
-	public String deleteMember(String id,HttpServletRequest request) {
+	@RequestMapping("member/deleteMember.do")
+	public String deleteMember(HttpServletRequest request) {
+		//System.out.println(id);
 		HttpSession session = request.getSession(false);
-		memberService.deleteMember(id);
+		MemberVO mvo =  (MemberVO) session.getAttribute("mvo");
+		memberService.deleteMember(mvo.getId());
 		if (session != null)
 			session.invalidate();
 		return "home.tiles";

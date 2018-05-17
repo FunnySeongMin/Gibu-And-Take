@@ -4,11 +4,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		$('.memberDelet').click(function(){
+		$('.memberDelete').click(function(){
 			var con_test = confirm("탈퇴하시겠습니까?");
 			if(con_test == true){
 				 alert("탈퇴되었습니다. 감사합니다.");
-				 location.href="${pageContext.request.contextPath }/home.do"; 
+				 location.href="${pageContext.request.contextPath}/member/deleteMember.do";
 				}
 				else if(con_test == false){
 				  return false;
@@ -60,7 +60,7 @@
                      
                      <div class="card-text"></div>
                      <!-- <a href="#" class="btn btn-sub-2-gnt btn-sm memberDelet">탈퇴</a> -->
-                     <button type="submit" class="btn btn-sub-2-gnt btn-sm memberDelet">탈퇴</button>
+                     <button type="submit" class="btn btn-sub-2-gnt btn-sm memberDelete">탈퇴</button>
                   </div>
                </div>
             </div>
