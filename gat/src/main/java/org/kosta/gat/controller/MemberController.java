@@ -60,9 +60,9 @@ public class MemberController {
 	public String login(MemberVO vo, HttpServletRequest request) {
 		MemberVO mvo=memberService.checkId(vo.getId());
 		if(mvo==null) { //아이디가 존재하지 않는 경우
-			return "member/login_fail.tiles";
+			return "member/loginFail.tiles";
 		}else if(!vo.getPassword().equals(mvo.getPassword())) { //비밀번호가 일치하지 않는 경우
-			return "member/login_fail.tiles";
+			return "member/loginFail.tiles";
 		}else { //정상적으로 로그인 하는 경우
 			request.getSession().setAttribute("mvo", mvo);
 			return "home.tiles";

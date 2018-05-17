@@ -4,9 +4,7 @@
 <div class="page-heading">
 	<h4 class="py-5 text-center sub2-txt">커뮤니티</h4>
 </div>
-
 <!-- /.Page Heading -->
-
 <!-- Page Content -->
 <div class="container">
 	<div class="col-10 offset-lg-1">
