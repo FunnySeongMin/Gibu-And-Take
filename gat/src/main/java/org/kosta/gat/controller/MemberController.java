@@ -78,7 +78,7 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();
-		return "member/loginFrom.tiles";
+		return "home.tiles";
 	}
 	/**
 	* 작성이유 : 회원수정 메서드
