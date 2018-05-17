@@ -105,10 +105,6 @@ public class MemberController {
 		System.out.println("mvo :"+mvo);*/
 		mvo.setPassword(newPassword);
 		System.out.println(mvo);
-	/*	if(nowPassword!=mvo.getPassword()) {
-			return "member/modifyPassword.tiles";
-		}
-		*/
 		memberService.updatePassword(mvo);
 		
 		if (session != null)
