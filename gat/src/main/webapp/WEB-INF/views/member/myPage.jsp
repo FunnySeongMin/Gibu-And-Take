@@ -75,13 +75,10 @@
                <div class="card">
                   <div class="card-header">마일리지</div>
                   <div class="card-body">
-                     <div class="card-title">마일리지</div>
                      <div class="card-text">
                         <p>보유 마일리지</p>
                      </div>
-                     <a href="#" class="btn btn-sub-2-gnt btn-sm mr-1">충전</a>
-                     <a href="#" class="btn btn-sub-2-gnt btn-sm mr-1">환전</a>
-                     <a href="#" class="btn btn-sub-2-gnt btn-sm">내역</a>
+                     <a href="${pageContext.request.contextPath}/member/mileagePage.do" class="btn btn-sub-2-gnt btn-sm mr-1">충전/환전</a>
                   </div>
                </div>
                <div class="card">

@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.MemberDAO;
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -74,5 +75,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updatePassword(MemberVO vo) {
 		memberDAO.updatePassword(vo);
+	}
+	
+	@Override
+	public void addMemberMileage(MileageTradeVO mileageTradeVO) {
+		memberDAO.addMemberMileage(mileageTradeVO);
 	}
 }

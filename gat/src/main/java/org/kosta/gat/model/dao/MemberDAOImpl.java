@@ -3,6 +3,7 @@ package org.kosta.gat.model.dao;
 import java.util.List;
 
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostPagingBean;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
@@ -105,5 +106,10 @@ public class MemberDAOImpl implements MemberDAO {
 		List<TakeDonationPostVO> tdList=template.selectList("member.readMyActivityList",tdPb);
 		TakeDonationPostListVO tdListVO=new TakeDonationPostListVO(tdList, tdPb);
 		return tdListVO;
+	}
+
+	@Override
+	public void addMemberMileage(MileageTradeVO mileageTradeVO) {
+		template.update("member.addMemberMileage", mileageTradeVO);
 	}
 }
