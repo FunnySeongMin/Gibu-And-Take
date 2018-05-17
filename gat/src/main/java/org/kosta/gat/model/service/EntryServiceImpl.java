@@ -1,5 +1,7 @@
 package org.kosta.gat.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.EntryDAO;
@@ -16,6 +18,7 @@ public class EntryServiceImpl implements EntryService {
 	@Override
 	@Transactional
 	public void addTakeDonation(TakeDonationPostVO tdVO) {
+		System.out.println("service"+tdVO);
 		entryDAO.addTakeDonation(tdVO);
 	}
 
@@ -23,5 +26,12 @@ public class EntryServiceImpl implements EntryService {
 	@Transactional
 	public void addReview(ReviewPostVO rpVO) {
 		entryDAO.addReview(rpVO);
+	}
+
+	@Override
+	@Transactional
+	public List<TakeDonationPostVO> findCheerupMessageByDpno(int dpno) {
+		return entryDAO.findCheerupMessageByDpno(dpno);
+		
 	}
 }

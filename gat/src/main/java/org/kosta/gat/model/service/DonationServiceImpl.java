@@ -13,6 +13,8 @@ import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class DonationServiceImpl implements DonationService {
@@ -60,6 +62,12 @@ public class DonationServiceImpl implements DonationService {
 	@Override
 	public void photoUpload(HttpServletRequest request, PhotoVo vo) {
 		donationDAO.photoUpload(request, vo);
+		
+	}
+
+	@Override
+	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
+		donationDAO.file_upload_save(uploadfile, modelMap);
 		
 	}
 }

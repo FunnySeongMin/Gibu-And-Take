@@ -1,5 +1,7 @@
 package org.kosta.gat.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +26,19 @@ public class EntryController {
 	@RequestMapping("addTakeDonation.do")
 	public String addTakeDonation(TakeDonationPostVO tdVO) {
 		entryService.addTakeDonation(tdVO);
+		return null;
+	}
+	/**
+	 * 응원메시지 목록
+	 * 작성이유 : 재능기부 상세페이지에 보여질 응원메시지를 보여준다
+	 * 
+	 * @param dpno 재능기부 글번호 : 재능기부글에 따라 달라지므로 재능기부 글번호를 받아온다
+	 * @author 조민경
+	 * 
+	 */
+	@RequestMapping("findCheerupMessageByDpno.do")
+	public String findCheerupMessageByDpno(int dpno) {
+		List<TakeDonationPostVO> list = entryService.findCheerupMessageByDpno(dpno);
 		return null;
 	}
 	/**

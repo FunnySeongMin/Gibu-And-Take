@@ -9,6 +9,8 @@ import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface DonationService {
 
@@ -27,6 +29,8 @@ public interface DonationService {
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response);
 	
 	public void photoUpload(HttpServletRequest request, PhotoVo vo);
+
+	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap);
 	
 	
 	
