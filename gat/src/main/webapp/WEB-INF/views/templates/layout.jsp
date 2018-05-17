@@ -51,7 +51,7 @@
 					//폼 submit
 					$("#contactForm").submit();
 				})
-			})
+			});
 			
 			<!-- 로그인 아이디 비밀번호 확인 : 아이디 중복체크, 아이디 길이확인, 비밀번호 일치여부 -->
 			$(document).ready(function(){
