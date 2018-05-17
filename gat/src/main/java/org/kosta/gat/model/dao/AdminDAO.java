@@ -25,4 +25,12 @@ public interface AdminDAO {
 
 	public void updateWebQuestionAnswer(WebQuestionPostVO wqVO);
 
+	public int appCount();
+
+	public int questionCount();
+
+	public int memberCount();
+
+	public int tradePointCount();
+
 }

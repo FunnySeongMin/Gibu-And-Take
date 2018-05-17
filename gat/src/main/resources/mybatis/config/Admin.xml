@@ -4,6 +4,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
+
+	<select id="tradePointCount" resultType="int">
+		select count(*) from take_donation where mileage_status='지급대기'
+	</select>
+	
+	<select id="memberCount" resultType="int">
+		select count(*) from gt_member
+	</select>
+
 	<select id="totalUnReceivedApplicationCount" resultType="int">
 		select count(*) from application where app_status='처리중'
 	</select>
@@ -85,6 +94,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="totalWebQuestionCount" resultType="int">
 		select count(*) from web_question
+	</select>
+	
+	<select id="questionCount" resultType="int">
+		select count(*) from web_question where wq_status='처리중'
 	</select>
 	
 	<resultMap type="webQuestionPostVO" id="wqPostVO">

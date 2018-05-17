@@ -19,6 +19,23 @@ public class AdminController {
 	private AdminService adminService;
 	
 	/**
+	 * 작성이유 : 관리자 페이지 뷰 데이터 전송
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("adminPageData.do")
+	public String adminPage(Model model) {
+		int appCount=adminService.appCount();
+		int qCount=adminService.questionCount();
+		int memberCount=adminService.memberCount();
+		int tradePointCount=adminService.tradePointCount();
+		model.addAttribute("appCount", appCount);
+		model.addAttribute("qCount", qCount);
+		model.addAttribute("memberCount", memberCount);
+		model.addAttribute("tradePointCount", tradePointCount);
+		return "admin/adminPage.tiles";
+	}
+	/**
 	* 작성이유 : 미승인 신청서 목록보기
 	* 
 	* @author 은성민
@@ -27,7 +44,7 @@ public class AdminController {
 	public String readUnReceivedApplicationList(int nowPage,Model model) {
 		ApplicationPostListVO apListVO=adminService.readUnReceivedApplicationList(nowPage);
 		model.addAttribute("apListVO", apListVO);
-		return null;
+		return "admin/readUnReceivedApplicationList.tiles";
 	}
 	/**
 	* 작성이유 : 미승인 신청서 상세보기
@@ -38,7 +55,7 @@ public class AdminController {
 	public String readUnReceivedApplicationDetail(String apno,Model model) {
 		ApplicationPostVO apVO=adminService.readUnReceivedApplicationDetail(apno);
 		model.addAttribute("apVO", apVO);
-		return null;
+		return "admin/readUnReceivedApplicationDetail.tiles";
 	}
 	/**
 	* 작성이유 : 미승인 신청서 승인여부 업데이트

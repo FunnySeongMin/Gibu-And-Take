@@ -199,6 +199,7 @@ create table take_donation(
 	td_regdate date default sysdate,
 	td_mileage number not null,
 	cheerup_message varchar2(200) default '당신을 응원합니다',
+	mileage_status varchar2(100) default '지급대기',
 	id varchar2(100) not null,
 	dp_no number not null,
 	CONSTRAINT fk_gt_take_donation_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE,
