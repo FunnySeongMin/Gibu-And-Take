@@ -40,6 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</update>
  	<update id="deleteMember" parameterType="string">
  		update GT_MEMBER set mgroup_no = '5'
-		where id =#{value}
+		where id = #{value}
  	</update>
 </mapper>

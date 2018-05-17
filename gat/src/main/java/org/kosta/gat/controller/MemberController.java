@@ -78,7 +78,7 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();
-		return "member/loginFrom.tiles";
+		return "home.tiles";
 	}
 	/**
 	* 작성이유 : 회원수정 메서드
@@ -101,12 +101,9 @@ public class MemberController {
 	public String updatePassword(String nowPassword,HttpServletRequest request,String newPassword) {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-		/*System.out.println("memberVO : "+vo);
-		System.out.println("mvo :"+mvo);*/
 		mvo.setPassword(newPassword);
 		System.out.println(mvo);
 		memberService.updatePassword(mvo);
-		
 		if (session != null)
 			session.invalidate();
 		return "home.tiles";
@@ -115,12 +112,15 @@ public class MemberController {
 	/**
 	* 작성이유 : 회원탈퇴 메서드
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
 	@RequestMapping("deleteMember.do")
-	public String deleteMember(String id) {
+	public String deleteMember(String id,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
 		memberService.deleteMember(id);
-		return null;
+		if (session != null)
+			session.invalidate();
+		return "home.tiles";
 	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 작성
