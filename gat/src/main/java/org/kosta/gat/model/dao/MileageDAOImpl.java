@@ -15,8 +15,8 @@ public class MileageDAOImpl implements MileageDAO {
 	private SqlSessionTemplate template;
 
 	@Override
-	public void addMileage(int mileage) {
-		template.insert("mileage.addMileage", mileage);
+	public void addMileage(MileageTradeVO mileageTradeVO) {
+		template.insert("mileage.addMileage", mileageTradeVO);
 	}
 
 	@Override
