@@ -210,11 +210,8 @@ create sequence take_donation_seq;
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
 
-select *from take_donation;
 
-select 
-
-select * from gt_member where id='keroro';
+select * from take_donation;
 
 --후기 게시판 테이블
 drop table review_post;

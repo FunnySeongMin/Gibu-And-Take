@@ -4,7 +4,7 @@ import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 
 public class TakeDonationPostVO {
-	private String tdNo;
+	private int tdNo;
 	private String tdRegdate;
 	private int tdMileage;
 	private String cheerUpMessage;
@@ -14,7 +14,7 @@ public class TakeDonationPostVO {
 	public TakeDonationPostVO() {
 		super();
 	}
-	public TakeDonationPostVO(String tdNo, String tdRegdate, int tdMileage, String cheerUpMessage, MemberVO memberVO,
+	public TakeDonationPostVO(int tdNo, String tdRegdate, int tdMileage, String cheerUpMessage, MemberVO memberVO,
 			DonationPostVO donationPostVO) {
 		super();
 		this.tdNo = tdNo;
@@ -24,10 +24,10 @@ public class TakeDonationPostVO {
 		this.memberVO = memberVO;
 		this.donationPostVO = donationPostVO;
 	}
-	public String getTdNo() {
+	public int getTdNo() {
 		return tdNo;
 	}
-	public void setTdNo(String tdNo) {
+	public void setTdNo(int tdNo) {
 		this.tdNo = tdNo;
 	}
 	public String getTdRegdate() {

@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <div class="container mt-5 mb-5">
 	<div class="row">
 		<div class="col-md-4 offset-md-4">
 			
 			<div class="card card-block login-form pt-5 pb-5">
 				<div class="card-body">
-					<!--NAVER ·Î±×ÀÎ -->
-					<button type="submit" class="btn btn-success btn-block">Naver ·Î±×ÀÎ</button>
+					<!--NAVER ë¡œê·¸ì¸ -->
+					<button type="submit" class="btn btn-success btn-block">Naver ë¡œê·¸ì¸</button>
 					<div class="divider mt-4">						
-						<span>¶Ç´Â<span>
+						<span>ë˜ëŠ”<span>
 					</div>
-					<!-- ÀÏ¹Ý ·Î±×ÀÎ -->
+					<!-- ì¼ë°˜ ë¡œê·¸ì¸ -->
 					<form action="login.do" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" name="id" placeholder="ID" required="required">
@@ -19,13 +19,13 @@
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" placeholder="Password" required="required">
 						</div>
-						<button type="submit" class="btn btn-point-gnt btn-block">·Î±×ÀÎ</button>
+						<button type="submit" class="btn btn-point-gnt btn-block">ë¡œê·¸ì¸</button>
 					</form>
 				</div>
 				<div class="card-body text-center">
-					<span class="small-txt desc-color mr-1">¾ÆÁ÷ °èÁ¤ÀÌ ¾øÀ¸½Å°¡¿ä?</span><a class="small-txt point-txt-gnt" href="${pageContext.request.contextPath }/member/registerMemberForm.do">°¡ÀÔÇÏ±â</a>
+					<span class="small-txt desc-color mr-1">ì•„ì§ ê³„ì •ì´ ì—†ìœ¼ì‹ ê°€ìš”?</span><a class="small-txt point-txt-gnt" href="${pageContext.request.contextPath }/member/registerMemberForm.do">ê°€ìž…í•˜ê¸°</a>
 					<!-- <div class="divider mt-2 mb-2"></div>
-					<span class="small-txt desc-color mr-1">ºñ¹Ð¹øÈ£¸¦ ÀØÀ¸¼Ì³ª¿ä?</span><a class="small-txt point-txt-gnt" href="find_password.html">ºñ¹Ð¹øÈ£ Ã£±â</a> -->
+					<span class="small-txt desc-color mr-1">ë¹„ë°€ë²ˆí˜¸ë¥¼ ìžŠìœ¼ì…¨ë‚˜ìš”?</span><a class="small-txt point-txt-gnt" href="find_password.html">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a> -->
 				</div>
 				
 				

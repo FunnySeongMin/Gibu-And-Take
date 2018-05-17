@@ -78,8 +78,9 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("readWebQuestionList.do")
-	public String readWebQuestionList(int nowPage) {
+	public String readWebQuestionList(int nowPage,Model model) {
 		WebQuestionPostListVO wqListVO=adminService.readWebQuestionList(nowPage);
+		model.addAttribute("wqListVO", wqListVO);
 		return null;
 	}
 	/**
@@ -88,8 +89,9 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("readWebQuestionDetail.do")
-	public String readWebQuestionDetail(String wqno) {
+	public String readWebQuestionDetail(String wqno,Model model) {
 		WebQuestionPostVO wqVO=adminService.readWebQuestionDetail(wqno);
+		model.addAttribute("wqVO", wqVO);
 		return null;
 	}
 	/**

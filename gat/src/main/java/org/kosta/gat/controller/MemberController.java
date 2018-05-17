@@ -60,9 +60,9 @@ public class MemberController {
 	public String login(MemberVO vo, HttpServletRequest request) {
 		MemberVO mvo=memberService.checkId(vo.getId());
 		if(mvo==null) { //아이디가 존재하지 않는 경우
-			return "member/login_fail.tiles";
+			return "member/loginFail.tiles";
 		}else if(!vo.getPassword().equals(mvo.getPassword())) { //비밀번호가 일치하지 않는 경우
-			return "member/login_fail.tiles";
+			return "member/loginFail.tiles";
 		}else { //정상적으로 로그인 하는 경우
 			request.getSession().setAttribute("mvo", mvo);
 			return "home.tiles";
@@ -89,10 +89,29 @@ public class MemberController {
 	public String updateMember(HttpServletRequest request,MemberVO vo) {
 		HttpSession session=request.getSession(false);
 		memberService.updateMember(vo);
-		//회원정보 조회
 		session.setAttribute("mvo", memberService.checkId(vo.getId()));
+		return "member/myPage.tiles";
+	}
+	/**
+	* 작성이유 : 비밀번호 변경
+	* 
+	* @author 백설희
+	*/
+	@RequestMapping(method=RequestMethod.POST, value="member/modifyPassword.do")
+	public String updatePassword(String nowPassword,HttpServletRequest request,String newPassword) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		/*System.out.println("memberVO : "+vo);
+		System.out.println("mvo :"+mvo);*/
+		mvo.setPassword(newPassword);
+		System.out.println(mvo);
+		memberService.updatePassword(mvo);
+		
+		if (session != null)
+			session.invalidate();
 		return "home.tiles";
 	}
+	
 	/**
 	* 작성이유 : 회원탈퇴 메서드
 	* 

@@ -30,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	inner join member_grade gra on m.mgrade_no=gra.mgrade_no
 	and m.id=#{value}
  	</select>
+ 	<update id="updatePassword" parameterType="memberVO">
+ 		update GT_MEMBER set password=#{password}
+		where id=#{id}
+ 	</update>
  	<update id="updateMember" parameterType="memberVO">
  		update GT_MEMBER set address=#{address}, email=#{email}
 		where id=#{id}
@@ -37,5 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="deleteMember" parameterType="string">
  		update GT_MEMBER set mgroup_no = '5'
 		where id =#{value}
+ 	</update>
+ 	 <update id="addMemberMileage" parameterType="mileageTradeVO">
+ 		update GT_MEMBER set mileage=mileage + #{mtVolume} where id =#{memberVO.id}
  	</update>
 </mapper>
