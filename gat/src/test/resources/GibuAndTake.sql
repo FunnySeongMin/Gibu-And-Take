@@ -244,10 +244,12 @@ values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전
 drop table web_question;
 create table web_question(
 	wq_no number primary key,
+	thread number not null,
 	wq_title varchar2(100),
 	wq_contents clob,
 	wq_regdate date default sysdate,
-	wq_parent_no number,
+	wq_parent_no number default 0,
+	seg number default 1,
 	wq_status varchar2(100) default '처리중',
 	id varchar2(100) not null,
 	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE

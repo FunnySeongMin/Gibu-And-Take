@@ -44,7 +44,7 @@
                         </b></span>&nbsp;건</div>
                      	<br>
                      </div>
-                     <div class="text-center"><a href="${pageContext.request.contextPath }/readWebQuestionList.do" class="btn btn-sub-2-gnt btn-sm">목록보기</a></div>
+                     <div class="text-center"><a href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">목록보기</a></div>
                   </div>
                </div>
             </div>

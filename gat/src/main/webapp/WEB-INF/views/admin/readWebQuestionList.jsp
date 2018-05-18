@@ -29,7 +29,14 @@
 					<c:forEach items="${wqPostVO }" var="wqPostVO">
 						<tr>
 							<td>${wqPostVO.wqNo }</td>
-							<td><a href="#">${apPostVO.wqTitle }</a></td>
+							<c:choose>
+								<c:when test="${!wqPostVO.answer }">
+									<td><a href="#" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle }</a></td>
+								</c:when>
+								<c:otherwise>
+									<td><a href="#">${wqPostVO.wqTitle }</a></td>
+								</c:otherwise>
+							</c:choose>
 							<td>${wqPostVO.memberVO.name }</td>
 							<td>${wqPostVO.wqRegdate }</td>
 						</tr>
@@ -46,7 +53,7 @@
 	<ul class="pagination justify-content-center mt-5">
 		<c:if test="${wqListVO.wqPb.previousPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
+				<a class="page-link" href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=${wqListVO.wqPb.startPageOfPageGroup-1}" aria-label="Previous">
 					<span aria-hidden="true">&laquo;</span>
 					<span class="sr-only">
 						Previous
@@ -58,7 +65,7 @@
 			<c:choose>
 				<c:when test="${wqListVO.wqPb.nowPage!=page}">
 					<li class="page-item">
-						<a class="page-link"  href="">${page}</a>
+						<a class="page-link"  href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=${page}">${page}</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -70,7 +77,7 @@
 		</c:forEach>
 		<c:if test="${wqListVO.wqPb.nextPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="" aria-label="Next">
+				<a class="page-link" href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=${wqListVO.wqPb.endPageOfPageGroup+1}" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
 					<span class="sr-only">Next</span>
 				</a>

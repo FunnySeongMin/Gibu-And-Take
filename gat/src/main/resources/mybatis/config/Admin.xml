@@ -54,8 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(start_date,'yyyy.mm.dd') start_date,
 			to_char(end_date,'yyyy.mm.dd') end_date,goal_mileage,app_status,id
-			from application where app_status='처리중') app, gt_member m
-			where app.id=m.id and app.app_status='처리중' and rnum between #{startRowNumber} 
+			from application) app, gt_member m
+			where app.id=m.id and rnum between #{startRowNumber} 
 			and #{endRowNumber} order by app.app_no desc
  		]]>
 	</select>
@@ -102,6 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="webQuestionPostVO" id="wqPostVO">
 		<result column="wq_no" property="wqNo"/>
+		<result column="thread" property="thread"/>
 		<result column="wq_title" property="wqTitle"/>
 		<result column="wq_contents" property="wqContents"/>
 		<result column="wq_regdate" property="wqRegdate"/>
@@ -119,10 +120,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="readWebQuestionList" resultMap="wqPostVO">
-		select wq.wq_no,wq.wq_title,to_char(wq.wq_regdate,'yyyy.mm.dd') wq_regdate,
-		wq.wq_parent_no,wq.wq_status
-		from web_question wq, gt_member m
-		where wq.id=m.id
+		<![CDATA[
+			select rnum,wq.wq_no,wq.thread,wq.wq_title,wq.wq_regdate,wq.wq_status,wq.wq_parent_no
+			from (select row_number() over(order by thread desc) rnum,wq_no,thread,wq_title,
+			to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_status,wq_parent_no,id
+			from web_question order by thread desc) wq, gt_member m
+			where wq.id=m.id and rnum between #{startRowNumber} and  #{endRowNumber}
+			order by thread desc
+		]]>
 	</select>
 	
 	<select id="readWebQuestionDetail" resultMap="wqPostVO">
@@ -135,8 +140,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="addWebQuestionAnswer" parameterType="webQuestionPostVO">
-		insert into web_question(wq_no,wq_title,wq_contents,wq_parent_no,wq_status,id)
-		values(web_question_seq.nextval,#{wqTitle},#{wqContents},#{wqNo},'답변',#{memberVO.id})
+		insert into web_question(wq_no,thread,wq_title,wq_contents,wq_parent_no,wq_status,id)
+		values(web_question_seq.nextval,#{wqNo}*100-1,#{wqTitle},
+		#{wqContents},#{wqNo},'답변',#{memberVO.id})
 	</insert>
 	
 	<update id="updateWebQuestionAnswer" parameterType="webQuestionPostVO">

@@ -6,7 +6,7 @@
 </script> -->
 <!-- Page Heading -->
 <div class="page-heading">
-	<h4 class="py-5 text-center sub2-txt">처리되지 않은 신청서</h4>
+	<h4 class="py-5 text-center sub2-txt">신청서</h4>
 </div>
 <!-- /.Page Heading -->
 <!-- Page Content -->
@@ -22,6 +22,7 @@
 						<td>제목</td>
 						<td>작성자</td>
 						<td>작성일자</td>
+						<td>승인여부</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,6 +33,7 @@
 							<td><a href="${pageContext.request.contextPath }/readUnReceivedApplicationDetail.do?apno=${apPostVO.appNo}">${apPostVO.appTitle }</a></td>
 							<td>${apPostVO.memberVO.name }</td>
 							<td>${apPostVO.appRegdate }</td>
+							<td>${apPostVO.appStatus }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

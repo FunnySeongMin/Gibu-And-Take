@@ -18,10 +18,11 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet"
 	media="screen">
 <!-- font awesome -->
-<link rel="stylesheet"
+<script src="https://use.fontawesome.com/132891cbd9.js"></script>
+<!-- <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
 	integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> -->
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
