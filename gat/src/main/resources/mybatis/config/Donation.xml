@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into application(
  		app_no, 
  		app_title, 
+ 		app_summery,
  		app_contents,
  		app_place,
  		app_imgdirectory,
@@ -22,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		id)
  		values(#{appNo}, 
  		#{appTitle}, 
+ 		#{appSummery},
  		#{appContents},
  		#{place},
  		#{imgDirectory},
