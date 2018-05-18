@@ -112,6 +112,7 @@
 					<small>info</small>
 				</h5>
 				<div class="jumbotron">
+				<div id="map" style="width:400px;height:400px;"></div>
 					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
 					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
 					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
@@ -198,4 +199,6 @@
 		</div>
 	</div>
  </div>
+ 
+
  <!-- /.container -->
