@@ -9,7 +9,7 @@ public interface MileageDAO {
 
 	public void tradeMileage(int mileage);
 
-	public void exchangeMileage(int mileage);
+	public void exchangeMileage(MileageTradeVO mileageTradeVO);
 
 	public MileageTradePostListVO readMyMileageTradeList(String id, int nowPage);
 

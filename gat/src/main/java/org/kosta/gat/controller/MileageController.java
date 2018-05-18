@@ -61,12 +61,29 @@ public class MileageController {
 	/**
 	* 작성이유 : 마일리지 환전
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("exchangeMileage.do")
-	public String exchangeMileage(int mileage) {
-		mileageService.exchangeMileage(mileage);
-		return null;
+	@RequestMapping(method=RequestMethod.POST, value="member/exchangeMileage.do")
+	public String exchangeMileage(String mugNo, String id, MileageTradeVO mileageTradeVO, HttpServletRequest request) {
+		//session 정보를 확인
+		HttpSession session=request.getSession(false);
+		if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			if(mvo!=null){
+				mileageTradeVO.setMemberVO(mvo);
+			}
+		}			
+		//MileageUseGroupVO에 mugNo를 넣어 거래 종류를 저장하고
+		//mileageTradeVO에 넣어줌
+		MileageUseGroupVO mugVO = new MileageUseGroupVO(mugNo, null);
+		mileageTradeVO.setMugVO(mugVO);
+		//mileageTradeVO에 정보를 저장시켜 addMileage시킴
+		mileageService.exchangeMileage(mileageTradeVO);
+		//addMileage된 내용을 MemberVO의 mileage에 업데이트 시킴
+		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
+		memberService.exchangeMemberMileage(mileageTradeVO);
+		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
+		return "redirect:/member/mileagePage.do";
 	}
 	/**
 	* 작성이유 : 마일리지 사용내역
