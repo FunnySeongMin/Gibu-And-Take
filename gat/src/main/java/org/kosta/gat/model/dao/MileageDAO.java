@@ -1,5 +1,7 @@
 package org.kosta.gat.model.dao;
 
+import java.util.List;
+
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 
@@ -11,6 +13,6 @@ public interface MileageDAO {
 
 	public void exchangeMileage(MileageTradeVO mileageTradeVO);
 
-	public MileageTradePostListVO readMyMileageTradeList(String id, int nowPage);
+	public List<MileageTradeVO> readMyMileageTradeList(String id);
 
 }

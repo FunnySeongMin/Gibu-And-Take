@@ -33,7 +33,7 @@ $(document).ready(function(){
 		}
 	})//submit
 	
-<!-- 마일리지 환전 조건 !-->
+<!-- 마일리지 환전 조건 -->
 	$("#submitBtn2").click(function(){
 		if($("#exchangeVolume").val()<10000) {
 			alert("환전할 금액은 10000원 이상이어야 합니다.")
@@ -81,7 +81,7 @@ $(document).ready(function(){
 <form id="exchangeMileageForm" method="post" action="exchangeMileage.do">
 <input type="hidden" name="mugNo" value="3">
 <input type="hidden" name="mvo" value="${sessionScope.mvo}">
-<input type="number" name="exchangeVolume" id="exchangeVolume" placeholder="환전할 금액" required="required">원 
+<input type="number" name="mtVolume" id="exchangeVolume" placeholder="환전할 금액" required="required">원 
 <!-- <button type="submit" id="submitBtn">환전</button> <br><br><br><br> -->
 <button type="submit" id="submitBtn2">환전 신청</button> <br><br><br><br> 
 보유 마일리지: ${sessionScope.mvo.mileage}원
@@ -89,16 +89,4 @@ $(document).ready(function(){
 </form>
 <br><br>
 
-<hr>
-<br><br>
-<!-- 마일리지 내역 보기  -->
-<h2>내역보기^0^</h2>
-<table>
-  <tr>
-    <th>거래 일시</th> <th>거래 분류</th> <th>거래량</th>
-  </tr>
-  <tr>
-    <td></td> <td></td> <td></td>
-  </tr>
-</table>
-<br><br>
+<a href="${pageContext.request.contextPath }/member/readMyMileageTradeList.do">마일리지 내역 보기</a>

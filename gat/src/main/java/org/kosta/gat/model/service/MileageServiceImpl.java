@@ -1,5 +1,7 @@
 package org.kosta.gat.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.MileageDAO;
@@ -31,7 +33,7 @@ public class MileageServiceImpl implements MileageService {
 	}
 
 	@Override
-	public MileageTradePostListVO readMyMileageTradeList(String id, int nowPage) {
-		return mileageDAO.readMyMileageTradeList(id,nowPage);
+	public List<MileageTradeVO> readMyMileageTradeList(String id) {
+		return mileageDAO.readMyMileageTradeList(id);
 	}
 }

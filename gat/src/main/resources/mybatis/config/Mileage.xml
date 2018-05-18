@@ -16,14 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by mt_regdate desc
  	</select>
  -->
+ 	<resultMap type="mileageTradeVO" id="mileageRM">
+		<result property="mugVO.mugNo" column="mug_no" />
+		<result property="mugVO.mugName" column="mug_name" />
+		<result property="memberVO.id" column="id" />
+	</resultMap>
+	<!-- 마일리지 충전 -->
  	<insert id="addMileage" parameterType="mileageTradeVO">
  		insert into mileage_trade(mt_no, mt_volume, mug_no, id)
  		values(mileage_trade_seq.nextval, #{mtVolume}, #{mugVO.mugNo}, #{memberVO.id})
  	</insert>
+ 	<!-- 마일리지 환전 -->
  	<insert id="exchangeMileage" parameterType="mileageTradeVO">
  		insert into mileage_trade(mt_no, mt_volume, mug_no, id)
  		values(mileage_trade_seq.nextval, #{mtVolume}, #{mugVO.mugNo}, #{memberVO.id})
  	</insert>
+ 	<!-- 마일리지 거래 -->
  	<insert id="tradeMileage" parameterType="mileageTradeVO">
  		<selectKey keyProperty="mtNo" resultType="int" order="BEFORE">
  			select mileage_trade_seq.nextval from dual
@@ -31,4 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into mileage_trade(mt_no, mt_volume, mt_regdate, mug_no, id)
  		values(#{mtNo}, #{mtVolume}, sysdate, #{mugVO.mugNo}, #{memberVO.id})
  	</insert>
+ 	<!-- 마일리지 거래 내역 -->
+ 	<select id="readMyMileageTradeList" parameterType="string" resultMap="mileageRM">
+ 		select t.mt_no as mtNo, t.mt_volume as mtVolume, to_char(t.mt_regdate,'YYYY.MM.DD') as mtRegdate, 
+ 		t.mug_no, mug.mug_name, t.id from MILEAGE_TRADE t
+		inner join MILEAGE_USE_GROUP mug on mug.mug_no=t.mug_no
+		inner join GT_MEMBER m on t.id = m.id
+		and m.id=#{value}
+ 	</select>
 </mapper>
