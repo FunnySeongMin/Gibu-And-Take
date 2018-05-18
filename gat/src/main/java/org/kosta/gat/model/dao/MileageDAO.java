@@ -1,6 +1,7 @@
 package org.kosta.gat.model.dao;
 
-import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
+import java.util.List;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostPagingBean;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 
 public interface MileageDAO {
@@ -11,6 +12,8 @@ public interface MileageDAO {
 
 	public void exchangeMileage(MileageTradeVO mileageTradeVO);
 
-	public MileageTradePostListVO readMyMileageTradeList(String id, int nowPage);
+	public List<MileageTradeVO> readMyMileageTradeList(MileageTradePostPagingBean pagingBean);
+
+	public int getTotalContentCount(String id);
 
 }

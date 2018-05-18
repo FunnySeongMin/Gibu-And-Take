@@ -30,18 +30,13 @@ public class MileageDAOImpl implements MileageDAO {
 	}
 
 	@Override
-	public MileageTradePostListVO readMyMileageTradeList(String id, int nowPage) {
-		MileageTradePostPagingBean mtPb=null;
-		int totalMyMileageTradeCount=template.selectOne("mileage.totalMyMileageTradeCount", id);
-		if(nowPage==0) {
-			mtPb=new MileageTradePostPagingBean(totalMyMileageTradeCount);
-		}else {
-			mtPb=new MileageTradePostPagingBean(totalMyMileageTradeCount, nowPage);
-		}
-		mtPb.setId(id);
-		List<MileageTradeVO> list=template.selectList("mileage.readMyMileageTradeList", mtPb);
-		MileageTradePostListVO mtListVO=new MileageTradePostListVO(list, mtPb);
-		return mtListVO;
+	public List<MileageTradeVO> readMyMileageTradeList(MileageTradePostPagingBean pagingBean) {
+		return template.selectList("mileage.readMyMileageTradeList", pagingBean);
+	}
+
+	@Override
+	public int getTotalContentCount(String id) {
+		return template.selectOne("mileage.getTotalContentCount", id);
 	}
 
 }
