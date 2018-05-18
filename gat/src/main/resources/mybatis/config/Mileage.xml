@@ -39,12 +39,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into mileage_trade(mt_no, mt_volume, mt_regdate, mug_no, id)
  		values(#{mtNo}, #{mtVolume}, sysdate, #{mugVO.mugNo}, #{memberVO.id})
  	</insert>
+ 	<!-- 마일리지 거래 내역 콘텐츠 수 -->
+ 	<select id="getTotalContentCount" parameterType="string" resultType="int">
+ 		select count(*) from mileage_trade where id=#{value}
+ 	</select>
  	<!-- 마일리지 거래 내역 -->
- 	<select id="readMyMileageTradeList" parameterType="string" resultMap="mileageRM">
- 		select t.mt_no as mtNo, t.mt_volume as mtVolume, to_char(t.mt_regdate,'YYYY.MM.DD') as mtRegdate, 
+ 	<select id="readMyMileageTradeList" parameterType="mileageTradePostPagingBean" resultMap="mileageRM">
+		select mtNo, mtVolume, mug_no, mug_name, mtRegdate, id from
+ 		(SELECT row_number() over(order by mt_no desc) AS rnum, 
+ 		t.mt_no as mtNo, t.mt_volume as mtVolume, to_char(t.mt_regdate,'YYYY.MM.DD') as mtRegdate, 
  		t.mug_no, mug.mug_name, t.id from MILEAGE_TRADE t
 		inner join MILEAGE_USE_GROUP mug on mug.mug_no=t.mug_no
 		inner join GT_MEMBER m on t.id = m.id
-		and m.id=#{value}
+		and m.id=#{id}) where rnum between #{startRowNumber} and #{endRowNumber} order by mtNo desc
  	</select>
 </mapper>

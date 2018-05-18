@@ -43,7 +43,7 @@ $(document).ready(function(){
 				<div class="list-group">
 					<a href="${pageContext.request.contextPath }/member/addMileage.do" class="list-group-item active">마일리지 충전</a>
 					<a href="${pageContext.request.contextPath }/member/exchangeMileage.do" class="list-group-item">마일리지 환전</a>
-					<a href="${pageContext.request.contextPath }/member/readMyMileageTradeList.do" class="list-group-item">마일리지 내역</a>
+					<a href="${pageContext.request.contextPath }/member/readMyMileageTradeList.do?nowPage=1" class="list-group-item">마일리지 내역</a>
 				</div>
 			</div>
 			<!-- /.col-lg-3 -->

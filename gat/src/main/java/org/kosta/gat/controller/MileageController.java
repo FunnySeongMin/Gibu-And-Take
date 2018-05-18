@@ -1,7 +1,5 @@
 package org.kosta.gat.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.service.MileageService;
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageUseGroupVO;
 import org.springframework.stereotype.Controller;
@@ -95,15 +94,17 @@ public class MileageController {
 	* @author 용다은
 	*/
 	@RequestMapping("member/readMyMileageTradeList.do")
-	public ModelAndView readMyMileageTradeList(HttpServletRequest request) {
+	public ModelAndView readMyMileageTradeList(HttpServletRequest request, int nowPage) {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
 			if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
 				MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-				List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
-				return new ModelAndView("member/readMyMileageTradeList.tiles","list", list);
+				//페이징 없이 목록만 뽑는 코드
+				//List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
+				MileageTradePostListVO listVO = mileageService.readMyMileageTradeList(mvo.getId(), nowPage); 
+				return new ModelAndView("member/readMyMileageTradeList.tiles","listVO", listVO);
 			}
 			else
-				return null;
+				return null; //뭘 넣어야 하지?
 	}
 }
