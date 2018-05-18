@@ -24,30 +24,26 @@
   						<c:forEach items="${listVO.mtVO}" var="list">
    					 <tr>
   						<td>${list.mtRegdate}</td>
-  						<c:choose>
   						<!-- 충전 -->
-  						<c:when test="${list.mugVO.mugNo==1}">
+  						<c:if test="${list.mugVO.mugNo==1}">
   						<td class="text-primary">${list.mugVO.mugName}</td>
   						<td class="text-primary">+${list.mtVolume}</td>
-  						</c:when>
+  						</c:if>
   						<!-- 거래 -->
-  						<c:when test="${list.mugVO.mugNo==2 || list.mugVO.mugNo==3}">
+  						<c:if test="${list.mugVO.mugNo==2}">
   						<td class="text-danger">${list.mugVO.mugName}</td>
   						<td class="text-danger">-${list.mtVolume}</td>
-  						</c:when>
+  						</c:if>
   						<!-- 환전 -->
-  						<c:when test="${list.mugVO.mugNo==3}">
-  						<td class="text-warning">${list.mugVO.mugName}</td>
-  						<td class="text-warning">-${list.mtVolume}</td>
-  						</c:when>
+  						<c:if test = "${list.mugVO.mugNo==3}">
+  						<td class="text">${list.mugVO.mugName}</td>
+  						<td class="text">-${list.mtVolume}</td>
+  						</c:if>
   						<!-- 적립 -->
-  						<c:when test="${list.mugVO.mugNo==4}"> 
+  						<c:if test="${list.mugVO.mugNo==4}">
   						<td class="text-success">${list.mugVO.mugName}</td>
-  						<td class="text-success">-${list.mtVolume}</td>
-  						</c:when>
-  						<c:otherwise>
-  						</c:otherwise>
-  						</c:choose>
+  						<td class="text-success">+${list.mtVolume}</td>
+  						</c:if>
    					 </tr>
   						</c:forEach>
 					</tbody>

@@ -74,6 +74,7 @@ create table mileage_use_group(
 insert into mileage_use_group values('1','충전');
 insert into mileage_use_group values('2','기부');
 insert into mileage_use_group values('3','환전');
+insert into mileage_use_group values('4','적립');
 
 --마일리지 거래 테이블
 drop table mileage_trade;
