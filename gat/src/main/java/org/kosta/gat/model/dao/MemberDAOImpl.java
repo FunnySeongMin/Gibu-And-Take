@@ -117,4 +117,5 @@ public class MemberDAOImpl implements MemberDAO {
 	public void exchangeMileage(MileageTradeVO mileageTradeVO) {
 		template.update("member.exchangeMemberMileage", mileageTradeVO);
 	}
+
 }

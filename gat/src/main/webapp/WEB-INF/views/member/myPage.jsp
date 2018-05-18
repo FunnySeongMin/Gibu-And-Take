@@ -88,7 +88,7 @@
                         <p>참여한 기부 10건</p>
                      </div>
                      <a href="${pageContext.request.contextPath}/member/activityList.do" class="btn btn-sub-2-gnt btn-sm">활동목록</a>
-                     <a href="#" class="btn btn-sub-2-gnt btn-sm">후기내역</a>
+                     <a href="${pageContext.request.contextPath}/member/readMyReviewPostList.do" class="btn btn-sub-2-gnt btn-sm">후기내역</a>
                   </div>
                </div>
             </div>

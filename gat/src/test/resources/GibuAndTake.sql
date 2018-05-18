@@ -45,6 +45,9 @@ create table gt_member(
 
 select * from gt_member;
 
+update gt_member set mgroup_no='2'
+where id='keroro'
+
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('javaking','seo','서정우','판교','seo@naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -139,10 +142,18 @@ insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory
 values(application_seq.nextval,'이윤희의 유니짜장','유니짜장은 재료만 잘게 다지면 됩니다!',
 '판교','이미지가 여기에 있어요',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang');
 
+insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'Class B','sfdhdsfhskjdhflksd',
+'용인','이미지가 여기에 있어요',155000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.05.18','yyyy.mm.dd'),'jin');
+
+insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'Class C','sadgdfg',
+'캐나다','이미지가 여기에 있어요',350000,'승인',to_date('2018.01.05','yyyy.mm.dd'),to_date('2018.05.05','yyyy.mm.dd'),'cho');
+
 SELECT application_seq.NEXTVAL FROM dual ; 
 SELECT application_seq.CURRVAL FROM dual ;
 
-
+select * from APPLICATION
 --선물 테이블
 drop table present;
 create table present(
@@ -187,6 +198,12 @@ create sequence donation_post_seq;
 insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
 values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
 200000,'1');
+insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
+values(donation_post_seq.nextval,'Class B','재미있는 꽃꽂이 시간','용인',
+155000,'21');
+insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
+values(donation_post_seq.nextval,'Class C','수화교실','영등포',
+360000,'22');
 
 select * from donation_post;
 
@@ -211,10 +228,13 @@ create sequence take_donation_seq;
 
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
-
-
+insert into take_donation(td_no,td_mileage,id,dp_no)
+values(take_donation_seq.nextval,1000,'keroro',1);
+insert into take_donation(td_no,td_mileage,id,dp_no)
+values(take_donation_seq.nextval,1000,'keroro',1);
 select * from take_donation;
 
+select * from TAKE_DONATION
 --후기 게시판 테이블
 drop table review_post;
 create table review_post(
@@ -238,7 +258,14 @@ create sequence review_post_seq;
 insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
 values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전부를 모두 다 배운거 같아 뿌듯합니다. 가위바위보를 확실히 질 수 있을것 같아요!!',
 8,'keroro',1,1);
+insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
+values(review_post_seq.nextval,'또 참여하고 싶어요','봉사를 통한 즐거움을 배웠습니다.',
+8,'yong',1,21);
+insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
+values(review_post_seq.nextval,'유익한 시간이었습니다.','adssasad',
+8,'keroro',1,22);
 
+select * from REVIEW_POST
 --사이트 문의 테이블
 drop table web_question;
 create table web_question(

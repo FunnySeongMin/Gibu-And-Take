@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -174,10 +175,13 @@ public class MemberController {
 	* 
 	* @author 백설희
 	*/
-	@RequestMapping("readMyReviewPostList.do")
-	public String readMyReviewPostList(String id,int nowPage,Model model) {
-		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(id,nowPage);
-		return null;
+	@RequestMapping("member/readMyReviewPostList.do")
+	public ModelAndView readMyReviewPostList(HttpServletRequest request,int nowPage) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
+		System.out.println(rpListVO);
+		return new ModelAndView("member/myReviewList","rpListVO",rpListVO);
 	}
 	/**
 	* 작성이유 : 나의 활동목록 보기

@@ -35,4 +35,5 @@ public interface MemberDAO {
 
 	public void exchangeMileage(MileageTradeVO mileageTradeVO);
 
+
 }
