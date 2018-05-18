@@ -18,11 +18,11 @@ public class MileageServiceImpl implements MileageService {
 	public void addMileage(MileageTradeVO mileageTradeVO) {
 		mileageDAO.addMileage(mileageTradeVO);
 	}
-
+	
 	@Override
 	@Transactional
-	public void tradeMileage(int mileage) {
-		mileageDAO.tradeMileage(mileage);
+	public void tradeMileage(MileageTradeVO mtVO) {
+		mileageDAO.tradeMileage(mtVO);
 	}
 
 	@Override
