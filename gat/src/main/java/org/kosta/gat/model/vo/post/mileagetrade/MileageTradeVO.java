@@ -3,7 +3,7 @@ package org.kosta.gat.model.vo.post.mileagetrade;
 import org.kosta.gat.model.vo.member.MemberVO;
 
 public class MileageTradeVO {
-	private String mtNo;
+	private int mtNo;
 	private int mtVolume;
 	private String mtRegdate;
 	private MileageUseGroupVO mugVO;
@@ -12,7 +12,7 @@ public class MileageTradeVO {
 	public MileageTradeVO() {
 		super();
 	}
-	public MileageTradeVO(String mtNo, int mtVolume, String mtRegdate, MileageUseGroupVO mugVO, MemberVO memberVO) {
+	public MileageTradeVO(int mtNo, int mtVolume, String mtRegdate, MileageUseGroupVO mugVO, MemberVO memberVO) {
 		super();
 		this.mtNo = mtNo;
 		this.mtVolume = mtVolume;
@@ -20,10 +20,10 @@ public class MileageTradeVO {
 		this.mugVO = mugVO;
 		this.memberVO = memberVO;
 	}
-	public String getMtNo() {
+	public int getMtNo() {
 		return mtNo;
 	}
-	public void setMtNo(String mtNo) {
+	public void setMtNo(int mtNo) {
 		this.mtNo = mtNo;
 	}
 	public int getMtVolume() {

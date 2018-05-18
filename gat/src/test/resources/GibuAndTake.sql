@@ -45,9 +45,6 @@ create table gt_member(
 
 select * from gt_member;
 
-update gt_member set mgroup_no='2'
-where id='keroro'
-
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('javaking','seo','서정우','판교','seo@naver.com',to_date('1997.07.21','yyyy.mm.dd'),1,6);
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -61,7 +58,7 @@ values('cho','abcd','조민경','서울','cho@naver.com',to_date('1992.06.09','y
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('yong','diyong','용다은','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),3,4);
+values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),4,4);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('keroro','pororo','은성민','서울','keroro@naver.com',to_date('1990.08.14','yyyy.mm.dd'),4,5);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -113,6 +110,7 @@ drop table application;
 create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
+	app_summery varchar2(100) not null,
 	app_contents clob not null,
 	app_place varchar2(100),
 	app_imgdirectory varchar2(100),
@@ -134,12 +132,12 @@ drop sequence application_seq;
 create sequence application_seq;
 
 --신청서 등록
-insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
+insert into application(app_no,app_title,app_summery,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약1','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
 '판교','이미지가 여기에 있어요',200000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'hwang');
 
-insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'이윤희의 유니짜장','유니짜장은 재료만 잘게 다지면 됩니다!',
+insert into application(app_no,app_title,app_summery,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'이윤희의 유니짜장','프로젝트 요약1','유니짜장은 재료만 잘게 다지면 됩니다!',
 '판교','이미지가 여기에 있어요',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang');
 
 insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
@@ -179,14 +177,18 @@ drop table donation_post;
 create table donation_post(
 	dp_no number primary key,
 	dp_title varchar2(100) not null,
+	dp_summery varchar2(100) not null,
 	dp_contents clob not null,
 	dp_place varchar2(100) not null,
 	dp_imgdirectory varchar2(100),
 	dp_regdate date default sysdate,
+	start_date date,
+	end_date date,
 	dp_count number default 0,
 	goal_mileage number not null,
 	donation_mileage number default 0,
 	total_entry number default 0,
+	dp_status number default 0,
 	app_no number,
 	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
 )
@@ -195,9 +197,9 @@ create table donation_post(
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
 
-insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
-values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
-200000,'1');
+insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
+values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
+'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),200000,'1');
 insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
 values(donation_post_seq.nextval,'Class B','재미있는 꽃꽂이 시간','용인',
 155000,'21');
@@ -216,12 +218,12 @@ create table take_donation(
 	td_regdate date default sysdate,
 	td_mileage number not null,
 	cheerup_message varchar2(200) default '당신을 응원합니다',
+	mileage_status varchar2(100) default '지급대기',
 	id varchar2(100) not null,
 	dp_no number not null,
 	CONSTRAINT fk_gt_take_donation_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE,
 	CONSTRAINT fk_gt_take_donation_dp_no FOREIGN KEY(dp_no) REFERENCES donation_post(dp_no) ON DELETE CASCADE
 )
-
 --기부 참여 테이블 시퀀스
 drop sequence take_donation_seq;
 create sequence take_donation_seq;

@@ -87,7 +87,7 @@ public class DonationController {
     		apVO.setImgDirectory(uploadfile.getOriginalFilename());
     		
     		System.out.println("대표이미지 이름 : "+apVO.getImgDirectory());
-    		donationService.file_upload_save(uploadfile, modelMap);
+    		apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap)); 
     	}
 		String appNO = donationService.addApplication(apVO);
 		

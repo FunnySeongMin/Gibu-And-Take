@@ -64,4 +64,24 @@ public class AdminServiceImpl implements AdminService {
 	public void updateWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminDAO.updateWebQuestionAnswer(wqVO);
 	}
+
+	@Override
+	public int appCount() {
+		return adminDAO.appCount();
+	}
+
+	@Override
+	public int questionCount() {
+		return adminDAO.questionCount();
+	}
+
+	@Override
+	public int memberCount() {
+		return adminDAO.memberCount();
+	}
+
+	@Override
+	public int tradePointCount() {
+		return adminDAO.tradePointCount();
+	}
 }

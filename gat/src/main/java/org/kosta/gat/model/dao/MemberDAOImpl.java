@@ -117,5 +117,15 @@ public class MemberDAOImpl implements MemberDAO {
 	public void exchangeMileage(MileageTradeVO mileageTradeVO) {
 		template.update("member.exchangeMemberMileage", mileageTradeVO);
 	}
-
+	
+	/**
+	 * '참여하기' 기능 구현 시,
+	 * 가용 마일리지를 사용한 마일리지를 차감하고
+	 * 누적 마일리지에 사용한 마일리지를 누적한다.
+	 */
+	@Override
+	public void updateMemberMileage(TakeDonationPostVO tdVO) {
+		template.update("member.updateMemberMileage",tdVO);
+		
+	}
 }

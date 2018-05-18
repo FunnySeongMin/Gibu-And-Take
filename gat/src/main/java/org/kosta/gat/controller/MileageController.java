@@ -1,5 +1,7 @@
 package org.kosta.gat.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -7,12 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.service.MileageService;
 import org.kosta.gat.model.vo.member.MemberVO;
-import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageUseGroupVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MileageController {
@@ -54,8 +56,8 @@ public class MileageController {
 	* @author 용다은
 	*/
 	@RequestMapping("tradeMileage.do")
-	public String tradeMileage(int mileage) {
-		mileageService.tradeMileage(mileage);
+	public String tradeMileage(MileageTradeVO mtVO) {
+		mileageService.tradeMileage(mtVO);
 		return null;
 	}
 	/**
@@ -86,13 +88,22 @@ public class MileageController {
 		return "redirect:/member/mileagePage.do";
 	}
 	/**
-	* 작성이유 : 마일리지 사용내역
+	* 마일리지 사용내역
 	* 
-	* @author 은성민
+	* 작성이유 : 사용 내역을 가져와서 보여주는 메서드
+	* 
+	* @author 용다은
 	*/
-	@RequestMapping("readMyMileageTradeList.do")
-	public String readMyMileageTradeList(String id,int nowPage) {
-		MileageTradePostListVO mtListVO=mileageService.readMyMileageTradeList(id,nowPage);
-		return null;
+	@RequestMapping("member/readMyMileageTradeList.do")
+	public ModelAndView readMyMileageTradeList(HttpServletRequest request) {
+		//session 정보를 확인
+		HttpSession session=request.getSession(false);
+			if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
+				MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+				List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
+				return new ModelAndView("member/readMyMileageTradeList","list", list);
+			}
+			else
+				return null;
 	}
 }

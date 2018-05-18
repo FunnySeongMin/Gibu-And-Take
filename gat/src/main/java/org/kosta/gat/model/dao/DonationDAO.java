@@ -32,7 +32,7 @@ public interface DonationDAO {
 
 	public String photoUpload(HttpServletRequest request, PhotoVo vo);
 
-	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap);
+	public String file_upload_save(MultipartFile uploadfile, ModelMap modelMap);
 
 	public void addPresent(ArrayList<PresentVO> list);
 

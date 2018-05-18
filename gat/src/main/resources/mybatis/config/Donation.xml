@@ -4,6 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="donation">
+	<!-- 신청서 insert -->
  	<insert id="addApplication" parameterType="applicationPostVO">
  		<selectKey keyProperty="appNo" resultType="string" order="BEFORE">
 			select
@@ -12,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into application(
  		app_no, 
  		app_title, 
+ 		app_summery,
  		app_contents,
  		app_place,
  		app_imgdirectory,
@@ -22,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		id)
  		values(#{appNo}, 
  		#{appTitle}, 
+ 		#{appSummery},
  		#{appContents},
  		#{place},
  		#{imgDirectory},
@@ -31,14 +34,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		'처리중',
  		#{memberVO.id})
  	</insert>
- 	
+ 	<!-- 선물 리스트 입력 -->
  	<insert id="addPresent" parameterType="presentVO">
  		insert into present(present_no, donation_mileage, present_contents, app_no) 
  		values(present_seq.nextval, #{donationMileage}, #{presentContents}, #{appNo})
  	</insert>
- 	
- 	<select id="readDonationDetail" resultType="donationPostVO">
+ 	<!-- 신청서 보기 -->
+ 	<!-- <select id="readDonationDetail" resultType="donationPostVO">
  		select dp_no, dp_title, dp_contents, dp_regdate, dp_place, dp_count, goal_mileage, donation_mileage, total_entry 
 		from donation_post where dp_no=#{value}
+ 	</select> -->
+ 	<select id="readDonationDetail" resultType="donationPostVO">
+ 		
  	</select>
 </mapper>
