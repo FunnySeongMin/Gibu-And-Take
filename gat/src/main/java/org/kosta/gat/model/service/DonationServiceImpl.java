@@ -69,8 +69,8 @@ public class DonationServiceImpl implements DonationService {
 	}
 
 	@Override
-	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
-		donationDAO.file_upload_save(uploadfile, modelMap);
+	public String file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
+		return donationDAO.file_upload_save(uploadfile, modelMap);
 		
 	}
 

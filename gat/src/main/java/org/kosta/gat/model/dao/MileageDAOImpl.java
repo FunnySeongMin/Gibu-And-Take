@@ -20,8 +20,8 @@ public class MileageDAOImpl implements MileageDAO {
 	}
 
 	@Override
-	public void tradeMileage(int mileage) {
-		template.update("mileage.tradeMileage", mileage);
+	public void tradeMileage(MileageTradeVO mtVO) {
+		template.insert("mileage.tradeMileage", mtVO);
 	}
 
 	@Override

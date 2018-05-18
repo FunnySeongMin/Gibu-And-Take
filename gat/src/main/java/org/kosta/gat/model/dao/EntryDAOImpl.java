@@ -15,7 +15,6 @@ public class EntryDAOImpl implements EntryDAO {
 
 	@Override
 	public void addTakeDonation(TakeDonationPostVO tdVO) {
-		System.out.println("dao"+tdVO);
 		template.insert("entry.addTakeDonation", tdVO);
 	}
 

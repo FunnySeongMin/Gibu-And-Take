@@ -88,4 +88,24 @@ public class AdminDAOImpl implements AdminDAO {
 	public void updateWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		template.update("admin.updateWebQuestionAnswer",wqVO);
 	}
+
+	@Override
+	public int appCount() {
+		return template.selectOne("admin.totalUnReceivedApplicationCount");
+	}
+
+	@Override
+	public int questionCount() {
+		return template.selectOne("admin.questionCount");
+	}
+
+	@Override
+	public int memberCount() {
+		return template.selectOne("admin.memberCount");
+	}
+
+	@Override
+	public int tradePointCount() {
+		return template.selectOne("admin.tradePointCount"); 
+	}
 }
