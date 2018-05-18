@@ -1,6 +1,8 @@
 package org.kosta.gat.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
+import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
@@ -118,11 +121,14 @@ public class DonationController {
     public String file_upload_form(ModelMap modelMap) {
         return "file_upload_form";
     }
-    
+	
+	
+	@RequestMapping("DonationListView.do")
+	public List<Map<String,Object>> DonationListView(DonationPostPagingBean dpPb) {
+		List<Map<String,Object>> list = donationService.DonationListView(dpPb);
+		return list;
+	}
  
-
-
-
 	
 	/**
 	* 작성이유 : 재능기부 신청서 수정
