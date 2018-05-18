@@ -94,5 +94,11 @@ $(document).ready(function(){
 <!-- 마일리지 내역 보기  -->
 <h2>내역보기^0^</h2>
 <table>
+  <tr>
+    <th>거래 일시</th> <th>거래 분류</th> <th>거래량</th>
+  </tr>
+  <tr>
+    <td></td> <td></td> <td></td>
+  </tr>
 </table>
 <br><br>

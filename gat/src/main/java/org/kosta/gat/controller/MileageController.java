@@ -86,9 +86,11 @@ public class MileageController {
 		return "redirect:/member/mileagePage.do";
 	}
 	/**
-	* 작성이유 : 마일리지 사용내역
+	* 마일리지 사용내역
 	* 
-	* @author 은성민
+	* 작성이유 : 
+	* 
+	* @author 용다은
 	*/
 	@RequestMapping("readMyMileageTradeList.do")
 	public String readMyMileageTradeList(String id,int nowPage) {
