@@ -9,12 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="memberVO.id" column="id" />
 		<result property="memberVO.name" column="name" />
 	</resultMap> 
--->
+
  	<select id="" parameterType="string" resultType="mileageUseGroupVO">
  		select mt_volume, mt_regdate from mileage_trade
 		where id='D_ruking'
 		order by mt_regdate desc
  	</select>
+ -->
  	<insert id="addMileage" parameterType="mileageTradeVO">
  		insert into mileage_trade(mt_no, mt_volume, mug_no, id)
  		values(mileage_trade_seq.nextval, #{mtVolume}, #{mugVO.mugNo}, #{memberVO.id})
@@ -22,5 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<insert id="exchangeMileage" parameterType="mileageTradeVO">
  		insert into mileage_trade(mt_no, mt_volume, mug_no, id)
  		values(mileage_trade_seq.nextval, #{mtVolume}, #{mugVO.mugNo}, #{memberVO.id})
+ 	</insert>
+ 	<insert id="tradeMileage" parameterType="mileageTradeVO">
+ 		<selectKey keyProperty="mtNo" resultType="int" order="BEFORE">
+ 			select mileage_trade_seq.nextval from dual
+ 		</selectKey>
+ 		insert into mileage_trade(mt_no, mt_volume, mt_regdate, mug_no, id)
+ 		values(#{mtNo}, #{mtVolume}, sysdate, #{mugVO.mugNo}, #{memberVO.id})
  	</insert>
 </mapper>

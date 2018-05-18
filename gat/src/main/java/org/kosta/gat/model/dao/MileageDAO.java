@@ -7,7 +7,7 @@ public interface MileageDAO {
 
 	public void addMileage(MileageTradeVO mileageTradeVO);
 
-	public void tradeMileage(int mileage);
+	public void tradeMileage(MileageTradeVO mtVO);
 
 	public void exchangeMileage(MileageTradeVO mileageTradeVO);
 

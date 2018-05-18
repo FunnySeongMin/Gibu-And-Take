@@ -54,8 +54,8 @@ public class MileageController {
 	* @author 용다은
 	*/
 	@RequestMapping("tradeMileage.do")
-	public String tradeMileage(int mileage) {
-		mileageService.tradeMileage(mileage);
+	public String tradeMileage(MileageTradeVO mtVO) {
+		mileageService.tradeMileage(mtVO);
 		return null;
 	}
 	/**
