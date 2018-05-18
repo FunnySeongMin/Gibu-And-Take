@@ -31,9 +31,9 @@ $(document).ready(function(){
 		if(addvolumeResult==""){
 			return false;
 		}
-	})//submit
+	});//submit
 	
-<!-- 마일리지 환전 조건 -->
+	<!-- 마일리지 환전 조건 -->
 	$("#submitBtn2").click(function(){
 		if($("#exchangeVolume").val()<10000) {
 			alert("환전할 금액은 10000원 이상이어야 합니다.")
@@ -83,7 +83,7 @@ $(document).ready(function(){
 <input type="hidden" name="mvo" value="${sessionScope.mvo}">
 <input type="number" name="mtVolume" id="exchangeVolume" placeholder="환전할 금액" required="required">원 
 <!-- <button type="submit" id="submitBtn">환전</button> <br><br><br><br> -->
-<button type="submit" id="submitBtn2">환전 신청</button> <br><br><br><br> 
+<button type="submit" id="submitBtn2">환전</button> <br><br><br><br> 
 보유 마일리지: ${sessionScope.mvo.mileage}원
 <!-- 현재 마일리지 : <span id="myMileageView"></span>원 -->
 </form>

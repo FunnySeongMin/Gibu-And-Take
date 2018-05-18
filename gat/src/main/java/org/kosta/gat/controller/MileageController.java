@@ -48,7 +48,7 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.addMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/mileagePage.do";
+		return "redirect:/member/addMileage.do";
 	}
 	/**
 	* 작성이유 : 마일리지 거래
@@ -85,7 +85,7 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.exchangeMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/mileagePage.do";
+		return "redirect:/member/exchangeMileage.do";
 	}
 	/**
 	* 마일리지 사용내역
@@ -101,7 +101,7 @@ public class MileageController {
 			if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
 				MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 				List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
-				return new ModelAndView("member/readMyMileageTradeList","list", list);
+				return new ModelAndView("member/readMyMileageTradeList.tiles","list", list);
 			}
 			else
 				return null;
