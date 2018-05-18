@@ -47,7 +47,7 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.addMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/addMileage.do";
+		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
 	}
 	/**
 	* 작성이유 : 마일리지 거래
@@ -84,7 +84,7 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.exchangeMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/exchangeMileage.do";
+		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
 	}
 	/**
 	* 마일리지 사용내역
@@ -102,6 +102,7 @@ public class MileageController {
 				//페이징 없이 목록만 뽑는 코드
 				//List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
 				MileageTradePostListVO listVO = mileageService.readMyMileageTradeList(mvo.getId(), nowPage); 
+				System.out.println(listVO);
 				return new ModelAndView("member/readMyMileageTradeList.tiles","listVO", listVO);
 			}
 			else

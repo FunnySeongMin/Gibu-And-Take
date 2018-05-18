@@ -25,13 +25,25 @@
    					 <tr>
   						<td>${list.mtRegdate}</td>
   						<c:choose>
+  						<!-- 충전 -->
   						<c:when test="${list.mugVO.mugNo==1}">
   						<td class="text-primary">${list.mugVO.mugName}</td>
   						<td class="text-primary">+${list.mtVolume}</td>
   						</c:when>
+  						<!-- 거래 -->
   						<c:when test="${list.mugVO.mugNo==2 || list.mugVO.mugNo==3}">
   						<td class="text-danger">${list.mugVO.mugName}</td>
   						<td class="text-danger">-${list.mtVolume}</td>
+  						</c:when>
+  						<!-- 환전 -->
+  						<c:when test="${list.mugVO.mugNo==3}">
+  						<td class="text-warning">${list.mugVO.mugName}</td>
+  						<td class="text-warning">-${list.mtVolume}</td>
+  						</c:when>
+  						<!-- 적립 -->
+  						<c:when test="${list.mugVO.mugNo==4}"> 
+  						<td class="text-success">${list.mugVO.mugName}</td>
+  						<td class="text-success">-${list.mtVolume}</td>
   						</c:when>
   						<c:otherwise>
   						</c:otherwise>
@@ -43,27 +55,35 @@
 				
 				<!-- Pagination -->
 				<ul class="pagination justify-content-center mt-5">
+				<c:set var="pb" value="${listVO.mtPb}"></c:set>
+					<c:if test="${pb.previousPageGroup}">	
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
+						<a class="page-link" href="${pageContext.request.contextPath}/member/readMyMileageTradeList.do?nowPage=${pb.startPageOfPageGroup-1}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 							<span class="sr-only">Previous</span>
 						</a>
 					</li>
+					</c:if>
+					<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+					<c:choose>
+					<c:when test="${pb.nowPage!=i}">
 					<li class="page-item">
-						<a class="page-link" href="#">1</a>
+						<a class="page-link" href="${pageContext.request.contextPath}/member/readMyMileageTradeList.do?nowPage=${i}">${i}</a>
 					</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item active"><a class="page-link" href="#" >${i}</a></li>
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
+					<c:if test="${pb.nextPageGroup}">	
 					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
+						<a class="page-link" href="${pageContext.request.contextPath}/member/readMyMileageTradeList.do?nowPage=${pb.endPageOfPageGroup+1}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
 						</a>
 					</li>
+					</c:if>
 				</ul>
 			</div>
 			<!-- /.col-lg-9 -->
