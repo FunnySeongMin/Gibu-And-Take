@@ -6,7 +6,7 @@
 </script> -->
 <!-- Page Heading -->
 <div class="page-heading">
-	<h4 class="py-5 text-center sub2-txt">처리되지 않은 신청서</h4>
+	<h4 class="py-5 text-center sub2-txt">답변없는 문의글</h4>
 </div>
 <!-- /.Page Heading -->
 <!-- Page Content -->
@@ -25,13 +25,13 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:set value="${apListVO.appPostVO }" var="appPostVO"/>
-					<c:forEach items="${appPostVO }" var="apPostVO">
+				<c:set value="${wqListVO.wqPostVO }" var="wqPostVO"/>
+					<c:forEach items="${wqPostVO }" var="wqPostVO">
 						<tr>
-							<td>${apPostVO.appNo }</td>
-							<td><a href="${pageContext.request.contextPath }/readUnReceivedApplicationDetail.do?apno=${apPostVO.appNo}">${apPostVO.appTitle }</a></td>
-							<td>${apPostVO.memberVO.name }</td>
-							<td>${apPostVO.appRegdate }</td>
+							<td>${wqPostVO.wqNo }</td>
+							<td><a href="#">${apPostVO.wqTitle }</a></td>
+							<td>${wqPostVO.memberVO.name }</td>
+							<td>${wqPostVO.wqRegdate }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -44,9 +44,9 @@
 	
 	<!-- Pagination -->
 	<ul class="pagination justify-content-center mt-5">
-		<c:if test="${apListVO.appPb.previousPageGroup }">
+		<c:if test="${wqListVO.wqPb.previousPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do?nowPage=${apListVO.appPb.startPageOfPageGroup-1}" aria-label="Previous">
+				<a class="page-link" href="#" aria-label="Previous">
 					<span aria-hidden="true">&laquo;</span>
 					<span class="sr-only">
 						Previous
@@ -54,11 +54,11 @@
 				</a>
 			</li>
 		</c:if>
-		<c:forEach var="page" begin="${apListVO.appPb.startPageOfPageGroup}" end="${apListVO.appPb.endPageOfPageGroup}">
+		<c:forEach var="page" begin="${wqListVO.wqPb.startPageOfPageGroup}" end="${wqListVO.wqPb.endPageOfPageGroup}">
 			<c:choose>
-				<c:when test="${apListVO.appPb.nowPage!=page}">
+				<c:when test="${wqListVO.wqPb.nowPage!=page}">
 					<li class="page-item">
-						<a class="page-link"  href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do?nowPage=${page}">${page}</a>
+						<a class="page-link"  href="">${page}</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -68,9 +68,9 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:if test="${apListVO.appPb.nextPageGroup }">
+		<c:if test="${wqListVO.wqPb.nextPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do?nowPage=${apListVO.appPb.endPageOfPageGroup+1}" aria-label="Next">
+				<a class="page-link" href="" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
 					<span class="sr-only">Next</span>
 				</a>

@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.gat.model.service.AdminService;
-import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -63,9 +62,14 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("updateUnReceivedApplication.do")
-	public String updateUnReceivedApplication(String apno,String command) {
+	public String updateUnReceivedApplication(String apno,String command,Model model) {
 		adminService.updateUnReceivedApplication(apno,command);
-		return null;
+		if(command.equals("거절")) {
+			model.addAttribute("apno", apno);
+			return "admin/writeAnswer.tiles";
+		}else {
+			return "redirect:readUnReceivedApplicationList.do?nowPage=1";
+		}
 	}
 	/**
 	* 작성이유 : 승인 거절 신청서 답변 등록
@@ -74,10 +78,8 @@ public class AdminController {
 	*/
 	@RequestMapping("addApplicationAnswer.do")
 	public String addApplicationAnswer(ApplicationPostVO apVO,HttpServletRequest request) {
-		MemberVO vo=(MemberVO) request.getSession().getAttribute("mvo");
-		apVO.setMemberVO(vo);
 		adminService.addApplicationAnswer(apVO);
-		return null;
+		return "redirect:readUnReceivedApplicationDetail.do?apno="+apVO.getAppNo();
 	}
 	/**
 	* 작성이유 : 승인된 신청서 게시글 등록
@@ -98,7 +100,7 @@ public class AdminController {
 	public String readWebQuestionList(int nowPage,Model model) {
 		WebQuestionPostListVO wqListVO=adminService.readWebQuestionList(nowPage);
 		model.addAttribute("wqListVO", wqListVO);
-		return null;
+		return "admin/readWebQuestionList.tiles";
 	}
 	/**
 	* 작성이유 : 사이트 문의 상세보기
