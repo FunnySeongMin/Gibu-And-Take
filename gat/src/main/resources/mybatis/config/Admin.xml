@@ -4,6 +4,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
+
+	<select id="tradePointCount" resultType="int">
+		select count(*) from take_donation where mileage_status='지급대기'
+	</select>
+	
+	<select id="memberCount" resultType="int">
+		select count(*) from gt_member
+	</select>
+
 	<select id="totalUnReceivedApplicationCount" resultType="int">
 		select count(*) from application where app_status='처리중'
 	</select>
@@ -40,12 +49,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultMap="appPostVO" parameterType="applicationPostPagingBean">
 		<![CDATA[
  			select rnum,app.app_no,app.app_title,app.app_place,app.app_regdate,
- 			app.start_date,app.end_date,app.goal_mileage,app.app_status
+			app.start_date,app.end_date,app.goal_mileage,app.app_status
 			from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
 			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(start_date,'yyyy.mm.dd') start_date,
 			to_char(end_date,'yyyy.mm.dd') end_date,goal_mileage,app_status,id
-			from application) app, gt_member m
+			from application where app_status='처리중') app, gt_member m
 			where app.id=m.id and app.app_status='처리중' and rnum between #{startRowNumber} 
 			and #{endRowNumber} order by app.app_no desc
  		]]>
@@ -63,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<update id="rejectionApplication">
+	<update id="rejectionApplication" parameterType="string">
 		update application set app_status='거절' where app_no=#{value}
 	</update>
 	
@@ -73,9 +82,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	<insert id="addApplicationAnswer" parameterType="applicationPostVO">
 		insert into application(app_no,app_title,app_contents,
-		app_status,app_parent_no,id,ag_no)
+		app_status,app_parent_no,id)
 		values(application_seq.nextval,#{appTitle},#{appContents},
-		'답변완료',#{appNo},#{memberVO.id},'3')
+		'답변완료',#{appNo},#{memberVO.id})
 	</insert>
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">
@@ -85,6 +94,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="totalWebQuestionCount" resultType="int">
 		select count(*) from web_question
+	</select>
+	
+	<select id="questionCount" resultType="int">
+		select count(*) from web_question where wq_status='처리중'
 	</select>
 	
 	<resultMap type="webQuestionPostVO" id="wqPostVO">
