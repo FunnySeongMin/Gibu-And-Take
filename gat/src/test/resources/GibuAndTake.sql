@@ -169,28 +169,32 @@ drop table donation_post;
 create table donation_post(
 	dp_no number primary key,
 	dp_title varchar2(100) not null,
+	dp_summery varchar2(100) not null,
 	dp_contents clob not null,
 	dp_place varchar2(100) not null,
 	dp_imgdirectory varchar2(100),
 	dp_regdate date default sysdate,
+	start_date date,
+	end_date date,
 	dp_count number default 0,
 	goal_mileage number not null,
 	donation_mileage number default 0,
 	total_entry number default 0,
+	dp_status number default 0,
 	app_no number,
 	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
 )
+
 
 --기부 게시글 시퀀스
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
 
-insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
-values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
-200000,'1');
+insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
+values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
+'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),200000,'1');
 
-select * from donation_post;
-
+select * from donation_post
 update donation_post set donation_mileage=donation_mileage+1000 where dp_no='1';
 
 --기부 참여 테이블
@@ -214,8 +218,6 @@ create sequence take_donation_seq;
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
 
-
-select * from take_donation;
 
 --후기 게시판 테이블
 drop table review_post;
