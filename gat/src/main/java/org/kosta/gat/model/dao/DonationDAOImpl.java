@@ -187,10 +187,11 @@ public class DonationDAOImpl implements DonationDAO {
 	}
 
 	@Override
-	public void file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
+	public String file_upload_save(MultipartFile uploadfile, ModelMap modelMap) {
 		System.out.println("파일있음");
         OutputStream out = null;
         PrintWriter printWriter = null;
+        String loadPath = null;
         try {
             // 파일명 얻기
             String fileName = uploadfile.getOriginalFilename();
@@ -199,7 +200,8 @@ public class DonationDAOImpl implements DonationDAO {
             // 파일의 바이트 정보 얻기
             byte[] bytes = uploadfile.getBytes();
             // 파일의 저장 경로 얻기
-            String uploadPath = "/업로드폴더/" + fileName;
+            String uploadPath = "/java-kosta/was/spring-tomcat/webapps/gat/resources/photo_upload/" + fileName;
+            loadPath = "/gat/resources/photo_upload/" + fileName;
             // 파일 객체 생성
             File file = new File(uploadPath);
             // 상위 폴더 존재 여부 확인
@@ -211,6 +213,7 @@ public class DonationDAOImpl implements DonationDAO {
             out = new FileOutputStream(file);
             // 파일 아웃풋 스트림에 파일의 바이트 쓰기
             out.write(bytes);
+            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -225,7 +228,7 @@ public class DonationDAOImpl implements DonationDAO {
                 e.printStackTrace();
             }
         }
-		
+        return loadPath;
 	}
 
 	@Override

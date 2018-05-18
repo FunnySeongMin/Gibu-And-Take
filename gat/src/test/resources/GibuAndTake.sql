@@ -58,7 +58,7 @@ values('cho','abcd','조민경','서울','cho@naver.com',to_date('1992.06.09','y
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('yong','diyong','용다은','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),3,4);
+values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),4,4);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('keroro','pororo','은성민','서울','keroro@naver.com',to_date('1990.08.14','yyyy.mm.dd'),4,5);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -110,6 +110,7 @@ drop table application;
 create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
+	app_summery varchar2(100) not null,
 	app_contents clob not null,
 	app_place varchar2(100),
 	app_imgdirectory varchar2(100),
@@ -131,12 +132,12 @@ drop sequence application_seq;
 create sequence application_seq;
 
 --신청서 등록
-insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
+insert into application(app_no,app_title,app_summery,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약1','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요',
 '판교','이미지가 여기에 있어요',200000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'hwang');
 
-insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'이윤희의 유니짜장','유니짜장은 재료만 잘게 다지면 됩니다!',
+insert into application(app_no,app_title,app_summery,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'이윤희의 유니짜장','프로젝트 요약1','유니짜장은 재료만 잘게 다지면 됩니다!',
 '판교','이미지가 여기에 있어요',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang');
 
 SELECT application_seq.NEXTVAL FROM dual ; 
@@ -168,28 +169,32 @@ drop table donation_post;
 create table donation_post(
 	dp_no number primary key,
 	dp_title varchar2(100) not null,
+	dp_summery varchar2(100) not null,
 	dp_contents clob not null,
 	dp_place varchar2(100) not null,
 	dp_imgdirectory varchar2(100),
 	dp_regdate date default sysdate,
+	start_date date,
+	end_date date,
 	dp_count number default 0,
 	goal_mileage number not null,
 	donation_mileage number default 0,
 	total_entry number default 0,
+	dp_status number default 0,
 	app_no number,
 	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
 )
+
 
 --기부 게시글 시퀀스
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
 
-insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
-values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
-200000,'1');
+insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
+values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
+'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),200000,'1');
 
-select * from donation_post;
-
+select * from donation_post
 update donation_post set donation_mileage=donation_mileage+1000 where dp_no='1';
 
 --기부 참여 테이블
@@ -213,8 +218,6 @@ create sequence take_donation_seq;
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
 
-
-select * from take_donation;
 
 --후기 게시판 테이블
 drop table review_post;

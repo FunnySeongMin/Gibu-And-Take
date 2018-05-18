@@ -2,8 +2,6 @@ package org.kosta.gat.model.dao;
 
 import java.util.List;
 
-import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
-import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostPagingBean;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,8 @@ public class MileageDAOImpl implements MileageDAO {
 	}
 
 	@Override
-	public void tradeMileage(int mileage) {
-		template.update("mileage.tradeMileage", mileage);
+	public void tradeMileage(MileageTradeVO mtVO) {
+		template.insert("mileage.tradeMileage", mtVO);
 	}
 
 	@Override
@@ -30,8 +28,8 @@ public class MileageDAOImpl implements MileageDAO {
 	}
 
 	@Override
-	public MileageTradePostListVO readMyMileageTradeList(String id, int nowPage) {
-		MileageTradePostPagingBean mtPb=null;
+	public List<MileageTradeVO> readMyMileageTradeList(String id) {
+		/*MileageTradePostPagingBean mtPb=null;
 		int totalMyMileageTradeCount=template.selectOne("mileage.totalMyMileageTradeCount", id);
 		if(nowPage==0) {
 			mtPb=new MileageTradePostPagingBean(totalMyMileageTradeCount);
@@ -41,7 +39,8 @@ public class MileageDAOImpl implements MileageDAO {
 		mtPb.setId(id);
 		List<MileageTradeVO> list=template.selectList("mileage.readMyMileageTradeList", mtPb);
 		MileageTradePostListVO mtListVO=new MileageTradePostListVO(list, mtPb);
-		return mtListVO;
+		return mtListVO;*/
+		return template.selectList("mileage.readMyMileageTradeList", id);
 	}
 
 }
