@@ -6,7 +6,13 @@
 <!-- 마일리지 환전 조건 -->
 $(document).ready(function(){
 	$("#submitBtn2").click(function(){
-		if($("#exchangeVolume").val()<10000) {
+		if ($("#bankInfo").val()=="" || $("#accountInfo").val()=="" || $("#nameInfo").val()=="") {
+			alert("계좌 정보를 입력해 주세요")
+			exchangevolumeResult="";
+		} else if ($(".custom-control-input").prop("checked") == false) {
+			alert("환전 내역에 동의해 주세요.")
+			exchangevolumeResult="";
+		} else if($("#exchangeVolume").val()<10000) {
 			alert("환전할 금액은 10000원 이상이어야 합니다.")
 			$("#exchangeVolume").val("").focus()
 			exchangevolumeResult="";
@@ -14,8 +20,7 @@ $(document).ready(function(){
 			alert("환전 금액이 보유 금액보다 많습니다.")
 			$("#exchangeVolume").val("").focus()
 			exchangevolumeResult="";
-		} 
-		else{
+		} else{
 			confirmResult = confirm($("#exchangeVolume").val()+"원 환전하시겠습니까?")
 			if(confirmResult)
 				exchangevolumeResult=$("#exchangeVolume").val();
@@ -28,6 +33,9 @@ $(document).ready(function(){
 	$("#exchangeMileageForm").submit(function(){
 		if(exchangevolumeResult==""){
 			return false;
+		}
+		else {
+			alert($("#bankInfo").val()+"은행 " + $("#accountInfo").val() + " " + $("#nameInfo").val() + "님께 5일 내로 입금됩니다.")
 		}
 	})//submit
 });//ready
@@ -58,16 +66,20 @@ $(document).ready(function(){
 							<input type="hidden" name="mugNo" value="3">
 							<input type="hidden" name="mvo" value="${sessionScope.mvo}">
 							<div class="form-group">
-								보유 마일리지: ${sessionScope.mvo.mileage}원
-								<input type="number" class="form-control" name="mtVolume" id="exchangeVolume" placeholder="환전할 금액">원
+								보유 마일리지: ${sessionScope.mvo.mileage} <br>
+								<input type="number" class="form-control" name="mtVolume" id="exchangeVolume" placeholder="환전할 금액">
 							</div>
 							<div class="form-group">
 								<label>은행</label>
-								<input type="text" class="form-control" name="#" placeholder="은행을 입력하세요">
+								<input type="text" class="form-control" id="bankInfo" placeholder="은행" required="required">
 							</div>
 							<div class="form-group">
 								<label>계좌번호</label>
-								<input type="text" class="form-control" name="#" placeholder="계좌번호를 입력하세요">
+								<input type="text" class="form-control" id="accountInfo" placeholder="계좌번호" required="required">
+							</div>
+							<div class="form-group">
+								<label>예금주 명</label>
+								<input type="text" class="form-control" id="nameInfo" placeholder="예금주" required="required">
 							</div>
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="#">
