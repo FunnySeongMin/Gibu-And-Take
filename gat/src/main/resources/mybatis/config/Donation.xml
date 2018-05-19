@@ -48,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select dp_no, dp_title, dp_contents, dp_regdate, dp_place, dp_count, goal_mileage, donation_mileage, total_entry 
 		from donation_post where dp_no=#{value}
  	</select>
+ 	
  	<select id="DonationListView" resultType="map" parameterType="donationPostPagingBean">
  		SELECT d.dp_no, d.dp_title, d.dp_summery, d.dp_imgdirectory, d.dp_count, d.dp_status, a.id FROM(
 		SELECT row_number() over(order by dp_no desc) as rnum, dp_no, dp_title, 
