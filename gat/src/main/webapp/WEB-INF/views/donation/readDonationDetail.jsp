@@ -25,8 +25,8 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<!-- Modal content-->
 				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title text-center">재능기부 참여 신청</h4>
+					<div class="modal-header bg-point-gnt">
+						<h4 class="modal-title text-center text-white">재능기부 참여 신청</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>					
 					<form method="post" action="">
@@ -38,7 +38,7 @@
 							<div class="row">
 								<label for="">사용할 마일리지</label>
 								<div class="col-lg-3"><input type="text" class="form-control form-control-sm" name="td_mileage"></div>
-								<small>보유 마일리지 : 10,000</small>
+								<small class="mt-1">보유 마일리지 : ${sessionScope.mvo.mileage }</small>
 							</div>
 							<div class="form-group my-3">
 								<label class="">한줄 응원 메세지</label><input type="text" class="form-control" name="cheerup-message">

@@ -17,19 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EntryController {
 	@Resource
 	private EntryService entryService;
-	
+
 	/**
-	* 작성이유 : 참여활동 신청
-	* 
-	* @author 은성민
-	*/
+	 * 재능기부 참여하기
+	 * 작성이유 : 등록된 재능기부에 참여하기 위한 메소드
+	 * 
+	 * @author 조민경
+	 */
 	@RequestMapping("addTakeDonation.do")
 	public String addTakeDonation(TakeDonationPostVO tdVO) {
 		entryService.addTakeDonation(tdVO);
 		return null;
 	}
+
 	/**
-	 * 응원메시지 목록
+	 * 응원메시지 목록 
 	 * 작성이유 : 재능기부 상세페이지에 보여질 응원메시지를 보여준다
 	 * 
 	 * @param dpno 재능기부 글번호 : 재능기부글에 따라 달라지므로 재능기부 글번호를 받아온다
@@ -41,11 +43,12 @@ public class EntryController {
 		List<TakeDonationPostVO> list = entryService.findCheerupMessageByDpno(dpno);
 		return null;
 	}
+
 	/**
-	* 작성이유 : 참여활동 후기 작성
-	* 
-	* @author 은성민
-	*/
+	 * 작성이유 : 참여활동 후기 작성
+	 * 
+	 * @author 은성민
+	 */
 	@RequestMapping("addReview.do")
 	public String addReview(ReviewPostVO rpVO) {
 		entryService.addReview(rpVO);

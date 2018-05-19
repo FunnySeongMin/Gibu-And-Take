@@ -87,7 +87,7 @@
                      <div class="card-text">
                         <p>참여한 기부 10건</p>
                      </div>
-                     <a href="#" class="btn btn-sub-2-gnt btn-sm">조회하기</a>
+                     <a href="${pageContext.request.contextPath }/member/readMyActivityList.do" class="btn btn-sub-2-gnt btn-sm">조회하기</a>
                   </div>
                </div>
             </div>
