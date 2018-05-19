@@ -40,6 +40,7 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=anRlGsCNfoEuOHfb1mmv&submodules=geocoder"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/donation.js"></script>
 	<script type="text/javascript">
 	    function execPostCode() {
 	         new daum.Postcode({

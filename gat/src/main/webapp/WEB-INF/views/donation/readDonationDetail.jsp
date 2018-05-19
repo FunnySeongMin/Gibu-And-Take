@@ -18,10 +18,10 @@
 				<div class="progress-bar bg-sub-3-gnt" role="progressbar" style="width: 63%" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 			<p>${dpVO.dpSummery }</p>
-			<button class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entry_form">참가하기</button>			
+			<button id="entryBtn" class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참가하기</button>			
 		</div>		
 		<!-- 참여 신청 Modal -->
-		<div class="modal fade" id="entry_form" role="dialog">
+		<div class="modal fade" id="entryForm" role="dialog">
 			<div class="modal-dialog modal-dialog-centered">
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -29,28 +29,29 @@
 						<h4 class="modal-title text-center text-white">재능기부 참여 신청</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>					
-					<form method="post" action="">
+					<form method="post" action="${pageContext.request.contextPath }/addTakeDonation.do" id="entryDonation">
 						<div class="modal-body bg-light">
 							<div class="">
+								<input type="hidden" name="dpno" value="${dpVO.dpNo}">
 								<p>${dpVO.dpTitle }</p>
 								<p>${dpVO.startDate } - ${dpVO.endDate }</p>
 							</div>
 							<div class="row">
 								<label for="">사용할 마일리지</label>
-								<div class="col-lg-3"><input type="text" class="form-control form-control-sm" name="td_mileage"></div>
-								<small class="mt-1">보유 마일리지 : ${sessionScope.mvo.mileage }</small>
+								<div class="col-lg-3"><input type="text" class="form-control form-control-sm" name="tdMileage" id="tdMileage"></div>
+								<small class="mt-1">보유 마일리지 : <span id="userMileage">${sessionScope.mvo.mileage }</span></small>
 							</div>
 							<div class="form-group my-3">
-								<label class="">한줄 응원 메세지</label><input type="text" class="form-control" name="cheerup-message">
+								<label class="">한줄 응원 메세지</label><input type="text" class="form-control" name="cheerupMessage" id="cheerupMessage">
 							</div>
-							<div class="form-control form-check small-txt">
-								<input type="checkbox" class="form-check-input" id="entry_agree">
-								<label class="form-check-label" for="entry_agree">상기 내용에 동의합니다</label>								
+							<div class="form-check small-txt">
+								<input type="checkbox" class="form-check-input" id="entryAgree">
+								<label class="form-check-label" for="entryAgree">상기 내용에 동의합니다</label>								
 							</div>							
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-point-gnt">신청하기</button>
-							<button type="button" class="btn ">취소</button>
+							<button type="button" class="btn" id="cancelBtn">취소</button>
 						</div>					
 					</form>
 				</div>
