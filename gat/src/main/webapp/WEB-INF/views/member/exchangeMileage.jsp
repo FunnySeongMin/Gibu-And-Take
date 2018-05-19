@@ -59,7 +59,7 @@ $(document).ready(function(){
 							<input type="hidden" name="mvo" value="${sessionScope.mvo}">
 							<div class="form-group">
 								보유 마일리지: ${sessionScope.mvo.mileage}원
-								<input type="number" class="form-control" name="mtVolume" id="exchangeVolume" placeholder="충전할 금액">원
+								<input type="number" class="form-control" name="mtVolume" id="exchangeVolume" placeholder="환전할 금액">원
 							</div>
 							<div class="form-group">
 								<label>은행</label>
