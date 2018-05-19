@@ -131,9 +131,6 @@ public class DonationController {
 		return list;
 	}
  
-
-
-
 	
 	/**
 	* 작성이유 : 재능기부 신청서 수정

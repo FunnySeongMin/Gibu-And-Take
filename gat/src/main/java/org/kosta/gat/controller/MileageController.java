@@ -47,7 +47,7 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.addMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/mileagePage.do";
+		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
 	}
 	/**
 	* 작성이유 : 마일리지 거래

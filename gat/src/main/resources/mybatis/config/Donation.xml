@@ -56,4 +56,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) d ,application a where d.app_no=a.app_no and rnum between #{startRowNumber} and #{endRowNumber} 
 		order by dp_no desc
  	</select>
+ 	<select id="DonationListView" resultType="map" parameterType="donationPostPagingBean">
+ 		SELECT d.dp_no, d.dp_title, d.dp_summery, d.dp_imgdirectory, d.dp_count, d.dp_status, a.id FROM(
+		SELECT row_number() over(order by dp_no desc) as rnum, dp_no, dp_title, 
+		dp_summery, dp_imgdirectory, dp_count, dp_status, app_no
+		FROM donation_post
+		) d ,application a where d.app_no=a.app_no and rnum between #{startRowNumber} and #{endRowNumber} 
+		order by dp_no desc
+ 	</select>
 </mapper>
