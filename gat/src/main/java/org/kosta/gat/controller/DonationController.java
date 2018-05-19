@@ -1,6 +1,8 @@
 package org.kosta.gat.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
+import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
@@ -41,12 +44,14 @@ public class DonationController {
 	/**
 	* 작성이유 : 재능기부 상세보기
 	* 
-	* @author 은성민
+	* @author 조민경
 	*/
-	@RequestMapping("readDonationDetail.do")
-	public String readDonationDetail(String dpno,Model model) {
+	@RequestMapping("donation/readDonationDetail.do")
+	public String readDonationDetail(String dpno, Model model) {
 		DonationPostVO dpVO=donationService.readDonationDetail(dpno);
-		return null;
+		System.out.println(dpVO);
+		model.addAttribute("dpVO", dpVO);
+		return "donation/readDonationDetail.tiles";
 	}
 	/**
 	* 작성이유 : 해당 재능기부 후기게시판 보기
@@ -118,7 +123,13 @@ public class DonationController {
     public String file_upload_form(ModelMap modelMap) {
         return "file_upload_form";
     }
-    
+	
+	
+	@RequestMapping("DonationListView.do")
+	public List<Map<String,Object>> DonationListView(DonationPostPagingBean dpPb) {
+		List<Map<String,Object>> list = donationService.DonationListView(dpPb);
+		return list;
+	}
  
 
 

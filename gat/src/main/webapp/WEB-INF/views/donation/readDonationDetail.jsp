@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    ${dpVO }
 <!-- Page Content -->
 <div class="container my-3">
 	<!-- Portfolio Item Row -->
 	<div class="row">	
 		<div class="col-md-6">
-		  <img class="img-fluid mt-3" src="http://placehold.it/750x500" alt="">
+		  <img class="img-fluid mt-3" src="${dpVO.dpImgDirectory }" alt="">
 		</div>	
 		<div class="col-md-6">
-			<h4 class="my-3">재능기부 제목</h3>
+			<h2 class="my-3 pb-2 border-bottom""> ${dpVO.dpTitle}</h2>
+			<h4><span class="mr-2">목표 마일리지</span><b>${dpVO.goalMileage }</b></h4>
+			<h4><span class="mr-2">현재 참여 마일리지</span><b>${dpVO.goalMileage }</b></h4>
+			<h4><span class="mr-2">참여자 수</span>${dpVO.totalEntry }</h4>
 			<h3 class="mt-3 sub-1-txt-gnt">63%</h3>
 			<div class="progress mb-3">
 				<div class="progress-bar bg-sub-3-gnt" role="progressbar" style="width: 63%" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+			<p>${dpVO.dpSummery }</p>
 			<button class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entry_form">참가하기</button>			
 		</div>		
 		<!-- 참여 신청 Modal -->
@@ -28,7 +32,8 @@
 					<form method="post" action="">
 						<div class="modal-body bg-light">
 							<div class="">
-								신청한 재능기부 내용
+								<p>${dpVO.dpTitle }</p>
+								<p>${dpVO.startDate } - ${dpVO.endDate }</p>
 							</div>
 							<div class="row">
 								<label for="">사용할 마일리지</label>
@@ -85,11 +90,9 @@
 					<small>summary</small>
 				</h3>
 				<div class="jumbotron">
-					재능기부 요약정보<br>재능기부 요약정보<br>재능기부 요약정보<br>
-					재능기부 요약정보<br>재능기부 요약정보<br>재능기부 요약정보<br>
-					재능기부 요약정보<br>재능기부 요약정보<br>재능기부 요약정보<br>
-					재능기부 요약정보<br>재능기부 요약정보<br>재능기부 요약정보<br>
-					재능기부 요약정보<br>재능기부 요약정보<br>재능기부 요약정보<br>
+					<p><small class="pr-1">프로젝트명</small>${dpVO.dpTitle }</p>
+					<p><small class="pr-1">프로젝트 요약</small>${dpVO.dpSummery }</p>
+					<p><small class="pr-1">프로젝트 장소</small><div id="map" style="width:400px;height:400px;"></div>${dpVO.place }</p>
 				</div>
 			</div>
 			
@@ -99,20 +102,15 @@
 					<small>introduce</small>
 				</h3>
 				<div class="jumbotron">
-					재능기부 소개<br>재능기부 소개<br>재능기부 소개<br>
-					재능기부 소개<br>재능기부 소개<br>재능기부 소개<br>
-					재능기부 소개<br>재능기부 소개<br>재능기부 소개<br>
-					재능기부 소개<br>재능기부 소개<br>재능기부 소개<br>
-					재능기부 소개<br>재능기부 소개<br>재능기부 소개<br>
+					${dpVO.dpContents }
 				</div>
 			</div>
 			<!-- 재능기부자 소개 -->
 			<div id="dp_member">
 				<h4 class="mt-4 mb-3">재능기부자 소개
 					<small>info</small>
-				</h5>
+				</h4>
 				<div class="jumbotron">
-				<div id="map" style="width:400px;height:400px;"></div>
 					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
 					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
 					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
