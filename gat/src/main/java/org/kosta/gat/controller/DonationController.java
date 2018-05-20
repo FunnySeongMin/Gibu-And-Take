@@ -26,6 +26,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -94,56 +95,51 @@ public class DonationController {
 	}
 
 	/**
-	 * 작성이유 : 재능기부 신청서 작성
-	 * 
-	 * @author 정진표
-	 */
+	* 작성이유 : 재능기부 신청서 작성
+	* 
+	* @author 정진표
+	*/
 	@RequestMapping("/board/addApplication.do")
-	public String addApplication(@RequestParam("main_image") MultipartFile uploadfile, ModelMap modelMap,
-			ApplicationPostVO apVO, HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-			if (mvo != null) {
+	public String addApplication(@RequestParam("main_image") MultipartFile uploadfile, ModelMap modelMap, ApplicationPostVO apVO, HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession(false);
+		if(session!=null){
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			if(mvo!=null){
 				apVO.setMemberVO(mvo);
 			}
-		}
-		if (!uploadfile.getOriginalFilename().equals("")) {
-			System.out.println("대표 이미지 파일 업로드");
-			apVO.setImgDirectory(uploadfile.getOriginalFilename());
-
-			System.out.println("대표이미지 이름 : " + apVO.getImgDirectory());
-			apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap));
-		}
+		}		
+		if(!uploadfile.getOriginalFilename().equals("")) {
+    		System.out.println("대표 이미지 파일 업로드");
+    		apVO.setImgDirectory(uploadfile.getOriginalFilename());
+    		
+    		System.out.println("대표이미지 이름 : "+apVO.getImgDirectory());
+    		apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap)); 
+    	}
 		String appNO = donationService.addApplication(apVO);
 
 		ArrayList<PresentVO> list = new ArrayList<>();
-		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")),
-				request.getParameter("presentContents1"), appNO));
-		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")),
-				request.getParameter("presentContents2"), appNO));
-		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage3")),
-				request.getParameter("presentContents3"), appNO));
-		System.out.println("apVO : " + apVO);
-		// System.out.println("리스크 : "+list);
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")), request.getParameter("presentContents1"),appNO));
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")), request.getParameter("presentContents2"),appNO));
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage3")), request.getParameter("presentContents3"),appNO));
+		System.out.println("apVO : "+apVO);
+		//System.out.println("리스크 : "+list);
 		donationService.addPresent(list);
 		// model.addAttribute("test",request.getParameter("editor") );
 		return "home.tiles";
 	}
-
-	// 단일파일업로드
+	
+	//단일파일업로드
 	@RequestMapping("photoUpload.do")
-	public void photoUpload(HttpServletRequest request, PhotoVo vo) {
+	public void photoUpload(HttpServletRequest request, PhotoVo vo){
 		donationService.photoUpload(request, vo);
 	}
-
-	// 다중파일업로드
+	//다중파일업로드
 	@RequestMapping("multiplePhotoUpload.do")
-	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
+	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
 		donationService.multiplePhotoUpload(request, response);
-
+		
 	}
-
+	
 	@RequestMapping("file_upload_form.do")
 	public String file_upload_form(ModelMap modelMap) {
 		return "file_upload_form";
@@ -152,6 +148,25 @@ public class DonationController {
 	@RequestMapping("DonationListView.do")
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb) {
 		List<Map<String, Object>> list = donationService.DonationListView(dpPb);
+		return list;
+	}
+	
+	@RequestMapping("/donation/listDonation.do")
+	public String listDonation(Model model) {
+		List<Map<String,Object>> list = donationService.DonationListView2();
+		List<Map<String,Object>> rank = donationService.DonationListRank();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("rank", rank);
+		System.out.println("리스트 뷰 : "+list);
+		return "donation/listDonation.tiles";
+	}
+	@RequestMapping("/donation/DonationListView2.do")
+	@ResponseBody
+	public List<Map<String,Object>> DonationListView2() {
+		System.out.println("여기 오냐?");
+		List<Map<String,Object>> list = donationService.DonationListView2();
+		System.out.println(list);
 		return list;
 	}
 

@@ -3,6 +3,7 @@ package org.kosta.gat.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -93,6 +95,9 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
 	public String updateMember(HttpServletRequest request,MemberVO vo) {
 		HttpSession session=request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
 		memberService.updateMember(vo);
 		session.setAttribute("mvo", memberService.checkId(vo.getId()));
 		return "member/myPage.tiles";
@@ -105,13 +110,15 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/modifyPassword.do")
 	public String updatePassword(String nowPassword,HttpServletRequest request,String newPassword) {
 		HttpSession session = request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
 		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 		mvo.setPassword(newPassword);
-		System.out.println(mvo);
 		memberService.updatePassword(mvo);
 		if (session != null)
 			session.invalidate();
-		return "home.tiles";
+		return "member/loginForm.tiles";
 	}
 	
 	/**
@@ -121,8 +128,10 @@ public class MemberController {
 	*/
 	@RequestMapping("member/deleteMember.do")
 	public String deleteMember(HttpServletRequest request) {
-		//System.out.println(id);
 		HttpSession session = request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
 		MemberVO mvo =  (MemberVO) session.getAttribute("mvo");
 		memberService.deleteMember(mvo.getId());
 		if (session != null)
@@ -132,22 +141,48 @@ public class MemberController {
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 작성
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("addWebQuestion.do")
-	public String addWebQuestion(WebQuestionPostVO webVO) {
+	@RequestMapping(method=RequestMethod.POST, value="board/addWebQuestion.do")
+	public String addWebQuestion(HttpServletRequest request, WebQuestionPostVO webVO) {
+		HttpSession session = request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
+		//session -> MemberVO로 회원 정보 저장
+		MemberVO mvo =  (MemberVO) session.getAttribute("mvo");
+		webVO.setMemberVO(mvo);
+		//addWebQuestion
 		memberService.addWebQuestion(webVO);
-		return null;
+		return "redirect:/member/readMyWebQuestionList.do?nowPage=1";
 	}
 	/**
-	* 작성이유 : 고객문의 게시판 게시글 보기
+	* 작성이유 : 나의 문의 게시판 목록 보기
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("readWebQuestion.do")
-	public String readWebQuestion(int nowPage,Model model) {
-		WebQuestionPostListVO wqListVO=memberService.readWebQuestion(nowPage);
-		return null;
+	@RequestMapping("member/readMyWebQuestionList.do")
+	public String readMyWebQuestionList(int nowPage, HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){ //session 없는 경우 로그인 페이지로 보냄
+			return "member/loginForm.tiles";
+		}
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		WebQuestionPostListVO wqListVO = memberService.readMyWebQuestionList(mvo.getId(), nowPage);
+		model.addAttribute("wqListVO", wqListVO);
+		return "member/readMyWebQuestionList.tiles";
+	}
+/**
+	* 작성이유 : 고객문의 게시판 게시글 상세 보기
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("member/readMyWebQuestionDetail.do")
+	public String readWebQuestion(int wqNo, Model model) {
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
+		model.addAttribute("wqPostVO", wqPostVO);
+		System.out.println(wqPostVO);
+		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 수정
@@ -172,17 +207,20 @@ public class MemberController {
 	/**
 	* 작성이유 : 나의 후기목록 보기
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
-	@RequestMapping("readMyReviewPostList.do")
-	public String readMyReviewPostList(String id,int nowPage,Model model) {
-		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(id,nowPage);
-		return null;
+	@RequestMapping("member/readMyReviewPostList.do")
+	public ModelAndView readMyReviewPostList(HttpServletRequest request,int nowPage) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
+		System.out.println(rpListVO);
+		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
 	/**
 	* 작성이유 : 나의 활동목록 보기
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
 	@RequestMapping("readMyActivityList.do")
 	public String readMyActivityList(String id,int nowPage,Model model) {

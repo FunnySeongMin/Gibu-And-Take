@@ -14,6 +14,8 @@
 			<!-- /.col-lg-3 -->
 			<div class="col-lg-9">
 				<h4 class="mb-4">마일리지 내역</h4>
+<%--   						<c:set var="list" value="${listVO.mtVO}"/>
+						보유 마일리지: ${list.memberVO}원 --%>
 				<table class="table table-hover">
 					<thead>
 						<tr>

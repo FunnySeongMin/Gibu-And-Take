@@ -8,7 +8,11 @@ $(document).ready(function(){
 	var addvolumeResult="";
 	var exchangevolumeResult="";
 	$("#submitBtn").click(function(){
-		if($("#addVolume").val()<1000) {
+		if ($(".custom-control-input").prop("checked") == false) {
+			alert("결제 내역에 동의해 주세요.")
+			addvolumeResult="";
+		}
+		else if($("#addVolume").val()<1000) {
 			alert("충전할 금액은 1000원 이상이어야 합니다.")
 			$("#addVolume").val("").focus()
 			addvolumeResult="";
@@ -32,6 +36,7 @@ $(document).ready(function(){
 			return false;
 		}
 	})//submit
+
 });//ready
 </script>
 <!-- 마일리지 페이지 기능 탭 -->
@@ -62,12 +67,12 @@ $(document).ready(function(){
 						<input type="hidden" name="mugNo" value="1">
 						<input type="hidden" name="mvo" value="${sessionScope.mvo}">
 							<div class="form-group">
-								보유 마일리지: ${sessionScope.mvo.mileage}원<br>
-								<input type="number" class="form-control" name="mtVolume" id="addVolume" placeholder="충전할금액을 입력하세요">원
+								보유 마일리지: ${sessionScope.mvo.mileage}<br>
+								<input type="number" class="form-control" name="mtVolume" id="addVolume" placeholder="충전할 금액">
 							</div>
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="#">
-								<label class="custom-control-label" >상기 내역에 동의합니다.</label>
+								<label class="custom-control-label" for="#">상기 내역에 동의합니다.</label>
 							</div>
 							<button type="submit" class="btn btn-point-gnt my-4" id="submitBtn">충전</button>
 						</form>

@@ -47,5 +47,9 @@ public interface DonationDAO {
 	public List<ReviewPostVO> readDonationReviewList(String dpno);
 
 	public void updateDonationMileageAndTotalEntry(TakeDonationPostVO tdVO);
+	
+	public List<Map<String, Object>> DonationListView2();
+
+	public List<Map<String, Object>> DonationListRank();
 
 }

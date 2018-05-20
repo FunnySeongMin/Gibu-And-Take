@@ -31,12 +31,12 @@ public class MileageController {
 	public String addMileage(String mugNo, String id, MileageTradeVO mileageTradeVO, HttpServletRequest request) {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
-		if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
+		if(session==null||session.getAttribute("mvo")==null){
+				return "member/loginForm.tiles";
+		}
+		else{ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
 			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-			if(mvo!=null){
-				mileageTradeVO.setMemberVO(mvo);
-			}
-		}			
+			mileageTradeVO.setMemberVO(mvo);	
 		//MileageUseGroupVO에 mugNo를 넣어 거래 종류를 저장하고
 		//mileageTradeVO에 넣어줌
 		MileageUseGroupVO mugVO = new MileageUseGroupVO(mugNo, null);
@@ -48,6 +48,7 @@ public class MileageController {
 		memberService.addMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
 		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
+		}
 	}
 	/**
 	* 작성이유 : 마일리지 거래
@@ -68,12 +69,12 @@ public class MileageController {
 	public String exchangeMileage(String mugNo, String id, MileageTradeVO mileageTradeVO, HttpServletRequest request) {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
-		if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
-			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-			if(mvo!=null){
-				mileageTradeVO.setMemberVO(mvo);
+		if(session==null||session.getAttribute("mvo")==null){
+				return "member/loginForm.tiles";
 			}
-		}			
+		else{ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			mileageTradeVO.setMemberVO(mvo);		
 		//MileageUseGroupVO에 mugNo를 넣어 거래 종류를 저장하고
 		//mileageTradeVO에 넣어줌
 		MileageUseGroupVO mugVO = new MileageUseGroupVO(mugNo, null);
@@ -85,6 +86,7 @@ public class MileageController {
 		memberService.exchangeMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
 		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
+		}
 	}
 	/**
 	* 마일리지 사용내역
@@ -99,13 +101,10 @@ public class MileageController {
 		HttpSession session=request.getSession(false);
 			if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
 				MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-				//페이징 없이 목록만 뽑는 코드
-				//List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
 				MileageTradePostListVO listVO = mileageService.readMyMileageTradeList(mvo.getId(), nowPage); 
-				System.out.println(listVO);
 				return new ModelAndView("member/readMyMileageTradeList.tiles","listVO", listVO);
 			}
 			else
-				return null; //뭘 넣어야 하지?
+				return null; //session==null 일 때 ModelAndView 어찌함?
 	}
 }

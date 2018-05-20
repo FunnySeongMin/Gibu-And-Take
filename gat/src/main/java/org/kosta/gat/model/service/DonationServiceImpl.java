@@ -95,6 +95,16 @@ public class DonationServiceImpl implements DonationService {
 	}
 
 	@Override
+	public List<Map<String, Object>> DonationListView2() {
+		return donationDAO.DonationListView2();
+	}
+
+	@Override
+	public List<Map<String, Object>> DonationListRank() {
+		return donationDAO.DonationListRank();
+	}
+	
+	@Override
 	public List<ReviewPostVO> readDonationReviewList(String dpno) {
 		return donationDAO.readDonationReviewList(dpno);
 	}

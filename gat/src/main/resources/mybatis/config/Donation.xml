@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select> -->
  	<!-- 재능기부 상세보기 -->
  	<select id="readDonationDetail" resultType="donationPostVO">
+ 		<!-- 일반 재능기부 게시판 view -->
  		select dp_no, dp_title, dp_contents, dp_regdate, dp_place, dp_count, goal_mileage, donation_mileage, total_entry 
 		from donation_post where dp_no=#{value}
  	</select>
@@ -94,4 +95,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update donation_post set donation_mileage=donation_mileage+#{tdMileage}, total_entry=total_entry+1
  		where dp_no=#{donationPostVO.dpNo}
  	</update>
+ 	
+ 	<!-- 재능기부 스크롤 페이징 게시판 -->
+ 	<select id="DonationListView2" resultType="map">
+		SELECT row_number() over(order by dp_no desc) as rnum, dp_no, dp_title, 
+		dp_summery, dp_imgdirectory, dp_count, dp_status, app_no
+		FROM donation_post
+ 	</select>
+ 	
+ 	<!-- 재능기부 리스트 상위 3명  -->
+ 	<select id="DonationListRank" resultType="map">
+		<![CDATA[select d.dp_no, total_entry, d.dp_title, d.dp_summery, d.dp_imgdirectory, d.dp_count, d.dp_status, d.app_no
+		from(
+		select  RANK() OVER (ORDER BY total_entry desc) as rank, dp_no,total_entry, dp_title, dp_summery, dp_imgdirectory, dp_count, dp_status, app_no
+		from donation_post
+		) d where rank <=3
+		]]>
+ 	</select>
 </mapper>
