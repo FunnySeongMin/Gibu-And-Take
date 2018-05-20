@@ -181,7 +181,6 @@ public class MemberController {
 	public String readWebQuestion(int wqNo, Model model) {
 		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
 		model.addAttribute("wqPostVO", wqPostVO);
-		System.out.println(wqPostVO);
 		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**
