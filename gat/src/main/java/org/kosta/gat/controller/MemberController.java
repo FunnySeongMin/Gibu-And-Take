@@ -154,7 +154,7 @@ public class MemberController {
 		webVO.setMemberVO(mvo);
 		//addWebQuestion
 		memberService.addWebQuestion(webVO);
-		return "redirect:member/readMyWebQuestionList.tiles";
+		return "redirect:/member/readMyWebQuestionList.do?nowPage=1";
 	}
 	/**
 	* 작성이유 : 나의 문의 게시판 목록 보기

@@ -25,8 +25,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:set value="${wqListVO.wqPostVO}" var="wqPostVO"/>
-					<c:forEach items="${wqPostVO}" var="wqPostVO">
+					<c:forEach items="${wqListVO.wqPostVO}" var="wqPostVO">
 						<tr>
 							<td>${wqPostVO.wqNo}</td>
 							<td><a href="#">${wqPostVO.wqTitle }</a></td>
@@ -59,7 +58,7 @@
 			<c:choose>
 				<c:when test="${pb.nowPage!=page}">
 					<li class="page-item">
-						<a class="page-link"  href="${pageContext.request.contextPath}/member/readMyMileageTradeList.do?nowPage=${page}">${page}</a>
+						<a class="page-link"  href="${pageContext.request.contextPath}/member/readMyWebQuestionList.do?nowPage=${page}">${page}</a>
 					</li>
 				</c:when>
 				<c:otherwise>
