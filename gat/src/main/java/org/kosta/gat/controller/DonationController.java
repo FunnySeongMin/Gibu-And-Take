@@ -63,6 +63,7 @@ public class DonationController {
 		List<ReviewPostVO> rpList = donationService.readDonationReviewList(dpno);
 		model.addAttribute("dpVO", dpVO);
 		model.addAttribute("tdList", tdList);
+		model.addAttribute("rpList", rpList);
 		return "donation/readDonationDetail.tiles";
 	}
 	
