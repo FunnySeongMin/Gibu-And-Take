@@ -41,6 +41,10 @@ public interface DonationService {
 	public void addPresent(ArrayList<PresentVO> list);
 
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb);
+
+	public List<Map<String, Object>> DonationListView2();
+
+	public List<Map<String, Object>> DonationListRank();
 	
 	
 	

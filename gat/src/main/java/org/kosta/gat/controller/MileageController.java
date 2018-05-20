@@ -102,7 +102,7 @@ public class MileageController {
 				//페이징 없이 목록만 뽑는 코드
 				//List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
 				MileageTradePostListVO listVO = mileageService.readMyMileageTradeList(mvo.getId(), nowPage); 
-				System.out.println(listVO);
+				System.out.println(listVO.getMtVO());
 				return new ModelAndView("member/readMyMileageTradeList.tiles","listVO", listVO);
 			}
 			else

@@ -47,6 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="readDonationDetail" resultType="donationPostVO">
  		
  	</select>
+ 	
+ 	<!-- 일반 재능기부 게시판 view -->
  	<select id="DonationListView" resultType="map" parameterType="donationPostPagingBean">
  		SELECT d.dp_no, d.dp_title, d.dp_summery, d.dp_imgdirectory, d.dp_count, d.dp_status, a.id FROM(
 		SELECT row_number() over(order by dp_no desc) as rnum, dp_no, dp_title, 
@@ -55,4 +57,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) d ,application a where d.app_no=a.app_no and rnum between #{startRowNumber} and #{endRowNumber} 
 		order by dp_no desc
  	</select>
+ 	<!-- 재능기부 스크롤 페이징 게시판 -->
+ 	<select id="DonationListView2" resultType="map">
+		SELECT row_number() over(order by dp_no desc) as rnum, dp_no, dp_title, 
+		dp_summery, dp_imgdirectory, dp_count, dp_status, app_no
+		FROM donation_post
+ 	</select>
+ 	
+ 	<!-- 재능기부 리스트 상위 3명  -->
+ 	<select id="DonationListRank" resultType="map">
+		<![CDATA[select d.dp_no, total_entry, d.dp_title, d.dp_summery, d.dp_imgdirectory, d.dp_count, d.dp_status, d.app_no
+		from(
+		select  RANK() OVER (ORDER BY total_entry desc) as rank, dp_no,total_entry, dp_title, dp_summery, dp_imgdirectory, dp_count, dp_status, app_no
+		from donation_post
+		) d where rank <=3
+		]]>
+ 	</select>
+ 	
 </mapper>

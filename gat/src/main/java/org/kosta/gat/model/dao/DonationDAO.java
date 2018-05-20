@@ -41,4 +41,8 @@ public interface DonationDAO {
 
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb);
 
+	public List<Map<String, Object>> DonationListView2();
+
+	public List<Map<String, Object>> DonationListRank();
+
 }
