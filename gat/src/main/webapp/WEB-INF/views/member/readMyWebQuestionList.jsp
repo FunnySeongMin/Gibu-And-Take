@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- <script type="text/javascript">
-	alert(${apListVO.appPb.nowPage});
-</script> -->
 <!-- Page Heading -->
 <div class="page-heading">
 	<h4 class="py-5 text-center sub2-txt">내 문의 목록</h4>
@@ -29,7 +26,7 @@
 						<tr>
 							<td>${wqPostVO.wqNo}</td>
 							<td><a href="${pageContext.request.contextPath}/member/readMyWebQuestionDetail.do?wqNo=${wqPostVO.wqNo}">${wqPostVO.wqTitle}</a></td>
-							<td>${wqPostVO.wqStatus}</td>
+							<td><span class="label label-warning">${wqPostVO.wqStatus}</span></td>
 							<td>${wqPostVO.wqRegdate }</td>
 						</tr>
 					</c:forEach>

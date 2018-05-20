@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MemberController {
@@ -144,7 +145,7 @@ public class MemberController {
 	* @author 용다은
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="board/addWebQuestion.do")
-	public String addWebQuestion(HttpServletRequest request, WebQuestionPostVO webVO) {
+	public String addWebQuestion(HttpServletRequest request, WebQuestionPostVO webVO, RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
 		if(session==null||session.getAttribute("mvo")==null){
 			return "member/loginForm.tiles";
@@ -154,7 +155,9 @@ public class MemberController {
 		webVO.setMemberVO(mvo);
 		//addWebQuestion
 		memberService.addWebQuestion(webVO);
-		return "redirect:/member/readMyWebQuestionList.do?nowPage=1";
+		//작성한 게시글을 바로 보여 주기 위해 wqNo 부여함
+		redirectAttributes.addAttribute("wqNo", +webVO.getWqNo());
+		return "redirect:/member/readMyWebQuestionDetail.do";
 	}
 	/**
 	* 작성이유 : 나의 문의 게시판 목록 보기
