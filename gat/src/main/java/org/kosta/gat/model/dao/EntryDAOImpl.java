@@ -24,8 +24,13 @@ public class EntryDAOImpl implements EntryDAO {
 	}
 
 	@Override
-	public List<TakeDonationPostVO> findCheerupMessageByDpno(int dpno) {
+	public List<TakeDonationPostVO> findCheerupMessageByDpno(String dpno) {
 		return template.selectList("entry.findCheerupMessageByDpno", dpno);
+	}
+
+	@Override
+	public int findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
+		return template.selectOne("entry.findEntryByIdAndDpno",tdVO);
 	}
 	
 }
