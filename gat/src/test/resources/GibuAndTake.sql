@@ -74,6 +74,7 @@ create table mileage_use_group(
 insert into mileage_use_group values('1','충전');
 insert into mileage_use_group values('2','기부');
 insert into mileage_use_group values('3','환전');
+insert into mileage_use_group values('4','적립');
 
 --마일리지 거래 테이블
 drop table mileage_trade;
@@ -277,7 +278,7 @@ create table web_question(
 	wq_status varchar2(100) default '처리중',
 	id varchar2(100) not null,
 	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
-) --힘내세요 1조!
+) 
 
 --사이트 문의 시퀀스
 drop sequence web_question_seq;

@@ -94,6 +94,9 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
 	public String updateMember(HttpServletRequest request,MemberVO vo) {
 		HttpSession session=request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
 		memberService.updateMember(vo);
 		session.setAttribute("mvo", memberService.checkId(vo.getId()));
 		return "member/myPage.tiles";
@@ -106,9 +109,11 @@ public class MemberController {
 	@RequestMapping(method=RequestMethod.POST, value="member/modifyPassword.do")
 	public String updatePassword(String nowPassword,HttpServletRequest request,String newPassword) {
 		HttpSession session = request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
 		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 		mvo.setPassword(newPassword);
-		System.out.println(mvo);
 		memberService.updatePassword(mvo);
 		if (session != null)
 			session.invalidate();
@@ -122,8 +127,10 @@ public class MemberController {
 	*/
 	@RequestMapping("member/deleteMember.do")
 	public String deleteMember(HttpServletRequest request) {
-		//System.out.println(id);
 		HttpSession session = request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
 		MemberVO mvo =  (MemberVO) session.getAttribute("mvo");
 		memberService.deleteMember(mvo.getId());
 		if (session != null)
@@ -133,12 +140,20 @@ public class MemberController {
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 작성
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("addWebQuestion.do")
-	public String addWebQuestion(WebQuestionPostVO webVO) {
+	@RequestMapping(method=RequestMethod.POST, value="board/addWebQuestion.do")
+	public String addWebQuestion(HttpServletRequest request, WebQuestionPostVO webVO) {
+		HttpSession session = request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){
+			return "member/loginForm.tiles";
+		}
+		//session -> MemberVO로 회원 정보 저장
+		MemberVO mvo =  (MemberVO) session.getAttribute("mvo");
+		webVO.setMemberVO(mvo);
+		//addWebQuestion
 		memberService.addWebQuestion(webVO);
-		return null;
+		return "redirect:/home.do"; //테스트를 위해 일단 홈으로 보냅니다
 	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 보기

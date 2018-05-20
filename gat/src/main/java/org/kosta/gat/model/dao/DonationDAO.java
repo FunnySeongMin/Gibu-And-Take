@@ -1,6 +1,8 @@
 package org.kosta.gat.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
+import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
@@ -35,5 +38,7 @@ public interface DonationDAO {
 	public String file_upload_save(MultipartFile uploadfile, ModelMap modelMap);
 
 	public void addPresent(ArrayList<PresentVO> list);
+
+	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb);
 
 }
