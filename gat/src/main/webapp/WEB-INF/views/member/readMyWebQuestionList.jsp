@@ -26,7 +26,7 @@
 						<tr>
 							<td>${wqPostVO.wqNo}</td>
 							<td><a href="${pageContext.request.contextPath}/member/readMyWebQuestionDetail.do?wqNo=${wqPostVO.wqNo}">${wqPostVO.wqTitle}</a></td>
-							<td><span class="label label-warning">${wqPostVO.wqStatus}</span></td>
+							<td>${wqPostVO.wqStatus}</td>
 							<td>${wqPostVO.wqRegdate }</td>
 						</tr>
 					</c:forEach>

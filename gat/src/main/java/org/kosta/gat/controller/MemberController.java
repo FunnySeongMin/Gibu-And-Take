@@ -188,24 +188,40 @@ public class MemberController {
 		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**
+	* 작성이유 : 고객문의 게시판 게시글 수정 폼으로 이동하기 위해
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("member/updateWebQuestionForm.do")
+	public String updateWebQuestionForm(int wqNo, Model model) {
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
+		model.addAttribute("wqPostVO", wqPostVO);
+		return "member/updateWebQuestionForm.tiles";
+	}
+	/**
 	* 작성이유 : 고객문의 게시판 게시글 수정
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("updateWebQuestion.do")
-	public String updateWebQuestion(WebQuestionPostVO wqVO) {
+	@RequestMapping(method=RequestMethod.POST, value="member/updateWebQuestion.do")
+	public String updateWebQuestion(WebQuestionPostVO wqVO, Model model) {
+		//새로 작성한 wqTitle과 wqContents를 받아온 wqVO를 이용해 update 시킴
 		memberService.updateWebQuestion(wqVO);
-		return null;
+		//wqNo를 이용해 detail을 읽어들임
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqVO.getWqNo());
+		//가져온 wqPostVO를 뿌려줌
+		model.addAttribute("wqPostVO", wqPostVO);
+		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 삭제
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("deleteWebQuestion.do")
-	public String deleteWebQuestion() {
-		memberService.deleteWebQuestion();
-		return null;
+	@RequestMapping("member/deleteWebQuestion.do")
+	public String deleteWebQuestion(int wqNo) {
+		memberService.deleteWebQuestion(wqNo);
+		return "redirect:/member/readMyWebQuestionList.do?nowPage=1";
 	}
 	/**
 	* 작성이유 : 나의 후기목록 보기
@@ -217,7 +233,6 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
-		System.out.println(rpListVO);
 		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
 	/**
