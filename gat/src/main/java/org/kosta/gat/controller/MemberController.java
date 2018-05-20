@@ -112,7 +112,7 @@ public class MemberController {
 		memberService.updatePassword(mvo);
 		if (session != null)
 			session.invalidate();
-		return "home.tiles";
+		return "member/loginForm.tiles";
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public class MemberController {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
 		System.out.println(rpListVO);
-		return new ModelAndView("member/myReviewList","rpListVO",rpListVO);
+		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
 	/**
 	* 작성이유 : 나의 활동목록 보기

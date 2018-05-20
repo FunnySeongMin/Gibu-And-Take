@@ -19,7 +19,6 @@
 						<td>작성일자</td>
 					</tr>
 				</thead>
-				
 					<tbody>
 					<c:forEach var="pvo" items="${requestScope.rpListVO.list}">
 						<tr>
@@ -30,7 +29,6 @@
 						</tr>
 					</c:forEach>
 					</tbody>
-				
 			</table>
 		</div>
 	</div>
@@ -39,35 +37,39 @@
 	<hr>
 	
 	<!-- Pagination -->
+	<c:set var="pb" value="${requestScope.rpListVO.rpPb}"></c:set>
 	<ul class="pagination justify-content-center mt-5">
-		<c:set var="pb" value="${requestScope.rpListVO.pagingBean}"></c:set>
 		<c:if test="${pb.previousPageGroup}">
 			<li class="page-item">
-			<a class="page-link" href="${pageContext.request.contextPath}/readMyReviewPostList.do?pageNo=${pb.startPageOfPageGroup-1}" aria-label="Previous">
-				<span aria-hidden="true">&laquo;</span>
-			</a>
-		</li>
-		</c:if>
-
-		<li class="page-item">
-			<a class="page-link" href="#">1</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">2</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">3</a>
-		</li>
-		<c:if test="${pb.nextPageGroup}">
-			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath}/readMyReviewPostList.do?pageNo=${pb.endPageOfPageGroup+1}" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
+				<a class="page-link" href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=${pb.startPageOfPageGroup-1}" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+					<span class="sr-only">Previous</span>
 				</a>
 			</li>
 		</c:if>
-		
-		
+		<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+			<c:choose>
+				<c:when test="${pb.nowPage!=i}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=${i}">${i}</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item">
+						<a class="page-link" href="#">${i}</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			&nbsp;
+		</c:forEach>
+		<c:if test="${pb.nextPageGroup}">
+			<li class="page-item">
+				<a class="page-link" href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=${pb.endPageOfPageGroup+1}" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+					<span class="sr-only">Next</span>
+				</a>
+			</li>
+		</c:if>
 	</ul>
-
 </div>
 <!-- /.container -->

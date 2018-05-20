@@ -10,13 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="memberGradeVO.mgradeNo" column="mgrade_no"/>
 		<result property="memberGradeVO.mgradeName" column="mgrade_name"/>
 	</resultMap>
-	<resultMap type="reviewPostVO" id="reviewPostRM">
-		<result property="reviewPostVO.rpNO" column="rp_no"/>
-		<result property="reviewPostVO.rpTitle" column="rp_title"/>
-		<result property="reviewPostVO.rpContents" column="rp_contents"/>
-		<result property="reviewPostVO.rpRegdate" column="rp_regdate"/>
-		<result property="reviewPostVO.rpRate" column="rp_rate"/>
-	</resultMap>
+	<!-- <resultMap type="reviewPostVO" id="reviewPostRM">
+		<result property="rpNo" column="rp_no"/>
+		<result property="rpTitle" column="rp_title"/>
+		<result property="rpContents" column="rp_contents"/>
+		<result property="rpRegdate" column="rp_regdate"/>
+		<result property="rpRate" column="rp_rate"/>
+		<result property="memberVO.id" column="id"/>
+	</resultMap> -->
  	<insert id="registerMember" parameterType="memberVO">
  		insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 		values(#{id}, #{password}, #{name}, #{address}, #{email}, #{birthday}, 1, 1)
@@ -56,12 +57,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="totalMyReviewPostCount" resultType="int">
  		select count(*) from
 		review_post
+		where id=#{value}
  	</select>
- 	<select id="readMyReviewPostList" resultMap="reviewPostRM" parameterType="reviewPostPagingBean">
+ 	<select id="readMyReviewPostList" resultType="reviewPostVO" parameterType="reviewPostPagingBean">
  		select r.rp_no,r.rp_title,r.rp_regdate from(
 		select row_number() over (order by rp_no desc) as rnum,rp_no,rp_title,to_char(rp_regdate,'YYYY,MM,DD') as rp_regdate,id
 		from REVIEW_POST
-		where id=#{value}
+		where id=#{id}
 		) r, GT_MEMBER m
 		where r.id=m.id and rnum between #{startRowNumber} and #{endRowNumber}
 		order by r.rp_no desc

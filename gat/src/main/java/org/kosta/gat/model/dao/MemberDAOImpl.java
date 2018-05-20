@@ -80,14 +80,17 @@ public class MemberDAOImpl implements MemberDAO {
 	public ReviewPostListVO readMyReviewPostList(String id, int nowPage) {
 		ReviewPostPagingBean rpPb=null;
 		//나의 후기글 목록의 수를 가져온다.
-		int totalMyReviewPostCount=template.selectOne("member.totalMyReviewPostCount", id);
+		int totalMyReviewPostCount=template.selectOne("member.totalMyReviewPostCount",id);
 		if(nowPage==0) {
 			rpPb=new ReviewPostPagingBean(totalMyReviewPostCount);
 		}else {
 			rpPb=new ReviewPostPagingBean(totalMyReviewPostCount, nowPage);
 		}
+		System.out.println("aaa:" +rpPb.getStartRowNumber()+"/"+rpPb.getEndRowNumber());
 		rpPb.setId(id);
+		System.out.println("DAO에 아이디당"+id);
 		List<ReviewPostVO> rpList=template.selectList("member.readMyReviewPostList", rpPb);
+		System.out.println(rpList);
 		ReviewPostListVO rpListVO=new ReviewPostListVO(rpList, rpPb);
 		return rpListVO;
 	}

@@ -263,9 +263,7 @@ values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전
 insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
 values(review_post_seq.nextval,'또 참여하고 싶어요','봉사를 통한 즐거움을 배웠습니다.',
 8,'yong',1,21);
-insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
-values(review_post_seq.nextval,'유익한 시간이었습니다.','adssasad',
-8,'keroro',1,22);
+
 
 select * from REVIEW_POST
 --사이트 문의 테이블
