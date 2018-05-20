@@ -194,7 +194,7 @@ insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,dp_imgd
 values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
 '1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),200000,'1');
 
-select * from donation_post
+select * from donation_post;
 update donation_post set donation_mileage=donation_mileage+1000 where dp_no='1';
 
 --기부 참여 테이블

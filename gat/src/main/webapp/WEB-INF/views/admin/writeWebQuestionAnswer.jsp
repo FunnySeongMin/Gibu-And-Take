@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
-	<h4 class="py-5 text-center">신청서 거절</h4>
+	<h4 class="py-5 text-center">문의글 답변쓰기</h4>
 </div>
 <!-- /.Page Heading -->
 
@@ -12,7 +12,7 @@
 	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 	<div class="row">
 		<div class="col-lg-12 my-4">
-			<form action="${pageContext.request.contextPath }/addApplicationAnswer.do" method="post" name="sentMessage" id="contactForm" novalidate>
+			<form action="${pageContext.request.contextPath}/addWebQuestionAnswer.do" method="post" name="sentMessage" id="contactForm" novalidate>
 				<div class="control-group form-group">
 					<div class="controls">
 						<label>작성자</label>&nbsp;
@@ -20,7 +20,7 @@
 						<label>제목</label>&nbsp;
 						<input type="text" name="appTitle">
 						<input type="hidden" name="memberVO.id" value="${sessionScope.mvo.id}">
-						<input type="hidden" name="appNo" value="${apno }">
+						<input type="hidden" name="wqNo" value="${wqno}">
 					</div>
 				</div>
 

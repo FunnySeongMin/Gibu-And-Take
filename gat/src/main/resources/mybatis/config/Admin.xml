@@ -20,8 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="applicationPostVO" id="appPostVO">
 		<result column="app_no" property="appNo"/>
 		<result column="app_title" property="appTitle"/>
+		<result column="app_summery" property="appSummery"/>
 		<result column="app_contents" property="appContents"/>
 		<result column="app_place" property="place"/>
+		<result column="app_imgdirectory" property="imgDirectory"/>
 		<result column="app_regdate" property="appRegdate"/>
 		<result column="start_date" property="startDate"/>
 		<result column="end_date" property="endDate"/>
@@ -48,8 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="readUnReceivedApplicationList"
 		resultMap="appPostVO" parameterType="applicationPostPagingBean">
 		<![CDATA[
- 			select rnum,app.app_no,app.app_title,app.app_place,app.app_regdate,
-			app.start_date,app.end_date,app.goal_mileage,app.app_status
+ 			select rnum,app.app_no,app.app_title,app.app_summery,app.app_place,
+ 			app.app_regdate,app.start_date,app.end_date,app.goal_mileage,app.app_status
 			from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
 			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(start_date,'yyyy.mm.dd') start_date,
@@ -62,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
 		<![CDATA[
-			select app.app_no,app.app_title,app.app_contents,app.app_place,
+			select app.app_no,app.app_title,app_summery,app.app_contents,app.app_place,
 			to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(app.start_date,'yyyy.mm.dd') start_date,
 			to_char(app.end_date,'yyyy.mm.dd') end_date,
@@ -88,8 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">
-		insert into donation_post(dp_no,dp_title,dp_contents,dp_place,dp_imgdirectory,goal_mileage,app_no)
-		values(donation_post_seq.nextval,#{appTitle},#{appContents},#{place},#{imgDirectory},#{goalMileage},#{appNo})
+		insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,
+		dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
+		values(donation_post_seq.nextval,#{appTitle},#{appSummery},#{appContents},
+		#{place},#{imgDirectory},to_date(#{startDate},'yyyy.mm.dd'),
+		to_date(#{endDate},'yyyy.mm.dd'),#{goalMileage},#{appNo})
 	</insert>
 	
 	<select id="totalWebQuestionCount" resultType="int">
@@ -131,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="readWebQuestionDetail" resultMap="wqPostVO">
-		select wq_no,wq_title,wq_contents,to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_parent_no,wq_status
+		select wq_no,thread,wq_title,wq_contents,to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_parent_no,wq_status
 		from web_question where wq_no=#{value}
 	</select>
 	
@@ -149,4 +154,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update web_question set wq_title=#{wqTitle} , wq_contents=#{wqContents} 
 		where wq_no=#{wqNo}	
 	</update>
+	
 </mapper>

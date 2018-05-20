@@ -31,10 +31,10 @@
 							<td>${wqPostVO.wqNo }</td>
 							<c:choose>
 								<c:when test="${!wqPostVO.answer }">
-									<td><a href="#" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle }</a></td>
+									<td><a href="${pageContext.request.contextPath}/readWebQuestionDetail.do?wqno=${wqPostVO.wqNo}" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle }</a></td>
 								</c:when>
 								<c:otherwise>
-									<td><a href="#">${wqPostVO.wqTitle }</a></td>
+									<td><a href="${pageContext.request.contextPath}/readWebQuestionDetail.do?wqno=${wqPostVO.wqNo}">${wqPostVO.wqTitle }</a></td>
 								</c:otherwise>
 							</c:choose>
 							<td>${wqPostVO.memberVO.name }</td>

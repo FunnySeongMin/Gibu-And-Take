@@ -68,6 +68,8 @@ public class AdminController {
 			model.addAttribute("apno", apno);
 			return "admin/writeAnswer.tiles";
 		}else {
+			ApplicationPostVO apVO=adminService.readUnReceivedApplicationDetail(apno);
+			adminService.addDonationPost(apVO);
 			return "redirect:readUnReceivedApplicationList.do?nowPage=1";
 		}
 	}
@@ -80,16 +82,6 @@ public class AdminController {
 	public String addApplicationAnswer(ApplicationPostVO apVO,HttpServletRequest request) {
 		adminService.addApplicationAnswer(apVO);
 		return "redirect:readUnReceivedApplicationDetail.do?apno="+apVO.getAppNo();
-	}
-	/**
-	* 작성이유 : 승인된 신청서 게시글 등록
-	* 
-	* @author 은성민
-	*/
-	@RequestMapping("addDonationPost.do")
-	public String addDonationPost(ApplicationPostVO apVO) {
-		adminService.addDonationPost(apVO);
-		return null;
 	}
 	/**
 	* 작성이유 : 사이트 문의 목록보기
@@ -111,7 +103,7 @@ public class AdminController {
 	public String readWebQuestionDetail(String wqno,Model model) {
 		WebQuestionPostVO wqVO=adminService.readWebQuestionDetail(wqno);
 		model.addAttribute("wqVO", wqVO);
-		return null;
+		return "admin/readWebQuestionDetail.tiles";
 	}
 	/**
 	* 작성이유 : 사이트 문의 답변작성
@@ -121,7 +113,7 @@ public class AdminController {
 	@RequestMapping("addWebQuestionAnswer.do")
 	public String addWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminService.addWebQuestionAnswer(wqVO);
-		return null;
+		return "redirect:readWebQuestionList.do?nowPage=1";
 	}
 	/**
 	* 작성이유 : 사이트 문의 답변수정
