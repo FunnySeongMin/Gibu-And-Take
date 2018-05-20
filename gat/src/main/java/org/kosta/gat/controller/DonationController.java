@@ -59,6 +59,8 @@ public class DonationController {
 		DonationPostVO dpVO = donationService.readDonationDetail(dpno);
 		// 해당 재능기부에 대한 응원메시지
 		List<TakeDonationPostVO> tdList = entryService.findCheerupMessageByDpno(dpno);
+		// 해당 재능기부에 대한 후기
+		List<ReviewPostVO> rpList = donationService.readDonationReviewList(dpno);
 		model.addAttribute("dpVO", dpVO);
 		model.addAttribute("tdList", tdList);
 		return "donation/readDonationDetail.tiles";
@@ -76,12 +78,6 @@ public class DonationController {
 		ReviewPostListVO rpListVO = donationService.readDonationReviewList(dpno, nowPage);
 		return null;
 	}*/
-	
-	@ModelAttribute("rpList")
-	public List<ReviewPostVO> readDonationReviewList(String dpno) {
-		List<ReviewPostVO> rpList = donationService.readDonationReviewList(dpno);
-		return rpList;
-	}
 
 	/**
 	 * 작성이유 : 해당 재능기부 후기게시판 상세보기
