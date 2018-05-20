@@ -1,8 +1,4 @@
 $(document).ready(function(){
-	$("#entryBtn").click(function(){
-		// 로그인되지 않은 회원이 참여하기를 누른경우
-		
-	});
 	$("#entryDonation").submit(function(){
 		//alert($("#userMileage").text());
 		//사용할 마일리지를 적지 않았을 경우
@@ -10,7 +6,7 @@ $(document).ready(function(){
 			alert("사용할 마일리지 액수를 적어주세요");
 			return false;
 		// 입력한 마일리지 액수가 보유 마일리지 액수보다 클 경우
-		}else if($("#tdMileage").val() > $("#userMileage").text()){		
+		}else if(parseInt($("#tdMileage").val()) > parseInt($("#userMileage").text())){
 			alert("보유하고 있는 마일리지 액수를 초과하였습니다.");
 			return false;
 		}else if(!$('input:checkbox[id="entryAgree"]').is(":checked")){

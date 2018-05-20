@@ -8,11 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.gat.model.service.DonationService;
 import org.kosta.gat.model.service.EntryService;
+import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,6 +24,8 @@ public class EntryController {
 	private EntryService entryService;
 	@Resource
 	private DonationService donationService;
+	@Resource
+	private MemberService memberService;
 
 	/**
 	 * 재능기부 참여하기
@@ -43,26 +47,38 @@ public class EntryController {
 		}
 		// 재능기부 글 VO 정보 가져오기
 		DonationPostVO dpVO = donationService.readDonationDetail(dpno);
-		// 회원이 참여하려는 재능기부VO SET
+		// 회원이 참여하려는 재능기부VO set
 		tdVO.setDonationPostVO(dpVO);
+		// 참여하기 기능
 		entryService.addTakeDonation(tdVO);
-		return "redirect:home.tiles";
+		request.getSession().setAttribute("mvo", memberService.checkId(tdVO.getMemberVO().getId()));
+		return "redirect:donation/readDonationDetail.do?dpno="+dpno;
 	}
-
-	/**
-	 * 응원메시지 목록 
-	 * 작성이유 : 재능기부 상세페이지에 보여질 응원메시지를 보여준다
-	 * 
-	 * @param dpno 재능기부 글번호 : 재능기부글에 따라 달라지므로 재능기부 글번호를 받아온다
-	 * @author 조민경
-	 * 
-	 */
-	@RequestMapping("findCheerupMessageByDpno.do")
-	public String findCheerupMessageByDpno(int dpno) {
-		List<TakeDonationPostVO> list = entryService.findCheerupMessageByDpno(dpno);
-		return null;
-	}
-
+	
+	/*@ModelAttribute("tdCount")
+	public int findEntryByIdAndDpno(String dpno, TakeDonationPostVO tdVO, HttpServletRequest request) {
+		// getSession(false) : 있으면 기존 세션, 없으면 null
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = null;
+		if(session!=null) {
+			mvo = (MemberVO)session.getAttribute("mvo");
+			System.out.println(mvo);
+			if(mvo!=null) {
+				// 참여하는 회원VO set
+				tdVO.setMemberVO(mvo);
+			}
+		}
+		// 재능기부 글 VO 정보 가져오기
+		DonationPostVO dpVO = donationService.readDonationDetail(dpno);
+		// 회원이 참여하려는 재능기부VO set
+		tdVO.setDonationPostVO(dpVO);
+		
+		System.out.println("controller : "+tdVO);
+		// 재능기부 참여여부 확인
+		int tdCount = entryService.findEntryByIdAndDpno(tdVO);
+		System.out.println(tdCount);
+		return tdCount;
+	}*/
 	/**
 	 * 작성이유 : 참여활동 후기 작성
 	 * 

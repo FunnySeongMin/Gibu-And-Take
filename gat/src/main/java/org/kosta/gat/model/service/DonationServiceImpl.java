@@ -17,6 +17,7 @@ import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -36,7 +37,12 @@ public class DonationServiceImpl implements DonationService {
 	public DonationPostVO readDonationDetail(String dpno) {
 		return donationDAO.readDonationDetail(dpno);
 	}
-
+	
+	@Override
+	public List<TakeDonationPostVO> readDonationCheerUpMessageList(String dpno) {
+		return donationDAO.readDonationCheerUpMessageList(dpno);
+	}
+	
 	@Override
 	public ReviewPostListVO readDonationReviewList(String dpno,int nowPage) {
 		return donationDAO.readDonationReviewList(dpno,nowPage);
@@ -86,5 +92,20 @@ public class DonationServiceImpl implements DonationService {
 	@Override
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb) {
 		return donationDAO.DonationListView(dpPb);
+	}
+
+	@Override
+	public List<Map<String, Object>> DonationListView2() {
+		return donationDAO.DonationListView2();
+	}
+
+	@Override
+	public List<Map<String, Object>> DonationListRank() {
+		return donationDAO.DonationListRank();
+	}
+	
+	@Override
+	public List<ReviewPostVO> readDonationReviewList(String dpno) {
+		return donationDAO.readDonationReviewList(dpno);
 	}
 }

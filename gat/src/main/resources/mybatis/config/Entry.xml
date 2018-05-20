@@ -11,10 +11,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into take_donation(td_no, td_regdate, td_mileage <if test="cheerUpMessage!=null">,cheerup_message</if>, id, dp_no)
  		values(#{tdNo}, sysdate, #{tdMileage} <if test="cheerUpMessage!=null">,#{cheerUpMessage}</if>, #{memberVO.id}, #{donationPostVO.dpNo})
  	</insert>
- 	
- 	<select id="findCheerupMessageByDpno" parameterType="int" resultType="takeDonationPostVO">
- 		select td_no, td_regdate, td_mileage, cheerup_message, id, dp_no
-		from take_donation
-		where dp_no=#{value}
+ 	<resultMap type="takeDonationPostVO" id="memberRM">
+ 		<result column="id"  property="memberVO.id"/>
+ 		<result column="name"  property="memberVO.name"/>
+ 	</resultMap> 
+ 	<select id="findCheerupMessageByDpno" parameterType="string" resultType="takeDonationPostVO" resultMap="memberRM">
+ 		select td.td_no, td.td_regdate, td.td_mileage, td.cheerup_message, td.dp_no, td.id, m.id, m.name 
+ 		from take_donation td, gt_member m 
+ 		where td.id=m.id and dp_no=#{value}
+ 		order by td.td_no desc
+ 	</select>
+ 	<select id="findEntryByIdAndDpno" parameterType="takeDonationPostVO" resultType="int">
+ 		select count(*) from take_donation where id=#{memberVO.id} and dp_no=#{donationPostVO.dpNo}
  	</select>
 </mapper>
