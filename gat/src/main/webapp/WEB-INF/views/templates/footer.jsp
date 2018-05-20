@@ -6,7 +6,7 @@
 	<ul class="list-inline py -3">
 		<li class="list-inline-item"><a href="#">서비스 소개</a></li>
 		<li class="list-inline-item"><a href="#">이달의 기부자</a></li>
-		<li class="list-inline-item"><a href="${pageContext.request.contextPath }/board/contactForm.do">문의하기</a></li>
+		<li class="list-inline-item"><a href="${pageContext.request.contextPath }/board/webQuestionForm.do">문의하기</a></li>
 		<li class="list-inline-item"><a href="#">이용약관</a></li>
 		<li class="list-inline-item"><a href="#">개인정보보호 정책</a></li>
 	</ul>

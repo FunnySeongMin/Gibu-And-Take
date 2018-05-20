@@ -1,7 +1,5 @@
 package org.kosta.gat.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.service.MileageService;
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageUseGroupVO;
 import org.springframework.stereotype.Controller;
@@ -32,12 +31,12 @@ public class MileageController {
 	public String addMileage(String mugNo, String id, MileageTradeVO mileageTradeVO, HttpServletRequest request) {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
-		if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
+		if(session==null||session.getAttribute("mvo")==null){
+				return "member/loginForm.tiles";
+		}
+		else{ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
 			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-			if(mvo!=null){
-				mileageTradeVO.setMemberVO(mvo);
-			}
-		}			
+			mileageTradeVO.setMemberVO(mvo);	
 		//MileageUseGroupVO에 mugNo를 넣어 거래 종류를 저장하고
 		//mileageTradeVO에 넣어줌
 		MileageUseGroupVO mugVO = new MileageUseGroupVO(mugNo, null);
@@ -48,7 +47,8 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.addMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/mileagePage.do";
+		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
+		}
 	}
 	/**
 	* 작성이유 : 마일리지 거래
@@ -69,12 +69,13 @@ public class MileageController {
 	public String exchangeMileage(String mugNo, String id, MileageTradeVO mileageTradeVO, HttpServletRequest request) {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
-		if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
-			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-			if(mvo!=null){
-				mileageTradeVO.setMemberVO(mvo);
+		if(session==null||session.getAttribute("mvo")==null){
+				System.out.println("asdasdds");
+				return "member/loginForm.tiles";
 			}
-		}			
+		else{ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			mileageTradeVO.setMemberVO(mvo);		
 		//MileageUseGroupVO에 mugNo를 넣어 거래 종류를 저장하고
 		//mileageTradeVO에 넣어줌
 		MileageUseGroupVO mugVO = new MileageUseGroupVO(mugNo, null);
@@ -85,7 +86,8 @@ public class MileageController {
 		mileageTradeVO.getMemberVO().setMileage(mileageTradeVO.getMtVolume());
 		memberService.exchangeMemberMileage(mileageTradeVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(mileageTradeVO.getMemberVO().getId()));
-		return "redirect:/member/mileagePage.do";
+		return "redirect:/member/readMyMileageTradeList.do?nowPage=1";
+		}
 	}
 	/**
 	* 마일리지 사용내역
@@ -95,15 +97,15 @@ public class MileageController {
 	* @author 용다은
 	*/
 	@RequestMapping("member/readMyMileageTradeList.do")
-	public ModelAndView readMyMileageTradeList(HttpServletRequest request) {
+	public ModelAndView readMyMileageTradeList(HttpServletRequest request, int nowPage) {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
 			if(session!=null){ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌
 				MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-				List<MileageTradeVO> list = mileageService.readMyMileageTradeList(mvo.getId());
-				return new ModelAndView("member/readMyMileageTradeList","list", list);
+				MileageTradePostListVO listVO = mileageService.readMyMileageTradeList(mvo.getId(), nowPage); 
+				return new ModelAndView("member/readMyMileageTradeList.tiles","listVO", listVO);
 			}
 			else
-				return null;
+				return null; //session==null 일 때 ModelAndView 어찌함?
 	}
 }

@@ -24,8 +24,20 @@ public class WebQuestionPostVO {
 	public WebQuestionPostVO() {
 		super();
 	}
-	public WebQuestionPostVO(String wqNo, int thread, String wqTitle, String wqContents, String wqRegdate,
-			String wqParentNo, String wqStatus, MemberVO memberVO) {
+
+	public WebQuestionPostVO(String wqTitle, String wqContents, String wqRegdate, String wqParentNo, String wqStatus,
+			MemberVO memberVO) {
+		super();
+		this.wqTitle = wqTitle;
+		this.wqContents = wqContents;
+		this.wqRegdate = wqRegdate;
+		this.wqParentNo = wqParentNo;
+		this.wqStatus = wqStatus;
+		this.memberVO = memberVO;
+	}
+
+	public WebQuestionPostVO(String wqNo,int thread, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
+			String wqStatus, MemberVO memberVO) {
 		super();
 		this.wqNo = wqNo;
 		this.thread = thread;

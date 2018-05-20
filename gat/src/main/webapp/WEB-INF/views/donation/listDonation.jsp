@@ -8,7 +8,7 @@
 					<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/detailDonation.do">Project Two</a>
+							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=3">Project Two</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
 					</div>
@@ -145,6 +145,5 @@
         </a>
       </li>
     </ul>
-
 </div>
 <!-- /.container -->

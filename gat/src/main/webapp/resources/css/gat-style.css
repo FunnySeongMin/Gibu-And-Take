@@ -248,5 +248,9 @@ button[class^="btn"], a[class^="btn"]{
 	border-top: 1px solid rgba(0, 0, 0, 0.07);	
 }
 
+.list-group-item.active{
+	background-color:#34bdb6 !important;
+	border-color:#34bdb6 !important;
+}
 
     

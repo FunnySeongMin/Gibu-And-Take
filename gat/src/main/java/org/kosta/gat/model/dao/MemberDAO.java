@@ -38,4 +38,5 @@ public interface MemberDAO {
 	
 	public void updateMemberMileage(TakeDonationPostVO tdVO);
 
+
 }
