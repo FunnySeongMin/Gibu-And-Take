@@ -126,4 +126,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return template.selectOne("member.getTotalQuestionContentCount", id);
 	}
 
+	@Override
+	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo) {
+		return template.selectOne("member.readMyWebQuestionDetail", wqNo);
+	}
+
 }

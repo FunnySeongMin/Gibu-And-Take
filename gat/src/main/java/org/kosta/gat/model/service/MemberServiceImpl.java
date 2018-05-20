@@ -102,4 +102,10 @@ public class MemberServiceImpl implements MemberService {
 				}
 				return new WebQuestionPostListVO(memberDAO.readMyWebQuestionList(pagingBean),pagingBean);
 			}
+
+	@Override
+	@Transactional
+	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo) {
+		return memberDAO.readMyWebQuestionDetail(wqNo);
+	}
 }

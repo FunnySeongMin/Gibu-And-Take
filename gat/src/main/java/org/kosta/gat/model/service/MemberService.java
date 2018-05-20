@@ -34,4 +34,6 @@ public interface MemberService {
 	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO);
 
 	public WebQuestionPostListVO readMyWebQuestionList(String id, int nowPage);
+
+	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo);
 }

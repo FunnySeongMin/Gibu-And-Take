@@ -28,7 +28,7 @@
 					<c:forEach items="${wqListVO.wqPostVO}" var="wqPostVO">
 						<tr>
 							<td>${wqPostVO.wqNo}</td>
-							<td><a href="#">${wqPostVO.wqTitle }</a></td>
+							<td><a href="${pageContext.request.contextPath}/member/readMyWebQuestionDetail.do?wqNo=${wqPostVO.wqNo}">${wqPostVO.wqTitle}</a></td>
 							<td>${wqPostVO.wqStatus}</td>
 							<td>${wqPostVO.wqRegdate }</td>
 						</tr>

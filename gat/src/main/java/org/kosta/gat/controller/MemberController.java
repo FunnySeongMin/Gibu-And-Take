@@ -3,9 +3,9 @@ package org.kosta.gat.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
-import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -172,16 +172,18 @@ public class MemberController {
 		model.addAttribute("wqListVO", wqListVO);
 		return "member/readMyWebQuestionList.tiles";
 	}
-/*	*//**
-	* 작성이유 : 고객문의 게시판 게시글 보기
+/**
+	* 작성이유 : 고객문의 게시판 게시글 상세 보기
 	* 
 	* @author 용다은
-	*//*
-	@RequestMapping("readWebQuestion.do")
-	public String readWebQuestion(int nowPage,Model model) {
-		WebQuestionPostListVO wqListVO=memberService.readWebQuestion(nowPage);
-		return null;
-	}*/
+	*/
+	@RequestMapping("member/readMyWebQuestionDetail.do")
+	public String readWebQuestion(int wqNo, Model model) {
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
+		model.addAttribute("wqPostVO", wqPostVO);
+		System.out.println(wqPostVO);
+		return "member/readMyWebQuestionDetail.tiles";
+	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 수정
 	* 

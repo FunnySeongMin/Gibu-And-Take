@@ -88,8 +88,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rnum, wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, wq_regdate as wqRegdate, 
 		wq_parent_no as wqParentNo, wq_status as wqStatus
 		from (select row_number() over(order by wq_no desc) as rnum, 
-		wq_no, wq_title, wq_contents, wq_regdate, wq_parent_no, wq_status
+		wq_no, wq_title, wq_contents, to_char(wq_regdate, 'YYYY.MM.DD') as wq_regdate, wq_parent_no, wq_status
 		from web_question where id = #{id})
 		where rnum between #{startRowNumber} and #{endRowNumber}
+ 	</select>
+ 	<select id = "readMyWebQuestionDetail" parameterType="int" resultType="webQuestionPostVO">
+		select wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, 
+		to_char(wq_regdate, 'YYYY.MM.DD') as wqRegdate, wq_status as wqStatus
+		from web_question where wq_no=#{value}
  	</select>
 </mapper>
