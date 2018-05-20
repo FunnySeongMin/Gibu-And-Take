@@ -2,6 +2,9 @@ package org.kosta.gat.model.dao;
 
 import java.util.List;
 
+import org.kosta.gat.model.vo.member.MemberListVO;
+import org.kosta.gat.model.vo.member.MemberPagingBean;
+import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostPagingBean;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
@@ -107,5 +110,20 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public int tradePointCount() {
 		return template.selectOne("admin.tradePointCount"); 
+	}
+
+	@Override
+	public MemberListVO readMemberList(int nowPage) {
+		MemberListVO mListVO=null;
+		int totalMemberCount=template.selectOne("admin.memberCount");
+		MemberPagingBean mPb=null;
+		if(nowPage==1) {
+			mPb=new MemberPagingBean(totalMemberCount);
+		}else {
+			mPb=new MemberPagingBean(totalMemberCount, nowPage);
+		}
+		List<MemberVO> list=template.selectList("admin.readMemberList",mPb);
+		mListVO=new MemberListVO(list, mPb);
+		return mListVO;
 	}
 }

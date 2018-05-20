@@ -3,6 +3,7 @@
 import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.AdminDAO;
+import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -83,5 +84,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int tradePointCount() {
 		return adminDAO.tradePointCount();
+	}
+
+	@Override
+	public MemberListVO readMemberList(int nowPage) {
+		return adminDAO.readMemberList(nowPage);
 	}
 }

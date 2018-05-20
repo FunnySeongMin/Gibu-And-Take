@@ -1,5 +1,6 @@
 package org.kosta.gat.model.service;
 
+import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -32,5 +33,7 @@ public interface AdminService {
 	public int memberCount();
 
 	public int tradePointCount();
+
+	public MemberListVO readMemberList(int nowPage);
 
 }

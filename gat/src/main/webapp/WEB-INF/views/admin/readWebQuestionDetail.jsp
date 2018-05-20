@@ -36,7 +36,7 @@
 						<a href="#" class="btn btn-sub-4-gnt" id="#">삭제</a>
 					</c:when>
 					<c:when test="${sessionScope.mvo.memberGroupVO.mgroupNo=='4' && wqVO.wqStatus=='처리중'}">
-							<a href="admin/writeWebQuestionAnswer.do" class="btn btn-sub-3-gnt mr-1" id="#">답변쓰기</a>
+							<a href="${pageContext.request.contextPath }/writeWebQuestionAnswer.do?wqno=${wqVO.wqNo}" class="btn btn-sub-3-gnt mr-1" id="#">답변쓰기</a>
 					</c:when>
 				</c:choose>
 			</div>

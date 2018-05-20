@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			select rnum,app.app_no,app.app_title,app.app_summery,app.app_place,
  			app.app_regdate,app.start_date,app.end_date,app.goal_mileage,app.app_status
 			from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
-			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
+			app_summery,app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(start_date,'yyyy.mm.dd') start_date,
 			to_char(end_date,'yyyy.mm.dd') end_date,goal_mileage,app_status,id
 			from application) app, gt_member m
@@ -145,14 +145,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="addWebQuestionAnswer" parameterType="webQuestionPostVO">
-		insert into web_question(wq_no,thread,wq_title,wq_contents,wq_parent_no,wq_status,id)
-		values(web_question_seq.nextval,#{wqNo}*100-1,#{wqTitle},
-		#{wqContents},#{wqNo},'답변',#{memberVO.id})
+		<selectKey keyProperty="wqNo" resultType="string" order="AFTER">
+			select web_question_seq.currval from dual
+		</selectKey>
+			insert into web_question(wq_no,thread,wq_title,wq_contents,wq_parent_no,wq_status,id)
+			values(web_question_seq.nextval,#{wqNo}*100-1,#{wqTitle},
+			#{wqContents},#{wqNo},'답변',#{memberVO.id})
 	</insert>
 	
 	<update id="updateWebQuestionAnswer" parameterType="webQuestionPostVO">
 		update web_question set wq_title=#{wqTitle} , wq_contents=#{wqContents} 
 		where wq_no=#{wqNo}	
 	</update>
+	
+	<resultMap type="memberVO" id="mvo">
+		<result column="id" property="id"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="email" property="email"/>
+		<result column="birthday" property="birthday"/>
+		<result column="mileage" property="mileage"/>
+		<result column="total_use_mileage" property="totalUseMileage"/>
+		<collection property="memberGroupVO" javaType="memberGroupVO" 
+		 column="mgroup_no" select="selectMemberGroup"/>
+		 <collection property="memberGradeVO" javaType="memberGradeVO" 
+		 column="mgrade_no" select="selectMemberGrade"/>
+	</resultMap>
+	
+	<select id="selectMemberGroup" resultType="memberGroupVO">
+		select mgroup_no,mgroup_name from member_group where mgroup_no=#{value}
+	</select>
+	
+	<select id="selectMemberGrade" resultType="memberGradeVO">
+		select mgrade_no,mgrade_name from member_grade where mgrade_no=#{value}
+	</select>
+	
+	<select id="readMemberList" resultMap="mvo" parameterType="memberPagingBean">
+	<![CDATA[
+		select rnum,m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+		m.total_use_mileage,m.mgroup_no,m.mgrade_no
+		from (select row_number() over(order by id desc) rnum,id,password,
+		name,address,email,to_char(birthday,'yyyy.mm.dd') birthday,mileage,
+		total_use_mileage,mgroup_no,mgrade_no
+		from gt_member where mgroup_no!=5) m
+		where rnum between #{startRowNumber} 
+		and #{endRowNumber} order by rnum desc
+	]]>
+	</select>
 	
 </mapper>

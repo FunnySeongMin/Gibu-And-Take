@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.gat.model.service.AdminService;
+import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -106,6 +107,16 @@ public class AdminController {
 		return "admin/readWebQuestionDetail.tiles";
 	}
 	/**
+	 * 작성이유 :  문의 답변작성 폼으로 이동
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("writeWebQuestionAnswer.do")
+	public String writeWebQuestionAnswer(String wqno,Model model) {
+		model.addAttribute("wqno", wqno);
+		return "admin/writeWebQuestionAnswer.tiles";
+	}
+	/**
 	* 작성이유 : 사이트 문의 답변작성
 	* 
 	* @author 은성민
@@ -113,7 +124,7 @@ public class AdminController {
 	@RequestMapping("addWebQuestionAnswer.do")
 	public String addWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminService.addWebQuestionAnswer(wqVO);
-		return "redirect:readWebQuestionList.do?nowPage=1";
+		return "redirect:readWebQuestionDetail.do?wqno="+wqVO.getWqNo();
 	}
 	/**
 	* 작성이유 : 사이트 문의 답변수정
@@ -124,5 +135,16 @@ public class AdminController {
 	public String updateWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminService.updateWebQuestionAnswer(wqVO);
 		return null;
+	}
+	/**
+	 * 작성이유 : 전체 회원 리스트 목록보기
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readMemberList.do")
+	public String readMemberList(int nowPage,Model model) {
+		MemberListVO mListVO=adminService.readMemberList(nowPage);
+		model.addAttribute("mListVO", mListVO);
+		return "admin/readMemberList.tiles";
 	}
 }

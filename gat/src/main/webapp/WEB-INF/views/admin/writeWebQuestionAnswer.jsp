@@ -18,16 +18,16 @@
 						<label>작성자</label>&nbsp;
 						<input type="text" value="${sessionScope.mvo.name }" readonly="readonly"><br>
 						<label>제목</label>&nbsp;
-						<input type="text" name="appTitle">
+						<input type="text" name="wqTitle">
 						<input type="hidden" name="memberVO.id" value="${sessionScope.mvo.id}">
-						<input type="hidden" name="wqNo" value="${wqno}">
+						<input type="hidden" name="wqNo" value="${wqno }">
 					</div>
 				</div>
 
 				<div class="control-group form-group">
 					<!-- 스마트 에디터 -->
 					<div class="controls">
-						<textarea name="appContents" id="appContents" rows="10" cols="100"
+						<textarea name="wqContents" id="appContents" rows="10" cols="100"
 							style="width:636px; height:412px;"></textarea>
 						<!-- <textarea rows="10" cols="100" class="form-control" id="#" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" placeholder="문의내용"></textarea> -->
 					</div>
