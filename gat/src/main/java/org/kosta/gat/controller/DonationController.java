@@ -11,14 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.gat.model.dao.PhotoVo;
 import org.kosta.gat.model.service.DonationService;
+import org.kosta.gat.model.service.EntryService;
 import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.application.PresentVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostListVO;
 import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
-import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -32,48 +33,67 @@ import org.springframework.web.multipart.MultipartFile;
 public class DonationController {
 	@Resource
 	private DonationService donationService;
-	
+	@Resource
+	private EntryService entryService;
 	/**
-	* 작성이유 : 재능기부 목록보기
-	* 
-	* @author 은성민
-	*/
+	 * 작성이유 : 재능기부 목록보기
+	 * 
+	 * @author 은성민
+	 */
 	@RequestMapping("readDonationList.do")
-	public String readDonationList(int nowPage,Model model) {
-		DonationPostListVO dpListVO=donationService.readDonationList(nowPage);
+	public String readDonationList(int nowPage, Model model) {
+		DonationPostListVO dpListVO = donationService.readDonationList(nowPage);
 		return null;
 	}
-		/**
-	* 작성이유 : 재능기부 상세보기
-	* 
-	* @author 조민경
-	*/
+
+	/**
+	 * 재능기부 상세보기
+	 * 작성이유 : 승인된 재능기부에 대한 정보를 상세히 볼 수 있다.
+	 * 		 : 해당 재능기부에 참여한 참여자들이 기부한 마일리지 액수와 응원메시지를 볼수 있다.
+	 * 
+	 * @author 조민경
+	 */
 	@RequestMapping("donation/readDonationDetail.do")
 	public String readDonationDetail(String dpno, Model model) {
-		DonationPostVO dpVO=donationService.readDonationDetail(dpno);
+		// 재능기부 상세내용
+		DonationPostVO dpVO = donationService.readDonationDetail(dpno);
+		// 해당 재능기부에 대한 응원메시지
+		List<TakeDonationPostVO> tdList = entryService.findCheerupMessageByDpno(dpno);
 		model.addAttribute("dpVO", dpVO);
+		model.addAttribute("tdList", tdList);
 		return "donation/readDonationDetail.tiles";
 	}
+	
 	/**
-	* 작성이유 : 해당 재능기부 후기게시판 보기
-	* 
-	* @author 은성민
-	*/
-	@RequestMapping("readDonationReviewList.do")
-	public String readDonationReviewList(String dpno,int nowPage,Model model) {
-		ReviewPostListVO rpListVO=donationService.readDonationReviewList(dpno,nowPage);
+	 * 해당 재능기부 후기 목록
+	 * 작성이유 : 해당 재능기부에 참여한 참여자들이 작성한 후기 목록을 본다.
+	 * 
+	 * @author 조민경
+	 */
+/*	@ModelAttribute("readDonationReviewList")
+	public String readDonationReviewList(String dpno, int nowPage, Model model) {
+		System.out.println(dpno);
+		ReviewPostListVO rpListVO = donationService.readDonationReviewList(dpno, nowPage);
 		return null;
+	}*/
+	
+	@ModelAttribute("rpList")
+	public List<ReviewPostVO> readDonationReviewList(String dpno) {
+		List<ReviewPostVO> rpList = donationService.readDonationReviewList(dpno);
+		return rpList;
 	}
+
 	/**
-	* 작성이유 : 해당 재능기부 후기게시판 상세보기
-	* 
-	* @author 은성민
-	*/
+	 * 작성이유 : 해당 재능기부 후기게시판 상세보기
+	 * 
+	 * @author 은성민
+	 */
 	@RequestMapping("readReviewDetail.do")
-	public String readReviewDetail(String rpno,Model model) {
-		ReviewPostVO rpVO=donationService.readReviewDetail(rpno);
+	public String readReviewDetail(String rpno, Model model) {
+		ReviewPostVO rpVO = donationService.readReviewDetail(rpno);
 		return null;
 	}
+
 	/**
 	* 작성이유 : 재능기부 신청서 작성
 	* 
@@ -96,7 +116,7 @@ public class DonationController {
     		apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap)); 
     	}
 		String appNO = donationService.addApplication(apVO);
-		
+
 		ArrayList<PresentVO> list = new ArrayList<>();
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")), request.getParameter("presentContents1"),appNO));
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")), request.getParameter("presentContents2"),appNO));
@@ -104,7 +124,7 @@ public class DonationController {
 		System.out.println("apVO : "+apVO);
 		//System.out.println("리스크 : "+list);
 		donationService.addPresent(list);
-		//model.addAttribute("test",request.getParameter("editor") );
+		// model.addAttribute("test",request.getParameter("editor") );
 		return "home.tiles";
 	}
 	
@@ -121,16 +141,16 @@ public class DonationController {
 	}
 	
 	@RequestMapping("file_upload_form.do")
-    public String file_upload_form(ModelMap modelMap) {
-        return "file_upload_form";
-    }
-	
-	
+	public String file_upload_form(ModelMap modelMap) {
+		return "file_upload_form";
+	}
+
 	@RequestMapping("DonationListView.do")
-	public List<Map<String,Object>> DonationListView(DonationPostPagingBean dpPb) {
-		List<Map<String,Object>> list = donationService.DonationListView(dpPb);
+	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb) {
+		List<Map<String, Object>> list = donationService.DonationListView(dpPb);
 		return list;
 	}
+	
 	@RequestMapping("/donation/listDonation.do")
 	public String listDonation(Model model) {
 		List<Map<String,Object>> list = donationService.DonationListView2();
@@ -149,13 +169,12 @@ public class DonationController {
 		System.out.println(list);
 		return list;
 	}
- 
-	
+
 	/**
-	* 작성이유 : 재능기부 신청서 수정
-	* 
-	* @author 은성민
-	*/
+	 * 작성이유 : 재능기부 신청서 수정
+	 * 
+	 * @author 은성민
+	 */
 	@RequestMapping("updateApplication.do")
 	public String updateApplication(ApplicationPostVO apVO) {
 		donationService.updateApplication(apVO);
