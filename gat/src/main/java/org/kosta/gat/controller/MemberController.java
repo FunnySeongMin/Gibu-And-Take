@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -116,7 +117,7 @@ public class MemberController {
 		memberService.updatePassword(mvo);
 		if (session != null)
 			session.invalidate();
-		return "home.tiles";
+		return "member/loginForm.tiles";
 	}
 	
 	/**
@@ -155,9 +156,19 @@ public class MemberController {
 		return "redirect:/home.do"; //테스트를 위해 일단 홈으로 보냅니다
 	}
 	/**
+	* 작성이유 : 나의 문의 게시판 목록 보기
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("member/readMyWebQuestionList.do")
+	public String readMyWebQuestionList(int nowPage,Model model) {
+		WebQuestionPostListVO wqListVO=memberService.readWebQuestion(nowPage);
+		return null;
+	}
+	/**
 	* 작성이유 : 고객문의 게시판 게시글 보기
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
 	@RequestMapping("readWebQuestion.do")
 	public String readWebQuestion(int nowPage,Model model) {
@@ -187,17 +198,20 @@ public class MemberController {
 	/**
 	* 작성이유 : 나의 후기목록 보기
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
-	@RequestMapping("readMyReviewPostList.do")
-	public String readMyReviewPostList(String id,int nowPage,Model model) {
-		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(id,nowPage);
-		return null;
+	@RequestMapping("member/readMyReviewPostList.do")
+	public ModelAndView readMyReviewPostList(HttpServletRequest request,int nowPage) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
+		System.out.println(rpListVO);
+		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
 	/**
 	* 작성이유 : 나의 활동목록 보기
 	* 
-	* @author 은성민
+	* @author 백설희
 	*/
 	@RequestMapping("readMyActivityList.do")
 	public String readMyActivityList(String id,int nowPage,Model model) {
