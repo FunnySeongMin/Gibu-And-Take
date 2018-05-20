@@ -232,8 +232,7 @@
 								</div>
 							</div>
 							<!-- /.후기 상세 modal -->
-							</c:forEach>
-							
+							</c:forEach>							
 						</tbody>
 					</table>
 					
