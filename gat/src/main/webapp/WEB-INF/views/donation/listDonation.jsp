@@ -147,7 +147,11 @@
           <span class="sr-only">Next</span>
         </a>
       </li>
+<<<<<<< HEAD
     </ul> -->
+=======
+    </ul>
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 </div>
 <!-- /.container -->
 

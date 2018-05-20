@@ -3,7 +3,7 @@ package org.kosta.gat.model.vo.post.webquestion;
 import org.kosta.gat.model.vo.member.MemberVO;
 
 public class WebQuestionPostVO {
-	private String wqNo;
+	private int wqNo;
 	private String wqTitle;
 	private String wqContents;
 	private String wqRegdate;
@@ -14,7 +14,19 @@ public class WebQuestionPostVO {
 	public WebQuestionPostVO() {
 		super();
 	}
-	public WebQuestionPostVO(String wqNo, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
+	
+	public WebQuestionPostVO(String wqTitle, String wqContents, String wqRegdate, String wqParentNo, String wqStatus,
+			MemberVO memberVO) {
+		super();
+		this.wqTitle = wqTitle;
+		this.wqContents = wqContents;
+		this.wqRegdate = wqRegdate;
+		this.wqParentNo = wqParentNo;
+		this.wqStatus = wqStatus;
+		this.memberVO = memberVO;
+	}
+
+	public WebQuestionPostVO(int wqNo, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
 			String wqStatus, MemberVO memberVO) {
 		super();
 		this.wqNo = wqNo;
@@ -25,10 +37,10 @@ public class WebQuestionPostVO {
 		this.wqStatus = wqStatus;
 		this.memberVO = memberVO;
 	}
-	public String getWqNo() {
+	public int getWqNo() {
 		return wqNo;
 	}
-	public void setWqNo(String wqNo) {
+	public void setWqNo(int wqNo) {
 		this.wqNo = wqNo;
 	}
 	public String getWqTitle() {

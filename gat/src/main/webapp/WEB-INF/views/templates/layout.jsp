@@ -40,6 +40,7 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=anRlGsCNfoEuOHfb1mmv&submodules=geocoder"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/donation.js"></script>
 	<script type="text/javascript">
 	    function execPostCode() {
 	         new daum.Postcode({
@@ -211,7 +212,7 @@
 	//var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
 	
 	//재능기부장소 주소정보
-	var myaddress = '경기도 하남시 덕풍공원로 81-5';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!) 
+	var myaddress = '${dpVO.place}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!) 
 	// 주소가 있는지 체크
 	naver.maps.Service
 			.geocode(

@@ -22,6 +22,7 @@ import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,15 +43,16 @@ public class DonationController {
 		DonationPostListVO dpListVO=donationService.readDonationList(nowPage);
 		return null;
 	}
-	/**
+		/**
 	* 작성이유 : 재능기부 상세보기
 	* 
-	* @author 은성민
+	* @author 조민경
 	*/
-	@RequestMapping("readDonationDetail.do")
-	public String readDonationDetail(String dpno,Model model) {
+	@RequestMapping("donation/readDonationDetail.do")
+	public String readDonationDetail(String dpno, Model model) {
 		DonationPostVO dpVO=donationService.readDonationDetail(dpno);
-		return null;
+		model.addAttribute("dpVO", dpVO);
+		return "donation/readDonationDetail.tiles";
 	}
 	/**
 	* 작성이유 : 해당 재능기부 후기게시판 보기
