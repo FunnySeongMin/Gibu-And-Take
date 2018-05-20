@@ -242,9 +242,23 @@ public class DonationDAOImpl implements DonationDAO {
 		
 		
 	}
-
+	//일반 재능기부 게시판 view 페이지
 	@Override
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb) {
-		return template.selectList("donation.DonationListView", dpPb);
+		/*return template.selectList("donation.DonationListView", dpPb);*/
+		return template.selectList("donation.DonationListView2");
 	}
+	//스크롤 페이징 재능기부 게시판
+	@Override
+	public List<Map<String, Object>> DonationListView2() {
+		/*return template.selectList("donation.DonationListView", dpPb);*/
+		return template.selectList("donation.DonationListView2");
+	}
+
+	@Override
+	public List<Map<String, Object>> DonationListRank() {
+		return template.selectList("donation.DonationListRank");
+	}
+	
+	
 }

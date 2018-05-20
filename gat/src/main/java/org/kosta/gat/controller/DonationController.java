@@ -25,6 +25,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -128,6 +129,24 @@ public class DonationController {
 	@RequestMapping("DonationListView.do")
 	public List<Map<String,Object>> DonationListView(DonationPostPagingBean dpPb) {
 		List<Map<String,Object>> list = donationService.DonationListView(dpPb);
+		return list;
+	}
+	@RequestMapping("/donation/listDonation.do")
+	public String listDonation(Model model) {
+		List<Map<String,Object>> list = donationService.DonationListView2();
+		List<Map<String,Object>> rank = donationService.DonationListRank();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("rank", rank);
+		System.out.println("리스트 뷰 : "+list);
+		return "donation/listDonation.tiles";
+	}
+	@RequestMapping("/donation/DonationListView2.do")
+	@ResponseBody
+	public List<Map<String,Object>> DonationListView2() {
+		System.out.println("여기 오냐?");
+		List<Map<String,Object>> list = donationService.DonationListView2();
+		System.out.println(list);
 		return list;
 	}
  
