@@ -31,15 +31,15 @@
 					</div>					
 					<form method="post" action="${pageContext.request.contextPath }/addTakeDonation.do" id="entryDonation">
 						<div class="modal-body bg-light">
-							<div class="">
+							<div class="m-3">
 								<input type="hidden" name="dpno" value="${dpVO.dpNo}">
 								<p>${dpVO.dpTitle }</p>
 								<p>${dpVO.startDate } - ${dpVO.endDate }</p>
 							</div>
-							<div class="row">
-								<label for="">사용할 마일리지</label>
-								<div class="col-lg-3"><input type="text" class="form-control form-control-sm" name="tdMileage" id="tdMileage"></div>
-								<small class="mt-1">보유 마일리지 : <span id="userMileage">${sessionScope.mvo.mileage }</span></small>
+							<div class="form-group my-3">
+								<label for="">사용할 마일리지 <small class="pl-1">보유 마일리지 : <span id="userMileage">${sessionScope.mvo.mileage }</span></small></label>
+								<input type="text" class="form-control form-control-sm" name="tdMileage" id="tdMileage">
+								
 							</div>
 							<div class="form-group my-3">
 								<label class="">한줄 응원 메세지</label><input type="text" class="form-control" name="cheerUpMessage" id="cheerUpMessage">
