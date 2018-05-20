@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -153,7 +154,7 @@ public class MemberController {
 		webVO.setMemberVO(mvo);
 		//addWebQuestion
 		memberService.addWebQuestion(webVO);
-		return "redirect:/home.do"; //테스트를 위해 일단 홈으로 보냅니다
+		return "redirect:member/readMyWebQuestionList.tiles";
 	}
 	/**
 	* 작성이유 : 나의 문의 게시판 목록 보기
@@ -161,20 +162,26 @@ public class MemberController {
 	* @author 용다은
 	*/
 	@RequestMapping("member/readMyWebQuestionList.do")
-	public String readMyWebQuestionList(int nowPage,Model model) {
-		WebQuestionPostListVO wqListVO=memberService.readWebQuestion(nowPage);
-		return null;
+	public String readMyWebQuestionList(int nowPage, HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){ //session 없는 경우 로그인 페이지로 보냄
+			return "member/loginForm.tiles";
+		}
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		WebQuestionPostListVO wqListVO = memberService.readMyWebQuestionList(mvo.getId(), nowPage);
+		model.addAttribute("wqListVO", wqListVO);
+		return "member/readMyWebQuestionList.tiles";
 	}
-	/**
+/*	*//**
 	* 작성이유 : 고객문의 게시판 게시글 보기
 	* 
 	* @author 용다은
-	*/
+	*//*
 	@RequestMapping("readWebQuestion.do")
 	public String readWebQuestion(int nowPage,Model model) {
 		WebQuestionPostListVO wqListVO=memberService.readWebQuestion(nowPage);
 		return null;
-	}
+	}*/
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 수정
 	* 

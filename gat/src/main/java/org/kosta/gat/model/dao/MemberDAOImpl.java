@@ -10,7 +10,6 @@ import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostPagingBean;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
-import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostPagingBean;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -52,18 +51,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public WebQuestionPostListVO readWebQuestion(int nowPage) {
-		WebQuestionPostPagingBean wqPb=null;
-		//총 문의글의 개수를 가져오는 메서드
-		int totalWebQuestionCount=template.selectOne("member.totalWebQuestionCount");
-		if(nowPage==0) {
-			wqPb=new WebQuestionPostPagingBean(totalWebQuestionCount);
-		}else {
-			wqPb= new WebQuestionPostPagingBean(totalWebQuestionCount, nowPage);
-		}
-		List<WebQuestionPostVO> list=template.selectList("member.WebQuestionPostList",wqPb);
-		WebQuestionPostListVO wqListVO=new WebQuestionPostListVO(list, wqPb);
-		return wqListVO;
+	public List<WebQuestionPostVO> readMyWebQuestionList(WebQuestionPostPagingBean pagingBean) {
+		return template.selectList("member.readMyWebQuestionList", pagingBean);
 	}
 
 	@Override
@@ -131,4 +120,10 @@ public class MemberDAOImpl implements MemberDAO {
 		template.update("member.updateMemberMileage",tdVO);
 		
 	}
+
+	@Override
+	public int getTotalQuestionContentCount(String id) {
+		return template.selectOne("member.getTotalQuestionContentCount", id);
+	}
+
 }
