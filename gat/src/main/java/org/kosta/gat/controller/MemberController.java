@@ -183,6 +183,7 @@ public class MemberController {
 	@RequestMapping("member/readMyWebQuestionDetail.do")
 	public String readWebQuestion(int wqNo, Model model) {
 		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
+		System.out.println(wqPostVO);
 		model.addAttribute("wqPostVO", wqPostVO);
 		return "member/readMyWebQuestionDetail.tiles";
 	}

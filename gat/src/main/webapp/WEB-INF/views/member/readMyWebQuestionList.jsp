@@ -29,6 +29,14 @@
 							<td>${wqPostVO.wqStatus}</td>
 							<td>${wqPostVO.wqRegdate }</td>
 						</tr>
+						<c:if test="${wqPostVO.wqStatus=='답변완료'}">
+							<tr>
+								<td></td>
+								<td><a href="${pageContext.request.contextPath}/member/readWebQuestionAnswer.do?wqno=${wqPostVO.wqNo}" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle}</a></td>
+								<td></td>
+								<td>${wqPostVO.wqRegdate}</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

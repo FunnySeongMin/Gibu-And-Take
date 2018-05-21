@@ -79,19 +79,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<selectKey keyProperty="wqNo" resultType="int" order="BEFORE">
  			select web_question_seq.nextval from dual
  		</selectKey>
- 		insert into web_question(wq_no, wq_title, wq_contents, id) values (#{wqNo}, #{wqTitle}, #{wqContents}, #{memberVO.id})
+ 		insert into web_question(wq_no, thread, wq_title, wq_contents, id) values (#{wqNo}, #{wqNo}*100, #{wqTitle}, #{wqContents}, #{memberVO.id})
  	</insert>
  	<select id = "getTotalQuestionContentCount" parameterType="string" resultType="int">
  		select count(*) from web_question where id=#{value}
  	</select>
- 	<select id="readMyWebQuestionList" parameterType="webQuestionPostPagingBean" resultType="webQuestionPostVO">
-		select rnum, wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, wq_regdate as wqRegdate, 
-		wq_parent_no as wqParentNo, wq_status as wqStatus
-		from (select row_number() over(order by wq_no desc) as rnum, 
-		wq_no, wq_title, wq_contents, to_char(wq_regdate, 'YYYY.MM.DD') as wq_regdate, wq_parent_no, wq_status
-		from web_question where id = #{id})
-		where rnum between #{startRowNumber} and #{endRowNumber}
- 	</select>
+ 	
+	<resultMap type="webQuestionPostVO" id="wqPostVO">
+		<result column="wq_no" property="wqNo"/>
+		<result column="thread" property="thread"/>
+		<result column="wq_title" property="wqTitle"/>
+		<result column="wq_contents" property="wqContents"/>
+		<result column="wq_regdate" property="wqRegdate"/>
+		<result column="wq_parent_no" property="wqParentNo"/>
+		<result column="wq_status" property="wqStatus"/>
+		<collection property="memberVO" javaType="memberVO" column="wq_no"
+		select="selectMemberByDetail" ></collection>
+	</resultMap>
+	
+	<select id="selectMemberByDetail" resultType="memberVO">
+		select m.id,m.password,m.name,m.address,to_char(m.birthday,'yyyy.mm.dd') birthday,
+		m.mileage,m.total_use_mileage
+		from gt_member m, web_question wq
+		where m.id=wq.id and wq.wq_no=#{value}
+	</select>
+	
+	<select id="readMyWebQuestionList" parameterType="webQuestionPostPagingBean" resultMap="wqPostVO">
+			select rnum,wq.wq_no,wq.thread,wq.wq_title,wq.wq_regdate,wq.wq_status,wq.wq_parent_no
+			from (select row_number() over(order by thread desc) rnum,wq_no,thread,wq_title,
+			to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_status,wq_parent_no,id
+			from web_question where id=#{id} order by thread desc ) wq, gt_member m
+			where wq.id=m.id and rnum between #{startRowNumber} and  #{endRowNumber}
+			order by thread desc
+	</select>
+	
  	<select id = "readMyWebQuestionDetail" parameterType="int" resultType="webQuestionPostVO">
 		select wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, 
 		to_char(wq_regdate, 'YYYY.MM.DD') as wqRegdate, wq_status as wqStatus
