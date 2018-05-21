@@ -197,8 +197,8 @@ public class AdminController {
 	 * @author 은성민
 	 */
 	@RequestMapping("givePoint.do")
-	public String givePoint(String id,int mileage) {
-		System.out.println(id+" "+mileage);
-		return null;
+	public String givePoint(String id,int mileage,int tdNo) {
+		adminService.givePoint(id,mileage,tdNo);
+		return "redirect:readTradePoint.do?nowPage=1";
 	}
 }
