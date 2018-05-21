@@ -146,8 +146,8 @@ values(application_seq.nextval,'Class B','sfdhdsfhskjdhflksd',
 '용인','이미지가 여기에 있어요',155000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.05.18','yyyy.mm.dd'),'jin');
 
 insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'Class C','sadgdfg',
-'캐나다','이미지가 여기에 있어요',350000,'승인',to_date('2018.01.05','yyyy.mm.dd'),to_date('2018.05.05','yyyy.mm.dd'),'cho');
+values(application_seq.nextval,'Class D','bbbbb',
+'서울','이미지가 여기에 있어요',700000,'승인',to_date('2018.02.22','yyyy.mm.dd'),to_date('2018.04.16','yyyy.mm.dd'),'keroro');
 
 SELECT application_seq.NEXTVAL FROM dual ; 
 SELECT application_seq.CURRVAL FROM dual ;
@@ -268,8 +268,8 @@ insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
 values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전부를 모두 다 배운거 같아 뿌듯합니다. 가위바위보를 확실히 질 수 있을것 같아요!!',
 8,'keroro',1,1);
 insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
-values(review_post_seq.nextval,'또 참여하고 싶어요','봉사를 통한 즐거움을 배웠습니다.',
-8,'yong',1,21);
+values(review_post_seq.nextval,'서리테스트한다','나와라나와랏',
+8,'yong',1,22);
 
 
 select * from REVIEW_POST

@@ -4,8 +4,10 @@ import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.MemberDAO;
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
+import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostPagingBean;
@@ -85,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
 	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO) {
 		memberDAO.exchangeMileage(mileageTradeVO);
 	}
-
+	
 	@Override
 	@Transactional
 	public WebQuestionPostListVO readMyWebQuestionList(String id, int nowPage) {
@@ -108,5 +110,17 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo) {
 		return memberDAO.readMyWebQuestionDetail(wqNo);
+	}
+	/**
+	 * 참여후기 상세보기 
+	 */
+	@Override
+	public ReviewPostVO readMyReviewDetail(String rpNo) {
+		return memberDAO.readMyReviewDetail(rpNo);
+	}
+
+	@Override
+	public ApplicationPostListVO readMyApplicationList(String id, int nowPage) {
+		return memberDAO.readMyApplicationList(id,nowPage);
 	}
 }

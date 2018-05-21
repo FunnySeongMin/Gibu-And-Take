@@ -10,14 +10,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="memberGradeVO.mgradeNo" column="mgrade_no"/>
 		<result property="memberGradeVO.mgradeName" column="mgrade_name"/>
 	</resultMap>
-	<!-- <resultMap type="reviewPostVO" id="reviewPostRM">
-		<result property="rpNo" column="rp_no"/>
+	<resultMap type="reviewPostVO" id="reviewPostRM">
+		<!-- <result property="rpNo" column="rp_no"/>
 		<result property="rpTitle" column="rp_title"/>
 		<result property="rpContents" column="rp_contents"/>
 		<result property="rpRegdate" column="rp_regdate"/>
-		<result property="rpRate" column="rp_rate"/>
+		<result property="rpRate" column="rp_rate"/> -->
 		<result property="memberVO.id" column="id"/>
-	</resultMap> -->
+		<result property="dpVO.dpTitle" column="dp_title"/>
+	</resultMap>
+	<resultMap type="takeDonationPostVO" id="takeDonationPostRM">
+		<!-- <result property="tdNo" column="td_no"/>
+		<result property="tdRegdate" column="td_regdate"/>
+		<result property="tdMileage" column="td_mileage"/> -->
+		<result property="donationPostVO.dpTitle" column="dp_title"/>
+	</resultMap>
  	<insert id="registerMember" parameterType="memberVO">
  		insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 		values(#{id}, #{password}, #{name}, #{address}, #{email}, #{birthday}, 1, 1)
@@ -61,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	<select id="readMyReviewPostList" resultType="reviewPostVO" parameterType="reviewPostPagingBean">
  		select r.rp_no,r.rp_title,r.rp_regdate from(
-		select row_number() over (order by rp_no desc) as rnum,rp_no,rp_title,to_char(rp_regdate,'YYYY,MM,DD') as rp_regdate,id
+		select row_number() over (order by rp_no desc) as rnum,rp_no,rp_title,to_char(rp_regdate,'YYYY.MM.DD') as rp_regdate,id
 		from REVIEW_POST
 		where id=#{id}
 		) r, GT_MEMBER m
@@ -124,4 +131,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="deleteWebQuestion" parameterType="int">
  		delete from web_question where wq_no=#{wqNo}
  	</update>
+ 	<!-- 나의 후기 상세보기 -->
+ 	<select id="readMyReviewDetail" resultMap="reviewPostRM" resultType="reviewPostVO">
+ 		SELECT r.rp_no, r.rp_title, r.rp_contents, 
+		r.rp_regdate, r.rp_rate, p.dp_title
+		FROM review_post r
+		INNER JOIN gt_member m ON r.id = m.id
+		INNER JOIN donation_post p ON p.dp_no = r.dp_no
+		INNER JOIN take_donation t ON t.td_no = r.td_no
+		AND r.rp_no=#{value}
+ 	</select>
+ 	<!-- 나의 재능기부 참여의 페이징을 위한 count -->
+ 	<select id="totalMyActivityCount" resultType="int">
+ 		select count(*) 
+		from take_donation
+		where id=#{value}
+ 	</select>
+ 	<!-- 나의 재능기부 참여 목록 -->
+ 	<select id="readMyActivityList" resultType="takeDonationPostVO" resultMap="takeDonationPostRM" parameterType="takeDonationPostPagingBean">
+ 		select t.td_no, t.td_regdate, t.td_mileage, d.dp_title from(
+		select row_number() over (order by td_no desc) as rnum,td_no,to_char(td_regdate,'YYYY.MM.DD') 
+		as td_regdate,td_mileage,id,dp_no
+		from take_donation
+		where id=#{id}) t, donation_post d
+		where t.dp_no = d.dp_no and rnum between #{startRowNumber} and #{endRowNumber}
+		order by t.td_no desc
+ 	</select>
+ 	<!-- 나의 재능기부 신청  내역의 페이징을 위한 count -->
+ 	<select id="totalMyApplicationPostCount" resultType="int">
+ 		select count(*) 
+		from application
+		where id=#{value}
+ 	</select>
+ 	<!-- 나의 재능기부 신청  내역 -->
+ 	<select id="readMyApplicationPostList" resultType="applicationPostVO" parameterType="takeDonationPostPagingBean">
+ 		select a.app_no, a.app_title, a.app_regdate, a.app_status from(
+		select row_number() over (order by app_no desc) as rnum,app_no,to_char(app_regdate,'YYYY.MM.DD') 
+		as app_regdate,app_status,id,app_title
+		from application
+		where id=#{id}) a, gt_member m
+		where a.id = m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by a.app_no desc
+ 	</select>
 </mapper>
