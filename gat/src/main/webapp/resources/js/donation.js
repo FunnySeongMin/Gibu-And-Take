@@ -1,6 +1,9 @@
 $(document).ready(function(){
+	$("#entryBtn").click(function(){
+		alert("로그인 후 이용해 주세요!")
+		location.href="../member/loginForm.do";
+	});
 	$("#entryDonation").submit(function(){
-		//alert($("#userMileage").text());
 		//사용할 마일리지를 적지 않았을 경우
 		if($("#tdMileage").val() == "" || $("#tdMileage").val() == null){
 			alert("사용할 마일리지 액수를 적어주세요");
@@ -17,6 +20,5 @@ $(document).ready(function(){
 	// '취소'버튼을 누르면 modal을 없앤다
 	$("#cancelBtn").click(function(){
 		$("#entryForm").modal("hide");
-	});
-	
+	});	
 });

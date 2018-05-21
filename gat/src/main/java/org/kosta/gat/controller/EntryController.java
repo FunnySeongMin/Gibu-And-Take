@@ -82,11 +82,18 @@ public class EntryController {
 	/**
 	 * 작성이유 : 참여활동 후기 작성
 	 * 
-	 * @author 은성민
+	 * @author 조민경
 	 */
 	@RequestMapping("addReview.do")
-	public String addReview(ReviewPostVO rpVO) {
+	public String addReview(String dpno, ReviewPostVO rpVO, HttpServletRequest request) {
+		System.out.println("entryController : "+dpno);
+		HttpSession session = request.getSession(false);
+		TakeDonationPostVO tdVO = null;
+		if(session!=null) {
+			tdVO = (TakeDonationPostVO)session.getAttribute("tdVO");
+			System.out.println(tdVO);
+		}
 		entryService.addReview(rpVO);
-		return null;
+		return "redirect:donation/readDonationDetail.do?dpno="+dpno;
 	}
 }

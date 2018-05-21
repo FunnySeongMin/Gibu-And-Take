@@ -97,4 +97,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		to_char(wq_regdate, 'YYYY.MM.DD') as wqRegdate, wq_status as wqStatus
 		from web_question where wq_no=#{value}
  	</select>
+ 	<update id="updateWebQuestion" parameterType="webQuestionPostVO">
+ 		update web_question set wq_title=#{wqTitle}, wq_contents=#{wqContents} where wq_no=#{wqNo}
+ 	</update>
+ 	<update id="deleteWebQuestion" parameterType="int">
+ 		delete from web_question where wq_no=#{wqNo}
+ 	</update>
 </mapper>
