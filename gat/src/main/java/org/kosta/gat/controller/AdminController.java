@@ -8,6 +8,7 @@ import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
@@ -189,5 +190,15 @@ public class AdminController {
 		TakeDonationPostListVO tdListVO=adminService.readTradePoint(nowPage);
 		model.addAttribute("tdListVO", tdListVO);
 		return "admin/readTradePointList.tiles";
+	}
+	/**
+	 * 작성이유 : 포인트 지급
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("givePoint.do")
+	public String givePoint(String id,int mileage) {
+		System.out.println(id+" "+mileage);
+		return null;
 	}
 }

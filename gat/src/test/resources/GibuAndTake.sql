@@ -191,16 +191,22 @@ create table donation_post(
 	total_entry number default 0,
 	dp_status number default 0,
 	app_no number,
-	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
+	id varchar2(100) not null,
+	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE,
+	CONSTRAINT fk_gt_donation_post_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
 )
 
 --기부 게시글 시퀀스
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
 
-insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
-values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
-'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),200000,'1');
+insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,
+dp_imgdirectory,start_date,end_date,goal_mileage,app_no,id)
+values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.',
+'여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
+'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),
+200000,'1','hwang');
+
 insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
 values(donation_post_seq.nextval,'Class B','재미있는 꽃꽂이 시간','용인',
 155000,'21');
