@@ -11,6 +11,8 @@ public interface EntryDAO {
 
 	public void addReview(ReviewPostVO rpVO);
 
-	public List<TakeDonationPostVO> findCheerupMessageByDpno(int dpno);
+	public List<TakeDonationPostVO> findCheerupMessageByDpno(String dpno);
+
+	public int findEntryByIdAndDpno(TakeDonationPostVO tdVO);
 
 }

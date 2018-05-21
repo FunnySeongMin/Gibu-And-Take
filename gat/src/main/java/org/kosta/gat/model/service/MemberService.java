@@ -23,7 +23,7 @@ public interface MemberService {
 
 	public void updateWebQuestion(WebQuestionPostVO wqVO);
 
-	public void deleteWebQuestion();
+	public void deleteWebQuestion(int wqNo);
 
 	public ReviewPostListVO readMyReviewPostList(String id, int nowPage);
 

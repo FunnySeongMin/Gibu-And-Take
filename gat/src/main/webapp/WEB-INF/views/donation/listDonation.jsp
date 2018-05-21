@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="jumbotron">
+<div class="jumbotron mb-0">
 	<div class="container">
 		<div class="row">
 			 <div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }">${rank[0].DP_TITLE }</a>
@@ -17,6 +18,7 @@
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }">${rank[1].DP_TITLE }</a>
@@ -39,11 +41,19 @@
 		</div>
 	</div>
 </div>
-
+<!-- 재능기부 신청하기 -->
+<div class="bg-sub-1-gnt py-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<span class="text-white border-right mr-1 pr-2">당신의 재능을 많은 사람들과 나누어 보세요</span>
+				<a href="${pageContext.request.contextPath }/donation/applyDonation.do" class="text-white">재능기부 신청하기<i class="far fa-edit"></i></a>
+			</div>
+		</div>
+	</div>
+</div> 
 <!-- Page Content -->
-<div class="container mt-5 mb-5">   
-	<!-- 재능기부 신청하기 -->
-	<a href="${pageContext.request.contextPath }/donation/applyDonation.do" class="btn btn-point-gnt my-5">재능기부 신청하기</a>
+<div class="container mt-5 mb-5">
     <!-- Project One -->
     <div class="row">
       <div class="col-md-7">
@@ -55,6 +65,7 @@
         <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">${list[0].DP_TITLE }</a></h3>
         <p>${list[0].DP_SUMMERY }</p>
         <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">View Project
+
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -164,8 +175,13 @@
 
 
 
+<<<<<<< HEAD
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
+=======
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 <script type="text/javascript">
 $(document).ready(function() {
     var win = $(window);

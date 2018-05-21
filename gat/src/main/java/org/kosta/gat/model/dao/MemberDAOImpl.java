@@ -15,6 +15,7 @@ import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -61,8 +62,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void deleteWebQuestion() {
-		template.delete("member.deleteWebQuestion");
+	public void deleteWebQuestion(int 	wqNo) {
+		template.delete("member.deleteWebQuestion", wqNo);
 	}
 
 	@Override
