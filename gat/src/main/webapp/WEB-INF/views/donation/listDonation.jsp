@@ -5,7 +5,7 @@
 		<div class="row">
 			 <div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }"><img class="card-img-top" src="${rank[0].DP_IMGDIRECTORY }" alt=""></a>
 
 					<div class="card-body">
 						<h4 class="card-title">
@@ -175,13 +175,7 @@
 
 
 
-<<<<<<< HEAD
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	
-=======
-
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
->>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 <script type="text/javascript">
 $(document).ready(function() {
     var win = $(window);

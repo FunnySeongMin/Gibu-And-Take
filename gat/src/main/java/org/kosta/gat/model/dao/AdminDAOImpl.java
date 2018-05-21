@@ -166,6 +166,7 @@ public class AdminDAOImpl implements AdminDAO {
 			tdPb=new TakeDonationPostPagingBean(totalTradePointCOunt, nowPage);
 		}
 		List<TakeDonationPostVO> tdVOList=template.selectList("admin.readTradePointList", tdPb);
-		return null;
+		tdListVO=new TakeDonationPostListVO(tdVOList, tdPb);
+		return tdListVO;
 	}
 }

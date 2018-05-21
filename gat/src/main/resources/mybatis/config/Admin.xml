@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
 		<![CDATA[
 			select app.app_no,app.app_title,app_summery,app.app_contents,app.app_place,
-			to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
+			app.app_imgdirectory,to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(app.start_date,'yyyy.mm.dd') start_date,
 			to_char(app.end_date,'yyyy.mm.dd') end_date,
 			app.goal_mileage,app.app_status
@@ -91,10 +91,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">
 		insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,
-		dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
+		dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no,id)
 		values(donation_post_seq.nextval,#{appTitle},#{appSummery},#{appContents},
 		#{place},#{imgDirectory},to_date(#{startDate},'yyyy.mm.dd'),
-		to_date(#{endDate},'yyyy.mm.dd'),#{goalMileage},#{appNo})
+		to_date(#{endDate},'yyyy.mm.dd'),#{goalMileage},#{appNo},#{memberVO.id})
 	</insert>
 	
 	<select id="totalWebQuestionCount" resultType="int">
@@ -145,9 +145,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="addWebQuestionAnswer" parameterType="webQuestionPostVO">
-		<selectKey keyProperty="wqNo" resultType="string" order="AFTER">
-			select web_question_seq.currval from dual
-		</selectKey>
 			insert into web_question(wq_no,thread,wq_title,wq_contents,wq_parent_no,wq_status,id)
 			values(web_question_seq.nextval,#{wqNo}*100-1,#{wqTitle},
 			#{wqContents},#{wqNo},'답변',#{memberVO.id})
@@ -225,37 +222,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="td_mileage" property="tdMileage"/>
 		<result column="cheerup_message" property="cheerUpMessage"/>
 		<collection property="memberVO" javaType="memberVO" 
-		column="id" select="selectTDMember"/>
+		column="td_no" select="selectTDMember"/>
 		<collection property="donationPostVO" javaType="donationPostVO" 
-		column="dp_no" select="selectTDDonation"/>
+		column="td_no" select="selectTDDonation"/>
 	</resultMap>
 	
-	<select id="selectTDDonation" resultType="donationPostVO">
+	<select id="selectTDDonation" resultMap="dpVO">
 	<![CDATA[
 		select dp.dp_no,dp.dp_title,dp.dp_summery,dp.dp_contents,dp.dp_place,
 		dp.dp_imgdirectory,to_char(dp.dp_regdate,'yyyy.mm.dd') dp_regdate,
-		to_char(dp.start_date,'yyyy.mm.dd') start_date,to_char(dp.end_date,'yyyy.mm.dd) end_date,
-		dp.dp_count,dp.goal_mileage,dp.donation_mileage,dp.total_entry,dp.dp_status
+		to_char(dp.start_date,'yyyy.mm.dd') start_date,to_char(dp.end_date,'yyyy.mm.dd') end_date,
+		dp.dp_count,dp.goal_mileage,dp.donation_mileage,dp.total_entry,dp.dp_status,id
 		from donation_post dp,take_donation td
-		where dp.dp_no=td.dp_no where td.dp_no=#{value}
+		where dp.dp_no=td.dp_no and td.td_no=#{value}
 	]]>
 	</select>
 	
-	<select id="selectTDMember" resultMap="mvo">
-		select m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
-		m.total_use_mileage,m.mgroup_no,m.mgrade_no
-		from gt_member m, take_donation td
-		where m.id=td.id and td.id=#{value}
+	<resultMap type="donationPostVO" id="dpVO">
+		<result column="dp_no" property="dpNo"/>
+		<result column="dp_title" property="dpTitle"/>
+		<result column="dp_summery" property="dpSummery"/>
+		<result column="dp_contents" property="dpContents"/>
+		<result column="dp_place" property="place"/>
+		<result column="dp_imgdirectory" property="dpImgDirectory"/>
+		<result column="dp_regdate" property="dpRegdate"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="dp_count" property="dpCount"/>
+		<result column="goal_mileage" property="goalMileage"/>
+		<result column="donation_mileage" property="donationMileage"/>
+		<result column="total_entry" property="totalEntry"/>
+		<result column="dp_status" property="dpStatus"/>
+		<collection property="memberVO" javaType="memberVO"
+		column="dp_no" select="selectDonationMember"></collection>
+	</resultMap>
+	
+	<select id="selectDonationMember" resultType="memberVO">
+		<![CDATA[
+			select m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+			m.total_use_mileage,m.mgroup_no,m.mgrade_no
+			from gt_member m, donation_post dp
+			where m.id=dp.id and dp.dp_no=#{value};
+		]]>
+	</select>
+	
+	<select id="selectTDMember" resultType="memberVO">
+		<![CDATA[
+			select m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+			m.total_use_mileage,m.mgroup_no,m.mgrade_no
+			from gt_member m, take_donation td
+			where m.id=td.id and td.td_no=#{value}
+		]]>
 	</select>
 	
 	<select id="readTradePointList" resultMap="tdPostVO">
-	<![CDATA[
-		select rnum,td.td_no,td.td_regdate,td.td_mileage,td.cheerup_message,td.mileage_status
-		from (select row_number() over(order by td_no desc) rnum,td_no,
-		to_char(td_regdate,'yyyy.mm.dd') td_regdate,
-		td_mileage,cheerup_message,mileage_status,id,dp_no
-		from take_donation where mileage_status='지급대기') td
-		where rnum between #{startRowNumber} and #{endRowNumber} order by td_no desc
+		<![CDATA[
+			select rnum,td.td_no,td.td_regdate,td.td_mileage,td.cheerup_message,td.mileage_status
+			from (select row_number() over(order by td_no desc) rnum,td_no,
+			to_char(td_regdate,'yyyy.mm.dd') td_regdate,
+			td_mileage,cheerup_message,mileage_status,id,dp_no
+			from take_donation where mileage_status='지급대기') td
+			where rnum between #{startRowNumber} and #{endRowNumber} order by td_no desc
 		]]>
 	</select>
 	
