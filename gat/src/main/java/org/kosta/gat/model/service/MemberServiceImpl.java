@@ -54,8 +54,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void deleteWebQuestion() {
-		memberDAO.deleteWebQuestion();
+	@Transactional
+	public void deleteWebQuestion(int wqNo) {
+		memberDAO.deleteWebQuestion(wqNo);
 	}
 
 	@Override
