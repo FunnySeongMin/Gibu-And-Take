@@ -169,4 +169,13 @@ public class AdminDAOImpl implements AdminDAO {
 		tdListVO=new TakeDonationPostListVO(tdVOList, tdPb);
 		return tdListVO;
 	}
+
+	@Override
+	public void givePoint(String id, int mileage,int tdNo) {
+		template.update("admin.updateTakeDonationStatus", tdNo);
+		MemberVO mvo=new MemberVO();
+		mvo.setId(id);
+		mvo.setMileage(mileage);
+		template.update("admin.givePoint", mvo);
+	}
 }

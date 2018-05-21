@@ -45,4 +45,6 @@ public interface AdminService {
 
 	public TakeDonationPostListVO readTradePoint(int nowPage);
 
+	public void givePoint(String id, int mileage, int tdNo);
+
 }

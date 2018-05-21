@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-	function givePoint(id,mileage){
+	function givePoint(id,mileage,tdNo){
 		var flag=confirm(id+"님에게 "+mileage+"포인트를 지급하시겠습니까?");
 		if(flag){
-			location.href="${pageContext.request.contextPath}/givePoint.do?id="+id+"&mileage="+mileage;
+			location.href="${pageContext.request.contextPath}/givePoint.do?id="+id+"&mileage="+mileage+"&tdNo="+tdNo;
 		}else{
 			return false;
 		}
@@ -38,7 +38,7 @@
 								<td>${tdpVO.tdMileage }</td>
 								<td>
 									<input type="button" value="포인트 지급" 
-									onclick="return givePoint('${tdpVO.donationPostVO.memberVO.id}','${tdpVO.tdMileage }')"
+									onclick="return givePoint('${tdpVO.donationPostVO.memberVO.id}','${tdpVO.tdMileage }',${tdpVO.tdNo })"
 									class="btn btn-sub-2-gnt btn-block">
 								</td> 
 							</tr>
