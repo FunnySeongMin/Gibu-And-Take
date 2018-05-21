@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
 	<h4 class="py-5 text-center">마이페이지</h4>
@@ -13,8 +14,8 @@
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="list-group">
-				<a href="${pageContext.request.contextPath }/member/readMyActivityList.do" class="list-group-item">재능기부 참여내역</a>
-				<a href="${pageContext.request.contextPath }/member/readMyApplicationList.do" class="list-group-item active">재능기부 신청내역</a>
+				<a href="${pageContext.request.contextPath }/member/readMyActivityList.do?nowPage=1" class="list-group-item">재능기부 참여내역</a>
+				<a href="${pageContext.request.contextPath }/member/readMyApplicationList.do?nowPage=1" class="list-group-item active">재능기부 신청내역</a>
 			</div>
 		</div>
 		<!-- /.col-lg-3 -->
@@ -31,27 +32,14 @@
 					</tr>
 				</thead>
 				<tbody>						
+					<c:forEach var="avo" items="${requestScope.apListVO.appPostVO}">	
 					<tr>
-						<td>3</td>
-						<td><a href="#">청소왕 황마의 청소 A to Z</a></td>
-						<td>황명아</td>
-						<td>2018.02.25</td>
-						<td>승인</td>
+						<td>${avo.appNo}</td>
+						<td>${avo.appTitle}</td>
+						<td>${avo.appRegdate}</td>
+						<td>${avo.appStatus}</td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="#">서정우의 코딩스쿨</a></td>
-						<td>서정우</td>
-						<td>2018.01.23</td>
-						<td>승인</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td><a href="#">오늘뭐먹지? 이윤희의 유니짜장</a></td>
-						<td>이윤희</td>
-						<td>2017.12.03</td>
-						<td>거절</td>
-					</tr>
+					</c:forEach>	
 				</tbody>
 			</table>
 
@@ -61,28 +49,39 @@
 	</div>
 	
 	<!-- Pagination -->
+	<c:set var="pb" value="${requestScope.apListVO.appPb}"></c:set>
 	<ul class="pagination justify-content-center mt-5">
-		<li class="page-item">
-			<a class="page-link" href="#" aria-label="Previous">
-				<span aria-hidden="true">&laquo;</span>
-				<span class="sr-only">Previous</span>
-			</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">1</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">2</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">3</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#" aria-label="Next">
-				<span aria-hidden="true">&raquo;</span>
-				<span class="sr-only">Next</span>
-			</a>
-		</li>
+		<c:if test="${pb.previousPageGroup}">
+			<li class="page-item">
+				<a class="page-link" href="${pageContext.request.contextPath}/member/readMyApplicationList.do?nowPage=${pb.startPageOfPageGroup-1}" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+					<span class="sr-only">Previous</span>
+				</a>
+			</li>
+		</c:if>
+		<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+			<c:choose>
+				<c:when test="${pb.nowPage!=i}">
+					<li class="page-item">
+						<a class="page-link" href="${pageContext.request.contextPath}/member/readMyApplicationList.do?nowPage=${i}">${i}</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item">
+						<a class="page-link" href="#">${i}</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			&nbsp;
+		</c:forEach>
+		<c:if test="${pb.nextPageGroup}">
+			<li class="page-item">
+				<a class="page-link" href="${pageContext.request.contextPath}/member/readMyApplicationList.do?nowPage=${pb.endPageOfPageGroup+1}" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+					<span class="sr-only">Next</span>
+				</a>
+			</li>
+		</c:if>
 	</ul>
 
 </div>

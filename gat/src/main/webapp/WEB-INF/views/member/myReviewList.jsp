@@ -20,10 +20,10 @@
 					</tr>
 				</thead>
 					<tbody>
-					<c:forEach var="pvo" items="${requestScope.rpListVO.list}">
+					<c:forEach var="pvo" items="${requestScope.rpListVO.list}" >
 						<tr>
 							<td>${pvo.rpNo}</td>
-							<td><a href="#">${pvo.rpTitle}</a></td>
+							<td><a href="${pageContext.request.contextPath}/member/readMyReviewDetail.do?rpNo=${pvo.rpNo}">${pvo.rpTitle}</a></td>
 							<td>${sessionScope.mvo.name}</td>
 							<td>${pvo.rpRegdate}</td>
 						</tr>

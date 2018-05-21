@@ -3,6 +3,9 @@ package org.kosta.gat.model.dao;
 import java.util.List;
 
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
+import org.kosta.gat.model.vo.post.application.ApplicationPostPagingBean;
+import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostPagingBean;
@@ -86,11 +89,8 @@ public class MemberDAOImpl implements MemberDAO {
 		}else {
 			rpPb=new ReviewPostPagingBean(totalMyReviewPostCount, nowPage);
 		}
-		System.out.println("aaa:" +rpPb.getStartRowNumber()+"/"+rpPb.getEndRowNumber());
 		rpPb.setId(id);
-		System.out.println("DAO에 아이디당"+id);
 		List<ReviewPostVO> rpList=template.selectList("member.readMyReviewPostList", rpPb);
-		System.out.println(rpList);
 		ReviewPostListVO rpListVO=new ReviewPostListVO(rpList, rpPb);
 		return rpListVO;
 	}
@@ -130,5 +130,33 @@ public class MemberDAOImpl implements MemberDAO {
 	public void updateMemberMileage(TakeDonationPostVO tdVO) {
 		template.update("member.updateMemberMileage",tdVO);
 		
+	}
+	/**
+	 * '나의 후기 목록'에서 
+	 * 해당 게시물을 클릭한 상세보기
+	 * 
+	 */
+	@Override
+	public ReviewPostVO readMyReviewDetail(String rpNo) {
+		ReviewPostVO reviewPostVO=template.selectOne("member.readMyReviewDetail", rpNo);
+		return reviewPostVO;
+	}
+	/**
+	 * 나의 재능기부 신청 내역
+	 */
+	@Override
+	public ApplicationPostListVO readMyApplicationList(String id, int nowPage) {
+		ApplicationPostPagingBean apPb=null;
+		//나의 후기글 목록의 수를 가져온다.
+		int totalMyApplicationPostCount=template.selectOne("member.totalMyApplicationPostCount",id);
+		if(nowPage==0) {
+			apPb=new ApplicationPostPagingBean(totalMyApplicationPostCount);
+		}else {
+			apPb=new ApplicationPostPagingBean(totalMyApplicationPostCount, nowPage);
+		}
+		apPb.setId(id);
+		List<ApplicationPostVO> apList=template.selectList("member.readMyApplicationPostList", apPb);
+		ApplicationPostListVO apListVO=new ApplicationPostListVO(apList, apPb);
+		return apListVO;
 	}
 }

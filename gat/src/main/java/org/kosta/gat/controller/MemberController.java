@@ -1,11 +1,15 @@
 package org.kosta.gat.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
+import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MemberController {
@@ -195,17 +200,46 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
-		System.out.println(rpListVO);
 		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
 	/**
-	* 작성이유 : 나의 활동목록 보기
+	* 작성이유 : 나의 재능기부 참여목록 
 	* 
 	* @author 백설희
 	*/
-	@RequestMapping("readMyActivityList.do")
-	public String readMyActivityList(String id,int nowPage,Model model) {
-		TakeDonationPostListVO tdListVO=memberService.readMyActivityList(id,nowPage);
-		return null;
+	@RequestMapping("member/readMyActivityList.do")
+	public ModelAndView readMyActivityList(int nowPage,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		TakeDonationPostListVO tdListVO=memberService.readMyActivityList(mvo.getId(),nowPage);
+		System.out.println(tdListVO);
+		return new ModelAndView("member/readMyActivityList.tiles","tdListVO",tdListVO);
+	}
+	/**
+	* 작성이유 : 나의 재능기부 신청 내역
+	* 
+	* @author 백설희
+	*/
+	@RequestMapping("member/readMyApplicationList.do")
+	public ModelAndView readMyApplicationList(int nowPage,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		ApplicationPostListVO apListVO=memberService.readMyApplicationList(mvo.getId(),nowPage);
+		System.out.println(apListVO);
+		return new ModelAndView("member/readMyApplicationList.tiles","apListVO",apListVO);
+	}
+	/**
+	* 작성이유 : 나의 후기 상세보기
+	* 
+	* @author 백설희
+	*/
+	@RequestMapping("member/readMyReviewDetail.do")
+	public String readMyReviewDetail(String rpNo,Model model) {
+		System.out.println("controller에서 rpNo 값 :"+rpNo);
+		ReviewPostVO reviewPostVO=memberService.readMyReviewDetail(rpNo);
+		System.out.println(reviewPostVO);
+		//redirectAttributes.addAttribute("reviewPostVO", reviewPostVO);
+		model.addAttribute("reviewPostVO", reviewPostVO);
+		return "member/readMyReviewDetail.tiles";
 	}
 }

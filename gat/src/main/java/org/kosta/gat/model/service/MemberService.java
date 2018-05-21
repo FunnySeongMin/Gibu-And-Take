@@ -1,8 +1,10 @@
 package org.kosta.gat.model.service;
 
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
+import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
@@ -34,4 +36,8 @@ public interface MemberService {
 	public void addMemberMileage(MileageTradeVO mileageTradeVO);
 
 	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO);
+
+	public ReviewPostVO readMyReviewDetail(String rpNo);
+
+	public ApplicationPostListVO readMyApplicationList(String id, int nowPage);
 }

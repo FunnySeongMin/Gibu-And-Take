@@ -1,8 +1,10 @@
 package org.kosta.gat.model.dao;
 
 import org.kosta.gat.model.vo.member.MemberVO;
+import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
+import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
@@ -37,6 +39,10 @@ public interface MemberDAO {
 	public void exchangeMileage(MileageTradeVO mileageTradeVO);
 	
 	public void updateMemberMileage(TakeDonationPostVO tdVO);
+
+	public ReviewPostVO readMyReviewDetail(String rpNo);
+
+	public ApplicationPostListVO readMyApplicationList(String id, int nowPage);
 
 
 }
