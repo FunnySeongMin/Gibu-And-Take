@@ -17,26 +17,33 @@
 					<tr>
 						<td>번호</td>
 						<td>제목</td>
+						<td>작성일</td>
 						<td>상태</td>
-						<td>작성일자</td>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${wqListVO.wqPostVO}" var="wqPostVO">
+				<c:set value="${wqListVO.wqPostVO }" var="wqPostVO"/>
+					<c:forEach items="${wqPostVO }" var="wqPostVO" varStatus="count">
 						<tr>
 							<td>${wqPostVO.wqNo}</td>
-							<td><a href="${pageContext.request.contextPath}/member/readMyWebQuestionDetail.do?wqNo=${wqPostVO.wqNo}">${wqPostVO.wqTitle}</a></td>
-							<td>${wqPostVO.wqStatus}</td>
-							<td>${wqPostVO.wqRegdate }</td>
+							<c:choose>
+								<c:when test="${!wqPostVO.answer}">
+									<td><a href="${pageContext.request.contextPath}/member/readMyWebQuestionDetail.do?wqNo=${wqPostVO.wqNo}" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle}</a></td>
+								</c:when>
+								<c:otherwise>
+									<td><a href="${pageContext.request.contextPath}/member/readMyWebQuestionDetail.do?wqNo=${wqPostVO.wqNo}">${wqPostVO.wqTitle }</a></td>
+								</c:otherwise>
+							</c:choose>
+							<td>${wqPostVO.wqRegdate}</td>
+							<c:choose>
+							<c:when test="${wqPostVO.wqStatus=='처리중'}">
+							<td><span class="label label-warning">${wqPostVO.wqStatus}</span></td>
+							</c:when>
+							<c:otherwise>
+							<td><span class="label label-danger">${wqPostVO.wqStatus}</span></td>
+							</c:otherwise>
+							</c:choose>
 						</tr>
-						<c:if test="${wqPostVO.wqStatus=='답변완료'}">
-							<tr>
-								<td></td>
-								<td><a href="${pageContext.request.contextPath}/member/readWebQuestionAnswer.do?wqno=${wqPostVO.wqNo}" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle}</a></td>
-								<td></td>
-								<td>${wqPostVO.wqRegdate}</td>
-							</tr>
-						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
