@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.kosta.gat.model.service.MemberService;
 import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
@@ -148,7 +149,7 @@ public class MemberController {
 	* @author 용다은
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="board/addWebQuestion.do")
-	public String addWebQuestion(HttpServletRequest request, WebQuestionPostVO webVO) {
+	public String addWebQuestion(HttpServletRequest request, WebQuestionPostVO webVO, RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
 		if(session==null||session.getAttribute("mvo")==null){
 			return "member/loginForm.tiles";
@@ -158,37 +159,73 @@ public class MemberController {
 		webVO.setMemberVO(mvo);
 		//addWebQuestion
 		memberService.addWebQuestion(webVO);
-		return "redirect:/home.do"; //테스트를 위해 일단 홈으로 보냅니다
+		//작성한 게시글을 바로 보여 주기 위해 wqNo 부여함
+		redirectAttributes.addAttribute("wqNo", +webVO.getWqNo());
+		return "redirect:/member/readMyWebQuestionDetail.do";
 	}
 	/**
-	* 작성이유 : 고객문의 게시판 게시글 보기
+	* 작성이유 : 나의 문의 게시판 목록 보기
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("readWebQuestion.do")
-	public String readWebQuestion(int nowPage,Model model) {
-		WebQuestionPostListVO wqListVO=memberService.readWebQuestion(nowPage);
-		return null;
+	@RequestMapping("member/readMyWebQuestionList.do")
+	public String readMyWebQuestionList(int nowPage, HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession(false);
+		if(session==null||session.getAttribute("mvo")==null){ //session 없는 경우 로그인 페이지로 보냄
+			return "member/loginForm.tiles";
+		}
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		WebQuestionPostListVO wqListVO = memberService.readMyWebQuestionList(mvo.getId(), nowPage);
+		model.addAttribute("wqListVO", wqListVO);
+		return "member/readMyWebQuestionList.tiles";
+	}
+/**
+	* 작성이유 : 고객문의 게시판 게시글 상세 보기
+	* 
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("member/readMyWebQuestionDetail.do")
+	public String readWebQuestion(int wqNo, Model model) {
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
+		model.addAttribute("wqPostVO", wqPostVO);
+		return "member/readMyWebQuestionDetail.tiles";
+	}
+	/**
+	* 작성이유 : 고객문의 게시판 게시글 수정 폼으로 이동하기 위해
+	* 
+	* @author 용다은
+	*/
+	@RequestMapping("member/updateWebQuestionForm.do")
+	public String updateWebQuestionForm(int wqNo, Model model) {
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
+		model.addAttribute("wqPostVO", wqPostVO);
+		return "member/updateWebQuestionForm.tiles";
 	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 수정
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("updateWebQuestion.do")
-	public String updateWebQuestion(WebQuestionPostVO wqVO) {
+	@RequestMapping(method=RequestMethod.POST, value="member/updateWebQuestion.do")
+	public String updateWebQuestion(WebQuestionPostVO wqVO, Model model) {
+		//새로 작성한 wqTitle과 wqContents를 받아온 wqVO를 이용해 update 시킴
 		memberService.updateWebQuestion(wqVO);
-		return null;
+		//wqNo를 이용해 detail을 읽어들임
+		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqVO.getWqNo());
+		//가져온 wqPostVO를 뿌려줌
+		model.addAttribute("wqPostVO", wqPostVO);
+		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**
 	* 작성이유 : 고객문의 게시판 게시글 삭제
 	* 
-	* @author 은성민
+	* @author 용다은
 	*/
-	@RequestMapping("deleteWebQuestion.do")
-	public String deleteWebQuestion() {
-		memberService.deleteWebQuestion();
-		return null;
+	@RequestMapping("member/deleteWebQuestion.do")
+	public String deleteWebQuestion(int wqNo) {
+		memberService.deleteWebQuestion(wqNo);
+		return "redirect:/member/readMyWebQuestionList.do?nowPage=1";
 	}
 	/**
 	* 작성이유 : 나의 후기목록 보기

@@ -23,11 +23,9 @@ public interface MemberService {
 	
 	public void addWebQuestion(WebQuestionPostVO webVO);
 
-	public WebQuestionPostListVO readWebQuestion(int nowPage);
-
 	public void updateWebQuestion(WebQuestionPostVO wqVO);
 
-	public void deleteWebQuestion();
+	public void deleteWebQuestion(int wqNo);
 
 	public ReviewPostListVO readMyReviewPostList(String id, int nowPage);
 
@@ -36,6 +34,10 @@ public interface MemberService {
 	public void addMemberMileage(MileageTradeVO mileageTradeVO);
 
 	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO);
+	
+	public WebQuestionPostListVO readMyWebQuestionList(String id, int nowPage);
+
+	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo);
 
 	public ReviewPostVO readMyReviewDetail(String rpNo);
 

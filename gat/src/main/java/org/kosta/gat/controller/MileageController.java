@@ -70,7 +70,6 @@ public class MileageController {
 		//session 정보를 확인
 		HttpSession session=request.getSession(false);
 		if(session==null||session.getAttribute("mvo")==null){
-				System.out.println("asdasdds");
 				return "member/loginForm.tiles";
 			}
 		else{ //login 상태면 mvo를 받아와서 MemberVO에 넣어줌

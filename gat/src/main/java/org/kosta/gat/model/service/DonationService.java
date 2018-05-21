@@ -15,6 +15,7 @@ import org.kosta.gat.model.vo.post.donation.DonationPostPagingBean;
 import org.kosta.gat.model.vo.post.donation.DonationPostVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,8 @@ public interface DonationService {
 	public DonationPostListVO readDonationList(int nowPage);
 
 	public DonationPostVO readDonationDetail(String dpno);
+	
+	public List<TakeDonationPostVO> readDonationCheerUpMessageList(String dpno);
 
 	public ReviewPostListVO readDonationReviewList(String dpno,int nowPage);
 
@@ -41,9 +44,10 @@ public interface DonationService {
 	public void addPresent(ArrayList<PresentVO> list);
 
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb);
-	
-	
-	
-	
 
+	public List<Map<String, Object>> DonationListView2();
+
+	public List<Map<String, Object>> DonationListRank();
+
+	public List<ReviewPostVO> readDonationReviewList(String dpno);
 }

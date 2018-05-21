@@ -1,8 +1,6 @@
 package org.kosta.gat.model.dao;
 
 import java.util.List;
-
-import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostPagingBean;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.mybatis.spring.SqlSessionTemplate;

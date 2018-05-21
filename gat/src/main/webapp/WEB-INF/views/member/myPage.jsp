@@ -89,6 +89,7 @@
                      </div>
                      <a href="${pageContext.request.contextPath}/member/readMyActivityList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">활동목록</a>
                      <a href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">후기내역</a>
+                     <a href="${pageContext.request.contextPath}/member/readMyWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">문의</a>
                   </div>
                </div>
             </div>

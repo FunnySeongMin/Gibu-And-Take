@@ -4,8 +4,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.gat.model.service.AdminService;
+import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
@@ -68,6 +71,8 @@ public class AdminController {
 			model.addAttribute("apno", apno);
 			return "admin/writeAnswer.tiles";
 		}else {
+			ApplicationPostVO apVO=adminService.readUnReceivedApplicationDetail(apno);
+			adminService.addDonationPost(apVO);
 			return "redirect:readUnReceivedApplicationList.do?nowPage=1";
 		}
 	}
@@ -80,16 +85,6 @@ public class AdminController {
 	public String addApplicationAnswer(ApplicationPostVO apVO,HttpServletRequest request) {
 		adminService.addApplicationAnswer(apVO);
 		return "redirect:readUnReceivedApplicationDetail.do?apno="+apVO.getAppNo();
-	}
-	/**
-	* 작성이유 : 승인된 신청서 게시글 등록
-	* 
-	* @author 은성민
-	*/
-	@RequestMapping("addDonationPost.do")
-	public String addDonationPost(ApplicationPostVO apVO) {
-		adminService.addDonationPost(apVO);
-		return null;
 	}
 	/**
 	* 작성이유 : 사이트 문의 목록보기
@@ -111,7 +106,17 @@ public class AdminController {
 	public String readWebQuestionDetail(String wqno,Model model) {
 		WebQuestionPostVO wqVO=adminService.readWebQuestionDetail(wqno);
 		model.addAttribute("wqVO", wqVO);
-		return null;
+		return "admin/readWebQuestionDetail.tiles";
+	}
+	/**
+	 * 작성이유 :  문의 답변작성 폼으로 이동
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("writeWebQuestionAnswer.do")
+	public String writeWebQuestionAnswer(String wqno,Model model) {
+		model.addAttribute("wqno", wqno);
+		return "admin/writeWebQuestionAnswer.tiles";
 	}
 	/**
 	* 작성이유 : 사이트 문의 답변작성
@@ -121,7 +126,7 @@ public class AdminController {
 	@RequestMapping("addWebQuestionAnswer.do")
 	public String addWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminService.addWebQuestionAnswer(wqVO);
-		return null;
+		return "redirect:readWebQuestionDetail.do?wqno="+wqVO.getWqNo();
 	}
 	/**
 	* 작성이유 : 사이트 문의 답변수정
@@ -131,6 +136,69 @@ public class AdminController {
 	@RequestMapping("updateWebQuestionAnswer.do")
 	public String updateWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminService.updateWebQuestionAnswer(wqVO);
+		return null;
+	}
+	/**
+	 * 작성이유 : 전체 회원 리스트 목록보기
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readMemberList.do")
+	public String readMemberList(int nowPage,Model model) {
+		MemberListVO mListVO=adminService.readMemberList(nowPage);
+		model.addAttribute("mListVO", mListVO);
+		return "admin/readMemberList.tiles";
+	}
+	/**
+	 * 작성이유 : 탈퇴한 회원 리스트 목록보기
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readDropMemberList.do")
+	public String readDropMemberList(int nowPage,Model model) {
+		MemberListVO mListVO=adminService.readDropMemberList(nowPage);
+		model.addAttribute("mListVO", mListVO);
+		return "admin/readDropMemberList.tiles";
+	}
+	/**
+	 * 작성이유 : 회원 강제탈퇴
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("deleteMember.do")
+	public String deleteMember(String id) {
+		adminService.deleteMember(id);
+		return "redirect:readMemberList.do?nowPage=1";
+	}
+	/**
+	 * 작성이유 : 탈퇴한 회원 복구
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("restoreMember.do")
+	public String restoreMember(String id) {
+		adminService.restoreMember(id);
+		return "redirect:readDropMemberList.do?nowPage=1";
+	}
+	/**
+	 * 작성이유 : 포인트 지급대상 리스트
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readTradePoint.do")
+	public String readTradePoint(int nowPage,Model model) {
+		TakeDonationPostListVO tdListVO=adminService.readTradePoint(nowPage);
+		model.addAttribute("tdListVO", tdListVO);
+		return "admin/readTradePointList.tiles";
+	}
+	/**
+	 * 작성이유 : 포인트 지급
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("givePoint.do")
+	public String givePoint(String id,int mileage) {
+		System.out.println(id+" "+mileage);
 		return null;
 	}
 }

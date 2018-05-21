@@ -10,6 +10,7 @@ import org.kosta.gat.model.vo.post.review.ReviewPostListVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
+import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostPagingBean;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,19 +50,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public WebQuestionPostListVO readWebQuestion(int nowPage) {
-		return memberDAO.readWebQuestion(nowPage);
-	}
-
-	@Override
 	@Transactional
 	public void updateWebQuestion(WebQuestionPostVO wqVO) {
 		memberDAO.updateWebQuestion(wqVO);
 	}
 
 	@Override
-	public void deleteWebQuestion() {
-		memberDAO.deleteWebQuestion();
+	@Transactional
+	public void deleteWebQuestion(int wqNo) {
+		memberDAO.deleteWebQuestion(wqNo);
 	}
 
 	@Override
@@ -89,6 +86,30 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public void exchangeMemberMileage(MileageTradeVO mileageTradeVO) {
 		memberDAO.exchangeMileage(mileageTradeVO);
+	}
+	
+	@Override
+	@Transactional
+	public WebQuestionPostListVO readMyWebQuestionList(String id, int nowPage) {
+		//목록에 보여 줄 문의 내역 수를 가져옴
+				int totalCount= memberDAO.getTotalQuestionContentCount(id);
+				//페이징빈 생성
+				WebQuestionPostPagingBean pagingBean=null;
+				if(nowPage==0) {
+					pagingBean=new WebQuestionPostPagingBean(totalCount);
+					pagingBean.setId(id);
+				}
+				else {
+					pagingBean=new WebQuestionPostPagingBean(totalCount, nowPage);
+					pagingBean.setId(id);
+				}
+				return new WebQuestionPostListVO(memberDAO.readMyWebQuestionList(pagingBean),pagingBean);
+			}
+
+	@Override
+	@Transactional
+	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo) {
+		return memberDAO.readMyWebQuestionDetail(wqNo);
 	}
 	/**
 	 * 참여후기 상세보기 

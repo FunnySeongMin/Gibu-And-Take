@@ -3,7 +3,8 @@ package org.kosta.gat.model.vo.post.webquestion;
 import org.kosta.gat.model.vo.member.MemberVO;
 
 public class WebQuestionPostVO {
-	private String wqNo;
+	private int wqNo;
+	private int thread;
 	private String wqTitle;
 	private String wqContents;
 	private String wqRegdate;
@@ -11,10 +12,19 @@ public class WebQuestionPostVO {
 	private String wqStatus;
 	private MemberVO memberVO;
 	
+	public boolean isAnswer() { 
+		int num=this.thread%100;
+		if(num==0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	public WebQuestionPostVO() {
 		super();
 	}
-	
+
 	public WebQuestionPostVO(String wqTitle, String wqContents, String wqRegdate, String wqParentNo, String wqStatus,
 			MemberVO memberVO) {
 		super();
@@ -26,10 +36,11 @@ public class WebQuestionPostVO {
 		this.memberVO = memberVO;
 	}
 
-	public WebQuestionPostVO(String wqNo, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
+	public WebQuestionPostVO(int wqNo,int thread, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
 			String wqStatus, MemberVO memberVO) {
 		super();
 		this.wqNo = wqNo;
+		this.thread = thread;
 		this.wqTitle = wqTitle;
 		this.wqContents = wqContents;
 		this.wqRegdate = wqRegdate;
@@ -37,11 +48,17 @@ public class WebQuestionPostVO {
 		this.wqStatus = wqStatus;
 		this.memberVO = memberVO;
 	}
-	public String getWqNo() {
+	public int getWqNo() {
 		return wqNo;
 	}
-	public void setWqNo(String wqNo) {
+	public void setWqNo(int wqNo) {
 		this.wqNo = wqNo;
+	}
+	public int getThread() {
+		return thread;
+	}
+	public void setThread(int thread) {
+		this.thread = thread;
 	}
 	public String getWqTitle() {
 		return wqTitle;
@@ -81,8 +98,8 @@ public class WebQuestionPostVO {
 	}
 	@Override
 	public String toString() {
-		return "WebQuestionPostVO [wqNo=" + wqNo + ", wqTitle=" + wqTitle + ", wqContents=" + wqContents
-				+ ", wqRegdate=" + wqRegdate + ", wqParentNo=" + wqParentNo + ", wqStatus=" + wqStatus + ", memberVO="
-				+ memberVO + "]";
+		return "WebQuestionPostVO [wqNo=" + wqNo + ", thread=" + thread + ", wqTitle=" + wqTitle + ", wqContents="
+				+ wqContents + ", wqRegdate=" + wqRegdate + ", wqParentNo=" + wqParentNo + ", wqStatus=" + wqStatus
+				+ ", memberVO=" + memberVO + "]";
 	}
 }

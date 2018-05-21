@@ -18,10 +18,11 @@
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet"
 	media="screen">
 <!-- font awesome -->
-<link rel="stylesheet"
+<script src="https://use.fontawesome.com/132891cbd9.js"></script>
+<!-- <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
 	integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> -->
 </head>
 <body>
 	<tiles:insertAttribute name="header" />
@@ -253,50 +254,9 @@
 								});
 					});
 	</script>
-	<script type="text/javascript">
-$(document).ready(function() {
-    var win = $(window);
-    var i=0;
+	
+	
 
-    // 스크롤할때마다 로드
-    win.scroll(function() {
-        // 끝에 도달하면 로드?
-        if ($(document).height() - win.height() == win.scrollTop()) {
-            $('#loading').hide();
-
-            // Uncomment this AJAX call to test it
-            
-            $.ajax({
-            	type:"get",
-                url: 'DonationListView.do',
-                data: 
-                success: function(result) {
-                	/* for (var i=0 ; i<result.length ; i++){
-                		alert();
-                	} */
-                	
-                	if(result){
-                		$('#posts').append("<tr>");
-                		$('#posts').append("<td>"+result[i].NO+"</td>");
-                		$('#posts').append("<td>"+result[i].TITLE+"</td>");
-                		$('#posts').append("<td>"+result[i].TIME_POSTED+"</td>");
-                		$('#posts').append("<td>"+result[i].ID);
-                		$('#posts').append("</tr>");
-                		i=i+1
-                	}
-                	//alert(result); 
-                    
-                }
-            });
-            $('#loading').hide();
-
-          /*   $('#posts').append(randomPost());
-            $('#loading').hide(); */
-        }
-    });
-});
-
-</script>
 
 </body>
 
