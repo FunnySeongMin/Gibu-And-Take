@@ -28,4 +28,8 @@
     <filter-name>encodeFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!--  세션 유지 시간을 위해 추가  -->
+  <session-config>
+  <session-timeout>6000</session-timeout>
+  </session-config>
 </web-app>
