@@ -185,8 +185,9 @@ public class AdminController {
 	 * @author 은성민
 	 */
 	@RequestMapping("readTradePoint.do")
-	public String readTradePoint(int nowPage) {
+	public String readTradePoint(int nowPage,Model model) {
 		TakeDonationPostListVO tdListVO=adminService.readTradePoint(nowPage);
-		return null;
+		model.addAttribute("tdListVO", tdListVO);
+		return "admin/readTradePointList.tiles";
 	}
 }
