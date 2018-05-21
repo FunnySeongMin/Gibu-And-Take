@@ -2,17 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-	function deleteMember(id){
-		var flag=confirm(id+"님을 강제탈퇴 시키시겠습니까?");
+	function restoreMember(id){
+		var flag=confirm(id+"님을 복구 시키시겠습니까?");
 		if(flag){
-			location.href="${pageContext.request.contextPath}/deleteMember.do?id="+id;
+			location.href="${pageContext.request.contextPath}/restoreMember.do?id="+id;
 		}else{
 			return false;
 		}
 	}
 </script>
 <div class="page-heading">
-	<h4 class="py-5 text-center sub2-txt">회원관리</h4>
+	<h4 class="py-5 text-center sub2-txt">탈퇴회원관리</h4>
 </div>
 <div class="container">
 	<div class="col-10 offset-lg-1">
@@ -35,7 +35,6 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mListVO.mlist }" var="mlist">
-						<c:if test="${mlist.memberGroupVO.mgroupNo!='4' }">
 							<tr>
 								<c:set value="${mlist.id }" var="id"></c:set>
 								<td>${id }</td>
@@ -47,11 +46,10 @@
 								<td>${mlist.memberGroupVO.mgroupName }</td>
 								<td>${mlist.memberGradeVO.mgradeName }</td>
 								<td>
-									<input type="button" value="강제탈퇴" onclick="return deleteMember('${id}')" 
+									<input type="button" value="복구" onclick="return restoreMember('${id}')" 
 									class="btn btn-sub-2-gnt btn-block">
 								</td> 
 							</tr>
-						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

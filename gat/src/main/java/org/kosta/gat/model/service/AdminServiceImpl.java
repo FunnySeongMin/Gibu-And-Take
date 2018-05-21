@@ -6,6 +6,7 @@ import org.kosta.gat.model.dao.AdminDAO;
 import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Service;
@@ -89,5 +90,27 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public MemberListVO readMemberList(int nowPage) {
 		return adminDAO.readMemberList(nowPage);
+	}
+
+	@Override
+	@Transactional
+	public void deleteMember(String id) {
+		adminDAO.deleteMember(id);
+	}
+
+	@Override
+	public MemberListVO readDropMemberList(int nowPage) {
+		return adminDAO.readDropMemberList(nowPage);
+	}
+
+	@Override
+	@Transactional
+	public void restoreMember(String id) {
+		adminDAO.restoreMember(id);
+	}
+
+	@Override
+	public TakeDonationPostListVO readTradePoint(int nowPage) {
+		return adminDAO.readTradePoint(nowPage);
 	}
 }

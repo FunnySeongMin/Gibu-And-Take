@@ -7,6 +7,7 @@ import org.kosta.gat.model.service.AdminService;
 import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 import org.springframework.stereotype.Controller;
@@ -146,5 +147,46 @@ public class AdminController {
 		MemberListVO mListVO=adminService.readMemberList(nowPage);
 		model.addAttribute("mListVO", mListVO);
 		return "admin/readMemberList.tiles";
+	}
+	/**
+	 * 작성이유 : 탈퇴한 회원 리스트 목록보기
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readDropMemberList.do")
+	public String readDropMemberList(int nowPage,Model model) {
+		MemberListVO mListVO=adminService.readDropMemberList(nowPage);
+		model.addAttribute("mListVO", mListVO);
+		return "admin/readDropMemberList.tiles";
+	}
+	/**
+	 * 작성이유 : 회원 강제탈퇴
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("deleteMember.do")
+	public String deleteMember(String id) {
+		adminService.deleteMember(id);
+		return "redirect:readMemberList.do?nowPage=1";
+	}
+	/**
+	 * 작성이유 : 탈퇴한 회원 복구
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("restoreMember.do")
+	public String restoreMember(String id) {
+		adminService.restoreMember(id);
+		return "redirect:readDropMemberList.do?nowPage=1";
+	}
+	/**
+	 * 작성이유 : 포인트 지급대상 리스트
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readTradePoint.do")
+	public String readTradePoint(int nowPage) {
+		TakeDonationPostListVO tdListVO=adminService.readTradePoint(nowPage);
+		return null;
 	}
 }

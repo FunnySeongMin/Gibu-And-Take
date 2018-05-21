@@ -64,7 +64,7 @@
                      </div>
                      <div class="text-center">
                      <a href="${pageContext.request.contextPath}/readMemberList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm mr-1">회원관리</a>
-                     <a href="${pageContext.request.contextPath}" class="btn btn-sub-2-gnt btn-sm mr-1">탈퇴한 회원관리</a>
+                     <a href="${pageContext.request.contextPath}/readDropMemberList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm mr-1">탈퇴한 회원관리</a>
                      </div>
                   </div>
                </div>
@@ -74,7 +74,7 @@
                      <div class="card-text text-center">
                         <p>지급 예정  ${tradePointCount}건</p>
                      </div>
-                     <div class="text-center"><a href="" class="btn btn-sub-2-gnt btn-sm">바로가기</a></div>
+                     <div class="text-center"><a href="${pageContext.request.contextPath}/readTradePoint.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">바로가기</a></div>
                   </div>
                </div>
             </div>

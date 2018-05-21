@@ -188,10 +188,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select row_number() over(order by id desc) rnum,id,password,
 		name,address,email,to_char(birthday,'yyyy.mm.dd') birthday,mileage,
 		total_use_mileage,mgroup_no,mgrade_no
-		from gt_member where mgroup_no!=5) m
+		from gt_member where mgroup_no!='5') m
 		where rnum between #{startRowNumber} 
 		and #{endRowNumber} order by rnum desc
 	]]>
+	</select>
+	
+	<update id="deleteMember" parameterType="string">
+		update gt_member set mgroup_no='5' where id=#{value}
+	</update>
+	
+	<select id="totalDropMemberCount" resultType="int">
+		select count(*) from gt_member where mgroup_no='5'
+	</select>
+	
+	<select id="readDropMemberList" parameterType="memberPagingBean" resultMap="mvo">
+	<![CDATA[
+		select rnum,m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+		m.total_use_mileage,m.mgroup_no,m.mgrade_no
+		from (select row_number() over(order by id desc) rnum,id,password,
+		name,address,email,to_char(birthday,'yyyy.mm.dd') birthday,mileage,
+		total_use_mileage,mgroup_no,mgrade_no
+		from gt_member where mgroup_no='5') m
+		where rnum between #{startRowNumber} 
+		and #{endRowNumber} order by rnum desc
+	]]>
+	</select>
+	
+	<update id="restoreMember">
+		update gt_member set mgroup_no='1' where id=#{value}
+	</update>
+	
+	<resultMap type="takeDonationPostVO" id="tdPostVO">
+		<result column="td_no" property="tdNo"/>
+		<result column="td_regdate" property="tdRegdate"/>
+		<result column="td_mileage" property="tdMileage"/>
+		<result column="cheerup_message" property="cheerUpMessage"/>
+		<collection property="memberVO" javaType="memberVO" 
+		column="id" select="selectTDMember"/>
+		<collection property="donationPostVO" javaType="donationPostVO" 
+		column="dp_no" select="selectTDDonation"/>
+	</resultMap>
+	
+	<select id="selectTDDonation" resultType="donationPostVO">
+	<![CDATA[
+		select dp.dp_no,dp.dp_title,dp.dp_summery,dp.dp_contents,dp.dp_place,
+		dp.dp_imgdirectory,to_char(dp.dp_regdate,'yyyy.mm.dd') dp_regdate,
+		to_char(dp.start_date,'yyyy.mm.dd') start_date,to_char(dp.end_date,'yyyy.mm.dd) end_date,
+		dp.dp_count,dp.goal_mileage,dp.donation_mileage,dp.total_entry,dp.dp_status
+		from donation_post dp,take_donation td
+		where dp.dp_no=td.dp_no where td.dp_no=#{value}
+	]]>
+	</select>
+	
+	<select id="selectTDMember" resultMap="mvo">
+		select m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+		m.total_use_mileage,m.mgroup_no,m.mgrade_no
+		from gt_member m, take_donation td
+		where m.id=td.id and td.id=#{value}
+	</select>
+	
+	<select id="readTradePointList" resultMap="tdPostVO">
+	<![CDATA[
+		select rnum,td.td_no,td.td_regdate,td.td_mileage,td.cheerup_message,td.mileage_status
+		from (select row_number() over(order by td_no desc) rnum,td_no,
+		to_char(td_regdate,'yyyy.mm.dd') td_regdate,
+		td_mileage,cheerup_message,mileage_status,id,dp_no
+		from take_donation where mileage_status='지급대기') td
+		where rnum between #{startRowNumber} and #{endRowNumber} order by td_no desc
+		]]>
 	</select>
 	
 </mapper>

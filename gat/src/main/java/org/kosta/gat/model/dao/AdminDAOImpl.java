@@ -8,6 +8,9 @@ import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostPagingBean;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostPagingBean;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostPagingBean;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
@@ -125,5 +128,44 @@ public class AdminDAOImpl implements AdminDAO {
 		List<MemberVO> list=template.selectList("admin.readMemberList",mPb);
 		mListVO=new MemberListVO(list, mPb);
 		return mListVO;
+	}
+
+	@Override
+	public void deleteMember(String id) {
+		template.update("admin.deleteMember", id);
+	}
+
+	@Override
+	public MemberListVO readDropMemberList(int nowPage) {
+		MemberListVO mListVO=null;
+		int totalDropMemberCount=template.selectOne("admin.totalDropMemberCount");
+		MemberPagingBean mPb=null;
+		if(nowPage==1) {
+			mPb=new MemberPagingBean(totalDropMemberCount);
+		}else {
+			mPb=new MemberPagingBean(totalDropMemberCount, nowPage);
+		}
+		List<MemberVO> list=template.selectList("admin.readDropMemberList",mPb);
+		mListVO=new MemberListVO(list, mPb);
+		return mListVO;
+	}
+
+	@Override
+	public void restoreMember(String id) {
+		template.update("admin.restoreMember", id);
+	}
+
+	@Override
+	public TakeDonationPostListVO readTradePoint(int nowPage) {
+		TakeDonationPostListVO tdListVO=null;
+		TakeDonationPostPagingBean tdPb=null;
+		int totalTradePointCOunt=template.selectOne("admin.tradePointCount");
+		if(nowPage==1) {
+			tdPb=new TakeDonationPostPagingBean(totalTradePointCOunt);
+		}else {
+			tdPb=new TakeDonationPostPagingBean(totalTradePointCOunt, nowPage);
+		}
+		List<TakeDonationPostVO> tdVOList=template.selectList("admin.readTradePointList", tdPb);
+		return null;
 	}
 }
