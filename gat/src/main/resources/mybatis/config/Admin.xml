@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
 		<![CDATA[
 			select app.app_no,app.app_title,app_summery,app.app_contents,app.app_place,
-			to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
+			app.app_imgdirectory,to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(app.start_date,'yyyy.mm.dd') start_date,
 			to_char(app.end_date,'yyyy.mm.dd') end_date,
 			app.goal_mileage,app.app_status
