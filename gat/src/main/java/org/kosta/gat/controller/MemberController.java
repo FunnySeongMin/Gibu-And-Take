@@ -178,7 +178,6 @@ public class MemberController {
 /**
 	* 작성이유 : 고객문의 게시판 게시글 상세 보기
 	* 
-	* 
 	* @author 용다은
 	*/
 	@RequestMapping("member/readMyWebQuestionDetail.do")
