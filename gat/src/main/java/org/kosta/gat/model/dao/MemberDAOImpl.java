@@ -160,4 +160,9 @@ public class MemberDAOImpl implements MemberDAO {
 		ApplicationPostListVO apListVO=new ApplicationPostListVO(apList, apPb);
 		return apListVO;
 	}
+
+	@Override
+	public WebQuestionPostVO readWebQuestionAnswer(int wqNo) {
+		return template.selectOne("member.readWebQuestionAnswer", wqNo);
+	}
 }

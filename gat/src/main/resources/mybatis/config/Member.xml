@@ -82,12 +82,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update gt_member set mileage=mileage-#{tdMileage}, total_use_mileage=total_use_mileage+#{tdMileage}
  		where id=#{memberVO.id} 
  	</update>
+ 	
+ 	<!-- 문의 글 작성하기 -->
  	<insert id="addWebQuestion" parameterType="webQuestionPostVO">
  		<selectKey keyProperty="wqNo" resultType="int" order="BEFORE">
  			select web_question_seq.nextval from dual
  		</selectKey>
  		insert into web_question(wq_no, thread, wq_title, wq_contents, id) values (#{wqNo}, #{wqNo}*100, #{wqTitle}, #{wqContents}, #{memberVO.id})
  	</insert>
+ 	
+ 	<!--  문의 글 페이징을 위해 글 수 세기  -->
  	<select id = "getTotalQuestionContentCount" parameterType="string" resultType="int">
  		select count(*) from web_question where id=#{value}
  	</select>
@@ -111,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=wq.id and wq.wq_no=#{value}
 	</select>
 	
+	<!-- 나의 문의 글 목록 뽑기 -->
 	<select id="readMyWebQuestionList" parameterType="webQuestionPostPagingBean" resultMap="wqPostVO">
 			select rnum,wq.wq_no,wq.thread,wq.wq_title,wq.wq_regdate,wq.wq_status,wq.wq_parent_no
 			from (select row_number() over(order by thread desc) rnum,wq_no,thread,wq_title,
@@ -120,17 +125,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by thread desc
 	</select>
 	
+	<!--  나의 문의 글 상세 보기 -->
  	<select id = "readMyWebQuestionDetail" parameterType="int" resultType="webQuestionPostVO">
 		select wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, 
 		to_char(wq_regdate, 'YYYY.MM.DD') as wqRegdate, wq_status as wqStatus
 		from web_question where wq_no=#{value}
  	</select>
+ 	
+ 	<!-- 문의 글 수정하기 -->
  	<update id="updateWebQuestion" parameterType="webQuestionPostVO">
  		update web_question set wq_title=#{wqTitle}, wq_contents=#{wqContents} where wq_no=#{wqNo}
  	</update>
- 	<update id="deleteWebQuestion" parameterType="int">
+ 	
+ 	<!-- 문의 글 삭제하기 -->
+ 	<delete id="deleteWebQuestion" parameterType="int">
  		delete from web_question where wq_no=#{wqNo}
- 	</update>
+ 	</delete>
+ 	
+ 	<!-- 문의 글에 해당하는 답변 내용 가져오기 -->
+ 	<select id="readWebQuestionAnswer" resultType="webQuestionPostVO" parameterType="int">
+ 	select wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, 
+ 	wq_regdate as wqRegdate, wq_parent_no as wqParentNo from web_question where wq_parent_no = #{value}
+ 	</select>
+ 	
  	<!-- 나의 후기 상세보기 -->
  	<select id="readMyReviewDetail" resultMap="reviewPostRM" resultType="reviewPostVO">
  		SELECT r.rp_no, r.rp_title, r.rp_contents, 
@@ -141,12 +158,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INNER JOIN take_donation t ON t.td_no = r.td_no
 		AND r.rp_no=#{value}
  	</select>
+ 	
  	<!-- 나의 재능기부 참여의 페이징을 위한 count -->
  	<select id="totalMyActivityCount" resultType="int">
  		select count(*) 
 		from take_donation
 		where id=#{value}
  	</select>
+ 	
  	<!-- 나의 재능기부 참여 목록 -->
  	<select id="readMyActivityList" resultType="takeDonationPostVO" resultMap="takeDonationPostRM" parameterType="takeDonationPostPagingBean">
  		select t.td_no, t.td_regdate, t.td_mileage, d.dp_title from(

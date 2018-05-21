@@ -15,10 +15,10 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<td>번호</td>
-						<td>제목</td>
-						<td>작성일</td>
-						<td>상태</td>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성일</th>
+						<th>상태</th>
 					</tr>
 				</thead>
 				<tbody>
