@@ -5,9 +5,8 @@
 		<div class="row">
 			 <div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }">
-						<img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-						<!-- img src = ${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_IMGDIRECTORY } -->
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }">${rank[0].DP_TITLE }</a>
@@ -18,8 +17,8 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }">
-						<img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }">${rank[1].DP_TITLE }</a>
@@ -30,7 +29,7 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }">${rank[2].DP_TITLE }</a>
@@ -65,7 +64,8 @@
       <div class="col-md-5">
         <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">${list[0].DP_TITLE }</a></h3>
         <p>${list[0].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="${list[0].DP_NO }>View Project
+        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">View Project
+
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -175,8 +175,13 @@
 
 
 
+<<<<<<< HEAD
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	
+=======
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 <script type="text/javascript">
 $(document).ready(function() {
     var win = $(window);
@@ -197,7 +202,7 @@ $(document).ready(function() {
                     //
                     //$('#loading').hide();
                     if(result){
-                    	$('#posts').append("<hr><div class=row><div class=col-md-7><a href=${pageContext.request.contextPath }/donation/detailDonation.do><img class=img-fluid rounded mb-3 mb-md-0 src=http://placehold.it/700x300 alt=></a></div><div class=col-md-5><h3><a href=${pageContext.request.contextPath }/donation/detailDonation.do>"+result[i].DP_TITLE+"</a></h3><p>"+result[i].DP_SUMMERY+"</p><a class=btn btn-primary href=#>View Project<span class=glyphicon glyphicon-chevron-right></span></a></div></div>");
+                    	$('#posts').append("<hr><div class='row'><div class='col-md-7'><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+"><img class='img-fluid rounded mb-3 mb-md-0' src=http://placehold.it/700x300 alt=></a></div><div class='col-md-5'><h3><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">"+result[i].DP_TITLE+"</a></h3><p>"+result[i].DP_SUMMERY+"</p><a class='btn btn-primary' href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">View Project<span class='glyphicon glyphicon-chevron-right'></span></a></div></div>");
                     	
                     	i=i+1
                     }
