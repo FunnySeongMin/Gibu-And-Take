@@ -19,7 +19,15 @@
 				<div class="progress-bar bg-sub-3-gnt" role="progressbar" style="width:${(dpVO.donationMileage/dpVO.goalMileage)*100 }%" aria-valuenow="${(dpVO.donationMileage/dpVO.goalMileage)*100 }" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 			<p>${dpVO.dpSummery }</p>
-			<button id="entryBtn" class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참가하기</button>			
+			<c:choose>
+				<c:when test="${sessionScope.mvo==null||sessionScope.mvo.id==null }">
+					<button id="entryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>		
+				</c:when>
+				<c:otherwise>
+					<button id="entryBtn" class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참여하기</button>	
+				</c:otherwise>
+			</c:choose>
+				
 		</div>
 		<!-- 참여 신청 Modal -->
 		<div class="modal fade" id="entryForm" role="dialog">
@@ -152,46 +160,46 @@
 					<h4 class="mt-5 pb-3 mb-3 border-bottom">참여 후기</h4>
 					<div class="mb-3">
 						<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
-						<a href="#" class="text-dark small-txt" data-target="#writeReviewFrom">후기 작성하기<i class="far fa-edit"></i></a>
+						<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>
 						<!-- 후기 작성 Modal -->
-						<div class="modal fade" id="writeReviewFrom" role="dialog">
+						<div class="modal fade" id="writeReviewForm" role="dialog">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
 									<div class="modal-header bg-point-gnt">
 										<h5 class="modal-title text-center text-white ml-3">후기 작성</h5>
 										<button type="button" class="mr-2 close" data-dismiss="modal">&times;</button>
 									</div>											
-									<form method="post" action="${pageContext.request.contextPath }/addTakeDonation.do" id="entryDonation">
+									<form method="post" action="${pageContext.request.contextPath}/addReview.do" id="addReview">
 										<div class="modal-body bg-light">
-											<div class="row m-3 p-3 border">
-												${dpVO }
-												<input type="hidden" name="dpno" value="${dpVO.dpNo}">
+											<div class="row m-1 p-3 border">
+												<input type="hidden" name="dpno" value="${dpVO.dpNo }">
 												<p>${dpVO.dpTitle }</p>
-												<p>${dpVO.startDate } - ${dpVO.endDate }</p>
-											</div>
-											<div class="row m-3">
-												<label for="">제목</label>
-												<div class="col-lg-3"><input type="text" class="form-control form-control-sm" name="tdMileage" id="tdMileage"></div>
-												<small class="mt-1">보유 마일리지 : <span id="userMileage">${sessionScope.mvo.mileage }</span></small>
+												<p>프로젝트 기간, 기부자명, 대표이미지, </p>
 											</div>
 											<div class="form-group my-3">
-												<label class="">한줄 응원 메세지</label><input type="text" class="form-control" name="cheerUpMessage" id="cheerUpMessage">
+												<label for="">제목</label>
+												<input type="text" class="form-control" name="rpTitle" id="rpTitle">
 											</div>
-											<div class="form-check small-txt">
-												<input type="checkbox" class="form-check-input" id="entryAgree">
-												<label class="form-check-label" for="entryAgree">상기 내용에 동의합니다</label>								
-											</div>							
+											<div calss="form-group my-3">
+												<label class="">별점</label>
+												<input type="number" class="form-control form-sm"  name="rpRate" min="1" max="10" id="rpRate">
+											</div>
+											<div class="form-group my-3">
+												<label class="">내용</label>
+												<textarea rows="7" maxlength="300" class="form-control" name="rpDontents" id="rpDontents"></textarea>
+											</div>
+															
 										</div>
 										<div class="modal-footer">
-											<button type="submit" class="btn btn-point-gnt">신청하기</button>
+											<button type="submit" class="btn btn-point-gnt">후기 등록</button>
 											<button type="button" class="btn" id="cancelBtn">취소</button>
 										</div>					
-									</form>
+									</form>									
+									<!-- /.후기 작성 modal -->
 								</div>
 						
 							</div>
 						</div>
-						<!-- /.후기 작성 modal -->
 						${rpList }
 					</div>
 					<table class="table table-hover">
