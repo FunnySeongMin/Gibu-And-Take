@@ -1,7 +1,5 @@
 package org.kosta.gat.model.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.DonationDAO;
@@ -11,6 +9,7 @@ import org.kosta.gat.model.dao.MileageDAO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageUseGroupVO;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +27,7 @@ public class EntryServiceImpl implements EntryService {
 
 	/**
 	 * 재능기부 참여
+	 * 
 	 * 1. 재능기부 참여
 	 * 		- 재능기부 응원메시지 내용(입력안하면 default), 회원id, 재능기부 게시글 번호가 db에 저장
 	 * 2. 마일리지 거래
@@ -39,8 +39,7 @@ public class EntryServiceImpl implements EntryService {
 	 * 4. 재능기부
 	 * 		- 회원이 재능기부 참여 한 후  회원이 사용한 마일리지 액수를
 	 * 				모금 마일리지 누적
-	 * 		- 참여자 수+1
-	 * 				
+	 * 		- 참여자 수+1	
 	 * 			
 	 */
 	@Override
@@ -60,13 +59,20 @@ public class EntryServiceImpl implements EntryService {
 		// 해당 재능기부 모금 마일리지, 총 재능기부 참여자 수 update
 		donationDAO.updateDonationMileageAndTotalEntry(tdVO);
 	}
+	
+	// 재능기부 참여여부 확인
+	@Override
+	public TakeDonationPostVO findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
+		return entryDAO.findEntryByIdAndDpno(tdVO);
+	}
 
+	//후기 작성
 	@Override
 	@Transactional
 	public void addReview(ReviewPostVO rpVO) {
 		entryDAO.addReview(rpVO);
 	}
-
+	
 	/**
 	 * 응원메시지 목록 
 	 * 작성이유 : 재능기부 상세페이지에 보여질 응원메시지를 보여준다
@@ -77,14 +83,9 @@ public class EntryServiceImpl implements EntryService {
 	 */
 	@Override
 	@Transactional
-	public List<TakeDonationPostVO> findCheerupMessageByDpno(String dpno) {
-		return entryDAO.findCheerupMessageByDpno(dpno);
+	public TakeDonationPostListVO findCheerupMessageByDpno(String dpno, int nowPage) {
+		return entryDAO.findCheerupMessageByDpno(dpno, nowPage);
 		
 	}
 
-	// 재능기부 참여여부 확인
-	@Override
-	public int findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
-		return entryDAO.findEntryByIdAndDpno(tdVO);
-	}
 }

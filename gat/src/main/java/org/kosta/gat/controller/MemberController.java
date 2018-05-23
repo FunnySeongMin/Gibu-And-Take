@@ -187,8 +187,13 @@ public class MemberController {
 	@RequestMapping("member/readMyWebQuestionDetail.do")
 	public String readWebQuestion(int wqNo, Model model) {
 		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
-		System.out.println(wqPostVO);
 		model.addAttribute("wqPostVO", wqPostVO);
+		//답변완료 된 문의글인 경우 답변VO를 찾는 메서드
+		if(wqPostVO.getWqStatus().equals("답변완료")) {
+			WebQuestionPostVO wqAnswerVO = memberService.readWebQuestionAnswer(wqNo);
+			//답변VO를 view로 보내줌
+			model.addAttribute("wqAnswerVO", wqAnswerVO);
+			}
 		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**

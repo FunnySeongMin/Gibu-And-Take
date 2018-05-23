@@ -63,8 +63,7 @@ public class DonationDAOImpl implements DonationDAO {
 	@Override
 	public ReviewPostListVO readDonationReviewList(String dpno,int nowPage) {
 		ReviewPostPagingBean rpPb=null;
-		ReviewPostListVO rpListVO = null;
-		/*
+		
 		//해당 후기글의 총 게시글 수
 		int totalDonationReviewCount=template.selectOne("donation.totalDonationReviewCount", dpno);
 		System.out.println("DonationDAOImpl : "+totalDonationReviewCount);
@@ -74,11 +73,16 @@ public class DonationDAOImpl implements DonationDAO {
 			rpPb=new ReviewPostPagingBean(totalDonationReviewCount, nowPage);
 		}
 		rpPb.setId(dpno);
-		List<ReviewPostVO> rpList=template.selectList("donation.readDonationReviewList", rpPb);
-		ReviewPostListVO rpListVO=new ReviewPostListVO(rpList, rpPb);*/
+		List<ReviewPostVO> rpList=  template.selectList("donation.readDonationReviewList", rpPb);
+		ReviewPostListVO rpListVO=new ReviewPostListVO(rpList, rpPb);
 
 		return rpListVO;
 	}
+	/*
+	@Override
+	public List<ReviewPostVO> readDonationReviewList(String dpno) {
+		return template.selectList("donation.readDonationReviewList",dpno);
+	}*/
 	
 	@Override
 	public ReviewPostVO readReviewDetail(String rpno) {
@@ -266,11 +270,6 @@ public class DonationDAOImpl implements DonationDAO {
 	@Override
 	public List<Map<String, Object>> DonationListRank() {
 		return template.selectList("donation.DonationListRank");
-	}
-
-	@Override
-	public List<ReviewPostVO> readDonationReviewList(String dpno) {
-		return template.selectList("donation.readDonationReviewList",dpno);
 	}
 
 	/**

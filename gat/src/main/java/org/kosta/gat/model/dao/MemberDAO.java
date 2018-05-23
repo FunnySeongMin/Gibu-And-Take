@@ -50,6 +50,7 @@ public interface MemberDAO {
 	public int getTotalQuestionContentCount(String id);
 
 	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo);
-	
 
+	public WebQuestionPostVO readWebQuestionAnswer(int wqNo);
+	
 }

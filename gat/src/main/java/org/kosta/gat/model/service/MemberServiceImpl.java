@@ -123,4 +123,10 @@ public class MemberServiceImpl implements MemberService {
 	public ApplicationPostListVO readMyApplicationList(String id, int nowPage) {
 		return memberDAO.readMyApplicationList(id,nowPage);
 	}
+
+	@Override
+	@Transactional
+	public WebQuestionPostVO readWebQuestionAnswer(int wqNo) {
+		return memberDAO.readWebQuestionAnswer(wqNo);
+	}
 }

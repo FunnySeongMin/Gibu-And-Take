@@ -5,11 +5,13 @@
 		<div class="row">
 			 <div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }"><img class="card-img-top" src="${rank[0].DP_IMGDIRECTORY }" alt=""></a>
-
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }&tdNowPage=1&rpNowPage=1">
+						<img class="card-img-top" src="http://placehold.it/700x400" alt="">
+					</a>
+					<!-- img src = ${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_IMGDIRECTORY } -->
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }">${rank[0].DP_TITLE }</a>
+							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[0].DP_TITLE }</a>
 						</h4>
 						<p class="card-text">${rank[0].DP_SUMMERY }</p>
 					</div>
@@ -17,11 +19,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
+						<img class="card-img-top" src="http://placehold.it/700x400" alt="">
+					</a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }">${rank[1].DP_TITLE }</a>
+							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[1].DP_TITLE }</a>
 						</h4>
 						<p class="card-text">${rank[1].DP_SUMMERY }</p>
 					</div>
@@ -29,10 +32,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
+						<img class="card-img-top" src="http://placehold.it/700x400" alt="">
+					</a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }">${rank[2].DP_TITLE }</a>
+							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[2].DP_TITLE }</a>
 						</h4>
 						<p class="card-text">${rank[2].DP_SUMMERY }</p>
 					</div>
@@ -57,15 +62,14 @@
     <!-- Project One -->
     <div class="row">
       <div class="col-md-7">
-        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">
+        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">
           <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">${list[0].DP_TITLE }</a></h3>
+        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">${list[0].DP_TITLE }</a></h3>
         <p>${list[0].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">View Project
-
+        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO}&tdNowPage=1&rpNowPage=1">View Project
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -77,14 +81,14 @@
     <!-- Project Two -->
     <div class="row">
       <div class="col-md-7">
-        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }">
+        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">
           <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }">${list[1].DP_TITLE }</a></h3>
+        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">${list[1].DP_TITLE }</a></h3>
         <p>${list[1].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }">View Project
+        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">View Project
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -96,14 +100,14 @@
     <!-- Project Three -->
     <div class="row">
       <div class="col-md-7">
-        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }">
+        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">
           <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }">${list[2].DP_TITLE }</a></h3>
+        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">${list[2].DP_TITLE }</a></h3>
         <p>${list[2].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }">View Project
+        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">View Project
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -116,14 +120,14 @@
     <div class="row">
 
       <div class="col-md-7">
-        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }">
+        <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">
           <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }">${list[3].DP_TITLE }</a></h3>
+        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">${list[3].DP_TITLE }</a></h3>
         <p>${list[3].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }">View Project
+        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">View Project
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
