@@ -23,8 +23,17 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  
 }
-
+.carousel-item:nth-child(2){
+	text-shadow: 0 1px 0 rgba(0,0,0,0.83);
+}
+.carousel-item:nth-child(3)>.carousel-caption>h3{
+	color: #777;
+}
+.carousel-item:nth-child(3)>.carousel-caption>p{
+	color: #777;
+}
 .portfolio-item {
   margin-bottom: 30px;
 }
@@ -181,7 +190,9 @@ button[class^="btn"], a[class^="btn"]{
 }
 
 
-
+/* .navbar-nav {
+	font-weight: bold;
+} */
 
 /* scoll-spy active color*/
 

@@ -44,4 +44,5 @@ public interface MemberService {
 	public ApplicationPostListVO readMyApplicationList(String id, int nowPage);
 
 	public WebQuestionPostVO readWebQuestionAnswer(int wqNo);
+	
 }

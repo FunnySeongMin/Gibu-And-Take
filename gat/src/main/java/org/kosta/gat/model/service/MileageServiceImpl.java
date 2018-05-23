@@ -2,7 +2,9 @@ package org.kosta.gat.model.service;
 
 import javax.annotation.Resource;
 
+import org.kosta.gat.model.dao.MemberDAO;
 import org.kosta.gat.model.dao.MileageDAO;
+import org.kosta.gat.model.vo.member.MemberVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostListVO;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradePostPagingBean;
 import org.kosta.gat.model.vo.post.mileagetrade.MileageTradeVO;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MileageServiceImpl implements MileageService {
 	@Resource
 	private MileageDAO mileageDAO;
+	@Resource
+	private MemberDAO memberDAO;
 
 	@Override
 	@Transactional
@@ -47,5 +51,15 @@ public class MileageServiceImpl implements MileageService {
 			pagingBean.setId(id);
 		}
 		return new MileageTradePostListVO(mileageDAO.readMyMileageTradeList(pagingBean),pagingBean);
+	}
+
+	@Override
+	@Transactional
+	public void saveMileage(String id, int mileage) {
+		MileageTradeVO mileageTradeVO = new MileageTradeVO();
+		MemberVO mvo = memberDAO.checkId(id);
+		mileageTradeVO.setMemberVO(mvo);
+		mileageTradeVO.setMtVolume(mileage);
+		mileageDAO.saveMileage(mileageTradeVO);
 	}
 }
