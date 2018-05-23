@@ -48,6 +48,4 @@ public interface DonationService {
 	public List<Map<String, Object>> DonationListView2();
 
 	public List<Map<String, Object>> DonationListRank();
-
-	public List<ReviewPostVO> readDonationReviewList(String dpno);
 }

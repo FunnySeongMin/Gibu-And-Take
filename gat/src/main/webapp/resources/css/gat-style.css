@@ -309,14 +309,14 @@ a.label:focus {
   background-color: #31b0d5;
 }
 .label-warning {
-  background-color: #34bdb6;
+  background-color: #f0ad4e;
 }
 .label-warning[href]:hover,
 .label-warning[href]:focus {
   background-color: #ec971f;
 }
 .label-danger {
-  background-color: #f35b56;
+  background-color: #d9534f;
 }
 .label-danger[href]:hover,
 .label-danger[href]:focus {
@@ -355,5 +355,11 @@ a.badge:focus {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* width: 100% */
+
+.jumbotron{
+	width:100% !important;
 }
     
