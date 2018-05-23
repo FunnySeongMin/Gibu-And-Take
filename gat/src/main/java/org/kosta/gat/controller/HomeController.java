@@ -19,6 +19,7 @@ public class HomeController {
 	/**
 	 * 
 	 * 작성이유 : tiles가 적용된 view
+	 * 
 	 * @author 조민경
 	 * 
 	 */
