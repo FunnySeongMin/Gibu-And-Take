@@ -146,8 +146,8 @@ values(application_seq.nextval,'Class B','sfdhdsfhskjdhflksd',
 '용인','이미지가 여기에 있어요',155000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.05.18','yyyy.mm.dd'),'jin');
 
 insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'Class C','sadgdfg',
-'캐나다','이미지가 여기에 있어요',350000,'승인',to_date('2018.01.05','yyyy.mm.dd'),to_date('2018.05.05','yyyy.mm.dd'),'cho');
+values(application_seq.nextval,'Class D','bbbbb',
+'서울','이미지가 여기에 있어요',700000,'승인',to_date('2018.02.22','yyyy.mm.dd'),to_date('2018.04.16','yyyy.mm.dd'),'keroro');
 
 SELECT application_seq.NEXTVAL FROM dual ; 
 SELECT application_seq.CURRVAL FROM dual ;
@@ -191,16 +191,22 @@ create table donation_post(
 	total_entry number default 0,
 	dp_status number default 0,
 	app_no number,
-	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE
+	id varchar2(100) not null,
+	CONSTRAINT fk_gt_donation_post_app_no FOREIGN KEY(app_no) REFERENCES application(app_no) ON DELETE CASCADE,
+	CONSTRAINT fk_gt_donation_post_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
 )
 
 --기부 게시글 시퀀스
 drop sequence donation_post_seq;
 create sequence donation_post_seq;
 
-insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no)
-values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.','여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
-'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),200000,'1');
+insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,dp_place,
+dp_imgdirectory,start_date,end_date,goal_mileage,app_no,id)
+values(donation_post_seq.nextval,'청소왕 황마의 청소 A to Z','프로젝트 요약입니다.',
+'여러분 청소가 참 쉽습니다. 저랑 같은조가 되시면 가위바위보를 질 수 있어요','판교',
+'1.jpg',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),
+200000,'1','hwang');
+
 insert into donation_post(dp_no,dp_title,dp_contents,dp_place,goal_mileage,app_no)
 values(donation_post_seq.nextval,'Class B','재미있는 꽃꽂이 시간','용인',
 155000,'21');
@@ -262,8 +268,8 @@ insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
 values(review_post_seq.nextval,'유익한 시간이었습니다.','청소의 전부를 모두 다 배운거 같아 뿌듯합니다. 가위바위보를 확실히 질 수 있을것 같아요!!',
 8,'keroro',1,1);
 insert into review_post(rp_no,rp_title,rp_contents,rp_rate,id,dp_no,td_no)
-values(review_post_seq.nextval,'또 참여하고 싶어요','봉사를 통한 즐거움을 배웠습니다.',
-8,'yong',1,21);
+values(review_post_seq.nextval,'서리테스트한다','나와라나와랏',
+8,'yong',1,22);
 
 
 select * from REVIEW_POST
@@ -271,10 +277,12 @@ select * from REVIEW_POST
 drop table web_question;
 create table web_question(
 	wq_no number primary key,
+	thread number not null,
 	wq_title varchar2(100),
 	wq_contents clob,
 	wq_regdate date default sysdate,
-	wq_parent_no number,
+	wq_parent_no number default 0,
+	seg number default 1,
 	wq_status varchar2(100) default '처리중',
 	id varchar2(100) not null,
 	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE

@@ -4,6 +4,7 @@ import org.kosta.gat.model.vo.member.MemberVO;
 
 public class WebQuestionPostVO {
 	private int wqNo;
+	private int thread;
 	private String wqTitle;
 	private String wqContents;
 	private String wqRegdate;
@@ -11,10 +12,19 @@ public class WebQuestionPostVO {
 	private String wqStatus;
 	private MemberVO memberVO;
 	
+	public boolean isAnswer() { 
+		int num=this.thread%100;
+		if(num==0) { //답변이 아님
+			return true;
+		}else { //답변임
+			return false;
+		}
+	}
+	
 	public WebQuestionPostVO() {
 		super();
 	}
-	
+
 	public WebQuestionPostVO(String wqTitle, String wqContents, String wqRegdate, String wqParentNo, String wqStatus,
 			MemberVO memberVO) {
 		super();
@@ -26,10 +36,11 @@ public class WebQuestionPostVO {
 		this.memberVO = memberVO;
 	}
 
-	public WebQuestionPostVO(int wqNo, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
+	public WebQuestionPostVO(int wqNo,int thread, String wqTitle, String wqContents, String wqRegdate, String wqParentNo,
 			String wqStatus, MemberVO memberVO) {
 		super();
 		this.wqNo = wqNo;
+		this.thread = thread;
 		this.wqTitle = wqTitle;
 		this.wqContents = wqContents;
 		this.wqRegdate = wqRegdate;
@@ -42,6 +53,12 @@ public class WebQuestionPostVO {
 	}
 	public void setWqNo(int wqNo) {
 		this.wqNo = wqNo;
+	}
+	public int getThread() {
+		return thread;
+	}
+	public void setThread(int thread) {
+		this.thread = thread;
 	}
 	public String getWqTitle() {
 		return wqTitle;
@@ -81,8 +98,8 @@ public class WebQuestionPostVO {
 	}
 	@Override
 	public String toString() {
-		return "WebQuestionPostVO [wqNo=" + wqNo + ", wqTitle=" + wqTitle + ", wqContents=" + wqContents
-				+ ", wqRegdate=" + wqRegdate + ", wqParentNo=" + wqParentNo + ", wqStatus=" + wqStatus + ", memberVO="
-				+ memberVO + "]";
+		return "WebQuestionPostVO [wqNo=" + wqNo + ", thread=" + thread + ", wqTitle=" + wqTitle + ", wqContents="
+				+ wqContents + ", wqRegdate=" + wqRegdate + ", wqParentNo=" + wqParentNo + ", wqStatus=" + wqStatus
+				+ ", memberVO=" + memberVO + "]";
 	}
 }

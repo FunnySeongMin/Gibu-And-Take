@@ -20,8 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="applicationPostVO" id="appPostVO">
 		<result column="app_no" property="appNo"/>
 		<result column="app_title" property="appTitle"/>
+		<result column="app_summery" property="appSummery"/>
 		<result column="app_contents" property="appContents"/>
 		<result column="app_place" property="place"/>
+		<result column="app_imgdirectory" property="imgDirectory"/>
 		<result column="app_regdate" property="appRegdate"/>
 		<result column="start_date" property="startDate"/>
 		<result column="end_date" property="endDate"/>
@@ -48,22 +50,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="readUnReceivedApplicationList"
 		resultMap="appPostVO" parameterType="applicationPostPagingBean">
 		<![CDATA[
- 			select rnum,app.app_no,app.app_title,app.app_place,app.app_regdate,
-			app.start_date,app.end_date,app.goal_mileage,app.app_status
+ 			select rnum,app.app_no,app.app_title,app.app_summery,app.app_place,
+ 			app.app_regdate,app.start_date,app.end_date,app.goal_mileage,app.app_status
 			from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
-			app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
+			app_summery,app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(start_date,'yyyy.mm.dd') start_date,
 			to_char(end_date,'yyyy.mm.dd') end_date,goal_mileage,app_status,id
-			from application where app_status='처리중') app, gt_member m
-			where app.id=m.id and app.app_status='처리중' and rnum between #{startRowNumber} 
+			from application) app, gt_member m
+			where app.id=m.id and rnum between #{startRowNumber} 
 			and #{endRowNumber} order by app.app_no desc
  		]]>
 	</select>
 	
 	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
 		<![CDATA[
-			select app.app_no,app.app_title,app.app_contents,app.app_place,
-			to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
+			select app.app_no,app.app_title,app_summery,app.app_contents,app.app_place,
+			app.app_imgdirectory,to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
 			to_char(app.start_date,'yyyy.mm.dd') start_date,
 			to_char(app.end_date,'yyyy.mm.dd') end_date,
 			app.goal_mileage,app.app_status
@@ -88,8 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">
-		insert into donation_post(dp_no,dp_title,dp_contents,dp_place,dp_imgdirectory,goal_mileage,app_no)
-		values(donation_post_seq.nextval,#{appTitle},#{appContents},#{place},#{imgDirectory},#{goalMileage},#{appNo})
+		insert into donation_post(dp_no,dp_title,dp_summery,dp_contents,
+		dp_place,dp_imgdirectory,start_date,end_date,goal_mileage,app_no,id)
+		values(donation_post_seq.nextval,#{appTitle},#{appSummery},#{appContents},
+		#{place},#{imgDirectory},to_date(#{startDate},'yyyy.mm.dd'),
+		to_date(#{endDate},'yyyy.mm.dd'),#{goalMileage},#{appNo},#{memberVO.id})
 	</insert>
 	
 	<select id="totalWebQuestionCount" resultType="int">
@@ -102,6 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="webQuestionPostVO" id="wqPostVO">
 		<result column="wq_no" property="wqNo"/>
+		<result column="thread" property="thread"/>
 		<result column="wq_title" property="wqTitle"/>
 		<result column="wq_contents" property="wqContents"/>
 		<result column="wq_regdate" property="wqRegdate"/>
@@ -119,14 +125,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="readWebQuestionList" resultMap="wqPostVO">
-		select wq.wq_no,wq.wq_title,to_char(wq.wq_regdate,'yyyy.mm.dd') wq_regdate,
-		wq.wq_parent_no,wq.wq_status
-		from web_question wq, gt_member m
-		where wq.id=m.id
+		<![CDATA[
+			select rnum,wq.wq_no,wq.thread,wq.wq_title,wq.wq_regdate,wq.wq_status,wq.wq_parent_no
+			from (select row_number() over(order by thread desc) rnum,wq_no,thread,wq_title,
+			to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_status,wq_parent_no,id
+			from web_question order by thread desc) wq, gt_member m
+			where wq.id=m.id and rnum between #{startRowNumber} and  #{endRowNumber}
+			order by thread desc
+		]]>
 	</select>
 	
 	<select id="readWebQuestionDetail" resultMap="wqPostVO">
-		select wq_no,wq_title,wq_contents,to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_parent_no,wq_status
+		select wq_no,thread,wq_title,wq_contents,to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_parent_no,wq_status
 		from web_question where wq_no=#{value}
 	</select>
 	
@@ -135,12 +145,153 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="addWebQuestionAnswer" parameterType="webQuestionPostVO">
-		insert into web_question(wq_no,wq_title,wq_contents,wq_parent_no,wq_status,id)
-		values(web_question_seq.nextval,#{wqTitle},#{wqContents},#{wqNo},'답변',#{memberVO.id})
+			insert into web_question(wq_no,thread,wq_title,wq_contents,wq_parent_no,wq_status,id)
+			values(web_question_seq.nextval,#{wqNo}*100-1,#{wqTitle},
+			#{wqContents},#{wqNo},'답변',#{memberVO.id})
 	</insert>
 	
 	<update id="updateWebQuestionAnswer" parameterType="webQuestionPostVO">
 		update web_question set wq_title=#{wqTitle} , wq_contents=#{wqContents} 
 		where wq_no=#{wqNo}	
 	</update>
+	
+	<resultMap type="memberVO" id="mvo">
+		<result column="id" property="id"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="email" property="email"/>
+		<result column="birthday" property="birthday"/>
+		<result column="mileage" property="mileage"/>
+		<result column="total_use_mileage" property="totalUseMileage"/>
+		<collection property="memberGroupVO" javaType="memberGroupVO" 
+		 column="mgroup_no" select="selectMemberGroup"/>
+		 <collection property="memberGradeVO" javaType="memberGradeVO" 
+		 column="mgrade_no" select="selectMemberGrade"/>
+	</resultMap>
+	
+	<select id="selectMemberGroup" resultType="memberGroupVO">
+		select mgroup_no,mgroup_name from member_group where mgroup_no=#{value}
+	</select>
+	
+	<select id="selectMemberGrade" resultType="memberGradeVO">
+		select mgrade_no,mgrade_name from member_grade where mgrade_no=#{value}
+	</select>
+	
+	<select id="readMemberList" resultMap="mvo" parameterType="memberPagingBean">
+	<![CDATA[
+		select rnum,m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+		m.total_use_mileage,m.mgroup_no,m.mgrade_no
+		from (select row_number() over(order by id desc) rnum,id,password,
+		name,address,email,to_char(birthday,'yyyy.mm.dd') birthday,mileage,
+		total_use_mileage,mgroup_no,mgrade_no
+		from gt_member where mgroup_no!='5') m
+		where rnum between #{startRowNumber} 
+		and #{endRowNumber} order by rnum desc
+	]]>
+	</select>
+	
+	<update id="deleteMember" parameterType="string">
+		update gt_member set mgroup_no='5' where id=#{value}
+	</update>
+	
+	<select id="totalDropMemberCount" resultType="int">
+		select count(*) from gt_member where mgroup_no='5'
+	</select>
+	
+	<select id="readDropMemberList" parameterType="memberPagingBean" resultMap="mvo">
+	<![CDATA[
+		select rnum,m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+		m.total_use_mileage,m.mgroup_no,m.mgrade_no
+		from (select row_number() over(order by id desc) rnum,id,password,
+		name,address,email,to_char(birthday,'yyyy.mm.dd') birthday,mileage,
+		total_use_mileage,mgroup_no,mgrade_no
+		from gt_member where mgroup_no='5') m
+		where rnum between #{startRowNumber} 
+		and #{endRowNumber} order by rnum desc
+	]]>
+	</select>
+	
+	<update id="restoreMember">
+		update gt_member set mgroup_no='1' where id=#{value}
+	</update>
+	
+	<resultMap type="donationPostVO" id="dpVO">
+		<result column="dp_no" property="dpNo"/>
+		<result column="dp_title" property="dpTitle"/>
+		<result column="dp_summery" property="dpSummery"/>
+		<result column="dp_contents" property="dpContents"/>
+		<result column="dp_place" property="place"/>
+		<result column="dp_imgdirectory" property="dpImgDirectory"/>
+		<result column="dp_regdate" property="dpRegdate"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="dp_count" property="dpCount"/>
+		<result column="goal_mileage" property="goalMileage"/>
+		<result column="donation_mileage" property="donationMileage"/>
+		<result column="total_entry" property="totalEntry"/>
+		<result column="dp_status" property="dpStatus"/>
+		<collection property="memberVO" javaType="memberVO"
+		column="dp_no" select="selectDonationMember"></collection>
+	</resultMap>
+	
+	<select id="selectDonationMember" resultType="memberVO">
+		<![CDATA[
+			select m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+			m.total_use_mileage,m.mgroup_no,m.mgrade_no
+			from gt_member m, donation_post dp
+			where m.id=dp.id and dp.dp_no=#{value}
+		]]>
+	</select>
+	
+	<resultMap type="takeDonationPostVO" id="tdPostVO">
+		<result column="td_no" property="tdNo"/>
+		<result column="td_regdate" property="tdRegdate"/>
+		<result column="td_mileage" property="tdMileage"/>
+		<result column="cheerup_message" property="cheerUpMessage"/>
+		<collection property="memberVO" javaType="memberVO" 
+		column="td_no" select="selectTDMember"/>
+		<collection property="donationPostVO" javaType="donationPostVO" 
+		column="td_no" select="selectTDDonation"/>
+	</resultMap>
+	
+	<select id="selectTDDonation" resultMap="dpVO">
+	<![CDATA[
+		select dp.dp_no,dp.dp_title,dp.dp_summery,dp.dp_contents,dp.dp_place,
+		dp.dp_imgdirectory,to_char(dp.dp_regdate,'yyyy.mm.dd') dp_regdate,
+		to_char(dp.start_date,'yyyy.mm.dd') start_date,to_char(dp.end_date,'yyyy.mm.dd') end_date,
+		dp.dp_count,dp.goal_mileage,dp.donation_mileage,dp.total_entry,dp.dp_status,dp.id
+		from donation_post dp,take_donation td
+		where dp.dp_no=td.dp_no and td.td_no=#{value}
+	]]>
+	</select>
+	
+	<select id="selectTDMember" resultType="memberVO">
+		<![CDATA[
+			select m.id,m.password,m.name,m.address,m.email,m.birthday,m.mileage,
+			m.total_use_mileage,m.mgroup_no,m.mgrade_no
+			from gt_member m, take_donation td
+			where m.id=td.id and td.td_no=#{value}
+		]]>
+	</select>
+	
+	<select id="readTradePointList" resultMap="tdPostVO">
+		<![CDATA[
+			select rnum,td.td_no,td.td_regdate,td.td_mileage,td.cheerup_message,td.mileage_status
+			from (select row_number() over(order by td_no desc) rnum,td_no,
+			to_char(td_regdate,'yyyy.mm.dd') td_regdate,
+			td_mileage,cheerup_message,mileage_status,id,dp_no
+			from take_donation where mileage_status='지급대기') td
+			where rnum between #{startRowNumber} and #{endRowNumber} order by td_no desc
+		]]>
+	</select>
+	
+	<update id="updateTakeDonationStatus">
+		update take_donation set mileage_status='지급완료' where td_no=#{value}
+	</update>
+	
+	<update id="givePoint" parameterType="memberVO">
+		update gt_member set mileage=mileage+#{mileage} where id=#{id}
+	</update>
+	
 </mapper>

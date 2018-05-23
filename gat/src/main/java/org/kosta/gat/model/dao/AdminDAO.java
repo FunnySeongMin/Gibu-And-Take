@@ -1,7 +1,9 @@
 package org.kosta.gat.model.dao;
 
+import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
+import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostListVO;
 import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 
@@ -31,6 +33,18 @@ public interface AdminDAO {
 
 	public int memberCount();
 
-	public int tradePointCount();
+	public int tradePointCount(); 
+
+	public MemberListVO readMemberList(int nowPage);
+
+	public void deleteMember(String id);
+
+	public MemberListVO readDropMemberList(int nowPage);
+
+	public void restoreMember(String id);
+
+	public TakeDonationPostListVO readTradePoint(int nowPage);
+
+	public void givePoint(String id, int mileage, int tdNo);
 
 }
