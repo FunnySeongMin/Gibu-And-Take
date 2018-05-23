@@ -1,7 +1,11 @@
 $(document).ready(function(){
 	$("#entryBtn").click(function(){
-		alert("로그인 후 이용해 주세요!")
+		alert("로그인 후 이용해 주세요");
 		location.href="../member/loginForm.do";
+	});
+	$("#checkEntryBtn").click(function(){
+		alert("재능기부는 한번만 참여 가능");
+		return false;
 	});
 	$("#entryDonation").submit(function(){
 		//사용할 마일리지를 적지 않았을 경우

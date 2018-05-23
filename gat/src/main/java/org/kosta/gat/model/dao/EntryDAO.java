@@ -1,5 +1,7 @@
 package org.kosta.gat.model.dao;
 
+import java.util.List;
+
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostVO;
