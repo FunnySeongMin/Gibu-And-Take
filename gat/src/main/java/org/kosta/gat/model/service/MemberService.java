@@ -42,4 +42,6 @@ public interface MemberService {
 	public ReviewPostVO readMyReviewDetail(String rpNo);
 
 	public ApplicationPostListVO readMyApplicationList(String id, int nowPage);
+
+	public WebQuestionPostVO readWebQuestionAnswer(int wqNo);
 }

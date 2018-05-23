@@ -182,13 +182,18 @@ public class MemberController {
 /**
 	* 작성이유 : 고객문의 게시판 게시글 상세 보기
 	* 
-	* 
 	* @author 용다은
 	*/
 	@RequestMapping("member/readMyWebQuestionDetail.do")
 	public String readWebQuestion(int wqNo, Model model) {
 		WebQuestionPostVO wqPostVO=memberService.readMyWebQuestionDetail(wqNo);
 		model.addAttribute("wqPostVO", wqPostVO);
+		//답변완료 된 문의글인 경우 답변VO를 찾는 메서드
+		if(wqPostVO.getWqStatus().equals("답변완료")) {
+			WebQuestionPostVO wqAnswerVO = memberService.readWebQuestionAnswer(wqNo);
+			//답변VO를 view로 보내줌
+			model.addAttribute("wqAnswerVO", wqAnswerVO);
+			}
 		return "member/readMyWebQuestionDetail.tiles";
 	}
 	/**

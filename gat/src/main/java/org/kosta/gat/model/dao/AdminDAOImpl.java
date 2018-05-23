@@ -28,7 +28,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage) {
 		ApplicationPostPagingBean apPb=null;
 		int totalUnReceivedApplicationCount=template.selectOne("admin.totalUnReceivedApplicationCount");
-		if(nowPage==0) {
+		if(nowPage==1) {
 			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount);
 		}else {
 			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount, nowPage);
@@ -168,5 +168,14 @@ public class AdminDAOImpl implements AdminDAO {
 		List<TakeDonationPostVO> tdVOList=template.selectList("admin.readTradePointList", tdPb);
 		tdListVO=new TakeDonationPostListVO(tdVOList, tdPb);
 		return tdListVO;
+	}
+
+	@Override
+	public void givePoint(String id, int mileage,int tdNo) {
+		template.update("admin.updateTakeDonationStatus", tdNo);
+		MemberVO mvo=new MemberVO();
+		mvo.setId(id);
+		mvo.setMileage(mileage);
+		template.update("admin.givePoint", mvo);
 	}
 }
