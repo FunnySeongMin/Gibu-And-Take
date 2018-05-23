@@ -7,7 +7,10 @@
 		<ul class="nav justify-content-end">
 		<c:choose>
 			<c:when test="${sessionScope.mvo!=null}">
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/myPage.do">${sessionScope.mvo.name} 님</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">${sessionScope.mvo.name} 님</a></li>
+				<c:if test="${sessionScope.mvo.memberGroupVO.mgroupNo!='4' }">
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/myPage.do">마이페이지</a></li>
+				</c:if>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/logout.do">Logout</a></li>
 				<c:if test="${sessionScope.mvo.memberGroupVO.mgroupNo=='4' }">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/adminPageData.do">관리자 페이지</a></li>
