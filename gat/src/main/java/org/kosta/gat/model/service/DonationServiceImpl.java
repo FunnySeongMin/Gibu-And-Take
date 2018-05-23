@@ -33,6 +33,7 @@ public class DonationServiceImpl implements DonationService {
 		return donationDAO.readDonationList(nowPage);
 	}
 
+	// 해당 재능기부 상세보기
 	@Override
 	public DonationPostVO readDonationDetail(String dpno) {
 		return donationDAO.readDonationDetail(dpno);
@@ -43,6 +44,7 @@ public class DonationServiceImpl implements DonationService {
 		return donationDAO.readDonationCheerUpMessageList(dpno);
 	}
 	
+	// 해당 재능기부 후기 목록
 	@Override
 	public ReviewPostListVO readDonationReviewList(String dpno,int nowPage) {
 		return donationDAO.readDonationReviewList(dpno,nowPage);
@@ -102,10 +104,5 @@ public class DonationServiceImpl implements DonationService {
 	@Override
 	public List<Map<String, Object>> DonationListRank() {
 		return donationDAO.DonationListRank();
-	}
-	
-	@Override
-	public List<ReviewPostVO> readDonationReviewList(String dpno) {
-		return donationDAO.readDonationReviewList(dpno);
 	}
 }
