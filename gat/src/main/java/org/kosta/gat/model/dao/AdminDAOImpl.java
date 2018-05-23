@@ -28,7 +28,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage) {
 		ApplicationPostPagingBean apPb=null;
 		int totalUnReceivedApplicationCount=template.selectOne("admin.totalUnReceivedApplicationCount");
-		if(nowPage==0) {
+		if(nowPage==1) {
 			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount);
 		}else {
 			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount, nowPage);

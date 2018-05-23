@@ -282,6 +282,5 @@ public class DonationDAOImpl implements DonationDAO {
 	@Override
 	public void updateDonationMileageAndTotalEntry(TakeDonationPostVO tdVO) {
 		template.update("donation.updateDonationMileage",tdVO);
-		
 	}
 }
