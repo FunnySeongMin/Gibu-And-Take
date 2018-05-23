@@ -49,7 +49,7 @@ public class EntryController {
 		// 참여하기 기능
 		entryService.addTakeDonation(tdVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(tdVO.getMemberVO().getId()));
-		return "redirect:donation/readDonationDetail.do?dpno=" + dpno;
+		return "redirect:donation/readDonationDetail.do?dpno="+dpno+"&tdNowPage=1&rpNowPage=1#dp_community";
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class EntryController {
 			entryService.addReview(rpVO);
 		}
 		request.getSession().setAttribute("mvo", memberService.checkId(rpVO.getMemberVO().getId()));
-		return "redirect:donation/readDonationDetail.do?dpno=" + dpno;
+		return "redirect:donation/readDonationDetail.do?dpno=" + dpno+"&tdNowPage=1&rpNowPage=1#dp_community";
 	}
 	
 	

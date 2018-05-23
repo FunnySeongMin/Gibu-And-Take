@@ -69,7 +69,7 @@
       <div class="col-md-5">
         <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">${list[0].DP_TITLE }</a></h3>
         <p>${list[0].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="${list[0].DP_NO }&tdNowPage=1&rpNowPage=1>View Project
+        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO}&tdNowPage=1&rpNowPage=1">View Project
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>

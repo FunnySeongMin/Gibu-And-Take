@@ -254,7 +254,7 @@
 								<td>${list.rpNo }</td>
 								<td><a href="#" data-toggle="modal" data-target="#entryReviewDetail${i.index}">${list.rpTitle }</a></td>
 								<td><c:forEach var="rate" begin="1" end="${list.rpRate }" step="1">
-									<c:out value=""/>
+									<c:out value="★"/>
 								</c:forEach></td>
 								<td>${list.memberVO.name }</td>
 							</tr>		
