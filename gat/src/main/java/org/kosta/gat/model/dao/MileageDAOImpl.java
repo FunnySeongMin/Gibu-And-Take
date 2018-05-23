@@ -37,4 +37,8 @@ public class MileageDAOImpl implements MileageDAO {
 		return template.selectOne("mileage.getTotalContentCount", id);
 	}
 
+	@Override
+	public void saveMileage(MileageTradeVO mileageTradeVO) {
+		template.update("mileage.saveMileage", mileageTradeVO);
+	}
 }

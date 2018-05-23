@@ -165,4 +165,5 @@ public class MemberDAOImpl implements MemberDAO {
 	public WebQuestionPostVO readWebQuestionAnswer(int wqNo) {
 		return template.selectOne("member.readWebQuestionAnswer", wqNo);
 	}
+
 }

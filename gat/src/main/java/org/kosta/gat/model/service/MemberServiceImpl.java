@@ -129,4 +129,5 @@ public class MemberServiceImpl implements MemberService {
 	public WebQuestionPostVO readWebQuestionAnswer(int wqNo) {
 		return memberDAO.readWebQuestionAnswer(wqNo);
 	}
+
 }
