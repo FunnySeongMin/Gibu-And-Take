@@ -4,6 +4,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="entry" >
+	<resultMap type="takeDonationPostVO" id="tdRM">
+ 		<result column="id"  property="memberVO.id"/>
+ 		<result column="name"  property="memberVO.name"/>
+ 		<result column="dp_no" property="donationPostVO.dpNo"/>
+ 	</resultMap> 
+ 	<!--  참여하기 insert -->
  	<insert id="addTakeDonation" parameterType="takeDonationPostVO">
  		<selectKey keyProperty="tdNo" resultType="int" order="BEFORE">
  			select take_donation_seq.nextval from dual
@@ -11,17 +17,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into take_donation(td_no, td_regdate, td_mileage <if test="cheerUpMessage!=null">,cheerup_message</if>, id, dp_no)
  		values(#{tdNo}, sysdate, #{tdMileage} <if test="cheerUpMessage!=null">,#{cheerUpMessage}</if>, #{memberVO.id}, #{donationPostVO.dpNo})
  	</insert>
- 	<resultMap type="takeDonationPostVO" id="memberRM">
- 		<result column="id"  property="memberVO.id"/>
- 		<result column="name"  property="memberVO.name"/>
- 	</resultMap> 
- 	<select id="findCheerupMessageByDpno" parameterType="string" resultType="takeDonationPostVO" resultMap="memberRM">
+ 	<!-- 응원메시지 총 갯수 -->
+ 	<select id="totalCheerUpMsgCount" resultType="int">
+ 		select count(*) from take_donation where dp_no =#{value}
+ 	</select>
+ 	<!-- 응원메시지 -->
+ 	<select id="findCheerupMessageByDpno" parameterType="takeDonationPostPagingBean" resultType="takeDonationPostListVO" resultMap="tdRM">
+ 		select td.td_no, td.td_regdate, td.td_mileage, td.cheerup_message, td.dp_no, td.id, m.id, m.name
+		from
+			(
+				select
+					row_number() over(order by td_no desc) as rnum, td_no,
+					td_regdate, td_mileage, cheerup_message, dp_no, id
+				from take_donation
+			) td, gt_member m 
+		where td.id=m.id and td.dp_no=#{id} and td.rnum between #{startRowNumber} and #{endRowNumber}
+		order by td.td_no desc
+ 	</select>
+ 	<!-- <select id="findCheerupMessageByDpno" parameterType="string" resultType="takeDonationPostVO" resultMap="tdRM">
  		select td.td_no, td.td_regdate, td.td_mileage, td.cheerup_message, td.dp_no, td.id, m.id, m.name 
  		from take_donation td, gt_member m 
  		where td.id=m.id and dp_no=#{value}
  		order by td.td_no desc
+ 	</select> -->
+ 	<!-- 해당 재능기부 참여여부 확인 -->
+ 	<select id="findEntryByIdAndDpno" parameterType="takeDonationPostVO" resultType="takeDonationPostVO" resultMap="tdRM">
+ 		select td_no, td_regdate, id, dp_no from take_donation where id=#{memberVO.id} and dp_no=#{donationPostVO.dpNo}
  	</select>
- 	<select id="findEntryByIdAndDpno" parameterType="takeDonationPostVO" resultType="int">
- 		select count(*) from take_donation where id=#{memberVO.id} and dp_no=#{donationPostVO.dpNo}
- 	</select>
+ 	<!-- <select id="findEntryByIdAndDpno" parameterType="takeDonationPostVO" resultType="takeDonationPostVO" resultMap="tdRM">
+ 		select td_no, td_regdate, id, dp_no from take_donation where id=#{memberVO.id} and dp_no=#{donationPostVO.dpNo}
+ 	</select> -->
+ 	<!-- 해당 재능기부 후기 -->
+ 	<insert id="addReview" parameterType="reviewPostVO">
+ 		<selectKey keyProperty="rpNo" resultType="string" order="BEFORE">
+ 			select review_post_seq.nextval from dual
+ 		</selectKey>
+ 		insert into review_post(rp_no, rp_title, rp_contents, rp_regdate, rp_rate, id, dp_no, td_no)
+ 		values(#{rpNo}, #{rpTitle}, #{rpContents}, sysdate, #{rpRate}, #{memberVO.id}, #{dpVO.dpNo}, #{tdpVO.tdNo})
+ 	</insert>
 </mapper>

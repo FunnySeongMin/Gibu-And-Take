@@ -14,9 +14,9 @@ public class WebQuestionPostVO {
 	
 	public boolean isAnswer() { 
 		int num=this.thread%100;
-		if(num==0) {
+		if(num==0) { //답변이 아님
 			return true;
-		}else {
+		}else { //답변임
 			return false;
 		}
 	}

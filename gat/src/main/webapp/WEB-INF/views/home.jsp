@@ -11,24 +11,24 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('${pageContext.request.contextPath}/resources/img/main_img01.jpg')">
+          <div class="carousel-item active" style="background-image:url('${pageContext.request.contextPath}/resources/img/main_img01.jpg')">
             <div class="carousel-caption d-none d-md-block">
-              <!-- <h3>First Slide</h3>
-              <p>This is a description for the first slide.</p> -->
+              <h3>GIBU AND TAKE</h3>
+              <p>봉사활동을 더 가치있게 만드는 새로운 사회공헌 플랫폼입니다</p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+          <div class="carousel-item" style="background-image: url(${pageContext.request.contextPath}/resources/img/main_img02.jpg)">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Second Slide</h3>
-              <p>This is a description for the second slide.</p>
+              <h3>A gift in season is a double favor to the needy.</h3>
+              <p>- Good fences makes good neighbors -</p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+          <div class="carousel-item" style="background: url(${pageContext.request.contextPath}/resources/img/main_img03.png) center top" >
             <div class="carousel-caption d-none d-md-block">
-              <h3>Third Slide</h3>
-              <p>This is a description for the third slide.</p>
+              <h3>GIBU AND TAKE</h3>
+              <p>The die is cast.</p>
             </div>
           </div>
         </div>

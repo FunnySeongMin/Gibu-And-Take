@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+	function givePoint(id,mileage,tdNo){
+		var flag=confirm(id+"님에게 "+mileage+"포인트를 지급하시겠습니까?");
+		if(flag){
+			location.href="${pageContext.request.contextPath}/givePoint.do?id="+id+"&mileage="+mileage+"&tdNo="+tdNo;
+		}else{
+			return false;
+		}
+	}
+</script>
 <div class="page-heading">
 	<h4 class="py-5 text-center sub2-txt">포인트 지급관리</h4>
 </div>
@@ -21,18 +31,17 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${tdListVO.tdpVO }" var="tdpVO">
-						<c:if test="${mlist.memberGroupVO.mgroupNo!='4' }">
 							<tr>
 								<td>${tdpVO.memberVO.id }</td>
 								<td>${tdpVO.memberVO.name }</td>
 								<td>${tdpVO.donationPostVO.dpTitle }</td>
 								<td>${tdpVO.tdMileage }</td>
 								<td>
-									<input type="button" value="포인트 지급"
+									<input type="button" value="포인트 지급" 
+									onclick="return givePoint('${tdpVO.donationPostVO.memberVO.id}','${tdpVO.tdMileage }',${tdpVO.tdNo })"
 									class="btn btn-sub-2-gnt btn-block">
 								</td> 
 							</tr>
-						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

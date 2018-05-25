@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     ${dpVO }
 <!-- Page Content -->
 <div class="container my-3">
@@ -10,7 +10,7 @@
 		  <img class="img-fluid mt-3" src="${dpVO.dpImgDirectory }" alt="">
 		</div>	
 		<div class="col-md-6">
-			<h2 class="my-3 pb-2 border-bottom""> ${dpVO.dpTitle}</h2>
+			<h2 class="my-3 pb-2 border-bottom"> ${dpVO.dpTitle}</h2>
 			<h4><span class="mr-2">목표 마일리지</span><b>${dpVO.goalMileage }</b></h4>
 			<h4><span class="mr-2">현재 참여 마일리지</span><b>${dpVO.donationMileage }</b></h4>
 			<h4><span class="mr-2">참여자 수</span>${dpVO.totalEntry }</h4>
@@ -20,11 +20,14 @@
 			</div>
 			<p>${dpVO.dpSummery }</p>
 			<c:choose>
-				<c:when test="${sessionScope.mvo==null||sessionScope.mvo.id==null }">
+				<c:when test="${sessionScope.mvo==null||sessionScope.mvo.id==null}">
 					<button id="entryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>		
 				</c:when>
+				<c:when test="${tdpVO!=null&&tdpVO.tdNo!=0 }">
+					<button id="checkEntryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>
+				</c:when>
 				<c:otherwise>
-					<button id="entryBtn" class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참여하기</button>	
+					<button class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참여하기</button>	
 				</c:otherwise>
 			</c:choose>
 				
@@ -145,7 +148,7 @@
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active mx-3 my-3" id="cheerup-message" role="tabpanel" aria-labelledby="cheerup-tab">
 					<h4 class="mt-5 pb-3 mb-3 border-bottom">응원 메시지</h4>					
-					<c:forEach items="${tdList}" var="list">
+					<c:forEach items="${tdList.tdpVO}" var="list">
 						<div class="border-bottom">
 							<div class="media mt-4">
 								<div class="media-body mb-3 ml-3">
@@ -155,12 +158,55 @@
 						</div>
 					</c:forEach>
 					
+					<!-- Pagination -->
+					<ul class="pagination justify-content-center mt-5">
+						<c:set var="pb" value="${tdList.tdpPb}"/>
+						<c:if test="${pb.previousPageGroup}">	
+							<li class="page-item">
+								<a class="page-link" href="${pageContext.request.contextPath}/donation/readDonationDetail.do?dpno=${dpVO.dpNo}&tdNowPage=${pb.startPageOfPageGroup-1}&rpNowPage=1" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+						</c:if>
+						<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+							<c:choose>
+								<c:when test="${pb.nowPage!=i}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/donation/readDonationDetail.do?dpno=${dpVO.dpNo}&tdNowPage=${i}&rpNowPage=${rpList.rpPb.nowPage }#dp_community">${i}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item active"><a class="page-link" href="#" >${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${pb.nextPageGroup}">	
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/donation/readDonationDetail.do?dpno=${dpVO.dpNo}&tdNowPage=${pb.endPageOfPageGroup+1}&rpNowPage=1" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								<span class="sr-only">Next</span>
+							</a>
+						</li>
+						</c:if>
+					</ul>
 				</div>
 				<div class="tab-pane fade mx-3 my-3" id="entry-review" role="tabpanel" aria-labelledby="review-tab">
 					<h4 class="mt-5 pb-3 mb-3 border-bottom">참여 후기</h4>
 					<div class="mb-3">
+						<!-- 후기 작성 btn -->
+						<%-- <c:forEach items="${tdpList }" var="tdp">
+							<p><c:set="${tdpList.tdNo }" var=tdNo />
+							${tdp.tdNo }</p>
+						</c:forEach>
 						<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
-						<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>
+						<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>	 --%>
+						
+						<c:if test="${(tdpVO!=null&&tdpVO.tdNo!=0)}">
+							<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
+							<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>					
+						</c:if>
+						
 						<!-- 후기 작성 Modal -->
 						<div class="modal fade" id="writeReviewForm" role="dialog">
 							<div class="modal-dialog modal-dialog-centered">
@@ -172,9 +218,11 @@
 									<form method="post" action="${pageContext.request.contextPath}/addReview.do" id="addReview">
 										<div class="modal-body bg-light">
 											<div class="row m-1 p-3 border">
+												<input type="hidden" name="tdno" value="${tdpVO.tdNo}">
 												<input type="hidden" name="dpno" value="${dpVO.dpNo }">
 												<p>${dpVO.dpTitle }</p>
 												<p>프로젝트 기간, 기부자명, 대표이미지, </p>
+												<p>참여번호:${tdpVO.tdNo}</p>
 											</div>
 											<div class="form-group my-3">
 												<label for="">제목</label>
@@ -186,7 +234,7 @@
 											</div>
 											<div class="form-group my-3">
 												<label class="">내용</label>
-												<textarea rows="7" maxlength="300" class="form-control" name="rpDontents" id="rpDontents"></textarea>
+												<pre><textarea rows="7" maxlength="300" class="form-control" name="rpContents" id="rpDontents"></textarea></pre>
 											</div>
 															
 										</div>
@@ -194,29 +242,31 @@
 											<button type="submit" class="btn btn-point-gnt">후기 등록</button>
 											<button type="button" class="btn" id="cancelBtn">취소</button>
 										</div>					
-									</form>									
-									<!-- /.후기 작성 modal -->
+									</form>
 								</div>
-						
 							</div>
-						</div>
-						${rpList }
+						</div>		
+						<!-- /.후기 작성 modal -->
 					</div>
 					<table class="table table-hover">
 						<thead>
 							<tr>
 								<td>#</td>
 								<td>글제목</td>
+								<td>평점</td>
 								<td>작성자</td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${rpList}" var="list" varStatus="i">
+							<c:forEach items="${rpList.list}" var="list" varStatus="i">
 							<tr>
 								<td>${list.rpNo }</td>
 								<td><a href="#" data-toggle="modal" data-target="#entryReviewDetail${i.index}">${list.rpTitle }</a></td>
+								<td><c:forEach var="rate" begin="1" end="${list.rpRate }" step="1">
+									<c:out value="★"/>
+								</c:forEach></td>
 								<td>${list.memberVO.name }</td>
-							</tr>
+							</tr>		
 							<!-- 후기 상세 Modal -->
 							<div class="modal fade" id="entryReviewDetail${i.index }" role="dialog">
 								<div class="modal-dialog modal-dialog-centered">
@@ -227,28 +277,59 @@
 										</div>											
 										<div class="modal-body bg-light">
 											<div class="row m-3">
-												${list.rpTitle }
+												<pre>${list.rpTitle }</pre>
 											</div>
 											<div class="row m-3">
 												<div class="jumbotron">
-													${list.rpContents }
+												<pre>${list.rpContents }</pre>
+													
 												</div>
 											</div>			
 										</div>
 									</div>
-							
 								</div>
 							</div>
-							<!-- /.후기 상세 modal -->
-							</c:forEach>							
+							</c:forEach>	
+							<!-- /.후기 상세 modal -->		
 						</tbody>
 					</table>
+					
+					<!-- Pagination -->
+					<ul class="pagination justify-content-center mt-5">
+						<c:set var="pb" value="${rpList.rpPb}"/>
+						<c:if test="${pb.previousPageGroup}">	
+							<li class="page-item">
+								<a class="page-link" href="${pageContext.request.contextPath}/donation/readDonationDetail.do?dpno=${dpVO.dpNo}&nowPage=${pb.startPageOfPageGroup-1}" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+						</c:if>
+						<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+							<c:choose>
+								<c:when test="${pb.nowPage!=i}">
+									<li class="page-item">
+										<a class="page-link" href="${pageContext.request.contextPath}/donation/readDonationDetail.do?dpno=${dpVO.dpNo}&tdNowPage=${tdList.tdpPb.nowPage }&rpNowPage=${i}#dp_community}">${i}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item active"><a class="page-link" href="#" >${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${pb.nextPageGroup}">	
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath}/donation/readDonationDetail.do?dpno=${dpVO.dpNo}&nowPage=${pb.endPageOfPageGroup+1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								<span class="sr-only">Next</span>
+							</a>
+						</li>
+						</c:if>
+					</ul>
 					
 				</div>
 			</div>
 		</div>
 	</div>
  </div>
- 
-
  <!-- /.container -->

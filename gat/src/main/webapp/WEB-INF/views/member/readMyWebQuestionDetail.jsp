@@ -30,18 +30,40 @@ $(document).ready(function(){
 </script>
 <!-- Page Content -->
 <div class="container">
-	<!-- Contact Form -->
-	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+	<!-- 문의 내용 -->
 	<div class="row">
 		<div class="col-10 offset-lg-1 my-4 border border-left-0 border-right-0">
 			<h3 class="my-3 px-3">${wqPostVO.wqTitle}</h3>
 			<p class="border border-left-0 border-right-0 py-3 px-3">글 번호: ${wqPostVO.wqNo} &nbsp;&nbsp;&nbsp; 작성 시간: ${wqPostVO.wqRegdate}
-			&nbsp;&nbsp;&nbsp; 처리 상태: ${wqPostVO.wqStatus} </p>
+			&nbsp;&nbsp;&nbsp; 
+			<c:choose>
+			<c:when test="${wqPostVO.wqStatus=='처리중'}">
+			<td><span class="label label-warning">${wqPostVO.wqStatus}</span></td>
+			</c:when>
+			<c:otherwise>
+			<td><span class="label label-danger">${wqPostVO.wqStatus}</span></td>
+			</c:otherwise>
+			</c:choose></p>
 			<div class="content">
 			<!--글내용-->
 				<div class="jumbotron">
-					${wqPostVO.wqContents}
+					${wqPostVO.wqContents} <br><br><br>
 				</div>
+				
+				<c:if test="${wqPostVO.wqStatus=='답변완료'}">
+				<!--답변 부분-->
+						<div class="col-10 offset-lg-1 my-4 border border-left-0 border-right-0">
+			<h3 class="my-3 px-3">RE: &nbsp;${wqAnswerVO.wqTitle}</h3>
+			<p class="border border-left-0 border-right-0 py-3 px-3">글 번호: ${wqAnswerVO.wqNo} &nbsp;&nbsp;&nbsp; 작성 시간: ${wqPostVO.wqRegdate}
+			&nbsp;&nbsp;&nbsp; 
+			<div class="content">
+			<!--답변 내용-->
+				<div class="jumbotron">
+					${wqAnswerVO.wqContents} <br><br><br>
+				</div>
+				</div>
+				</div>
+				</c:if>
 			</div>	
 		</div>
 	</div>

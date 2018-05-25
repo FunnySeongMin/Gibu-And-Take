@@ -10,14 +10,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="memberGradeVO.mgradeNo" column="mgrade_no"/>
 		<result property="memberGradeVO.mgradeName" column="mgrade_name"/>
 	</resultMap>
-	<!-- <resultMap type="reviewPostVO" id="reviewPostRM">
-		<result property="rpNo" column="rp_no"/>
+	<resultMap type="reviewPostVO" id="reviewPostRM">
+		<!-- <result property="rpNo" column="rp_no"/>
 		<result property="rpTitle" column="rp_title"/>
 		<result property="rpContents" column="rp_contents"/>
 		<result property="rpRegdate" column="rp_regdate"/>
-		<result property="rpRate" column="rp_rate"/>
+		<result property="rpRate" column="rp_rate"/> -->
 		<result property="memberVO.id" column="id"/>
-	</resultMap> -->
+		<result property="dpVO.dpTitle" column="dp_title"/>
+	</resultMap>
+	<resultMap type="takeDonationPostVO" id="takeDonationPostRM">
+		<!-- <result property="tdNo" column="td_no"/>
+		<result property="tdRegdate" column="td_regdate"/>
+		<result property="tdMileage" column="td_mileage"/> -->
+		<result property="donationPostVO.dpTitle" column="dp_title"/>
+	</resultMap>
  	<insert id="registerMember" parameterType="memberVO">
  		insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 		values(#{id}, #{password}, #{name}, #{address}, #{email}, #{birthday}, 1, 1)
@@ -61,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	<select id="readMyReviewPostList" resultType="reviewPostVO" parameterType="reviewPostPagingBean">
  		select r.rp_no,r.rp_title,r.rp_regdate from(
-		select row_number() over (order by rp_no desc) as rnum,rp_no,rp_title,to_char(rp_regdate,'YYYY,MM,DD') as rp_regdate,id
+		select row_number() over (order by rp_no desc) as rnum,rp_no,rp_title,to_char(rp_regdate,'YYYY.MM.DD') as rp_regdate,id
 		from REVIEW_POST
 		where id=#{id}
 		) r, GT_MEMBER m
@@ -75,32 +82,114 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update gt_member set mileage=mileage-#{tdMileage}, total_use_mileage=total_use_mileage+#{tdMileage}
  		where id=#{memberVO.id} 
  	</update>
+ 	
+ 	<!-- 문의 글 작성하기 -->
  	<insert id="addWebQuestion" parameterType="webQuestionPostVO">
  		<selectKey keyProperty="wqNo" resultType="int" order="BEFORE">
  			select web_question_seq.nextval from dual
  		</selectKey>
- 		insert into web_question(wq_no, wq_title, wq_contents, id) values (#{wqNo}, #{wqTitle}, #{wqContents}, #{memberVO.id})
+ 		insert into web_question(wq_no, thread, wq_title, wq_contents, id) values (#{wqNo}, #{wqNo}*100, #{wqTitle}, #{wqContents}, #{memberVO.id})
  	</insert>
+ 	
+ 	<!--  문의 글 페이징을 위해 글 수 세기  -->
  	<select id = "getTotalQuestionContentCount" parameterType="string" resultType="int">
  		select count(*) from web_question where id=#{value}
  	</select>
- 	<select id="readMyWebQuestionList" parameterType="webQuestionPostPagingBean" resultType="webQuestionPostVO">
-		select rnum, wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, wq_regdate as wqRegdate, 
-		wq_parent_no as wqParentNo, wq_status as wqStatus
-		from (select row_number() over(order by wq_no desc) as rnum, 
-		wq_no, wq_title, wq_contents, to_char(wq_regdate, 'YYYY.MM.DD') as wq_regdate, wq_parent_no, wq_status
-		from web_question where id = #{id})
-		where rnum between #{startRowNumber} and #{endRowNumber}
- 	</select>
+ 	
+	<resultMap type="webQuestionPostVO" id="wqPostVO">
+		<result column="wq_no" property="wqNo"/>
+		<result column="thread" property="thread"/>
+		<result column="wq_title" property="wqTitle"/>
+		<result column="wq_contents" property="wqContents"/>
+		<result column="wq_regdate" property="wqRegdate"/>
+		<result column="wq_parent_no" property="wqParentNo"/>
+		<result column="wq_status" property="wqStatus"/>
+		<collection property="memberVO" javaType="memberVO" column="wq_no"
+		select="selectMemberByDetail" ></collection>
+	</resultMap>
+	
+	<select id="selectMemberByDetail" resultType="memberVO">
+		select m.id,m.password,m.name,m.address,to_char(m.birthday,'yyyy.mm.dd') birthday,
+		m.mileage,m.total_use_mileage
+		from gt_member m, web_question wq
+		where m.id=wq.id and wq.wq_no=#{value}
+	</select>
+	
+	<!-- 나의 문의 글 목록 뽑기 -->
+	<select id="readMyWebQuestionList" parameterType="webQuestionPostPagingBean" resultMap="wqPostVO">
+			select rnum,wq.wq_no,wq.thread,wq.wq_title,wq.wq_regdate,wq.wq_status,wq.wq_parent_no
+			from (select row_number() over(order by thread desc) rnum,wq_no,thread,wq_title,
+			to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_status,wq_parent_no,id
+			from web_question where id=#{id} order by thread desc ) wq, gt_member m
+			where wq.id=m.id and rnum between #{startRowNumber} and  #{endRowNumber}
+			order by thread desc
+	</select>
+	
+	<!--  나의 문의 글 상세 보기 -->
  	<select id = "readMyWebQuestionDetail" parameterType="int" resultType="webQuestionPostVO">
 		select wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, 
 		to_char(wq_regdate, 'YYYY.MM.DD') as wqRegdate, wq_status as wqStatus
 		from web_question where wq_no=#{value}
  	</select>
+ 	
+ 	<!-- 문의 글 수정하기 -->
  	<update id="updateWebQuestion" parameterType="webQuestionPostVO">
  		update web_question set wq_title=#{wqTitle}, wq_contents=#{wqContents} where wq_no=#{wqNo}
  	</update>
- 	<update id="deleteWebQuestion" parameterType="int">
+ 	
+ 	<!-- 문의 글 삭제하기 -->
+ 	<delete id="deleteWebQuestion" parameterType="int">
  		delete from web_question where wq_no=#{wqNo}
- 	</update>
+ 	</delete>
+ 	
+ 	<!-- 문의 글에 해당하는 답변 내용 가져오기 -->
+ 	<select id="readWebQuestionAnswer" resultType="webQuestionPostVO" parameterType="int">
+ 	select wq_no as wqNo, wq_title as wqTitle, wq_contents as wqContents, 
+ 	wq_regdate as wqRegdate, wq_parent_no as wqParentNo from web_question where wq_parent_no = #{value}
+ 	</select>
+ 	
+ 	<!-- 나의 후기 상세보기 -->
+ 	<select id="readMyReviewDetail" resultMap="reviewPostRM" resultType="reviewPostVO">
+ 		SELECT r.rp_no, r.rp_title, r.rp_contents, 
+		r.rp_regdate, r.rp_rate, p.dp_title
+		FROM review_post r
+		INNER JOIN gt_member m ON r.id = m.id
+		INNER JOIN donation_post p ON p.dp_no = r.dp_no
+		INNER JOIN take_donation t ON t.td_no = r.td_no
+		AND r.rp_no=#{value}
+ 	</select>
+ 	
+ 	<!-- 나의 재능기부 참여의 페이징을 위한 count -->
+ 	<select id="totalMyActivityCount" resultType="int">
+ 		select count(*) 
+		from take_donation
+		where id=#{value}
+ 	</select>
+ 	
+ 	<!-- 나의 재능기부 참여 목록 -->
+ 	<select id="readMyActivityList" resultType="takeDonationPostVO" resultMap="takeDonationPostRM" parameterType="takeDonationPostPagingBean">
+ 		select t.td_no, t.td_regdate, t.td_mileage, d.dp_title from(
+		select row_number() over (order by td_no desc) as rnum,td_no,to_char(td_regdate,'YYYY.MM.DD') 
+		as td_regdate,td_mileage,id,dp_no
+		from take_donation
+		where id=#{id}) t, donation_post d
+		where t.dp_no = d.dp_no and rnum between #{startRowNumber} and #{endRowNumber}
+		order by t.td_no desc
+ 	</select>
+ 	<!-- 나의 재능기부 신청  내역의 페이징을 위한 count -->
+ 	<select id="totalMyApplicationPostCount" resultType="int">
+ 		select count(*) 
+		from application
+		where id=#{value}
+ 	</select>
+ 	<!-- 나의 재능기부 신청  내역 -->
+ 	<select id="readMyApplicationPostList" resultType="applicationPostVO" parameterType="takeDonationPostPagingBean">
+ 		select a.app_no, a.app_title, a.app_regdate, a.app_status from(
+		select row_number() over (order by app_no desc) as rnum,app_no,to_char(app_regdate,'YYYY.MM.DD') 
+		as app_regdate,app_status,id,app_title
+		from application
+		where id=#{id}) a, gt_member m
+		where a.id = m.id and rnum between #{startRowNumber} and #{endRowNumber}
+		order by a.app_no desc
+ 	</select>
 </mapper>

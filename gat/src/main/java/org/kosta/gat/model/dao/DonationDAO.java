@@ -26,7 +26,7 @@ public interface DonationDAO {
 
 	public List<TakeDonationPostVO> readDonationCheerUpMessageList(String dpno);
 
-	public ReviewPostListVO readDonationReviewList(String dpno,int nowPage);
+	public ReviewPostListVO readDonationReviewList(String dpno, int nowPage);
 
 	public ReviewPostVO readReviewDetail(String rpno);
 
@@ -43,8 +43,6 @@ public interface DonationDAO {
 	public void addPresent(ArrayList<PresentVO> list);
 
 	public List<Map<String, Object>> DonationListView(DonationPostPagingBean dpPb);
-
-	public List<ReviewPostVO> readDonationReviewList(String dpno);
 
 	public void updateDonationMileageAndTotalEntry(TakeDonationPostVO tdVO);
 	

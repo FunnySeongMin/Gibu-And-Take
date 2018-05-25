@@ -63,8 +63,7 @@ public class DonationDAOImpl implements DonationDAO {
 	@Override
 	public ReviewPostListVO readDonationReviewList(String dpno,int nowPage) {
 		ReviewPostPagingBean rpPb=null;
-		ReviewPostListVO rpListVO = null;
-		/*
+		
 		//해당 후기글의 총 게시글 수
 		int totalDonationReviewCount=template.selectOne("donation.totalDonationReviewCount", dpno);
 		System.out.println("DonationDAOImpl : "+totalDonationReviewCount);
@@ -74,11 +73,16 @@ public class DonationDAOImpl implements DonationDAO {
 			rpPb=new ReviewPostPagingBean(totalDonationReviewCount, nowPage);
 		}
 		rpPb.setId(dpno);
-		List<ReviewPostVO> rpList=template.selectList("donation.readDonationReviewList", rpPb);
-		ReviewPostListVO rpListVO=new ReviewPostListVO(rpList, rpPb);*/
+		List<ReviewPostVO> rpList=  template.selectList("donation.readDonationReviewList", rpPb);
+		ReviewPostListVO rpListVO=new ReviewPostListVO(rpList, rpPb);
 
 		return rpListVO;
 	}
+	/*
+	@Override
+	public List<ReviewPostVO> readDonationReviewList(String dpno) {
+		return template.selectList("donation.readDonationReviewList",dpno);
+	}*/
 	
 	@Override
 	public ReviewPostVO readReviewDetail(String rpno) {
@@ -267,11 +271,6 @@ public class DonationDAOImpl implements DonationDAO {
 		return template.selectList("donation.DonationListRank");
 	}
 
-	@Override
-	public List<ReviewPostVO> readDonationReviewList(String dpno) {
-		return template.selectList("donation.readDonationReviewList",dpno);
-	}
-
 	/**
 	 * 해당 재능기부 모금 마일리지, 총 재능기부 참여자 수 update
 	 * 작성이유 : 회원이 재능기부 참여 한 후  회원이 사용한 마일리지 액수만큼 모금 마일리지에 누적
@@ -281,7 +280,6 @@ public class DonationDAOImpl implements DonationDAO {
 	@Override
 	public void updateDonationMileageAndTotalEntry(TakeDonationPostVO tdVO) {
 		template.update("donation.updateDonationMileage",tdVO);
-		
 	}
 
 	@Override

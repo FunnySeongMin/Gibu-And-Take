@@ -113,4 +113,10 @@ public class AdminServiceImpl implements AdminService {
 	public TakeDonationPostListVO readTradePoint(int nowPage) {
 		return adminDAO.readTradePoint(nowPage);
 	}
+
+	@Override
+	@Transactional
+	public void givePoint(String id, int mileage,int tdNo) {
+		adminDAO.givePoint(id,mileage,tdNo);
+	}
 }

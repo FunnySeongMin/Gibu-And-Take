@@ -76,7 +76,7 @@
                   <div class="card-header">마일리지</div>
                   <div class="card-body">
                      <div class="card-text">
-                        <p>보유 마일리지</p>
+                        <p>보유 마일리지 : ${sessionScope.mvo.mileage}</p>
                      </div>
                      <a href="${pageContext.request.contextPath}/member/addMileage.do" class="btn btn-sub-2-gnt btn-sm mr-1">충전/환전/조회</a>
                   </div>
@@ -87,9 +87,9 @@
                      <div class="card-text">
                         <p>참여한 기부 10건</p>
                      </div>
-                     <a href="${pageContext.request.contextPath}/member/activityList.do" class="btn btn-sub-2-gnt btn-sm">활동목록</a>
-                     <a href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">후기</a>
-             	    <a href="${pageContext.request.contextPath}/member/readMyWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">문의</a>
+                     <a href="${pageContext.request.contextPath}/member/readMyActivityList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">활동목록</a>
+                     <a href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">후기내역</a>
+                     <a href="${pageContext.request.contextPath}/member/readMyWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">문의</a>
                   </div>
                </div>
             </div>

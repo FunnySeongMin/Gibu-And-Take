@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.gat.model.service.AdminService;
+import org.kosta.gat.model.service.MileageService;
 import org.kosta.gat.model.vo.member.MemberListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostListVO;
 import org.kosta.gat.model.vo.post.application.ApplicationPostVO;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 	@Resource
 	private AdminService adminService;
+	@Resource
+	private MileageService mileageService;
 	
 	/**
 	 * 작성이유 : 관리자 페이지 뷰 데이터 전송
@@ -189,5 +192,17 @@ public class AdminController {
 		TakeDonationPostListVO tdListVO=adminService.readTradePoint(nowPage);
 		model.addAttribute("tdListVO", tdListVO);
 		return "admin/readTradePointList.tiles";
+	}
+	/**
+	 * 작성이유 : 포인트 지급
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("givePoint.do")
+	public String givePoint(String id,int mileage,int tdNo) {
+		adminService.givePoint(id,mileage,tdNo);
+		//마일리지 테이블에 적립하기 위함
+		mileageService.saveMileage(id, mileage);
+		return "redirect:readTradePoint.do?nowPage=1";
 	}
 }

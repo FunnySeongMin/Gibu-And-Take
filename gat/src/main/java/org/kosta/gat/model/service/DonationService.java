@@ -54,5 +54,4 @@ public interface DonationService {
 	public ApplicationPostVO modifyApplyDonationView(String apno);
 
 	public String modifyApplyDonation(ApplicationPostVO apVO);
-
 }
