@@ -52,5 +52,7 @@ public interface MemberDAO {
 	public WebQuestionPostVO readMyWebQuestionDetail(int wqNo);
 
 	public WebQuestionPostVO readWebQuestionAnswer(int wqNo);
+
+	public int appCount(String id);
 	
 }

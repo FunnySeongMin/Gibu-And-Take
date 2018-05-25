@@ -91,6 +91,19 @@ public class MemberController {
 		return "home.tiles";
 	}
 	/**
+	 * 작성이유 : 
+	 * 
+	 * @author 백설희
+	 */
+	@RequestMapping("member/myPage.do")
+	public String myPage(Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		int appCount=memberService.appCount(mvo.getId());
+		model.addAttribute("appCount", appCount);
+		return "member/myPage.tiles";
+	}
+	/**
 	* 작성이유 : 회원수정 메서드
 	* 
 	* @author 백설희
@@ -239,6 +252,7 @@ public class MemberController {
 	public ModelAndView readMyReviewPostList(HttpServletRequest request,int nowPage) {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		System.out.println(mvo);
 		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
 		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
@@ -273,9 +287,7 @@ public class MemberController {
 	*/
 	@RequestMapping("member/readMyReviewDetail.do")
 	public String readMyReviewDetail(String rpNo,Model model) {
-		System.out.println("controller에서 rpNo 값 :"+rpNo);
 		ReviewPostVO reviewPostVO=memberService.readMyReviewDetail(rpNo);
-		System.out.println(reviewPostVO);
 		//redirectAttributes.addAttribute("reviewPostVO", reviewPostVO);
 		model.addAttribute("reviewPostVO", reviewPostVO);
 		return "member/readMyReviewDetail.tiles";

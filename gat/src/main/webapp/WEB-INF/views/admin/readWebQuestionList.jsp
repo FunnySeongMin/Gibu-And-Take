@@ -15,7 +15,7 @@
 	</div>
 	<div class="row">
 		<div class="col-10 offset-lg-1 my-4">
-			<table class="table table-hover">
+			<table class="table table-hover webQuestion">
 				<thead>
 					<tr>
 						<td>번호</td>
@@ -27,7 +27,7 @@
 				<tbody>
 				<c:set value="${wqListVO.wqPostVO }" var="wqPostVO"/>
 					<c:forEach items="${wqPostVO }" var="wqPostVO">
-						<tr>
+						<tr class="webQuestionRe" >
 							<td>${wqPostVO.wqNo }</td>
 							<c:choose>
 								<c:when test="${!wqPostVO.answer }">
