@@ -172,11 +172,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		START_DATE = #{startDate}, END_DATE = #{endDate}
 	</update>
 	
-	<update id="updatePresent" parameterType="presentVO">
-	
+	<update id="updatePresent" parameterType="presentVO">	
 		update present set 
 		insert into present(present_no, donation_mileage, present_contents, app_no)
 		values(present_seq.nextval, #{donationMileage}, #{presentContents},
 		#{appNo})
 	</update>
+	
+	<select id="findPresentByDpno" resultType="presentVO">
+		select present_no, donation_mileage, present_contents
+		from present where app_no=(select app_no from donation_post where dp_no=#{value})
+	</select>
 </mapper>
