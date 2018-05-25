@@ -76,7 +76,7 @@
                   <div class="card-header">마일리지</div>
                   <div class="card-body">
                      <div class="card-text">
-                        <p>보유 마일리지</p>
+                        <p>보유 마일리지 : ${sessionScope.mvo.mileage}</p>
                      </div>
                      <a href="${pageContext.request.contextPath}/member/addMileage.do" class="btn btn-sub-2-gnt btn-sm mr-1">충전/환전/조회</a>
                   </div>
