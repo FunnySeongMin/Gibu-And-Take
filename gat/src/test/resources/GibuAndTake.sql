@@ -56,7 +56,7 @@ values('baek','12345','백설희','용인','baek@naver.com',to_date('1994.06.16'
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('cho','abcd','조민경','서울','cho@naver.com',to_date('1992.06.09','yyyy.mm.dd'),1,2);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('yong','diyong','용다은','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
+values('yong','diyong','관리자YONG','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),4,6);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),4,4);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
