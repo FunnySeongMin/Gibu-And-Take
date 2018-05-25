@@ -105,4 +105,12 @@ public class DonationServiceImpl implements DonationService {
 	public List<Map<String, Object>> DonationListRank() {
 		return donationDAO.DonationListRank();
 	}
+
+	// 해당 재능기부에 대한 선물 가져오기
+	@Override
+	public List<PresentVO> findPresentByDpno(String dpno) {
+		return donationDAO.findPresentByDpno(dpno);
+	}
+	
+	
 }

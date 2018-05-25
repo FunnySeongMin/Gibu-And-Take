@@ -15,8 +15,7 @@ public class PresentVO {
 	public PresentVO() {
 		super();
 	}
-	
-	
+
 	public PresentVO(String presentNo, int donationMileage, String presentContents, String appNo) {
 		super();
 		this.presentNo = presentNo;

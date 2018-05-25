@@ -11,7 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="td_no" property="tdpVO.tdNo"/>
  		<result column="dp_no" property="dpVO.dpNo"/>
  	</resultMap> 
-
+ 	<resultMap type="donationPostVO" id="dpRM">
+ 		<result column="id" property="memberVO.id"/>
+ 		<result column="dp_place" property="place"/> 		
+ 		<result column="app_no" property="appPostVO.appNo"/> 		
+ 	</resultMap>
+	
 	<!-- 신청서 insert -->
  	<insert id="addApplication" parameterType="applicationPostVO">
  		<selectKey keyProperty="appNo" resultType="string" order="BEFORE">
@@ -53,9 +58,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from donation_post where dp_no=#{value}
  	</select> -->
  	<!-- 재능기부 상세보기 -->
- 	<select id="readDonationDetail" resultType="donationPostVO">
+ 	<select id="readDonationDetail" resultType="donationPostVO" resultMap="dpRM">
  		<!-- 일반 재능기부 게시판 view -->
- 		select dp_no, dp_title, dp_contents, dp_regdate, dp_place, dp_count, goal_mileage, donation_mileage, total_entry 
+ 		select
+ 			dp_no, dp_title, dp_summery, dp_contents, 
+ 			dp_place, dp_imgdirectory, to_char(dp_regdate, 'YYYY-MM-DD') as dp_regdate, to_char(start_date, 'YYYY-MM-DD') as start_date, 
+ 			to_char(end_date, 'YYYY-MM-DD') as end_date,
+			dp_count, goal_mileage, donation_mileage, total_entry, dp_status, app_no, id
 		from donation_post where dp_no=#{value}
  	</select>
  	<!-- 해당 재능기부의 응원메시지 목록 -->
@@ -114,5 +123,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from donation_post
 		) d where rank <=3
 		]]>
+ 	</select> 	
+ 	<select id="findPresentByDpno" parameterType="string" resultType="presentVO">
+ 		select present_no, donation_mileage, present_contents, app_no 
+ 		from present 
+ 		where app_no=(select app_no from donation_post where dp_no=#{value})
  	</select>
 </mapper>

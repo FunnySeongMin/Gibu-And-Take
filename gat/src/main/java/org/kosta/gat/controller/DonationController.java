@@ -81,6 +81,9 @@ public class DonationController {
 		//List<TakeDonationPostVO> tdpList= entryService.findEntryByIdAndDpno(tdpVO);
 		//System.out.println("DonationController readDonation [tdpList]"+tdpList);
 		
+		//해당 재능기부에 대한 선물 목록
+		List<PresentVO> pList = donationService.findPresentByDpno(dpno);
+		
 		// 해당 재능기부에 대한 응원메시지
 		model.addAttribute("tdList", tdList);
 		// 해당 재능기부에 대한 후기
@@ -92,6 +95,10 @@ public class DonationController {
 		//model.addAttribute("tdpList", tdpList);
 		
 		//entryService.findEntryByIdAndDpno(tdpVO);
+		
+		model.addAttribute("pList", pList);
+		
+		System.out.println("DonationController [pList] : "+pList);
 		
 		return "donation/readDonationDetail.tiles";
 	}
