@@ -44,6 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="findEntryByIdAndDpno" parameterType="takeDonationPostVO" resultType="takeDonationPostVO" resultMap="tdRM">
  		select td_no, td_regdate, id, dp_no from take_donation where id=#{memberVO.id} and dp_no=#{donationPostVO.dpNo}
  	</select>
+ 	<!-- <select id="findEntryByIdAndDpno" parameterType="takeDonationPostVO" resultType="takeDonationPostVO" resultMap="tdRM">
+ 		select td_no, td_regdate, id, dp_no from take_donation where id=#{memberVO.id} and dp_no=#{donationPostVO.dpNo}
+ 	</select> -->
  	<!-- 해당 재능기부 후기 -->
  	<insert id="addReview" parameterType="reviewPostVO">
  		<selectKey keyProperty="rpNo" resultType="string" order="BEFORE">

@@ -46,6 +46,9 @@ public class EntryController {
 		DonationPostVO dpVO = donationService.readDonationDetail(dpno);
 		// 회원이 참여하려는 재능기부VO set
 		tdVO.setDonationPostVO(dpVO);
+		if(tdVO.getCheerUpMessage().equals("") || tdVO.getCheerUpMessage()==null){
+			tdVO.setCheerUpMessage(null);
+		}
 		// 참여하기 기능
 		entryService.addTakeDonation(tdVO);
 		request.getSession().setAttribute("mvo", memberService.checkId(tdVO.getMemberVO().getId()));

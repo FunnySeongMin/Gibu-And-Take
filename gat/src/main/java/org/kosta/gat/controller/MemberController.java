@@ -252,7 +252,6 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		TakeDonationPostListVO tdListVO=memberService.readMyActivityList(mvo.getId(),nowPage);
-		System.out.println(tdListVO);
 		return new ModelAndView("member/readMyActivityList.tiles","tdListVO",tdListVO);
 	}
 	/**
@@ -265,7 +264,6 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		ApplicationPostListVO apListVO=memberService.readMyApplicationList(mvo.getId(),nowPage);
-		System.out.println(apListVO);
 		return new ModelAndView("member/readMyApplicationList.tiles","apListVO",apListVO);
 	}
 	/**

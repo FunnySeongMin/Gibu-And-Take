@@ -54,4 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INNER JOIN GT_MEMBER m ON t.id = m.id
 		AND m.id=#{id}) WHERE rnum BETWEEN #{startRowNumber} AND #{endRowNumber} ORDER BY mtNo DESC
  	</select>
+ 		<!-- 마일리지 적립 -->
+ 	<insert id="saveMileage" parameterType="mileageTradeVO">
+ 		<selectKey keyProperty="mtNo" resultType="int" order="BEFORE">
+ 			select mileage_trade_seq.nextval from dual
+ 		</selectKey>
+ 			insert into mileage_trade(mt_no, mt_volume, mt_regdate, mug_no, id)
+ 			values(#{mtNo}, #{mtVolume}, sysdate, 4, #{memberVO.id})
+ 	</insert>
 </mapper>

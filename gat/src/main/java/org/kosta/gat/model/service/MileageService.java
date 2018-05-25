@@ -12,4 +12,6 @@ public interface MileageService {
 
 	public MileageTradePostListVO readMyMileageTradeList(String string, int nowPage);
 
+	public void saveMileage(String id, int mileage);
+
 }
