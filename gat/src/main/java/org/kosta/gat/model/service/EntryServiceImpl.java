@@ -1,5 +1,7 @@
 package org.kosta.gat.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.gat.model.dao.DonationDAO;
@@ -45,7 +47,8 @@ public class EntryServiceImpl implements EntryService {
 	@Override
 	@Transactional
 	public void addTakeDonation(TakeDonationPostVO tdVO) {
-		System.out.println("entryService : "+tdVO);
+		System.out.println("entryService addTakeDontaion [tdVO]: "+tdVO);
+		System.out.println("entryService addTakeDontaion [tdVO.응원메시지]: "+tdVO.getCheerUpMessage());
 		// 재능기부 참여
 		entryDAO.addTakeDonation(tdVO);
 		// 재능기부 참여에 사용한 마일리지 내역
@@ -61,11 +64,14 @@ public class EntryServiceImpl implements EntryService {
 	}
 	
 	// 재능기부 참여여부 확인
-	@Override
+	/*@Override
+	public List<TakeDonationPostVO> findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
+		return entryDAO.findEntryByIdAndDpno(tdVO);
+	}*/
+	
 	public TakeDonationPostVO findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
 		return entryDAO.findEntryByIdAndDpno(tdVO);
 	}
-
 	//후기 작성
 	@Override
 	@Transactional

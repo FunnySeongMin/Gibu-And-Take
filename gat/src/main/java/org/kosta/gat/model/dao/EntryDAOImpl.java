@@ -2,7 +2,6 @@ package org.kosta.gat.model.dao;
 
 import java.util.List;
 
-import org.kosta.gat.model.vo.post.review.ReviewPostPagingBean;
 import org.kosta.gat.model.vo.post.review.ReviewPostVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostListVO;
 import org.kosta.gat.model.vo.post.takedonation.TakeDonationPostPagingBean;
@@ -45,9 +44,13 @@ public class EntryDAOImpl implements EntryDAO {
 		return tdpListVO;
 	}
 
-	@Override
 	public TakeDonationPostVO findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
 		return template.selectOne("entry.findEntryByIdAndDpno",tdVO);
 	}
 	
+	/*@Override
+	public List<TakeDonationPostVO> findEntryByIdAndDpno(TakeDonationPostVO tdVO) {
+		return template.selectList("entry.findEntryByIdAndDpno",tdVO);
+	}
+	*/
 }

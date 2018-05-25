@@ -141,12 +141,12 @@ insert into application(app_no,app_title,app_summery,app_contents,app_place,app_
 values(application_seq.nextval,'이윤희의 유니짜장','프로젝트 요약1','유니짜장은 재료만 잘게 다지면 됩니다!',
 '판교','이미지가 여기에 있어요',200000,'처리중',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.06.08','yyyy.mm.dd'),'banjang');
 
-insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'Class B','sfdhdsfhskjdhflksd',
+insert into application(app_no,app_title,app_summery,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'Class B','프로젝트 요약b','sfdhdsfhskjdhflksd',
 '용인','이미지가 여기에 있어요',155000,'승인',to_date('2018.01.23','yyyy.mm.dd'),to_date('2018.05.18','yyyy.mm.dd'),'jin');
 
-insert into application(app_no,app_title,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
-values(application_seq.nextval,'Class D','bbbbb',
+insert into application(app_no,app_title,app_summery,app_contents,app_place,app_imgdirectory,goal_mileage,app_status,start_date,end_date,id)
+values(application_seq.nextval,'Class D','프로젝트 요약d','bbbbb',
 '서울','이미지가 여기에 있어요',700000,'승인',to_date('2018.02.22','yyyy.mm.dd'),to_date('2018.04.16','yyyy.mm.dd'),'keroro');
 
 SELECT application_seq.NEXTVAL FROM dual ; 
@@ -235,6 +235,8 @@ create table take_donation(
 drop sequence take_donation_seq;
 create sequence take_donation_seq;
 
+select * from take_donation;
+
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
 insert into take_donation(td_no,td_mileage,id,dp_no)
@@ -291,11 +293,3 @@ create table web_question(
 --사이트 문의 시퀀스
 drop sequence web_question_seq;
 create sequence web_question_seq;
-
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   <%--  ${dpVO } --%>
+    ${dpVO }
 <!-- Page Content -->
 <div class="container my-3">
 	<!-- Portfolio Item Row -->
@@ -10,7 +10,7 @@
 		  <img class="img-fluid mt-3" src="${dpVO.dpImgDirectory }" alt="">
 		</div>	
 		<div class="col-md-6">
-			<h2 class="my-3 pb-2 border-bottom""> ${dpVO.dpTitle}</h2>
+			<h2 class="my-3 pb-2 border-bottom"> ${dpVO.dpTitle}</h2>
 			<h4><span class="mr-2">목표 마일리지</span><b>${dpVO.goalMileage }</b></h4>
 			<h4><span class="mr-2">현재 참여 마일리지</span><b>${dpVO.donationMileage }</b></h4>
 			<h4><span class="mr-2">참여자 수</span>${dpVO.totalEntry }</h4>
@@ -22,6 +22,9 @@
 			<c:choose>
 				<c:when test="${sessionScope.mvo==null||sessionScope.mvo.id==null}">
 					<button id="entryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>		
+				</c:when>
+				<c:when test="${tdpVO!=null&&tdpVO.tdNo!=0 }">
+					<button id="checkEntryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>
 				</c:when>
 				<c:otherwise>
 					<button class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참여하기</button>	
@@ -192,12 +195,18 @@
 					<h4 class="mt-5 pb-3 mb-3 border-bottom">참여 후기</h4>
 					<div class="mb-3">
 						<!-- 후기 작성 btn -->
-						<c:choose>
-							<c:when test="${tdpVO.tdNo!=0}">
-								<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
-								<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>					
-							</c:when>
-						</c:choose>
+						<%-- <c:forEach items="${tdpList }" var="tdp">
+							<p><c:set="${tdpList.tdNo }" var=tdNo />
+							${tdp.tdNo }</p>
+						</c:forEach>
+						<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
+						<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>	 --%>
+						
+						<c:if test="${(tdpVO!=null&&tdpVO.tdNo!=0)}">
+							<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
+							<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>					
+						</c:if>
+						
 						<!-- 후기 작성 Modal -->
 						<div class="modal fade" id="writeReviewForm" role="dialog">
 							<div class="modal-dialog modal-dialog-centered">
