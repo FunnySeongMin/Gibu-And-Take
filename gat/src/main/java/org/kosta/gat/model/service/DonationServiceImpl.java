@@ -105,10 +105,11 @@ public class DonationServiceImpl implements DonationService {
 	public List<Map<String, Object>> DonationListRank() {
 		return donationDAO.DonationListRank();
 	}
-	/*@Override
+	@Override
 	public List<ReviewPostVO> readDonationReviewList(String dpno) {
-		return donationDAO.readDonationReviewList(dpno);
-	}*/
+		//return donationDAO.readDonationReviewList(dpno);
+		return null;
+	}
 
 	@Override
 	public ApplicationPostVO modifyApplyDonationView(String apno) {
@@ -120,6 +121,7 @@ public class DonationServiceImpl implements DonationService {
 	public String modifyApplyDonation(ApplicationPostVO apVO) {
 		return donationDAO.modifyApplyDonation(apVO);
 	}
+
 
 
 }
