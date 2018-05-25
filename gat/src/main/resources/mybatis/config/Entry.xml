@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="name"  property="memberVO.name"/>
  		<result column="dp_no" property="donationPostVO.dpNo"/>
  	</resultMap> 
- 	<!-- 참여하기 insert -->
+ 	<!--  참여하기 insert -->
  	<insert id="addTakeDonation" parameterType="takeDonationPostVO">
  		<selectKey keyProperty="tdNo" resultType="int" order="BEFORE">
  			select take_donation_seq.nextval from dual
