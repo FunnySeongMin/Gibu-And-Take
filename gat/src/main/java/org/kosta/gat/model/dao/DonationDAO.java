@@ -50,4 +50,8 @@ public interface DonationDAO {
 
 	public List<Map<String, Object>> DonationListRank();
 
+	public ApplicationPostVO modifyApplyDonationView(String apno);
+
+	public String modifyApplyDonation(ApplicationPostVO apVO);
+
 }
