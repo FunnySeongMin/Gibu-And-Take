@@ -19,7 +19,7 @@
 	</div>
 	<div class="row">
 		<div class="col-10 offset-lg-1 my-4">
-			<table class="table table-hover">
+			<table class="table table-hover dropMember">
 				<thead>
 					<tr>
 						<td>아이디</td>
@@ -47,7 +47,7 @@
 								<td>${mlist.memberGradeVO.mgradeName }</td>
 								<td>
 									<input type="button" value="복구" onclick="return restoreMember('${id}')" 
-									class="btn btn-sub-2-gnt btn-block">
+									class="btn btn-sub-2-gnt btn-block dropMemberBtn">
 								</td> 
 							</tr>
 					</c:forEach>

@@ -85,7 +85,7 @@
                   <div class="card-header">나의 활동</div>
                   <div class="card-body">
                      <div class="card-text">
-                        <p>참여한 기부 10건</p>
+                        <p>나의 기부활동 참여 ${appCount}건</p>
                      </div>
                      <a href="${pageContext.request.contextPath}/member/readMyActivityList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">활동목록</a>
                      <a href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">후기내역</a>

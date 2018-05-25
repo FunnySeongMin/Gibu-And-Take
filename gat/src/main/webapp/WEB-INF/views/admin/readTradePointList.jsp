@@ -19,7 +19,7 @@
 	</div>
 	<div class="row">
 		<div class="col-10 offset-lg-1 my-4">
-			<table class="table table-hover">
+			<table class="table table-hover readTradePoint">
 				<thead>
 					<tr>
 						<td>아이디</td>
@@ -39,7 +39,7 @@
 								<td>
 									<input type="button" value="포인트 지급" 
 									onclick="return givePoint('${tdpVO.donationPostVO.memberVO.id}','${tdpVO.tdMileage }',${tdpVO.tdNo })"
-									class="btn btn-sub-2-gnt btn-block">
+									class="btn btn-block tradePointBtn">
 								</td> 
 							</tr>
 					</c:forEach>

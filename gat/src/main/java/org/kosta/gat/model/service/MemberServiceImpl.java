@@ -130,4 +130,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.readWebQuestionAnswer(wqNo);
 	}
 
+	@Override
+	public int appCount(String id) {
+		return memberDAO.appCount(id);
+	}
+
 }

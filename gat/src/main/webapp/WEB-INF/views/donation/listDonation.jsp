@@ -7,7 +7,7 @@
 			 <div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }&tdNowPage=1&rpNowPage=1">
-						<img class="card-img-top" src="http://placehold.it/700x400" alt="">
+						<img class="card-img-top" src="${rank[0].DP_IMGDIRECTORY}" alt="">
 					</a>
 					<!-- img src = ${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_IMGDIRECTORY } -->
 					<div class="card-body">
@@ -21,7 +21,7 @@
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
-						<img class="card-img-top" src="http://placehold.it/700x400" alt="">
+						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="">
 					</a>
 					<div class="card-body">
 						<h4 class="card-title">
@@ -34,7 +34,7 @@
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
-						<img class="card-img-top" src="http://placehold.it/700x400" alt="">
+						<img class="card-img-top" src="${rank[2].DP_IMGDIRECTORY}" alt="">
 					</a>
 					<div class="card-body">
 						<h4 class="card-title">
@@ -64,7 +64,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[0].DP_IMGDIRECTORY}" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -83,7 +83,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[1].DP_IMGDIRECTORY}" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -102,7 +102,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[2].DP_IMGDIRECTORY}" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -122,7 +122,7 @@
 
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[3].DP_IMGDIRECTORY}" alt="">
         </a>
       </div>
       <div class="col-md-5">

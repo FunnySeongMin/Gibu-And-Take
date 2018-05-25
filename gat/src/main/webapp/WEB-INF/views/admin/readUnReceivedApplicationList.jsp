@@ -15,7 +15,7 @@
 	</div>
 	<div class="row">
 		<div class="col-10 offset-lg-1 my-4">
-			<table class="table table-hover">
+			<table class="table table-hover unReceivedAppList">
 				<thead>
 					<tr>
 						<td>번호</td>

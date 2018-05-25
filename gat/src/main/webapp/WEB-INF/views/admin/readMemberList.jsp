@@ -15,11 +15,11 @@
 	<h4 class="py-5 text-center sub2-txt">회원관리</h4>
 </div>
 <div class="container">
-	<div class="col-10 offset-lg-1">
+	<div class="col-11 offset-lg-1">
 	</div>
 	<div class="row">
-		<div class="col-10 offset-lg-1 my-4">
-			<table class="table table-hover">
+		<div class="col-11 my-4 readMemberListDiv">
+			<table class="table table-hover readMemberList">
 				<thead>
 					<tr>
 						<td>아이디</td>
@@ -48,7 +48,7 @@
 								<td>${mlist.memberGradeVO.mgradeName }</td>
 								<td>
 									<input type="button" value="강제탈퇴" onclick="return deleteMember('${id}')" 
-									class="btn btn-sub-2-gnt btn-block">
+									class="btn btn-sub-2-gnt btn-block adminDeleteMember">
 								</td> 
 							</tr>
 						</c:if>

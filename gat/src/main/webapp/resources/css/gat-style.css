@@ -373,4 +373,52 @@ a.badge:focus {
 .jumbotron{
 	width:100% !important;
 }
-    
+
+/*관리자 문의글 리스트*/
+.webQuestion{
+	text-align: center;
+}
+.webQuestionRe>td:nth-child(2){
+	text-align: left;
+	padding-left: 120px;
+	width: 1px;
+}
+/*관리자 승인안된 신청서 내역*/
+.unReceivedAppList{
+	text-align: center;
+}
+/*관리자  총 회원 리스트*/
+.readMemberListDiv{
+	margin: 0 auto;
+}
+.readMemberList {
+	text-align: center;
+}
+
+.adminDeleteMember{
+	background-color: #d9534f;
+	color : #fff;
+	width: 100px;
+}
+/*탈퇴한 회원 리스트*/
+.readTradePoint, .dropMember{
+	text-align: center;
+}
+.dropMember>tbody>tr>td:last-child{
+	padding-top: 5px;
+}
+.dropMemberBtn {
+	color:#fff;
+	background-color: #34bdb6;
+}
+
+.readTradePoint>tbody>tr>td:last-child{
+	padding-top: 5px;
+}
+
+.tradePointBtn {
+	color:#fff;
+	background-color: #34bdb6;
+}
+
+
