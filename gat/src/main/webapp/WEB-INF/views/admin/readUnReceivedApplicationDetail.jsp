@@ -32,7 +32,7 @@
 				<a href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do?nowPage=1" class="btn btn-sub-2-gnt ml-auto mr-1 " id="#" >목록</a>
 				<c:choose>
 					<c:when test="${sessionScope.mvo.id==apVO.memberVO.id }">
-						<a href="#" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
+						<a href="${pageContext.request.contextPath }/donation/modifyApplyDonationView.do?apno=${apVO.appNo }" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
 						<a href="#" class="btn btn-sub-4-gnt" id="#">삭제</a>
 					</c:when>
 					<c:when test="${sessionScope.mvo.memberGroupVO.mgroupNo=='4'}">
