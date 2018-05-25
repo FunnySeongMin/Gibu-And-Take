@@ -27,7 +27,7 @@
 					<tr>
 						<td>1</td>
 						<td><a href="${pageContext.request.contextPath }/board/detail_board.do">글제목입니다</a></td>
-						<td>작성자입니다</td>
+						<td>작성자입니다.</td>
 						<td>작성일자입니다</td>
 					</tr>
 				</tbody>
