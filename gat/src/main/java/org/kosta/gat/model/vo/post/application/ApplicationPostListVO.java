@@ -7,7 +7,7 @@ public class ApplicationPostListVO {
 	private ApplicationPostPagingBean appPb;
 	
 	public ApplicationPostListVO() {
-		super();
+		super(); 
 	}
 	public ApplicationPostListVO(List<ApplicationPostVO> appPostVO, ApplicationPostPagingBean appPb) {
 		super();
