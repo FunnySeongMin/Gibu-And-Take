@@ -61,34 +61,34 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img1.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="detail_gibu.html">Project Two</a>
+                <a href="detail_gibu.html">플라워 1Day 클래스</a>
               </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+              <p class="card-text">요즘 대세 플라워 원데이클래스! 참여하여 즐거운 시간 보내보아요~</p>
             </div>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img2.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="detail_gibu.html">Project Three</a>
+                <a href="detail_gibu.html">봉사활동</a>
               </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+              <p class="card-text">어르신들과의 즐거운 시간</p>
             </div>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img3.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="detail_gibu.html">Project Four</a>
+                <a href="detail_gibu.html">신발 커스터마이징</a>
               </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+              <p class="card-text">각자의 스타일로 신발을 예쁘게 만들 수 있는 활동</p>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img4.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#">Project Two</a>
@@ -122,7 +122,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img5.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#">Project Three</a>
@@ -133,7 +133,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img6.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#">Project Four</a>
@@ -161,7 +161,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img2.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#">Project Two</a>
@@ -172,7 +172,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img4.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#">Project Three</a>
@@ -183,7 +183,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img1.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="#">Project Four</a>

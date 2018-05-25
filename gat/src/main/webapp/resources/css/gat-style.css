@@ -374,20 +374,19 @@ a.badge:focus {
 	width:100% !important;
 }
 
-/*관리자 문의글 리스트*/
+/*愿�由ъ옄 臾몄쓽湲� 由ъ뒪�듃*/
 .webQuestion{
 	text-align: center;
 }
 .webQuestionRe>td:nth-child(2){
 	text-align: left;
 	padding-left: 120px;
-	width: 1px;
 }
-/*관리자 승인안된 신청서 내역*/
+/*愿�由ъ옄 �듅�씤�븞�맂 �떊泥��꽌 �궡�뿭*/
 .unReceivedAppList{
 	text-align: center;
 }
-/*관리자  총 회원 리스트*/
+/*愿�由ъ옄  珥� �쉶�썝 由ъ뒪�듃*/
 .readMemberListDiv{
 	margin: 0 auto;
 }
@@ -400,7 +399,7 @@ a.badge:focus {
 	color : #fff;
 	width: 100px;
 }
-/*탈퇴한 회원 리스트*/
+/*�깉�눜�븳 �쉶�썝 由ъ뒪�듃*/
 .readTradePoint, .dropMember{
 	text-align: center;
 }
