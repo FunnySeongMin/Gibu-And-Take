@@ -235,7 +235,7 @@ create table take_donation(
 drop sequence take_donation_seq;
 create sequence take_donation_seq;
 
-select * from take_donation;
+select * from take_donation; 
 
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);
