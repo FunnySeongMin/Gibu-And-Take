@@ -48,6 +48,12 @@ public interface DonationService {
 	public List<Map<String, Object>> DonationListView2();
 
 	public List<Map<String, Object>> DonationListRank();
+
+	public List<ReviewPostVO> readDonationReviewList(String dpno);
+
+	public ApplicationPostVO modifyApplyDonationView(String apno);
+
+	public String modifyApplyDonation(ApplicationPostVO apVO);
 	
 	public List<PresentVO> findPresentByDpno(String dpno);
 }

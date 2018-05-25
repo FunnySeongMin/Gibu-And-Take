@@ -201,6 +201,7 @@ public class AdminController {
 	@RequestMapping("givePoint.do")
 	public String givePoint(String id,int mileage,int tdNo) {
 		adminService.givePoint(id,mileage,tdNo);
+		//마일리지 테이블에 적립하기 위함
 		mileageService.saveMileage(id, mileage);
 		return "redirect:readTradePoint.do?nowPage=1";
 	}

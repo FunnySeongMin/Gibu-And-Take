@@ -52,4 +52,8 @@ public interface DonationDAO {
 	
 	public List<PresentVO> findPresentByDpno(String dpno);
 
+	public ApplicationPostVO modifyApplyDonationView(String apno);
+
+	public String modifyApplyDonation(ApplicationPostVO apVO);
+
 }

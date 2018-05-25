@@ -40,6 +40,7 @@ public class DonationDAOImpl implements DonationDAO {
 		DonationPostPagingBean dpPb=null;
 		//재능기부 목록 총 게시글 수
 		int totalDonationPostCount=template.selectOne("donation.totalDonationPostCount");
+		System.out.println("게시글 수 : "+totalDonationPostCount );
 		if(nowPage==0) {
 			dpPb=new DonationPostPagingBean(totalDonationPostCount);
 		}else {
@@ -98,7 +99,6 @@ public class DonationDAOImpl implements DonationDAO {
 	public String addApplication(ApplicationPostVO apVO) {
 		System.out.println("DAO :"+apVO);
 		template.insert("donation.addApplication", apVO);
-		System.out.println("시퀀스 넘버:"+apVO.getAppNo());
 		return apVO.getAppNo();
 	}
 
@@ -285,5 +285,18 @@ public class DonationDAOImpl implements DonationDAO {
 	@Override
 	public void updateDonationMileageAndTotalEntry(TakeDonationPostVO tdVO) {
 		template.update("donation.updateDonationMileage",tdVO);
+	}
+
+	@Override
+	public ApplicationPostVO modifyApplyDonationView(String apno) {
+		return template.selectOne("donation.modifyApplyDonationView",apno);
+	}
+
+	@Override
+	public String modifyApplyDonation(ApplicationPostVO apVO) {
+		// TODO Auto-generated method stub
+		template.update("donation.modifyApplyDonation",apVO);
+		System.out.println("업데이트 시퀀스 넘버:"+apVO.getAppNo());
+		return apVO.getAppNo();
 	}
 }

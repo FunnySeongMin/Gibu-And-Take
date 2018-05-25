@@ -166,4 +166,8 @@ public class MemberDAOImpl implements MemberDAO {
 		return template.selectOne("member.readWebQuestionAnswer", wqNo);
 	}
 
+	@Override
+	public int appCount(String id) {
+		return template.selectOne("member.totalMyActivityCount",id);
+	}
 }

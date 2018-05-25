@@ -163,8 +163,46 @@ public class DonationController {
 		// model.addAttribute("test",request.getParameter("editor") );
 		return "home.tiles";
 	}
+	//수정게시판 로드
+	@RequestMapping("/donation/modifyApplyDonationView.do")
+	public String modifyApplyDonationView(String apno, HttpServletRequest request, Model model) {
+		System.out.println("수정폼 로드");
+		ApplicationPostVO apVO = donationService.modifyApplyDonationView(apno);
+		model.addAttribute("apVO",apVO);
+		return "donation/modifyApplyDonation.tiles";
+	}
+	//수정게시판 업데이트
+	@RequestMapping("/donation/modifyApplyDonation.do")
+	public String modifyApplyDonation(@RequestParam("main_image") MultipartFile uploadfile, ModelMap modelMap, ApplicationPostVO apVO, HttpServletRequest request, Model model) {
+		System.out.println("수정폼 업데이트");
+		HttpSession session=request.getSession(false);
+		if(session!=null){
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			if(mvo!=null){
+				apVO.setMemberVO(mvo);
+			}
+		}		
+		if(!uploadfile.getOriginalFilename().equals("")) {
+    		System.out.println("대표 이미지 파일 업로드");
+    		apVO.setImgDirectory(uploadfile.getOriginalFilename());
+    		
+    		System.out.println("대표이미지 이름 : "+apVO.getImgDirectory());
+    		apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap)); 
+    	}
+		String appNO = donationService.modifyApplyDonation(apVO);
 
-	// 단일파일업로드
+		ArrayList<PresentVO> list = new ArrayList<>();
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")), request.getParameter("presentContents1"),appNO));
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")), request.getParameter("presentContents2"),appNO));
+		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage3")), request.getParameter("presentContents3"),appNO));
+		System.out.println("apVO : "+apVO);
+		//System.out.println("리스크 : "+list);
+		donationService.addPresent(list);
+		// model.addAttribute("test",request.getParameter("editor") );
+		return "home.tiles";
+	}
+	
+	//단일파일업로드
 	@RequestMapping("photoUpload.do")
 	public void photoUpload(HttpServletRequest request, PhotoVo vo) {
 		donationService.photoUpload(request, vo);

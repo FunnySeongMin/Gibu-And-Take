@@ -4,7 +4,40 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="donation">
-
+	<resultMap type="applicationPostVO" id="appPostVO">
+		<result column="app_no" property="appNo" />
+		<result column="app_title" property="appTitle" />
+		<result column="app_summery" property="appSummery" />
+		<result column="app_contents" property="appContents" />
+		<result column="app_place" property="place" />
+		<result column="app_imgdirectory" property="imgDirectory" />
+		<result column="app_regdate" property="appRegdate" />
+		<result column="start_date" property="startDate" />
+		<result column="end_date" property="endDate" />
+		<result column="goal_mileage" property="goalMileage" />
+		<result column="app_status" property="appStatus" />
+		<collection property="presentList" ofType="presentVO"
+			javaType="java.util.List" column="app_no" select="selectPresent"></collection>
+		<collection property="memberVO" javaType="memberVO"
+			column="app_no" select="selectMember"></collection>
+	</resultMap>
+	<select id="selectPresent" resultType="presentVO"
+		parameterType="string">
+		select
+		pre.present_no,pre.donation_mileage,pre.present_contents
+		from present
+		pre, application app
+		where pre.app_no=app.app_no and
+		pre.app_no=#{value}
+	</select>
+	<select id="selectMember" resultType="memberVO"
+		parameterType="string">
+		select
+		m.id,m.password,m.name,m.address,m.birthday,m.mileage,m.total_use_mileage
+		from gt_member m, application app
+		where m.id=app.id and
+		app.app_no=#{value}
+	</select>
 	<resultMap type="ReviewPostVO" id="rpRM">
  		<result column="id"  property="memberVO.id"/>
  		<result column="name"  property="memberVO.name"/>
@@ -84,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<!-- 해당 재능기부 후기 수-->
  	<select id="totalDonationReviewCount" parameterType="string" resultType="int">
- 		select count(*) from review_post where dp_no=#{values}
+ 		select count(*) from review_post where dp_no=#{value}
  	</select>
  	
  	<!-- 해당 재능기부 후기 목록 -->
@@ -123,10 +156,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from donation_post
 		) d where rank <=3
 		]]>
- 	</select> 	
- 	<select id="findPresentByDpno" parameterType="string" resultType="presentVO">
- 		select present_no, donation_mileage, present_contents, app_no 
- 		from present 
- 		where app_no=(select app_no from donation_post where dp_no=#{value})
- 	</select>
+	</select>
+ 	<!-- 재능기부 리스트 상위 3명 -->
+	<select id="modifyApplyDonationView" resultMap="appPostVO">
+		select app_no,
+		app_title, app_summery, app_contents, app_place, app_imgdirectory,
+		goal_mileage, start_date, end_date,app_status, id
+		from application
+		where app_no=#{value}
+	</select>
+	<update id="modifyApplyDonation">
+		UPDATE APPLICATION SET APP_TITLE = 
+		#{appTitle}, APP_SUMMERY = #{appSummery}, APP_CONTENTS = #{appContents},
+		APP_PLACE = #{place}, APP_IMGDIRECTORY =#{imgDirectory}, GOAL_MILEAGE = #{goalMileage}, 
+		START_DATE = #{startDate}, END_DATE = #{endDate}
+	</update>
+	
+	<update id="updatePresent" parameterType="presentVO">
+	
+		update present set 
+		insert into present(present_no, donation_mileage, present_contents, app_no)
+		values(present_seq.nextval, #{donationMileage}, #{presentContents},
+		#{appNo})
+	</update>
 </mapper>

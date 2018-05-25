@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="selectPresent" resultType="presentVO" parameterType="string">
-		select pre.present_no,pre.donation_mileage,pre.present_contents
+		select pre.present_no,pre.donation_mileage,pre.present_contents, pre.app_no
 		from present pre, application app
 		where pre.app_no=app.app_no and pre.app_no=#{value}
 	</select>
