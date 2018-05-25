@@ -25,7 +25,7 @@
                      <div class="card-text">
                         <div class="col-6"></div>
                         <div class="text-center"><span><b style="font-size:40px">
-                        	${appCount }
+                        	${appCount}
                         </b></span>&nbsp;건</div>
                      	<br>
                      </div>
