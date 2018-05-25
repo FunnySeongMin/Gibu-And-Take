@@ -17,7 +17,7 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }"><img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY }" alt=""></a>
 
 					<div class="card-body">
 						<h4 class="card-title">
@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }"><img class="card-img-top" src="${rank[2].DP_IMGDIRECTORY }" alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }">${rank[2].DP_TITLE }</a>
@@ -58,7 +58,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[0].DP_IMGDIRECTORY }" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -78,7 +78,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[1].DP_IMGDIRECTORY }" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -97,7 +97,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[2].DP_IMGDIRECTORY }" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -117,7 +117,7 @@
 
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[3].DP_IMGDIRECTORY }" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -196,7 +196,7 @@ $(document).ready(function() {
                     //
                     //$('#loading').hide();
                     if(result){
-                    	$('#posts').append("<hr><div class='row'><div class='col-md-7'><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+"><img class='img-fluid rounded mb-3 mb-md-0' src=http://placehold.it/700x300 alt=></a></div><div class='col-md-5'><h3><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">"+result[i].DP_TITLE+"</a></h3><p>"+result[i].DP_SUMMERY+"</p><a class='btn btn-primary' href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">View Project<span class='glyphicon glyphicon-chevron-right'></span></a></div></div>");
+                    	$('#posts').append("<hr><div class='row'><div class='col-md-7'><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+"><img class='img-fluid rounded mb-3 mb-md-0' src="+result[i].DP_IMGDIRECTORY+" alt=></a></div><div class='col-md-5'><h3><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">"+result[i].DP_TITLE+"</a></h3><p>"+result[i].DP_SUMMERY+"</p><a class='btn btn-primary' href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">View Project<span class='glyphicon glyphicon-chevron-right'></span></a></div></div>");
                     	
                     	i=i+1
                     }

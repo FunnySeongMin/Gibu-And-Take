@@ -280,7 +280,7 @@ create table web_question(
 	wq_status varchar2(100) default '처리중',
 	id varchar2(100) not null,
 	CONSTRAINT fk_gt_web_question_id FOREIGN KEY(id) REFERENCES gt_member(id) ON DELETE CASCADE
-) 
+)
 
 --사이트 문의 시퀀스
 drop sequence web_question_seq;

@@ -90,7 +90,6 @@ public class DonationDAOImpl implements DonationDAO {
 	public String addApplication(ApplicationPostVO apVO) {
 		System.out.println("DAO :"+apVO);
 		template.insert("donation.addApplication", apVO);
-		System.out.println("시퀀스 넘버:"+apVO.getAppNo());
 		return apVO.getAppNo();
 	}
 
@@ -283,5 +282,18 @@ public class DonationDAOImpl implements DonationDAO {
 	public void updateDonationMileageAndTotalEntry(TakeDonationPostVO tdVO) {
 		template.update("donation.updateDonationMileage",tdVO);
 		
+	}
+
+	@Override
+	public ApplicationPostVO modifyApplyDonationView(String apno) {
+		return template.selectOne("donation.modifyApplyDonationView",apno);
+	}
+
+	@Override
+	public String modifyApplyDonation(ApplicationPostVO apVO) {
+		// TODO Auto-generated method stub
+		template.update("donation.modifyApplyDonation",apVO);
+		System.out.println("업데이트 시퀀스 넘버:"+apVO.getAppNo());
+		return apVO.getAppNo();
 	}
 }
