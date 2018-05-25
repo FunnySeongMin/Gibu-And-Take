@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 해당 재능기부 후기 수 -->
 	<select id="totalDonationReviewCount" parameterType="string"
 		resultType="int">
-		select count(*) from review_post where dp_no=#{values}
+		select count(*) from review_post where dp_no=#{value}
 	</select>
 
 	<!-- 해당 재능기부 후기 목록 -->
@@ -124,15 +124,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="id" property="memberVO.id" />
 		<result column="name" property="memberVO.name" />
 	</resultMap>
-	<select id="readDonationReviewList" resultType="ReviewPostVO"
-		resultMap="memberRM">
-		select rp_no, rp_title, rp_contents, rp_regdate, rp_rate, rp.id, m.id,
-		m.name
-		from review_post rp, gt_member m
-		where rp.id=m.id and
-		dp_no=#{value}
-		order by rp_no desc
-	</select>
 	<!-- <select id="readDonationReviewList" parameterType="ReviewPostPagingBean" 
 		resultType="ReviewPostVO"> select rp_no, rp_title, rp_contents, rp_regdate, 
 		rp_rate, id, dp_no, td_no from (SELECT row_number() over(order by rp_no desc) 
@@ -141,26 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		MILEAGE_USE_GROUP mug on mug.mug_no=t.mug_no inner join GT_MEMBER m on t.id 
 		= m.id and m.id=#{id}) where rnum between #{startRowNumber} and #{endRowNumber} 
 		order by mtNo desc </select> -->
-	<!-- 재능기부 모금마일리지, 총 참여자 수 -->
-	<update id="updateDonationMileage"
-		parameterType="takeDonationPostVO">
-		update donation_post set donation_mileage=donation_mileage+#{tdMileage},
-		total_entry=total_entry+1
-		where dp_no=#{donationPostVO.dpNo}
-	</update>
 
-	<!-- 재능기부 스크롤 페이징 게시판 -->
-	<select id="DonationListView2" resultType="map">
-		SELECT row_number()
-		over(order by dp_no desc) as rnum, dp_no, dp_title,
-
- 	</select>
- 	
- 	<!-- 해당 재능기부 후기 수-->
- 	<select id="totalDonationReviewCount" parameterType="string" resultType="int">
- 		select count(*) from review_post where dp_no=#{values}
- 	</select>
- 	
  	<!-- 해당 재능기부 후기 목록 -->
  	<select id="readDonationReviewList" parameterType="ReviewPostPagingBean" resultType="ReviewPostVO" resultMap="rpRM">
  		select rp.rp_no, rp.rp_title, rp.rp_contents, rp.rp_regdate, rp.rp_rate,rp.dp_no, rp.td_no, rp.id, m.name

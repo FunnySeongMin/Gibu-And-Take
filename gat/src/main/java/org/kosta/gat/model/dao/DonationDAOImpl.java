@@ -40,6 +40,7 @@ public class DonationDAOImpl implements DonationDAO {
 		DonationPostPagingBean dpPb=null;
 		//재능기부 목록 총 게시글 수
 		int totalDonationPostCount=template.selectOne("donation.totalDonationPostCount");
+		System.out.println("게시글 수 : "+totalDonationPostCount );
 		if(nowPage==0) {
 			dpPb=new DonationPostPagingBean(totalDonationPostCount);
 		}else {
