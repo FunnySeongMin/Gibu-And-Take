@@ -9,9 +9,9 @@ import org.kosta.gat.model.vo.post.webquestion.WebQuestionPostVO;
 
 public interface AdminDAO {
 
-	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage);
+	public ApplicationPostListVO readApplicationList(int nowPage);
 
-	public ApplicationPostVO readUnReceivedApplicationDetail(String apno);
+	public ApplicationPostVO readApplicationDetail(String apno);
 
 	public void updateUnReceivedApplication(String apno, String command);
 
@@ -46,5 +46,11 @@ public interface AdminDAO {
 	public TakeDonationPostListVO readTradePoint(int nowPage);
 
 	public void givePoint(String id, int mileage, int tdNo);
+
+	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage);
+
+	public WebQuestionPostListVO readUnReceivedWebQuestionList(int nowPage);
+
+	public WebQuestionPostVO readUnReceivedWebQuestionDetail(String wqno);
 
 }

@@ -6,7 +6,7 @@
 </script> -->
 <!-- Page Heading -->
 <div class="page-heading">
-	<h4 class="py-5 text-center sub2-txt">미승인 신청서</h4>
+	<h4 class="py-5 text-center sub2-txt">신청서</h4>
 </div>
 <!-- /.Page Heading -->
 <!-- Page Content -->
@@ -30,7 +30,7 @@
 					<c:forEach items="${appPostVO }" var="apPostVO">
 						<tr>
 							<td>${apPostVO.appNo }</td>
-							<td><a href="${pageContext.request.contextPath }/readUnReceivedApplicationDetail.do?apno=${apPostVO.appNo}">${apPostVO.appTitle }</a></td>
+							<td><a href="${pageContext.request.contextPath }/readApplicationDetail.do?apno=${apPostVO.appNo}">${apPostVO.appTitle }</a></td>
 							<td>${apPostVO.memberVO.name }</td>
 							<td>${apPostVO.appRegdate }</td>
 							<td>${apPostVO.appStatus }</td>
@@ -48,7 +48,7 @@
 	<ul class="pagination justify-content-center mt-5">
 		<c:if test="${apListVO.appPb.previousPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do.do?nowPage=${apListVO.appPb.startPageOfPageGroup-1}" aria-label="Previous">
+				<a class="page-link" href="${pageContext.request.contextPath }/readApplicationList.do?nowPage=${apListVO.appPb.startPageOfPageGroup-1}" aria-label="Previous">
 					<span aria-hidden="true">&laquo;</span>
 					<span class="sr-only">
 						Previous
@@ -60,7 +60,7 @@
 			<c:choose>
 				<c:when test="${apListVO.appPb.nowPage!=page}">
 					<li class="page-item">
-						<a class="page-link"  href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do.do?nowPage=${page}">${page}</a>
+						<a class="page-link"  href="${pageContext.request.contextPath }/readApplicationList.do?nowPage=${page}">${page}</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -72,7 +72,7 @@
 		</c:forEach>
 		<c:if test="${apListVO.appPb.nextPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do.do?nowPage=${apListVO.appPb.endPageOfPageGroup+1}" aria-label="Next">
+				<a class="page-link" href="${pageContext.request.contextPath }/readApplicationList.do?nowPage=${apListVO.appPb.endPageOfPageGroup+1}" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
 					<span class="sr-only">Next</span>
 				</a>

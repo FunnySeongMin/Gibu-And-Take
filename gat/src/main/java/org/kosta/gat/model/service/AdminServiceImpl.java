@@ -18,13 +18,13 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO adminDAO;
 
 	@Override
-	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage) {
-		return adminDAO.readUnReceivedApplicationList(nowPage);
+	public ApplicationPostListVO readApplicationList(int nowPage) {
+		return adminDAO.readApplicationList(nowPage);
 	}
 
 	@Override
-	public ApplicationPostVO readUnReceivedApplicationDetail(String apno) {
-		return adminDAO.readUnReceivedApplicationDetail(apno);
+	public ApplicationPostVO readApplicationDetail(String apno) {
+		return adminDAO.readApplicationDetail(apno);
 	}
 
 	@Override
@@ -118,5 +118,20 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void givePoint(String id, int mileage,int tdNo) {
 		adminDAO.givePoint(id,mileage,tdNo);
+	}
+
+	@Override
+	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage) {
+		return adminDAO.readUnReceivedApplicationList(nowPage);
+	}
+
+	@Override
+	public WebQuestionPostListVO readUnReceivedWebQuestionList(int nowPage) {
+		return adminDAO.readUnReceivedWebQuestionList(nowPage);
+	}
+
+	@Override
+	public WebQuestionPostVO readUnReceivedWebQuestionDetail(String wqno) {
+		return adminDAO.readUnReceivedWebQuestionDetail(wqno);
 	}
 }
