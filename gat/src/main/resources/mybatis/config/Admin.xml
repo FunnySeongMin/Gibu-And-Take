@@ -105,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into application(app_no,app_title,app_contents,
 		app_status,app_parent_no,id)
 		values(application_seq.nextval,#{appTitle},#{appContents},
-		'답변완료',#{appNo},#{memberVO.id})
+		'거절',#{appNo},#{memberVO.id})
 	</insert>
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
-	<h4 class="py-5 text-center">문의글 답변수정</h4>
+	<h4 class="py-5 text-center">문의글 답변쓰기</h4>
 </div>
 <!-- /.Page Heading -->
 
@@ -12,14 +12,15 @@
 	<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 	<div class="row">
 		<div class="col-lg-12 my-4">
-			<form action="${pageContext.request.contextPath}/updateWebQuestionAnswer.do" method="post" name="sentMessage" id="contactForm" novalidate>
+			<form action="${pageContext.request.contextPath}/updateWebQuestionAnswer.do" method="post" name="contactForm" id="contactForm" novalidate>
 				<div class="control-group form-group">
 					<div class="controls">
 						<label>작성자</label>&nbsp;
-						<input type="text" value="${sessionScope.mvo.name }" readonly="readonly"><br>
+						<input type="text" name="userName" value="${sessionScope.mvo.name }" readonly="readonly"><br>
 						<label>제목</label>&nbsp;
 						<input type="text" name="wqTitle" value="${wqVO.wqTitle }">
-						<input type="hidden" name="wqNo" value="${wqno }">
+						<input type="hidden" name="memberVO.id" value="${sessionScope.mvo.id}">
+						<input type="hidden" name="wqNo" value="${wqVO.wqNo }">
 					</div>
 				</div>
 
@@ -33,8 +34,8 @@
 				</div>
 				<div id="success"></div>
 				<!-- For success/fail messages -->
-				<input type="submit" id="savebutton"
-					class="btn btn-sub-2-gnt btn-block" value="작성완료">
+				<button type="submit" id="savebutton"
+					class="btn btn-sub-2-gnt btn-block">작성완료</button>
 			</form>
 		</div>
 

@@ -90,6 +90,7 @@ public class AdminController {
 	*/
 	@RequestMapping("updateUnReceivedApplication.do")
 	public String updateUnReceivedApplication(String apno,String command,Model model) {
+		System.out.println(apno);
 		if(command.equals("거절")) {
 			model.addAttribute("apno", apno);
 			return "admin/writeAnswer.tiles";
@@ -182,9 +183,8 @@ public class AdminController {
 	*/
 	@RequestMapping("updateWebQuestionAnswer.do")
 	public String updateWebQuestionAnswer(WebQuestionPostVO wqVO) {
-		System.out.println(wqVO);
 		adminService.updateWebQuestionAnswer(wqVO);
-		return "redirect:readWebQuestionDetail?wqno="+wqVO.getWqNo();
+		return "redirect:readWebQuestionDetail.do?wqno="+wqVO.getWqNo();
 	}
 	/**
 	 * 작성이유 : 전체 회원 리스트 목록보기
