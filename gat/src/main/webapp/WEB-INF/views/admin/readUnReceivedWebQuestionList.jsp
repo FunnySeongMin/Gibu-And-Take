@@ -6,7 +6,7 @@
 </script> -->
 <!-- Page Heading -->
 <div class="page-heading">
-	<h4 class="py-5 text-center sub2-txt">문의글 목록</h4>
+	<h4 class="py-5 text-center sub2-txt">답변없는 문의글</h4>
 </div>
 <!-- /.Page Heading -->
 <!-- Page Content -->
@@ -31,10 +31,10 @@
 							<td>${wqPostVO.wqNo }</td>
 							<c:choose>
 								<c:when test="${!wqPostVO.answer }">
-									<td><a href="${pageContext.request.contextPath}/readWebQuestionDetail.do?wqno=${wqPostVO.wqNo}" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle }</a></td>
+									<td><a href="${pageContext.request.contextPath}/readUnReceivedWebQuestionDetail.do?wqno=${wqPostVO.wqNo}" class="pl-4"><span style="color:#f35b56">⇒ Re: </span>${wqPostVO.wqTitle }</a></td>
 								</c:when>
 								<c:otherwise>
-									<td><a href="${pageContext.request.contextPath}/readWebQuestionDetail.do?wqno=${wqPostVO.wqNo}">${wqPostVO.wqTitle }</a></td>
+									<td><a href="${pageContext.request.contextPath}/readUnReceivedWebQuestionDetail.do?wqno=${wqPostVO.wqNo}">${wqPostVO.wqTitle }</a></td>
 								</c:otherwise>
 							</c:choose>
 							<td>${wqPostVO.memberVO.name }</td>
@@ -53,7 +53,7 @@
 	<ul class="pagination justify-content-center mt-5">
 		<c:if test="${wqListVO.wqPb.previousPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=${wqListVO.wqPb.startPageOfPageGroup-1}" aria-label="Previous">
+				<a class="page-link" href="${pageContext.request.contextPath }/readUnReceivedWebQuestionList.do?nowPage=${wqListVO.wqPb.startPageOfPageGroup-1}" aria-label="Previous">
 					<span aria-hidden="true">&laquo;</span>
 					<span class="sr-only">
 						Previous
@@ -65,7 +65,7 @@
 			<c:choose>
 				<c:when test="${wqListVO.wqPb.nowPage!=page}">
 					<li class="page-item">
-						<a class="page-link"  href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=${page}">${page}</a>
+						<a class="page-link"  href="${pageContext.request.contextPath }/readUnReceivedWebQuestionList.do?nowPage=${page}">${page}</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -77,7 +77,7 @@
 		</c:forEach>
 		<c:if test="${wqListVO.wqPb.nextPageGroup }">
 			<li class="page-item">
-				<a class="page-link" href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=${wqListVO.wqPb.endPageOfPageGroup+1}" aria-label="Next">
+				<a class="page-link" href="${pageContext.request.contextPath }/readUnReceivedWebQuestionList.do?nowPage=${wqListVO.wqPb.endPageOfPageGroup+1}" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
 					<span class="sr-only">Next</span>
 				</a>

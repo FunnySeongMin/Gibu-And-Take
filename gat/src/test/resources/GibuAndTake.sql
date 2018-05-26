@@ -111,7 +111,7 @@ drop table application;
 create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
-	app_summery varchar2(100) not null,
+	app_summery varchar2(100) ,
 	app_contents clob not null,
 	app_place varchar2(100),
 	app_imgdirectory varchar2(100),
@@ -127,6 +127,8 @@ create table application(
 
 select app_no, app_title, app_contents, app_place, app_imgdirectory, app_regdate, goal_mileage, 
 app_status, start_date, end_date, id from application
+
+ALTER TABLE application MODIFY ( app_summery varchar2(100) NULL );
 
 --신청서 테이블 시퀀스
 drop sequence application_seq;
