@@ -24,8 +24,11 @@
         <div class="control-group">
             <label class="control-label">Address</label>
             <div class="controls">
+                    <button type="button" class="btn btn-sub-2-gnt" onclick="execPostCode();">
+					<i class="fa fa-search"></i> 주소 찾기
+					</button>
                 <div class="input-prepend">
-                    <input type="text" id="url" class="input-xlarge" name="address" value="${sessionScope.mvo.address}">
+                    <input type="text" class="input-xlarge" name="place" id="place" value="${sessionScope.mvo.address}">
                 </div>
             </div>
         </div>

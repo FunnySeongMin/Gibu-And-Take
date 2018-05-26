@@ -421,3 +421,10 @@ a.badge:focus {
 }
 
 
+
+
+
+.portfolio-item div a img{
+	width:100%;
+	height:200px;
+}

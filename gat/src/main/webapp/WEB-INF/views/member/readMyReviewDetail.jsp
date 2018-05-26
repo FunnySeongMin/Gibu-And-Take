@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#deleteBtn").click(function() {
+		var result = confirm("후기를 삭제하시겠습니까?")
+		if(result)
+			location.href="${pageContext.request.contextPath}/member/deleteMyReview.do?rpNo=${reviewPostVO.rpNo}";
+	});//click
+}); //ready
+</script>
+
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
 	<h4 class="py-5 text-center">글 보기</h4>
@@ -32,7 +43,7 @@
 			<div class="d-flex align-items-end">
 				<a href="javascript:history.back()" class="btn btn-sub-2-gnt ml-auto mr-1 " id="#" >목록</a>
 				<a href="#" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
-				<a href="#" class="btn btn-sub-4-gnt" id="#">삭제</a>
+				<a href="#" class="btn btn-sub-4-gnt" id="deleteBtn">삭제</a>
 			</div>
 		</div>
 	</div>

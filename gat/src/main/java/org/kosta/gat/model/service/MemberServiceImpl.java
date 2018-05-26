@@ -135,4 +135,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.appCount(id);
 	}
 
+	@Override
+	@Transactional
+	public void deleteMyReview(String rpNo) {
+		memberDAO.deleteMyReview(rpNo);
+	}
+
 }

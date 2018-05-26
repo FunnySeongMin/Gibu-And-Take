@@ -170,4 +170,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public int appCount(String id) {
 		return template.selectOne("member.totalMyActivityCount",id);
 	}
+
+	@Override
+	public void deleteMyReview(String rpNo) {
+		template.delete("member.deleteMyReview", rpNo);
+	}
 }
