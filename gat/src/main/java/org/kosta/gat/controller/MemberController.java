@@ -32,7 +32,8 @@ public class MemberController {
 	* @author 용다은
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
-	public String registerMember(MemberVO vo) {
+	public String registerMember(MemberVO vo, String place) {
+		vo.setAddress(place);
 		memberService.registerMember(vo);
 		return "redirect:/home.do";
 	}
@@ -109,12 +110,13 @@ public class MemberController {
 	* @author 백설희
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
-	public String updateMember(HttpServletRequest request,MemberVO vo) {
+	public String updateMember(HttpServletRequest request,MemberVO vo, String place) {
 		HttpSession session=request.getSession(false);
 		if(session==null||session.getAttribute("mvo")==null){
 			return "member/loginForm.tiles";
 		}
-		memberService.updateMember(vo);
+		vo.setAddress(place); //받아온 place 값을 vo의 address로 set
+		memberService.updateMember(vo); //place를 바꾼 vo를 이용해 update함
 		session.setAttribute("mvo", memberService.checkId(vo.getId()));
 		return "member/myPage.tiles";
 	}
