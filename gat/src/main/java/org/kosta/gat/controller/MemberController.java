@@ -32,7 +32,8 @@ public class MemberController {
 	* @author 용다은
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
-	public String registerMember(MemberVO vo) {
+	public String registerMember(MemberVO vo, String place) {
+		vo.setAddress(place);
 		memberService.registerMember(vo);
 		return "redirect:/home.do";
 	}
@@ -109,12 +110,13 @@ public class MemberController {
 	* @author 백설희
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
-	public String updateMember(HttpServletRequest request,MemberVO vo) {
+	public String updateMember(HttpServletRequest request,MemberVO vo, String place) {
 		HttpSession session=request.getSession(false);
 		if(session==null||session.getAttribute("mvo")==null){
 			return "member/loginForm.tiles";
 		}
-		memberService.updateMember(vo);
+		vo.setAddress(place); //받아온 place 값을 vo의 address로 set
+		memberService.updateMember(vo); //place를 바꾼 vo를 이용해 update함
 		session.setAttribute("mvo", memberService.checkId(vo.getId()));
 		return "member/myPage.tiles";
 	}
@@ -252,7 +254,6 @@ public class MemberController {
 	public ModelAndView readMyReviewPostList(HttpServletRequest request,int nowPage) {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		System.out.println(mvo);
 		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
 		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
@@ -291,5 +292,18 @@ public class MemberController {
 		//redirectAttributes.addAttribute("reviewPostVO", reviewPostVO);
 		model.addAttribute("reviewPostVO", reviewPostVO);
 		return "member/readMyReviewDetail.tiles";
+	}
+	/**
+	 * 작성이유 : 후기 번호를 받아와서 
+	 * 해당하는 후기를 삭제하기 위하여
+	 * 
+	 * 나의 후기 삭제하기
+	 * 
+	 * @author 용다은
+	 */
+	@RequestMapping("member/deleteMyReview.do")
+	public String deleteMyReview(String rpNo) {
+		memberService.deleteMyReview(rpNo);
+		return "redirect:/member/readMyReviewPostList.do?nowPage=1";
 	}
 }

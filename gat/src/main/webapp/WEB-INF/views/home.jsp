@@ -52,10 +52,10 @@
           <div class="card h-100 bg-sub-1-gnt">
             <div class="card-body">
               <h4 class="card-title">
-                <a href="list_gibu.html">기부</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">기부</a>
               </h4>
              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-			 <a href="list_gibu.html">more<i class="fas fa-angle-double-right"></i></a>
+			 <a href="${pageContext.request.contextPath }/donation/listDonation.do">more<i class="fas fa-angle-double-right"></i></a>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
             <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img1.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="detail_gibu.html">플라워 1Day 클래스</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">플라워 1Day 클래스</a>
               </h4>
               <p class="card-text">요즘 대세 플라워 원데이클래스! 참여하여 즐거운 시간 보내보아요~</p>
             </div>
@@ -72,10 +72,10 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img2.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath }/donation/listDonation.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img2.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="detail_gibu.html">봉사활동</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">봉사활동</a>
               </h4>
               <p class="card-text">어르신들과의 즐거운 시간</p>
             </div>
@@ -86,7 +86,7 @@
             <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img3.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="detail_gibu.html">신발 커스터마이징</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">신발 커스터마이징</a>
               </h4>
               <p class="card-text">각자의 스타일로 신발을 예쁘게 만들 수 있는 활동</p>
             </div>
@@ -102,19 +102,19 @@
           <div class="card h-100 bg-sub-2-gnt">
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">taking</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">taking</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-			  <a href="#">more<i class="fas fa-angle-double-right"></i></a>
+			  <a href="${pageContext.request.contextPath }/donation/listDonation.do">more<i class="fas fa-angle-double-right"></i></a>
             </div>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img4.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath }/donation/listDonation.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img4.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Two</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">Project Two</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -125,7 +125,7 @@
             <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img5.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Three</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">Project Three</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
             </div>
@@ -133,10 +133,10 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img6.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath }/donation/listDonation.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img6.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Four</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">Project Four</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -155,16 +155,16 @@
                 <a href="#">Best Person</a>
               </h4>
 			  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-			  <a href="#">more<i class="fas fa-angle-double-right"></i></a>
+			  <a href="${pageContext.request.contextPath }/donation/listDonation.do">more<i class="fas fa-angle-double-right"></i></a>
             </div>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img2.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath }/donation/listDonation.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img2.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Two</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">Project Two</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>
@@ -172,10 +172,10 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img4.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath }/donation/listDonation.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img4.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Three</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">Project Three</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
             </div>
@@ -183,10 +183,10 @@
         </div>
         <div class="col-lg-3 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img1.jpg" alt=""></a>
+            <a href="${pageContext.request.contextPath }/donation/listDonation.do"><img class="card-img-top" src="${pageContext.request.contextPath }/resources/img/img1.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Project Four</a>
+                <a href="${pageContext.request.contextPath }/donation/listDonation.do">Project Four</a>
               </h4>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
             </div>

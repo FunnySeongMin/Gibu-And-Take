@@ -25,22 +25,22 @@ public class AdminDAOImpl implements AdminDAO {
 	private SqlSessionTemplate template;
 
 	@Override
-	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage) {
+	public ApplicationPostListVO readApplicationList(int nowPage) {
 		ApplicationPostPagingBean apPb=null;
-		int totalUnReceivedApplicationCount=template.selectOne("admin.totalUnReceivedApplicationCount");
+		int totalApplicationCount=template.selectOne("admin.totalApplicationCount");
 		if(nowPage==1) {
-			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount);
+			apPb=new ApplicationPostPagingBean(totalApplicationCount);
 		}else {
-			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount, nowPage);
+			apPb=new ApplicationPostPagingBean(totalApplicationCount, nowPage);
 		}
-		List<ApplicationPostVO> list=template.selectList("admin.readUnReceivedApplicationList",apPb);
+		List<ApplicationPostVO> list=template.selectList("admin.readApplicationList",apPb);
 		ApplicationPostListVO apListVO=new ApplicationPostListVO(list, apPb);
 		return apListVO;
 	}
 
 	@Override
-	public ApplicationPostVO readUnReceivedApplicationDetail(String apno) {
-		return template.selectOne("admin.readUnReceivedApplicationDetail", apno);
+	public ApplicationPostVO readApplicationDetail(String apno) {
+		return template.selectOne("admin.readApplicationDetail", apno);
 	}
 
 	@Override
@@ -177,5 +177,38 @@ public class AdminDAOImpl implements AdminDAO {
 		mvo.setId(id);
 		mvo.setMileage(mileage);
 		template.update("admin.givePoint", mvo);
+	}
+
+	@Override
+	public ApplicationPostListVO readUnReceivedApplicationList(int nowPage) {
+		ApplicationPostPagingBean apPb=null;
+		int totalUnReceivedApplicationCount=template.selectOne("admin.totalUnReceivedApplicationCount");
+		if(nowPage==1) {
+			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount);
+		}else {
+			apPb=new ApplicationPostPagingBean(totalUnReceivedApplicationCount, nowPage);
+		}
+		List<ApplicationPostVO> list=template.selectList("admin.readUnReceivedApplicationList",apPb);
+		ApplicationPostListVO apListVO=new ApplicationPostListVO(list, apPb);
+		return apListVO;
+	}
+
+	@Override
+	public WebQuestionPostListVO readUnReceivedWebQuestionList(int nowPage) {
+		WebQuestionPostPagingBean wqPb=null;
+		int totalWebQuestionCount=template.selectOne("admin.totalUnReceivedWebQuestionCount");
+		if(nowPage==0) {
+			wqPb=new WebQuestionPostPagingBean(totalWebQuestionCount);
+		}else {
+			wqPb=new WebQuestionPostPagingBean(totalWebQuestionCount, nowPage);
+		}
+		List<WebQuestionPostVO> wqList=template.selectList("admin.readUnReceivedWebQuestionList",wqPb);
+		WebQuestionPostListVO wqListVO=new WebQuestionPostListVO(wqList, wqPb);
+		return wqListVO;
+	}
+
+	@Override
+	public WebQuestionPostVO readUnReceivedWebQuestionDetail(String wqno) {
+		return template.selectOne("admin.readWebQuestionDetail", wqno); 
 	}
 }

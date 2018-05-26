@@ -29,7 +29,8 @@
                         </b></span>&nbsp;건</div>
                      	<br>
                      </div>
-                     <div class="text-center"><a href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">목록보기</a></div>
+                     <div class="text-center"><a href="${pageContext.request.contextPath }/readApplicationList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">목록보기</a>
+                  	<a href="${pageContext.request.contextPath }/readUnReceivedApplicationList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">처리중 목록보기</a></div>
                   </div>
                </div>
                <div class="card">
@@ -44,7 +45,10 @@
                         </b></span>&nbsp;건</div>
                      	<br>
                      </div>
-                     <div class="text-center"><a href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">목록보기</a></div>
+	                     <div class="text-center">
+		                     <a href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">목록보기</a>
+		                     <a href="${pageContext.request.contextPath }/readUnReceivedWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt btn-sm">문의중 목록보기</a>
+	                     </div>
                   </div>
                </div>
             </div>

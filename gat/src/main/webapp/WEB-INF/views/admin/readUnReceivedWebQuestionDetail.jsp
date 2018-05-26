@@ -29,10 +29,10 @@
 	<div class="row">
 		<div class="col-10 offset-lg-1">
 			<div class="d-flex align-items-end">
-				<a href="${pageContext.request.contextPath }/readWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt ml-auto mr-1 " id="#" >목록</a>
+				<a href="${pageContext.request.contextPath }/readUnReceivedWebQuestionList.do?nowPage=1" class="btn btn-sub-2-gnt ml-auto mr-1 " id="#" >목록</a>
 				<c:choose>
 					<c:when test="${sessionScope.mvo.id==wqVO.memberVO.id }">
-						<a href="${pageContext.request.contextPath }/updateWebQuestionForm.do?wqno=${wqVO.wqNo}" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
+						<a href="#" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
 					</c:when>
 					<c:when test="${sessionScope.mvo.memberGroupVO.mgroupNo=='4' && wqVO.wqStatus=='처리중'}">
 							<a href="${pageContext.request.contextPath }/writeWebQuestionAnswer.do?wqno=${wqVO.wqNo}" class="btn btn-sub-3-gnt mr-1" id="#">답변쓰기</a>

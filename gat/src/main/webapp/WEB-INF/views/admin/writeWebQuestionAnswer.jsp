@@ -18,7 +18,7 @@
 						<label>작성자</label>&nbsp;
 						<input type="text" value="${sessionScope.mvo.name }" readonly="readonly"><br>
 						<label>제목</label>&nbsp;
-						<input type="text" name="wqTitle">
+						<input type="text" name="wqTitle" value="${wqVO.wqTitle }">
 						<input type="hidden" name="memberVO.id" value="${sessionScope.mvo.id}">
 						<input type="hidden" name="wqNo" value="${wqno }">
 					</div>

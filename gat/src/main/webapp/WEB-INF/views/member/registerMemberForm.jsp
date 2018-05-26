@@ -32,8 +32,11 @@
                      </div>
                      <div class="form-group">
                         <label>주소</label>
-                        <button type="" class="btn btn-sm">검색</button>
-                        <input type="text" class="form-control" name="address" required="required">
+						<button type="button" class="btn btn-sub-2-gnt"
+							onclick="execPostCode();">
+							<i class="fa fa-search"></i> 주소 찾기
+						</button>
+                        <input type="text" class="form-control" name="place" id="place" required="required">
                      </div>
                      <div class="form-group">
                         <input type="email" class="form-control" name="email" placeholder="이메일" required="required">

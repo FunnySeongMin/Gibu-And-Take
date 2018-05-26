@@ -40,10 +40,32 @@ public class AdminController {
 		return "admin/adminPage.tiles";
 	}
 	/**
-	* 작성이유 : 미승인 신청서 목록보기
+	* 작성이유 : 신청서 목록보기
 	* 
 	* @author 은성민
 	*/
+	@RequestMapping("readApplicationList.do")
+	public String readApplicationList(int nowPage,Model model) {
+		ApplicationPostListVO apListVO=adminService.readApplicationList(nowPage);
+		model.addAttribute("apListVO", apListVO);
+		return "admin/readApplicationList.tiles";
+	}
+	/**
+	* 작성이유 : 신청서 상세보기
+	* 
+	* @author 은성민
+	*/
+	@RequestMapping("readApplicationDetail.do")
+	public String readApplicationDetail(String apno,Model model) {
+		ApplicationPostVO apVO=adminService.readApplicationDetail(apno);
+		model.addAttribute("apVO", apVO);
+		return "admin/readApplicationDetail.tiles";
+	}
+	/**
+	 * 작성이유 미승인 신청서 목록보기
+	 * 
+	 * @author 은성민
+	 */
 	@RequestMapping("readUnReceivedApplicationList.do")
 	public String readUnReceivedApplicationList(int nowPage,Model model) {
 		ApplicationPostListVO apListVO=adminService.readUnReceivedApplicationList(nowPage);
@@ -51,13 +73,13 @@ public class AdminController {
 		return "admin/readUnReceivedApplicationList.tiles";
 	}
 	/**
-	* 작성이유 : 미승인 신청서 상세보기
-	* 
-	* @author 은성민
-	*/
+	 * 작성이유 : 미승인 신청서 상세보기
+	 * 
+	 * @author 은성민
+	 */
 	@RequestMapping("readUnReceivedApplicationDetail.do")
 	public String readUnReceivedApplicationDetail(String apno,Model model) {
-		ApplicationPostVO apVO=adminService.readUnReceivedApplicationDetail(apno);
+		ApplicationPostVO apVO=adminService.readApplicationDetail(apno);
 		model.addAttribute("apVO", apVO);
 		return "admin/readUnReceivedApplicationDetail.tiles";
 	}
@@ -68,14 +90,14 @@ public class AdminController {
 	*/
 	@RequestMapping("updateUnReceivedApplication.do")
 	public String updateUnReceivedApplication(String apno,String command,Model model) {
-		adminService.updateUnReceivedApplication(apno,command);
 		if(command.equals("거절")) {
 			model.addAttribute("apno", apno);
 			return "admin/writeAnswer.tiles";
 		}else {
-			ApplicationPostVO apVO=adminService.readUnReceivedApplicationDetail(apno);
+			adminService.updateUnReceivedApplication(apno,command);
+			ApplicationPostVO apVO=adminService.readApplicationDetail(apno);
 			adminService.addDonationPost(apVO);
-			return "redirect:readUnReceivedApplicationList.do?nowPage=1";
+			return "redirect:readApplicationList.do?nowPage=1";
 		}
 	}
 	/**
@@ -84,9 +106,10 @@ public class AdminController {
 	* @author 은성민
 	*/
 	@RequestMapping("addApplicationAnswer.do")
-	public String addApplicationAnswer(ApplicationPostVO apVO,HttpServletRequest request) {
+	public String addApplicationAnswer(ApplicationPostVO apVO,HttpServletRequest request,String command) {
+		adminService.updateUnReceivedApplication(apVO.getAppNo(), command);
 		adminService.addApplicationAnswer(apVO);
-		return "redirect:readUnReceivedApplicationDetail.do?apno="+apVO.getAppNo();
+		return "redirect:readApplicationDetail.do?apno="+apVO.getAppNo();
 	}
 	/**
 	* 작성이유 : 사이트 문의 목록보기
@@ -100,6 +123,17 @@ public class AdminController {
 		return "admin/readWebQuestionList.tiles";
 	}
 	/**
+	 * 작성이유 : 문의중인 문의목록
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readUnReceivedWebQuestionList.do")
+	public String readUnReceivedWebQuestionList(int nowPage,Model model) {
+		WebQuestionPostListVO wqListVO=adminService.readUnReceivedWebQuestionList(nowPage);
+		model.addAttribute("wqListVO", wqListVO);
+		return "admin/readUnReceivedWebQuestionList.tiles";
+	}
+	/**
 	* 작성이유 : 사이트 문의 상세보기
 	* 
 	* @author 은성민
@@ -109,6 +143,17 @@ public class AdminController {
 		WebQuestionPostVO wqVO=adminService.readWebQuestionDetail(wqno);
 		model.addAttribute("wqVO", wqVO);
 		return "admin/readWebQuestionDetail.tiles";
+	}
+	/**
+	 * 작성이유 : 답변없는 문의글 상세보기
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("readUnReceivedWebQuestionDetail.do")
+	public String readUnReceivedWebQuestionDetail(String wqno,Model model) {
+		WebQuestionPostVO wqVO=adminService.readUnReceivedWebQuestionDetail(wqno);
+		model.addAttribute("wqVO", wqVO);
+		return "admin/readUnReceivedWebQuestionDetail.tiles";
 	}
 	/**
 	 * 작성이유 :  문의 답변작성 폼으로 이동
@@ -128,7 +173,7 @@ public class AdminController {
 	@RequestMapping("addWebQuestionAnswer.do")
 	public String addWebQuestionAnswer(WebQuestionPostVO wqVO) {
 		adminService.addWebQuestionAnswer(wqVO);
-		return "redirect:readWebQuestionDetail.do?wqno="+wqVO.getWqNo();
+		return "redirect:readUnReceivedWebQuestionDetail.do?wqno="+wqVO.getWqNo();
 	}
 	/**
 	* 작성이유 : 사이트 문의 답변수정
@@ -137,8 +182,9 @@ public class AdminController {
 	*/
 	@RequestMapping("updateWebQuestionAnswer.do")
 	public String updateWebQuestionAnswer(WebQuestionPostVO wqVO) {
+		System.out.println(wqVO);
 		adminService.updateWebQuestionAnswer(wqVO);
-		return null;
+		return "redirect:readWebQuestionDetail?wqno="+wqVO.getWqNo();
 	}
 	/**
 	 * 작성이유 : 전체 회원 리스트 목록보기
@@ -204,5 +250,16 @@ public class AdminController {
 		//마일리지 테이블에 적립하기 위함
 		mileageService.saveMileage(id, mileage);
 		return "redirect:readTradePoint.do?nowPage=1";
+	}
+	/**
+	 * 작성이유 : 답변 수정폼 으로 이동
+	 * 
+	 * @author 은성민
+	 */
+	@RequestMapping("updateWebQuestionForm.do")
+	public String updateWebQuestionForm(String wqno,Model model) {
+		WebQuestionPostVO wqVO=adminService.readWebQuestionDetail(wqno);
+		model.addAttribute("wqVO", wqVO);
+		return "admin/updateWebQuestionForm.tiles";
 	}
 }
