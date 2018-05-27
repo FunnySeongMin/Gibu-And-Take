@@ -50,11 +50,9 @@
 
 /* font awesome with text align*/
 i{
-	vertical-align:middle;
+	/* vertical-align:middle; */
 	margin:0 5px;
 }
-
-
 
 .divider{
 	text-align:center;
@@ -75,6 +73,10 @@ i{
 
 .desc-color{
 	color:#757575;
+}
+
+.desc-dark-color{
+	color:#444;
 }
 
 .white-txt, .white-txt a{
@@ -213,6 +215,11 @@ button[class^="btn"], a[class^="btn"]{
 /* page heading*/
 .page-heading{
 	background : url("../img/bg_page_heading.jpg") repeat-x; 
+	border-top:1px solid #eee;
+}
+
+#bp-page-heading{
+	background:url("../img/bg_page_heading_person.jpg") !important;
 	border-top:1px solid #eee;
 }
 
@@ -419,5 +426,3 @@ a.badge:focus {
 	color:#fff;
 	background-color: #34bdb6;
 }
-
-

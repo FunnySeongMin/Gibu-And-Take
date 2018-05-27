@@ -12,6 +12,10 @@ $(document).ready(function(){
 		if($("#tdMileage").val() == "" || $("#tdMileage").val() == null){
 			alert("사용할 마일리지 액수를 적어주세요");
 			return false;
+		// 입력한 마일리지가 0 인 경우
+		}if(parseInt($("#tdMileage").val())==0){
+			alert("마일리지 0 이상부터 가능합니다.")
+			return false;
 		// 입력한 마일리지 액수가 보유 마일리지 액수보다 클 경우
 		}else if(parseInt($("#tdMileage").val()) > parseInt($("#userMileage").text())){
 			alert("보유하고 있는 마일리지 액수를 초과하였습니다.");

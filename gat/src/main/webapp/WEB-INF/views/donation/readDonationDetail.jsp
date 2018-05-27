@@ -219,13 +219,6 @@
 					<h4 class="mt-5 pb-3 mb-3 border-bottom">참여 후기</h4>
 					<div class="mb-3">
 						<!-- 후기 작성 btn -->
-						<%-- <c:forEach items="${tdpList }" var="tdp">
-							<p><c:set="${tdpList.tdNo }" var=tdNo />
-							${tdp.tdNo }</p>
-						</c:forEach>
-						<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
-						<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>	 --%>
-						
 						<c:if test="${(tdpVO!=null&&tdpVO.tdNo!=0)}">
 							<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
 							<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>					
@@ -245,8 +238,7 @@
 												<input type="hidden" name="tdno" value="${tdpVO.tdNo}">
 												<input type="hidden" name="dpno" value="${dpVO.dpNo }">
 												<p>${dpVO.dpTitle }</p>
-												<p>프로젝트 기간, 기부자명, 대표이미지, </p>
-												<p>참여번호:${tdpVO.tdNo}</p>
+												<p>${dpVO.startDate} - ${dpVO.endDate }, ${dpVO.memberVO.name } </p>
 											</div>
 											<div class="form-group my-3">
 												<label for="">제목</label>
