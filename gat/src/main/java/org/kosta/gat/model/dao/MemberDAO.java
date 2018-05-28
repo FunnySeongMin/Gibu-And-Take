@@ -54,5 +54,7 @@ public interface MemberDAO {
 	public WebQuestionPostVO readWebQuestionAnswer(int wqNo);
 
 	public int appCount(String id);
+
+	public void deleteMyReview(String rpNo);
 	
 }

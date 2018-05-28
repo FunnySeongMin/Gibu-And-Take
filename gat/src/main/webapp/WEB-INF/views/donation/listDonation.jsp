@@ -20,8 +20,13 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
+<<<<<<< HEAD
 					<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
 						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="">
+=======
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
+						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="" >
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 					</a>
 					<div class="card-body">
 						<h4 class="card-title">
@@ -31,9 +36,15 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
+=======
+			<div class="col-lg-4 col-sm-4 portfolio-item ">
+				<div class="card h-100"">
+					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
+>>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 						<img class="card-img-top" src="${rank[2].DP_IMGDIRECTORY}" alt="">
 					</a>
 					<div class="card-body">
@@ -64,7 +75,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[0].DP_IMGDIRECTORY}" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[0].DP_IMGDIRECTORY}" alt="" style="width:auto; height:200px; margin: 0 auto" >
         </a>
       </div>
       <div class="col-md-5">
@@ -83,7 +94,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[1].DP_IMGDIRECTORY}" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[1].DP_IMGDIRECTORY}" alt="" style="width:auto; height:200px;">
         </a>
       </div>
       <div class="col-md-5">
@@ -102,7 +113,7 @@
     <div class="row">
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[2].DP_IMGDIRECTORY}" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[2].DP_IMGDIRECTORY}" alt="" style="width:auto; height:200px;">
         </a>
       </div>
       <div class="col-md-5">
@@ -122,7 +133,7 @@
 
       <div class="col-md-7">
         <a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[3].DP_IMGDIRECTORY}" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="${list[3].DP_IMGDIRECTORY}" alt="" style="width:auto; height:200px;">
         </a>
       </div>
       <div class="col-md-5">

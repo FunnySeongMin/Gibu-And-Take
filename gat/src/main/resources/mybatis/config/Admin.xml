@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from gt_member
 	</select>
 
+	<select id="totalApplicationCount" resultType="int">
+		select count(*) from application
+	</select>
+	
 	<select id="totalUnReceivedApplicationCount" resultType="int">
 		select count(*) from application where app_status='처리중'
 	</select>
@@ -47,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=app.id and app.app_no=#{value}
 	</select>
 	
-	<select id="readUnReceivedApplicationList"
+	<select id="readApplicationList"
 		resultMap="appPostVO" parameterType="applicationPostPagingBean">
 		<![CDATA[
  			select rnum,app.app_no,app.app_title,app.app_summery,app.app_place,
@@ -62,7 +66,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		]]>
 	</select>
 	
-	<select id="readUnReceivedApplicationDetail" resultMap="appPostVO">
+	<select id="readUnReceivedApplicationList" resultMap="appPostVO" 
+	parameterType="applicationPostPagingBean">
+		<![CDATA[
+	 			select rnum,app.app_no,app.app_title,app.app_summery,app.app_place,
+	 			app.app_regdate,app.start_date,app.end_date,app.goal_mileage,app.app_status
+				from (select row_number() over(order by app_no desc) rnum,app_no,app_title,
+				app_summery,app_place,to_char(app_regdate,'yyyy.mm.dd') app_regdate,
+				to_char(start_date,'yyyy.mm.dd') start_date,
+				to_char(end_date,'yyyy.mm.dd') end_date,goal_mileage,app_status,id
+				from application where app_status='처리중') app, gt_member m
+				where app.id=m.id and rnum between #{startRowNumber} 
+				and #{endRowNumber} order by app.app_no desc
+	 		]]>
+	</select>
+	
+	<select id="readApplicationDetail" resultMap="appPostVO">
 		<![CDATA[
 			select app.app_no,app.app_title,app_summery,app.app_contents,app.app_place,
 			app.app_imgdirectory,to_char(app.app_regdate,'yyyy.mm.dd') app_regdate,
@@ -86,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into application(app_no,app_title,app_contents,
 		app_status,app_parent_no,id)
 		values(application_seq.nextval,#{appTitle},#{appContents},
-		'답변완료',#{appNo},#{memberVO.id})
+		'거절',#{appNo},#{memberVO.id})
 	</insert>
 	
 	<insert id="addDonationPost" parameterType="applicationPostVO">
@@ -102,6 +121,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="questionCount" resultType="int">
+		select count(*) from web_question where wq_status='처리중'
+	</select>
+	
+	<select id="totalUnReceivedWebQuestionCount" resultType="int">
 		select count(*) from web_question where wq_status='처리중'
 	</select>
 	
@@ -135,10 +158,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<select id="readUnReceivedWebQuestionList" resultMap="wqPostVO">
+		<![CDATA[
+				select rnum,wq.wq_no,wq.thread,wq.wq_title,wq.wq_regdate,wq.wq_status,wq.wq_parent_no
+				from (select row_number() over(order by thread desc) rnum,wq_no,thread,wq_title,
+				to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_status,wq_parent_no,id
+				from web_question where wq_status='처리중' order by thread desc) wq, gt_member m
+				where wq.id=m.id and rnum between #{startRowNumber} and  #{endRowNumber}
+				order by thread desc
+			]]>
+	</select>
+	
 	<select id="readWebQuestionDetail" resultMap="wqPostVO">
 		select wq_no,thread,wq_title,wq_contents,to_char(wq_regdate,'yyyy.mm.dd') wq_regdate,wq_parent_no,wq_status
 		from web_question where wq_no=#{value}
 	</select>
+	
 	
 	<update id="updateWebQuestionStatus" parameterType="webQuestionPostVO">
 		update web_question set wq_status='답변완료' where wq_no=#{wqNo}

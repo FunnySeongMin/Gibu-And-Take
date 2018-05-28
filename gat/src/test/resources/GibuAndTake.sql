@@ -56,7 +56,7 @@ values('baek','12345','백설희','용인','baek@naver.com',to_date('1994.06.16'
 insert into gt_member(id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('cho','abcd','조민경','서울','cho@naver.com',to_date('1992.06.09','yyyy.mm.dd'),1,2);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
-values('yong','diyong','용다은','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),2,3);
+values('yong','diyong','관리자YONG','수원','yong@naver.com',to_date('1994.06.01','yyyy.mm.dd'),4,6);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
 values('jin','jung','정진표','하남','jin@naver.com',to_date('1987.06.15','yyyy.mm.dd'),4,4);
 insert into gt_member (id,password,name,address,email,birthday,mgroup_no,mgrade_no)
@@ -111,7 +111,7 @@ drop table application;
 create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
-	app_summery varchar2(100) not null,
+	app_summery varchar2(100) ,
 	app_contents clob not null,
 	app_place varchar2(100),
 	app_imgdirectory varchar2(100),
@@ -127,6 +127,8 @@ create table application(
 
 select app_no, app_title, app_contents, app_place, app_imgdirectory, app_regdate, goal_mileage, 
 app_status, start_date, end_date, id from application
+
+ALTER TABLE application MODIFY ( app_summery varchar2(100) NULL );
 
 --신청서 테이블 시퀀스
 drop sequence application_seq;
@@ -235,7 +237,7 @@ create table take_donation(
 drop sequence take_donation_seq;
 create sequence take_donation_seq;
 
-select * from take_donation;
+select * from take_donation; 
 
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);

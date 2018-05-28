@@ -115,14 +115,18 @@ public class DonationController {
 			apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap));
 		}
 		String appNO = donationService.addApplication(apVO);
-
 		ArrayList<PresentVO> list = new ArrayList<>();
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")),
 				request.getParameter("presentContents1"), appNO));
+		if(!request.getParameter("donationMileage2").equals("")) {
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")),
 				request.getParameter("presentContents2"), appNO));
+		}
+		if(!request.getParameter("donationMileage3").equals("")) {
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage3")),
 				request.getParameter("presentContents3"), appNO));
+		}
+		System.out.println("list : "+ list);
 		System.out.println("apVO : " + apVO);
 		// System.out.println("리스크 : "+list);
 		donationService.addPresent(list);
