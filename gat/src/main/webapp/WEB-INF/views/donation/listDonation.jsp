@@ -12,7 +12,7 @@
 					<!-- img src = ${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_IMGDIRECTORY } -->
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[0].DP_TITLE }</a>
+							<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[0].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[0].DP_TITLE }</a>
 						</h4>
 						<p class="card-text">${rank[0].DP_SUMMERY }</p>
 					</div>
@@ -20,25 +20,24 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
-						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="" >
-					</a>
+					<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
+						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="">
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[1].DP_TITLE }</a>
+							<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[1].DP_TITLE }</a>
 						</h4>
 						<p class="card-text">${rank[1].DP_SUMMERY }</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4 portfolio-item ">
-				<div class="card h-100"">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
+			<div class="col-lg-4 col-sm-4 portfolio-item">
+				<div class="card h-100">
+					<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
 						<img class="card-img-top" src="${rank[2].DP_IMGDIRECTORY}" alt="">
 					</a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[2].DP_TITLE }</a>
+							<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[2].DP_TITLE }</a>
 						</h4>
 						<p class="card-text">${rank[2].DP_SUMMERY }</p>
 					</div>
@@ -68,9 +67,9 @@
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">${list[0].DP_TITLE }</a></h3>
+        <h3><a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO }&tdNowPage=1&rpNowPage=1">${list[0].DP_TITLE }</a></h3>
         <p>${list[0].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO}&tdNowPage=1&rpNowPage=1">View Project
+        <a class="btn btn-sub-3-gnt btn-sm" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[0].DP_NO}&tdNowPage=1&rpNowPage=1">more <i class="fas fa-angle-double-right"></i>
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -87,9 +86,9 @@
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">${list[1].DP_TITLE }</a></h3>
+        <h3><a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">${list[1].DP_TITLE }</a></h3>
         <p>${list[1].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">View Project
+        <a class="btn btn-sub-3-gnt btn-sm" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[1].DP_NO }&tdNowPage=1&rpNowPage=1">more <i class="fas fa-angle-double-right"></i>
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -106,9 +105,9 @@
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">${list[2].DP_TITLE }</a></h3>
+        <h3><a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">${list[2].DP_TITLE }</a></h3>
         <p>${list[2].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">View Project
+        <a class="btn btn-sub-3-gnt btn-sm" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[2].DP_NO }&tdNowPage=1&rpNowPage=1">more <i class="fas fa-angle-double-right"></i>
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -126,9 +125,9 @@
         </a>
       </div>
       <div class="col-md-5">
-        <h3><a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">${list[3].DP_TITLE }</a></h3>
+        <h3><a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">${list[3].DP_TITLE }</a></h3>
         <p>${list[3].DP_SUMMERY }</p>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">View Project
+        <a class="btn btn-sub-3-gnt btn-sm" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${list[3].DP_NO }&tdNowPage=1&rpNowPage=1">more <i class="fas fa-angle-double-right"></i>
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -201,7 +200,7 @@ $(document).ready(function() {
                     //
                     //$('#loading').hide();
                     if(result){
-                    	$('#posts').append("<hr><div class='row'><div class='col-md-7'><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+"><img class='img-fluid rounded mb-3 mb-md-0' src=http://placehold.it/700x300 alt=></a></div><div class='col-md-5'><h3><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">"+result[i].DP_TITLE+"</a></h3><p>"+result[i].DP_SUMMERY+"</p><a class='btn btn-primary' href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">View Project<span class='glyphicon glyphicon-chevron-right'></span></a></div></div>");
+                    	$('#posts').append("<hr><div class='row'><div class='col-md-7'><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+"><img class='img-fluid rounded mb-3 mb-md-0' src=http://placehold.it/700x300 alt=></a></div><div class='col-md-5'><h3><a href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">"+result[i].DP_TITLE+"</a></h3><p>"+result[i].DP_SUMMERY+"</p><a class='btn btn-sub-3-gnt btn-sm' href=${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno="+result[i].DP_NO+">more <i class="fas fa-angle-double-right"></i><span class='glyphicon glyphicon-chevron-right'></span></a></div></div>");
                     	
                     	i=i+1
                     }
