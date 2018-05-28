@@ -139,4 +139,11 @@ public class MemberServiceImpl implements MemberService {
 	public void updateMyReview(ReviewPostVO rpVO) {
 		memberDAO.updateMyReview(rpVO);
 	}
+	
+	@Override
+	@Transactional
+	public void deleteMyReview(String rpNo) {
+		memberDAO.deleteMyReview(rpNo);
+	}
+	
 }

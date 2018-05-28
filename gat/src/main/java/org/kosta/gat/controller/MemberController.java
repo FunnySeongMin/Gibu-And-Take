@@ -32,7 +32,8 @@ public class MemberController {
 	* @author 용다은
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="member/registerMember.do")
-	public String registerMember(MemberVO vo) {
+	public String registerMember(MemberVO vo, String place) {
+		vo.setAddress(place);
 		memberService.registerMember(vo);
 		return "redirect:/home.do";
 	}
@@ -252,7 +253,6 @@ public class MemberController {
 	public ModelAndView readMyReviewPostList(HttpServletRequest request,int nowPage) {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		System.out.println(mvo);
 		ReviewPostListVO rpListVO=memberService.readMyReviewPostList(mvo.getId(),nowPage);
 		return new ModelAndView("member/myReviewList.tiles","rpListVO",rpListVO);
 	}
@@ -319,5 +319,18 @@ public class MemberController {
 		System.out.println(rPostVO);
 		model.addAttribute("wqPostVO", rPostVO);
 		return "member/readMyReviewDetail.tiles";
+	}
+	/**
+	 * 작성이유 : 후기 번호를 받아와서 
+	 * 해당하는 후기를 삭제하기 위하여
+	 * 
+	 * 나의 후기 삭제하기
+	 * 
+	 * @author 용다은
+	 */
+	@RequestMapping("member/deleteMyReview.do")
+	public String deleteMyReview(String rpNo) {
+		memberService.deleteMyReview(rpNo);
+		return "redirect:/member/readMyReviewPostList.do?nowPage=1";
 	}
 }

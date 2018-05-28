@@ -56,6 +56,10 @@ public class DonationDAOImpl implements DonationDAO {
 		return template.selectOne("donation.readDonationDetail", dpno);
 	}
 
+	public List<PresentVO> findPresentByDpno(String dpno) {
+		return template.selectList("donation.findPresentByDpno",dpno);
+	}
+	
 	@Override
 	public List<TakeDonationPostVO> readDonationCheerUpMessageList(String dpno) {
 		return template.selectList("donation.readDonationCheerUpMessageList",dpno);

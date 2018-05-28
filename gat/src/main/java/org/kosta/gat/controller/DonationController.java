@@ -75,11 +75,8 @@ public class DonationController {
 		TakeDonationPostListVO tdList = entryService.findCheerupMessageByDpno(dpno, tdNowPage);
 		// 해당 재능기부에 대한 후기 목록
 		ReviewPostListVO rpList = donationService.readDonationReviewList(dpno, rpNowPage);
-		
-		
-		//TakeDonationPostVO tdpVO = entryService.findEntryByIdAndDpno(tdpVO)
-		//List<TakeDonationPostVO> tdpList= entryService.findEntryByIdAndDpno(tdpVO);
-		//System.out.println("DonationController readDonation [tdpList]"+tdpList);
+		//해당 재능기부에 대한 선물 목록
+		List<PresentVO> pList = donationService.findPresentByDpno(dpno);
 		
 		// 해당 재능기부에 대한 응원메시지
 		model.addAttribute("tdList", tdList);
@@ -89,34 +86,10 @@ public class DonationController {
 		model.addAttribute("dpVO", dpVO);
 		// 참여 여부 확인
 		model.addAttribute("tdpVO", tdpVO);
-		//model.addAttribute("tdpList", tdpList);
-		
-		//entryService.findEntryByIdAndDpno(tdpVO);
+		// 선물 리스트
+		model.addAttribute("pList", pList);
 		
 		return "donation/readDonationDetail.tiles";
-	}
-
-	/**
-	 * 해당 재능기부 후기 목록 작성이유 : 해당 재능기부에 참여한 참여자들이 작성한 후기 목록을 본다.
-	 * 
-	 * @author 조민경
-	 */
-	/*
-	 * @ModelAttribute("readDonationReviewList") public String
-	 * readDonationReviewList(String dpno, int nowPage, Model model) {
-	 * System.out.println(dpno); ReviewPostListVO rpListVO =
-	 * donationService.readDonationReviewList(dpno, nowPage); return null; }
-	 */
-
-	/**
-	 * 작성이유 : 해당 재능기부 후기게시판 상세보기
-	 * 
-	 * @author 은성민
-	 */
-	@RequestMapping("readReviewDetail.do")
-	public String readReviewDetail(String rpno, Model model) {
-		ReviewPostVO rpVO = donationService.readReviewDetail(rpno);
-		return null;
 	}
 
 	/**
@@ -142,14 +115,18 @@ public class DonationController {
 			apVO.setImgDirectory(donationService.file_upload_save(uploadfile, modelMap));
 		}
 		String appNO = donationService.addApplication(apVO);
-
 		ArrayList<PresentVO> list = new ArrayList<>();
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage1")),
 				request.getParameter("presentContents1"), appNO));
+		if(!request.getParameter("donationMileage2").equals("")) {
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage2")),
 				request.getParameter("presentContents2"), appNO));
+		}
+		if(!request.getParameter("donationMileage3").equals("")) {
 		list.add(new PresentVO(null, Integer.parseInt(request.getParameter("donationMileage3")),
 				request.getParameter("presentContents3"), appNO));
+		}
+		System.out.println("list : "+ list);
 		System.out.println("apVO : " + apVO);
 		// System.out.println("리스크 : "+list);
 		donationService.addPresent(list);

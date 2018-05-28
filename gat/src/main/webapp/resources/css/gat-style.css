@@ -50,7 +50,7 @@
 
 /* font awesome with text align*/
 i{
-	vertical-align:middle;
+	/* vertical-align:middle; */
 	margin:0 5px;
 }
 
@@ -76,7 +76,9 @@ i{
 .desc-color{
 	color:#757575;
 }
-
+.desc-dark-color{
+	color:#444;
+}
 .white-txt, .white-txt a{
 	color:#fff;
 }
@@ -216,6 +218,10 @@ button[class^="btn"], a[class^="btn"]{
 	border-top:1px solid #eee;
 }
 
+#bp-page-heading{
+	background:url("../img/bg_page_heading_person.jpg") !important;
+	border-top:1px solid #eee;
+}
 
 /*updateForm*/
 #updateForm{
@@ -381,7 +387,6 @@ a.badge:focus {
 .webQuestionRe>td:nth-child(2){
 	text-align: left;
 	padding-left: 120px;
-	/* width: 1px; */
 }
 /*관리자 승인안된 신청서 내역*/
 .unReceivedAppList{

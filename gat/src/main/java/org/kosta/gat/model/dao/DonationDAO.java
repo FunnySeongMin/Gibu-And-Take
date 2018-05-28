@@ -49,6 +49,8 @@ public interface DonationDAO {
 	public List<Map<String, Object>> DonationListView2();
 
 	public List<Map<String, Object>> DonationListRank();
+	
+	public List<PresentVO> findPresentByDpno(String dpno);
 
 	public ApplicationPostVO modifyApplyDonationView(String apno);
 

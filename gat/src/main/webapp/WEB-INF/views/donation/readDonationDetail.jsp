@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    ${dpVO }
 <!-- Page Content -->
 <div class="container my-3">
 	<!-- Portfolio Item Row -->
-	<div class="row">	
+	<div class="row">
 		<div class="col-md-6">
 		  <img class="img-fluid mt-3" src="${dpVO.dpImgDirectory }" alt="">
 		</div>	
 		<div class="col-md-6">
-			<h2 class="my-3 pb-2 border-bottom"> ${dpVO.dpTitle}</h2>
+			<h2 class="my-3 pb-2 border-bottom"> ${dpVO.dpTitle}</h2> <p>${dpVO.dpSummery }</p>
 			<h4><span class="mr-2">목표 마일리지</span><b>${dpVO.goalMileage }</b></h4>
 			<h4><span class="mr-2">현재 참여 마일리지</span><b>${dpVO.donationMileage }</b></h4>
 			<h4><span class="mr-2">참여자 수</span>${dpVO.totalEntry }</h4>
@@ -18,13 +17,16 @@
 			<div class="progress mb-3">
 				<div class="progress-bar bg-sub-3-gnt" role="progressbar" style="width:${(dpVO.donationMileage/dpVO.goalMileage)*100 }%" aria-valuenow="${(dpVO.donationMileage/dpVO.goalMileage)*100 }" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
-			<p>${dpVO.dpSummery }</p>
+			
 			<c:choose>
 				<c:when test="${sessionScope.mvo==null||sessionScope.mvo.id==null}">
 					<button id="entryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>		
 				</c:when>
 				<c:when test="${tdpVO!=null&&tdpVO.tdNo!=0 }">
 					<button id="checkEntryBtn" class="btn btn-point-gnt btn-block" type="button">참여하기</button>
+				</c:when>
+				<c:when test="${dpVO.memberVO.id == sessionScope.mvo.id}">
+					<button id="#" class="btn btn-point-gnt btn-block" type="button">재능기부자는 참여할 수 없습니다.</button>
 				</c:when>
 				<c:otherwise>
 					<button class="btn btn-point-gnt btn-block" type="submit" data-toggle="modal" data-target="#entryForm">참여하기</button>	
@@ -75,7 +77,7 @@
 </div>
 <!-- /.container -->
 		
-<nav id="navbar-dp-info" class="mt-5 border-top border-bottom">
+<nav id="navbar-dp-info" class="navbar mt-5 border-top border-bottom">
 	<div class="container border-left">
 		<ul class="nav nav-pills">	
 			<li class="nav-item">
@@ -85,7 +87,7 @@
 				<a class="nav-link" href="#dp_info">재능기부 소개</a>
 			</li>	
 			<li class="nav-item">
-				<a class="nav-link" href="#dp_member">재능기부자 소개</a>
+				<a class="nav-link" href="#dp_member">선물 소개</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#dp_community">커뮤니티</a>
@@ -103,9 +105,23 @@
 					<small>summary</small>
 				</h3>
 				<div class="jumbotron">
-					<p><small class="pr-1">프로젝트명</small>${dpVO.dpTitle }</p>
-					<p><small class="pr-1">프로젝트 요약</small>${dpVO.dpSummery }</p>
-					<p><small class="pr-1">프로젝트 장소</small><div id="map" style="width:400px;height:400px;"></div>${dpVO.place }</p>
+					<table class="table table-sm table-hover">
+						<tr>
+							<td>프로젝트명</td>
+							<td>${dpVO.dpTitle}</td>	
+						</tr>
+						<tr>
+							<td>기간</td>
+							<td><i class="far fa-calendar-alt"></i>${dpVO.startDate} - ${dpVO.endDate }</td>	
+						</tr>
+						<tr>
+							<td>장소</td>
+							<td>${dpVO.place }</td>	
+						</tr>
+
+					</table>
+					<!-- 장소에 따른 지도 -->
+					<div id="map" style="width:400px;height:400px;"></div>
 				</div>
 			</div>
 			
@@ -120,15 +136,23 @@
 			</div>
 			<!-- 재능기부자 소개 -->
 			<div id="dp_member">
-				<h4 class="mt-4 mb-3">재능기부자 소개
-					<small>info</small>
+				<h4 class="mt-4 mb-3">선물 소개
+					<small>gift</small>
 				</h4>
 				<div class="jumbotron">
-					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
-					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
-					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
-					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
-					재능기부자 소개<br>재능기부자 소개<br>재능기부자 소개<br>
+					<table class="table">
+						<tr>
+							<th>모금 마일리지</th>
+							<th>선물</th>
+						</tr>
+						<c:forEach items="${pList}" var="list">
+							<tr>
+								<td>${list.donationMileage }</td>
+								<td>${list.presentContents }</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<%-- ${pList } --%>
 				</div>
 			</div>
 		</div>
@@ -195,13 +219,6 @@
 					<h4 class="mt-5 pb-3 mb-3 border-bottom">참여 후기</h4>
 					<div class="mb-3">
 						<!-- 후기 작성 btn -->
-						<%-- <c:forEach items="${tdpList }" var="tdp">
-							<p><c:set="${tdpList.tdNo }" var=tdNo />
-							${tdp.tdNo }</p>
-						</c:forEach>
-						<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
-						<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>	 --%>
-						
 						<c:if test="${(tdpVO!=null&&tdpVO.tdNo!=0)}">
 							<span class="small-txt border-right pr-2 mr-2">재능기부에 참여한 후기를 남겨주세요</span>
 							<a href="#" id="writeReview" class="text-dark small-txt" data-toggle="modal" data-target="#writeReviewForm">후기 작성하기<i class="far fa-edit"></i></a>					
@@ -221,8 +238,7 @@
 												<input type="hidden" name="tdno" value="${tdpVO.tdNo}">
 												<input type="hidden" name="dpno" value="${dpVO.dpNo }">
 												<p>${dpVO.dpTitle }</p>
-												<p>프로젝트 기간, 기부자명, 대표이미지, </p>
-												<p>참여번호:${tdpVO.tdNo}</p>
+												<p>${dpVO.startDate} - ${dpVO.endDate }, ${dpVO.memberVO.name } </p>
 											</div>
 											<div class="form-group my-3">
 												<label for="">제목</label>

@@ -25,6 +25,7 @@
 						</div>
 						<input type="hidden" name="memberVO.id" value="${sessionScope.mvo.id}">
 						<input type="hidden" name="appNo" value="${apno}">
+						<input type="hidden" name="command" value="거절">
 					</div>
 				</div>
 

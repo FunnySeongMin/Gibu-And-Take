@@ -49,4 +49,6 @@ public interface MemberService {
 
 	public void updateMyReview(ReviewPostVO rpVO);
 	
+	public void deleteMyReview(String rpNo);
+	
 }

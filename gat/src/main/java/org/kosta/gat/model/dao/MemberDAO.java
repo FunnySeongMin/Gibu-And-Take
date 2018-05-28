@@ -55,6 +55,8 @@ public interface MemberDAO {
 
 	public int appCount(String id);
 
-	void updateMyReview(ReviewPostVO rpVO);
+	public void updateMyReview(ReviewPostVO rpVO);
+	
+	public void deleteMyReview(String rpNo);
 	
 }

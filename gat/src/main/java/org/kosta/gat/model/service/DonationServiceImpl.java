@@ -105,6 +105,7 @@ public class DonationServiceImpl implements DonationService {
 	public List<Map<String, Object>> DonationListRank() {
 		return donationDAO.DonationListRank();
 	}
+	
 	@Override
 	public List<ReviewPostVO> readDonationReviewList(String dpno) {
 		//return donationDAO.readDonationReviewList(dpno);
@@ -122,6 +123,9 @@ public class DonationServiceImpl implements DonationService {
 		return donationDAO.modifyApplyDonation(apVO);
 	}
 
-
-
+	// 해당 재능기부에 대한 선물 가져오기
+	@Override
+	public List<PresentVO> findPresentByDpno(String dpno) {
+		return donationDAO.findPresentByDpno(dpno);
+	}
 }

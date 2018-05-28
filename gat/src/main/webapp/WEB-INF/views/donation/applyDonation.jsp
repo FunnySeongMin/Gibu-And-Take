@@ -4,20 +4,22 @@
 <div class="page-heading bg-sub-3-gnt">
 	<h4 class="py-5 text-center">재능기부 신청하기</h4>
 </div>
-
 <!-- /.Page Heading -->
 
 <!-- Page Content -->
-<div class="container">
+<!-- <div class="container">
 	<div class="row">
 		<div class="col-10 offset-lg-1 my-4">
-			<h3 class="mt-4 mb-3">
+			<h5 class="mt-4 mb-3">
 				재능기부자 기본 정보 <small>info</small>
-			</h3>
-			<div class="jumbotron">재능기부자 기본 정보</div>
+			</h5>
+			<div class="jumbotron">
+			
+				
+			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- /.Page Content -->
 <!-- Page Content -->
 <div class="container">
@@ -31,6 +33,12 @@
 						<label>재능기부 프로젝트명</label> <input type="text" class="form-control"
 							id="appTitle" name="appTitle" required
 							data-validation-required-message="재능기부 프로젝트명을 입력하세요">
+					</div>
+				</div>
+				<div class="control-group form-group">
+					<div class="controls">
+						<label>재능기부자 명</label>
+						<input type="text" class="form-control" value="${sessionScope.mvo.name }" readonly> 
 					</div>
 				</div>
 				<div class="control-group form-group">
