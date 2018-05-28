@@ -22,7 +22,7 @@
 
 		<div class="col-lg-9">
 			<h4 class="mb-4">재능기부 신청내역</h4>
-			<table class="table table-hover">
+			<table class="table table-hover myApplicationList">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -35,9 +35,13 @@
 					<c:forEach var="avo" items="${requestScope.apListVO.appPostVO}">	
 					<tr>
 						<td>${avo.appNo}</td>
-						<td>${avo.appTitle}</td>
+						<td><a href="#opret-produkt" data-toggle="collapse" data-parent="#help-accordion-1">${avo.appTitle}</a></td>
 						<td>${avo.appRegdate}</td>
 						<td>${avo.appStatus}</td>
+					</tr>
+					<tr id="opret-produkt" class="collapse in">
+						<td>승인 거절 사유 : </td>
+						<td colspan="3">아래로 슬라이드당</td>
 					</tr>
 					</c:forEach>	
 				</tbody>

@@ -128,6 +128,7 @@ create table application(
 select app_no, app_title, app_contents, app_place, app_imgdirectory, app_regdate, goal_mileage, 
 app_status, start_date, end_date, id from application
 
+select * from application
 --신청서 테이블 시퀀스
 drop sequence application_seq;
 create sequence application_seq;

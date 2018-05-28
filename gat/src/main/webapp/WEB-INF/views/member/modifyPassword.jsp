@@ -39,6 +39,7 @@
 			}
 		});//keyup
 		$("#updateForm").submit(function(){
+			alert("여기까지 들어왔다");
 			var usrPassword=${sessionScope.mvo.password};
 			var insertPassword=$("#insertPassword").val();
 			if (checkResultPassword=="") {
@@ -51,6 +52,9 @@
 				alert("다시 로그인 해주세요");
 			}
 		});//submit
+		$('.btn-cancel').click(function(){
+			location.href="${pageContext.request.contextPath }/member/myPage.do";
+		});
 	});
 </script>
 <div class="container" id="updateForm">
@@ -84,7 +88,7 @@
         <div class="control-group">
           <div class="controls">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn">Cancel</button>
+            <button type="button" class="btn btn-cancel">Cancel</button>
           </div>    
         </div>
       </form>

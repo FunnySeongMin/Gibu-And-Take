@@ -381,7 +381,7 @@ a.badge:focus {
 .webQuestionRe>td:nth-child(2){
 	text-align: left;
 	padding-left: 120px;
-	width: 1px;
+	/* width: 1px; */
 }
 /*관리자 승인안된 신청서 내역*/
 .unReceivedAppList{
@@ -421,4 +421,30 @@ a.badge:focus {
 	background-color: #34bdb6;
 }
 
+.myApplicationList, .myActivityList, .myReviewList, .myWebQuestionList {
+	text-align: center;
+}
 
+.rpTitleInput {
+	float: left;
+    width: 85%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.updateMyReviewP>p:nth-child(1){
+	float: left;
+}
+.updateMyReviewP>p:nth-child(3) {
+	overflow: auto;
+}
+#sendMessageButton {
+	margin: 0 auto;
+}
+.writeAnswerLabel01{
+	float: left;
+	margin-right: 10px;
+}
+
+.writeAnswerLabel02{
+	
+}

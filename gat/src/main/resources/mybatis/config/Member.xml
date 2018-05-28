@@ -192,4 +192,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.id = m.id and rnum between #{startRowNumber} and #{endRowNumber}
 		order by a.app_no desc
  	</select>
+ 	<update id="updateMyReview" parameterType="reviewPostVO">
+ 		update review_post set rp_title=#{rpTitle}, rp_contents=#{rpContents} 
+ 		where rp_no=#{rpNo}
+ 	</update>
 </mapper>

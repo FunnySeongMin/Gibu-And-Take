@@ -135,4 +135,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.appCount(id);
 	}
 
+	@Override
+	public void updateMyReview(ReviewPostVO rpVO) {
+		memberDAO.updateMyReview(rpVO);
+	}
 }

@@ -170,4 +170,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public int appCount(String id) {
 		return template.selectOne("member.totalMyActivityCount",id);
 	}
+	
+	@Override
+	public void updateMyReview(ReviewPostVO rpVO) {
+		//System.out.println("DAOImpl까지 들어왔음" + rpVO);
+		template.update("member.updateMyReview", rpVO);
+		//System.out.println("DAOImpl의 sql 나왔음");
+	}
 }

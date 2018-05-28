@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#questionUpdateBtn").click(function(){
+			alert(${rPostVO.rpNo});
+			location.href="${pageContext.request.contextPath }/member/updatMyReviewForm.do?rpNo=${rPostVO.rpNo}"
+	});//click 
+});//ready
+</script>
 <!-- Page Heading -->
 <div class="page-heading bg-sub-3-gnt">
 	<h4 class="py-5 text-center">글 보기</h4>
@@ -28,15 +37,14 @@
 		
 	</div>
 	<div class="row">
-		<div class="col-10 offset-lg-1">
+		<div class="col-9 offset-lg-1">
 			<div class="d-flex align-items-end">
-				<a href="javascript:history.back()" class="btn btn-sub-2-gnt ml-auto mr-1 " id="#" >목록</a>
-				<a href="#" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
+				<a href="${pageContext.request.contextPath}/member/readMyReviewPostList.do?nowPage=1" class="btn btn-sub-2-gnt ml-auto mr-1 " id="#" >목록</a>
+				<a href="${pageContext.request.contextPath }/member/updateMyReviewForm.do?rpNo=${reviewPostVO.rpNo}" class="btn btn-sub-3-gnt mr-1" id="#">수정</a>
 				<a href="#" class="btn btn-sub-4-gnt" id="#">삭제</a>
 			</div>
 		</div>
 	</div>
 	<!-- /.row -->
 
-</div>
 <!-- /.container -->
