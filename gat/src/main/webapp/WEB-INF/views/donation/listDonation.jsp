@@ -20,14 +20,8 @@
 			</div>
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
-<<<<<<< HEAD
 					<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
 						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="">
-=======
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">
-						<img class="card-img-top" src="${rank[1].DP_IMGDIRECTORY}" alt="" >
->>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
-					</a>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[1].DP_NO }&tdNowPage=1&rpNowPage=1">${rank[1].DP_TITLE }</a>
@@ -36,15 +30,9 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
 			<div class="col-lg-4 col-sm-4 portfolio-item">
 				<div class="card h-100">
 					<a class="sub-1-txt-gnt" href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
-=======
-			<div class="col-lg-4 col-sm-4 portfolio-item ">
-				<div class="card h-100"">
-					<a href="${pageContext.request.contextPath }/donation/readDonationDetail.do?dpno=${rank[2].DP_NO }&tdNowPage=1&rpNowPage=1">
->>>>>>> branch 'master' of https://github.com/FunnySeongMin/Gibu-And-Take.git
 						<img class="card-img-top" src="${rank[2].DP_IMGDIRECTORY}" alt="">
 					</a>
 					<div class="card-body">
