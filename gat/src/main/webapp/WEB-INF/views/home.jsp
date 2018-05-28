@@ -59,7 +59,7 @@
 					<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 						adipiscing elit. Nam viverra euismod odio, gravida pellentesque
 						urna varius vitae.</p>
-					<a href="list_gibu.html">
+					<a href="${pageContext.request.contextPath}/donation/listDonation.do">
 						more <i class="fas fa-angle-double-right"></i>
 					</a>
 				</div>
