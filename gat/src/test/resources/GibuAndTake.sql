@@ -111,7 +111,7 @@ drop table application;
 create table application(
 	app_no number primary key,
 	app_title varchar2(100) not null,
-	app_summery varchar2(100) ,
+	app_summery varchar2(100),
 	app_contents clob not null,
 	app_place varchar2(100),
 	app_imgdirectory varchar2(100),
@@ -130,6 +130,7 @@ app_status, start_date, end_date, id from application
 
 ALTER TABLE application MODIFY ( app_summery varchar2(100) NULL );
 
+select * from application
 --신청서 테이블 시퀀스
 drop sequence application_seq;
 create sequence application_seq;
@@ -237,7 +238,7 @@ create table take_donation(
 drop sequence take_donation_seq;
 create sequence take_donation_seq;
 
-select * from take_donation; 
+select * from take_donation;
 
 insert into take_donation(td_no,td_mileage,id,dp_no)
 values(take_donation_seq.nextval,1000,'keroro',1);

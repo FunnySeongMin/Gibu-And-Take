@@ -192,6 +192,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.id = m.id and rnum between #{startRowNumber} and #{endRowNumber}
 		order by a.app_no desc
  	</select>
+ 	<!-- 나의 후기 수정하기 -->
+ 	<update id="updateMyReview" parameterType="reviewPostVO">
+ 		update review_post set rp_title=#{rpTitle}, rp_contents=#{rpContents} 
+ 		where rp_no=#{rpNo}
+ 	</update>
  	<!-- 나의 후기 삭제하기  -->
  	 <delete id="deleteMyReview" parameterType="string">
  		delete from review_post where rp_no=#{value}

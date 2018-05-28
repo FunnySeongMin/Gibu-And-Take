@@ -47,6 +47,8 @@ public interface MemberService {
 	
 	public int appCount(String id);
 
+	public void updateMyReview(ReviewPostVO rpVO);
+	
 	public void deleteMyReview(String rpNo);
 	
 }

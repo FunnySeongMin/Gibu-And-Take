@@ -54,6 +54,8 @@ i{
 	margin:0 5px;
 }
 
+
+
 .divider{
 	text-align:center;
 	border-top:1px solid #ccc;	
@@ -74,11 +76,9 @@ i{
 .desc-color{
 	color:#757575;
 }
-
 .desc-dark-color{
 	color:#444;
 }
-
 .white-txt, .white-txt a{
 	color:#fff;
 }
@@ -380,7 +380,7 @@ a.badge:focus {
 	width:100% !important;
 }
 
-/*愿�由ъ옄 臾몄쓽湲� 由ъ뒪�듃*/
+/*관리자 문의글 리스트*/
 .webQuestion{
 	text-align: center;
 }
@@ -388,11 +388,11 @@ a.badge:focus {
 	text-align: left;
 	padding-left: 120px;
 }
-/*愿�由ъ옄 �듅�씤�븞�맂 �떊泥��꽌 �궡�뿭*/
+/*관리자 승인안된 신청서 내역*/
 .unReceivedAppList{
 	text-align: center;
 }
-/*愿�由ъ옄  珥� �쉶�썝 由ъ뒪�듃*/
+/*관리자  총 회원 리스트*/
 .readMemberListDiv{
 	margin: 0 auto;
 }
@@ -405,7 +405,7 @@ a.badge:focus {
 	color : #fff;
 	width: 100px;
 }
-/*�깉�눜�븳 �쉶�썝 由ъ뒪�듃*/
+/*탈퇴한 회원 리스트*/
 .readTradePoint, .dropMember{
 	text-align: center;
 }
@@ -424,4 +424,32 @@ a.badge:focus {
 .tradePointBtn {
 	color:#fff;
 	background-color: #34bdb6;
+}
+
+.myApplicationList, .myActivityList, .myReviewList, .myWebQuestionList {
+	text-align: center;
+}
+
+.rpTitleInput {
+	float: left;
+    width: 85%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.updateMyReviewP>p:nth-child(1){
+	float: left;
+}
+.updateMyReviewP>p:nth-child(3) {
+	overflow: auto;
+}
+#sendMessageButton {
+	margin: 0 auto;
+}
+.writeAnswerLabel01{
+	float: left;
+	margin-right: 10px;
+}
+
+.writeAnswerLabel02{
+	
 }

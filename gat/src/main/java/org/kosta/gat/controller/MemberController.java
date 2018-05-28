@@ -92,7 +92,7 @@ public class MemberController {
 		return "home.tiles";
 	}
 	/**
-	 * 작성이유 : 
+	 * 작성이유 : 마이페이지의 나의 참여 건수 
 	 * 
 	 * @author 백설희
 	 */
@@ -110,13 +110,12 @@ public class MemberController {
 	* @author 백설희
 	*/
 	@RequestMapping(method=RequestMethod.POST, value="member/update.do")
-	public String updateMember(HttpServletRequest request,MemberVO vo, String place) {
+	public String updateMember(HttpServletRequest request,MemberVO vo) {
 		HttpSession session=request.getSession(false);
 		if(session==null||session.getAttribute("mvo")==null){
 			return "member/loginForm.tiles";
 		}
-		vo.setAddress(place); //받아온 place 값을 vo의 address로 set
-		memberService.updateMember(vo); //place를 바꾼 vo를 이용해 update함
+		memberService.updateMember(vo);
 		session.setAttribute("mvo", memberService.checkId(vo.getId()));
 		return "member/myPage.tiles";
 	}
@@ -192,7 +191,7 @@ public class MemberController {
 		model.addAttribute("wqListVO", wqListVO);
 		return "member/readMyWebQuestionList.tiles";
 	}
-/**
+    /**
 	* 작성이유 : 고객문의 게시판 게시글 상세 보기
 	* 
 	* @author 용다은
@@ -291,6 +290,34 @@ public class MemberController {
 		ReviewPostVO reviewPostVO=memberService.readMyReviewDetail(rpNo);
 		//redirectAttributes.addAttribute("reviewPostVO", reviewPostVO);
 		model.addAttribute("reviewPostVO", reviewPostVO);
+		return "member/readMyReviewDetail.tiles";
+	}
+	
+	/**
+	* 작성이유 : 내 후기 수정 폼으로 이동하기 위해
+	* 
+	* @author 백설희
+	*/
+	@RequestMapping("member/updateMyReviewForm.do")
+	public String updateMyReviewForm(String rpNo, Model model) {
+		ReviewPostVO reviewPostVO=memberService.readMyReviewDetail(rpNo);
+		System.out.println("sql다녀옴" + reviewPostVO);
+		model.addAttribute("rPostVO", reviewPostVO);
+		return "member/updateMyReviewForm.tiles";
+	}
+	/**
+	* 작성이유 : 내 후기 수정
+	* 
+	* @author 백설희
+	*/
+	@RequestMapping(method=RequestMethod.POST, value="member/updateMyReview.do")
+	public String updateMyReview(ReviewPostVO rpVO, Model model) {
+		//새로 작성한 wqTitle과 wqContents를 받아온 wqVO를 이용해 update 시킴
+		memberService.updateMyReview(rpVO);
+		//wqNo를 이용해 detail을 읽어들임
+		ReviewPostVO rPostVO=memberService.readMyReviewDetail(rpVO.getRpNo());
+		System.out.println(rPostVO);
+		model.addAttribute("wqPostVO", rPostVO);
 		return "member/readMyReviewDetail.tiles";
 	}
 	/**

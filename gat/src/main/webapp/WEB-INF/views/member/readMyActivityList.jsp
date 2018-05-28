@@ -15,7 +15,7 @@
 
 		<div class="col-lg-3">
 			<div class="list-group">
-				<a href="${pageContext.request.contextPath }/member/readMyActivityList.do" class="list-group-item active">재능기부 참여내역</a>
+				<a href="${pageContext.request.contextPath }/member/readMyActivityList.do?nowPage=1" class="list-group-item active">재능기부 참여내역</a>
 				<a href="${pageContext.request.contextPath }/member/readMyApplicationList.do?nowPage=1" class="list-group-item">재능기부 신청내역</a>
 			</div>
 		</div>
@@ -23,7 +23,7 @@
 
 		<div class="col-lg-9">
 			<h4 class="mb-4">재능기부 참여내역</h4>
-			<table class="table table-hover">
+			<table class="table table-hover myActivityList">
 				<thead>
 					<tr>
 						<th>#</th>
