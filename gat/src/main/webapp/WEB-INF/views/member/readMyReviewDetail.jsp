@@ -48,6 +48,6 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<!-- /.row -->
-
+ 
 </div>
 <!-- /.container -->
